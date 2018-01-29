@@ -1,0 +1,104 @@
+@import "../../assets/css/variables";
+.landing-page {
+  background-color: $yellow;
+  height: 100%;
+  .wrapper-img {
+    // margin-top: 80px;
+    margin-bottom: 85px;
+    height: 100%;
+    .img-desk,
+    .img-mob {
+      height: 100%;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+    }
+  }
+  .wrapper-contact-link {
+    // height: 80px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    .bottom {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      background-color: $light-gray;
+      .formHeader {
+        font-family: 'Heebo-Bold';
+        font-size: 21px;
+        text-align: center;
+        svg {
+          height: 30px !important;
+          width: 30px !important;
+        }
+        &>div {
+          margin-top: -10px;
+        }
+      }
+      .formContent {
+        max-height: 0;
+        transition: max-height 0.15s ease-out;
+        overflow: hidden;
+        &.active {
+          max-height: 500px;
+          transition: max-height 0.25s ease-in;
+        }
+        form {
+          flex-direction: column;
+          padding: 10px 0 26px 0 !important;
+          .wrapper-input {
+            max-width: none !important;
+            width: 100% !important;
+            margin-bottom: 17px !important;
+            input {
+              color: rgba(27, 27, 27, 0.8) !important;
+            }
+            &>div:last-child {
+              margin-top: 5px !important;
+            }
+          }
+          .send-btn {
+            display: none !important;
+            &.no-icon {
+              display: block !important;
+              background-color: black !important;
+              color: white !important;
+              border-radius: 21px !important;
+              height: 42px !important;
+              span {
+                font-size: 17px !important;
+              }
+            }
+          }
+        }
+      }
+    }
+    .wrapper-send-email-form {
+      width: 60%;
+      margin: 0 auto;
+      form {
+        padding: 20px;
+        .send-btn {
+          button {
+            background-color: black !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .landing-page {
+    .wrapper-img {
+      // margin-top: 40px;
+    }
+    .wrapper-contact-link {
+      .wrapper-send-email-form {
+        width: 100%;
+      }
+    }
+  }
+}
