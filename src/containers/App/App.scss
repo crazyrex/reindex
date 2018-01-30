@@ -1,110 +1,30 @@
 // eslint-disable
-// @import '~bootstrap-sass/assets/stylesheets/bootstrap/mixins';
-@import "../../assets/css/variables";
-body {
-  position: relative;
-}
-// body iframe {
-//   display: none;
-// }
-
-// body iframe[title="ווידג'ט recaptcha"] {
-//   display: block;
-// }
+@import '~bootstrap-sass/assets/stylesheets/bootstrap/mixins';
 
 .app {
   display: flex;
   min-height: 100vh;
-  direction: rtl;
   flex-direction: column;
-  align-items: flex-end;
-  // .brand {
-  //   position: absolute;
-  //   $size: 40px;
-  //   top: 5px;
-  //   left: 5px;
-  //   display: inline-block;
-  //   background: #1daede no-repeat center center;
-  //   width: $size;
-  //   height: $size;
-  //   background-size: 80%;
-  //   margin: 0 10px 0 0;
-  //   border-radius: $size / 2;
-  // }
-  // nav :global(.fa) {
-  //   font-size: 2em;
-  //   line-height: 20px;
-  // }
+  margin: 10px 10px;
+  .brand {
+    position: absolute;
+    $size: 40px;
+    top: 5px;
+    left: 5px;
+    display: inline-block;
+    background: #1daede no-repeat center center;
+    width: $size;
+    height: $size;
+    background-size: 80%;
+    margin: 0 10px 0 0;
+    border-radius: $size / 2;
+  }
+  nav :global(.fa) {
+    font-size: 2em;
+    line-height: 20px;
+  }
   .content {
     flex: 1;
     width: 100%;
-    flex-grow: 1;
-    display: flex;
-    flex-wrap: wrap;
-    >* {
-      width: 100%;
-    }
   }
-  .footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    color: white;
-    padding: 20px;
-    background-color: #1b1b1b;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 100;
-    font-size: 14px;
-    color: #7a7a7a;
-      svg {
-       color :#7a7a7a !important;
-       height: 15px !important;
-      }
-    a {
-      color: #7a7a7a;
-      text-decoration:none;
-    }
-    .contact {
-      color: $yellow;
-    }
-    .logo-footer {
-      width: 61px;
-      height: 14px;
-      background-size: contain;
-      cursor: pointer;
-      display: inline-block;
-      margin-right: 5px;
-      margin-top: -4px;
-    }
-  }
-
-  .rights {
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    z-index: 100;
-    padding: 8px;
-  }
-
-
-  &.home, &.thanks {
-    .rights {
-      background-color: $yellow;
-      width: 100%;
-    }
-  }
-  &.landing-page {
-    .rights {
-      background-color: $light-gray
-    }
-  }
- 
 }
- #popupVSButton {
-    display: none ;
-  }
-  #popupVSChat {
-    display: none;
-  }

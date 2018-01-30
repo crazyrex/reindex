@@ -1,6 +1,4 @@
 
-#Reindex 
- Add dinamic text.
 # React Universal Saga
 
 [![React Universal Saga Version](https://img.shields.io/npm/v/react-universal-saga.svg?maxAge=2592000)](https://img.shields.io/npm/dm/react-universal-saga.svg?maxAge=2592000)

@@ -3,7 +3,7 @@ import { take, put, call, fork, select } from 'redux-saga/effects';
 import { api, history } from '../services';
 import * as actions from '../actions';
 
-import { getUser, getStarredByUser } from '../reducers/selectors';
+import { getUser, getRepo, getStarredByUser, getStargazersByRepo } from '../reducers/selectors';
 
 // each entity defines 3 creators { request, success, failure }
 const { user, repo, starred, stargazers } = actions;
@@ -11,7 +11,7 @@ const { user, repo, starred, stargazers } = actions;
 // url for first page
 // urls for next pages will be extracted from the successive loadMore* requests
 const firstPageStarredUrl = login => `users/${login}/starred`;
-// const firstPageStargazersUrl = fullName => `repos/${fullName}/stargazers`;
+const firstPageStargazersUrl = fullName => `repos/${fullName}/stargazers`;
 
 
 /**
@@ -48,12 +48,12 @@ export function* loadUser(login, requiredFields) {
 }
 
 // load repo unless it is cached
-// function* loadRepo(fullName, requiredFields) {
-//   const repoObj = yield select(getRepo, fullName);
-//   if (!repoObj || requiredFields.some(key => !repoObj.hasOwnProperty(key))) {
-//     yield call(fetchRepo, fullName);
-//   }
-// }
+function* loadRepo(fullName, requiredFields) {
+  const repoObj = yield select(getRepo, fullName);
+  if (!repoObj || requiredFields.some(key => !repoObj.hasOwnProperty(key))) {
+    yield call(fetchRepo, fullName);
+  }
+}
 
 // load next page of repos starred by this user unless it is cached
 export function* loadStarred(login, loadMore) {
@@ -68,16 +68,16 @@ export function* loadStarred(login, loadMore) {
 }
 
 // load next page of users who starred this repo unless it is cached
-// function* loadStargazers(fullName, loadMore) {
-//   const stargazersByRepo = yield select(getStargazersByRepo, fullName);
-//   if (!stargazersByRepo || !stargazersByRepo.pageCount || loadMore) {
-//     yield call(
-//       fetchStargazers,
-//       fullName,
-//       stargazersByRepo.nextPageUrl || firstPageStargazersUrl(fullName)
-//       );
-//   }
-// }
+function* loadStargazers(fullName, loadMore) {
+  const stargazersByRepo = yield select(getStargazersByRepo, fullName);
+  if (!stargazersByRepo || !stargazersByRepo.pageCount || loadMore) {
+    yield call(
+      fetchStargazers,
+      fullName,
+      stargazersByRepo.nextPageUrl || firstPageStargazersUrl(fullName)
+      );
+  }
+}
 
 /**
  ****************************** WATCHERS ***********************************
@@ -91,43 +91,49 @@ function* watchNavigate() {
   }
 }
 
-import recordSaga from '../containers/RecordPage/sagas';
-import createFormSaga from '../components/CreateForm/saga';
-import searchSaga from '../components/SearchBar/saga';
-import adminSearchSaga from '../components/AdminSearchBar/saga';
-import categoriesTreeSaga from '../components/CategoriesTree/saga';
-import MainSearchSaga from '../containers/MainSearch/sagas';
-import PhoneSaga from '../components/Phone/saga';
-import ResultsSaga from '../containers/ResultsPage/sagas';
-import uploadSaga from '../components/Upload/sagas';
-import AdminRequestsSaga from '../containers/AdminRequests/sagas';
-import AdminSearch from '../containers/AdminSearch/sagas';
-import AdminSearchHistorySaga from '../containers/AdminSearchHistory/sagas';
-import AuthPage from '../containers/AuthPage/sagas';
-import SendEmailFormSaga from '../components/SendEmailForm/saga';
-import ContactUsFormSaga from '../components/ContactUsForm/saga';
-import RecordSettingsSaga from '../components/RecordSettings/saga';
-import DownloadSaga from '../components/Download/saga';
+// Fetches data for a User : user data + starred repos
+function* watchLoadUserPage() {
+  while (true) {
+    const { login, requiredFields = [] } = yield take(actions.LOAD_USER_PAGE);
+
+    yield fork(loadUser, login, requiredFields);
+    yield fork(loadStarred, login);
+    // Example for redirection from saga routine:
+    // yield put(navigate('xkawi'));
+  }
+}
+
+// Fetches data for a Repo: repo data + repo stargazers
+function* watchLoadRepoPage() {
+  while (true) {
+    const { fullName, requiredFields = [] } = yield take(actions.LOAD_REPO_PAGE);
+
+    yield fork(loadRepo, fullName, requiredFields);
+    yield fork(loadStargazers, fullName);
+  }
+}
+
+// Fetches more starred repos, use pagination data from getStarredByUser(login)
+function* watchLoadMoreStarred() {
+  while (true) {
+    const { login } = yield take(actions.LOAD_MORE_STARRED);
+    yield fork(loadStarred, login, true);
+  }
+}
+
+function* watchLoadMoreStargazers() {
+  while (true) {
+    const { fullName } = yield take(actions.LOAD_MORE_STARGAZERS);
+    yield fork(loadStargazers, fullName, true);
+  }
+}
 
 export default function* root() {
   yield [
-    ...fork(watchNavigate),
-    ...recordSaga,
-    ...createFormSaga,
-    ...searchSaga,
-    ...adminSearchSaga,
-    ...categoriesTreeSaga,
-    ...MainSearchSaga,
-    ...ResultsSaga,
-    ...AdminRequestsSaga,
-    ...AdminSearch,
-    ...AdminSearchHistorySaga,
-    ...AuthPage,
-    ...PhoneSaga,
-    ...SendEmailFormSaga,
-    ...ContactUsFormSaga,
-    ...RecordSettingsSaga,
-    ...uploadSaga,
-    ...DownloadSaga
+    fork(watchNavigate),
+    fork(watchLoadUserPage),
+    fork(watchLoadRepoPage),
+    fork(watchLoadMoreStarred),
+    fork(watchLoadMoreStargazers)
   ];
 }

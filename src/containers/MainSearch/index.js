@@ -7,24 +7,24 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
-import Filters from 'components/Filters';
-import logo from 'assets/img/Hamadruch-Hachredi-logo.png';
-import beta from 'assets/img/beta-large.png';
-import HeaderSite from 'components/HeaderSite';
-import SearchIcons from 'components/SearchIcons';
-import NoResults from 'components/NoResults';
-import Results from 'components/Results';
-import SearchBar from 'components/SearchBar';
-import Snackbar from 'material-ui/Snackbar';
-import DrawerFilter from 'components/DrawerFilter';
+// import Filters from 'components/Filters';
+// import logo from 'assets/img/Hamadruch-Hachredi-logo.png';
+// import beta from 'assets/img/beta-large.png';
+// import HeaderSite from 'components/HeaderSite';
+// import SearchIcons from 'components/SearchIcons';
+// import NoResults from 'components/NoResults';
+// import Results from 'components/Results';
+// import SearchBar from 'components/SearchBar';
+// import Snackbar from 'material-ui/Snackbar';
+// import DrawerFilter from 'components/DrawerFilter';
 import { detectmob } from '../../utils/functions';
-import config from '../../402Config';
+import config from '../../config';
 // import Tabs from 'components/Tabs';
 import { loadResults, changeState, updateRecord, displayIcons, closeUpdateRecordModal } from './actions';
-import { spacing } from 'material-ui/styles';
-const seoImage = require('assets/img/hp.png');
-import IconButton from 'material-ui/IconButton';
-import PlaceIcon from 'material-ui/svg-icons/navigation/cancel';
+// import { spacing } from 'material-ui/styles';
+// const seoImage = require('assets/img/hp.png');
+// import IconButton from 'material-ui/IconButton';
+// import PlaceIcon from 'material-ui/svg-icons/navigation/cancel';
 
 
 const styles = require('./MainSearch.scss');
@@ -43,7 +43,7 @@ export class MainSearch extends React.PureComponent {
       initial_screen_size: '',
       displayIcons: true,
       goToApp: true,
-      ifApp :true
+      ifApp: true
     };
 
     this.handleModalClose = this.handleModalClose.bind(this);
@@ -65,8 +65,8 @@ export class MainSearch extends React.PureComponent {
       this.setState({ displayIcons: this.props.displayIcons })
     }
     window.addEventListener('resize', this.onResize, false);
-    ifApp = window.navigator.appVersion.indexOf('AppName/1') == -1 ? false: true;
-    this.setState({ifApp:ifApp});
+    ifApp = window.navigator.appVersion.indexOf('AppName/1') == -1 ? false : true;
+    this.setState({ ifApp: ifApp });
   }
 
 
@@ -84,7 +84,7 @@ export class MainSearch extends React.PureComponent {
   componentWillUnmount() {
     // you need to unbind the same listener that was binded.
     window.removeEventListener('resize', this.onResize, false);
-   
+
   }
 
   toggleIcons() {
@@ -104,21 +104,22 @@ export class MainSearch extends React.PureComponent {
   }
 
   handleClose() {
-    ifApp = true;    
-    this.setState({ goToApp: false ,ifApp: true});
+    ifApp = true;
+    this.setState({ goToApp: false, ifApp: true });
   }
 
   render() {
     return (
-      <div className={`main-search full-height-container main ${this.props.state === 'main' ? 'main' : 'search'} ${!this.state.ifApp  ? 'gotoapp' : ''}`}>
+      // <div className={`main-search full-height-container main ${this.props.state === 'main' ? 'main' : 'search'} ${!this.state.ifApp  ? 'gotoapp' : ''}`}>
+      <div className="main-search full-height-container main">
         <Helmet
-          title="המדריך החרדי 402 - אינדקס עסקים ואנשים של המגזר החרדי"
+          title="Reindex"
           meta={[
-            { name: 'description', content: 'אתר 402 - המדריך החרדי און ליין, האתר היחיד לחיפוש מידע על אנשים, עסקים וארגונים במגזר החרדי' },
-            { property: 'og:image', content: `https://402.co.il${seoImage}` },
+            { name: 'description', content: 'Reindex' },
+            // { property: 'og:image', content: `https://402.co.il${seoImage}` },
           ]}
         />
-        <HeaderSite logoClicked={this.changeState} />
+        {/*  <HeaderSite logoClicked={this.changeState} />
         <div className={'wrapper-autocomplete'}>
          <div className={styles["header"]}>
             <img src={logo} role="presentation" /> &nbsp;
@@ -140,7 +141,7 @@ export class MainSearch extends React.PureComponent {
               <img src={seoImage} />
             </div>
             <div className="txt">
-              <span>אפליקציית המדריך החרדי</span>
+              <span>Reindex</span>
             </div>
             <a className="linkToGP" href="https://play.google.com/store/apps/details?id=com.app.thecharedidirectory">הורד</a>
           </div>
@@ -168,7 +169,7 @@ export class MainSearch extends React.PureComponent {
           message={this.props.updateRecordAlert.text}
           autoHideDuration={4000}
           onRequestClose={this.props.closeUpdateRecordModal}
-        />
+        /> */}
       </div>
     );
   }
@@ -195,15 +196,15 @@ MainSearch.propTypes = {
 
 export function mapStateToProps(state) {
   return {
-    state: state.mainSearch.state,
-    results: state.mainSearch.results,
-    totalResults: state.mainSearch.totalResults,
-    limitResults: state.mainSearch.limitResults,
-    offsetResults: state.mainSearch.offsetResults,
-    updateRecordAlert: state.mainSearch.updateRecordAlert,
-    searchBarData: state.mainSearch.searchBarData,
-    search: state.search.search,
-    isDisplayIcons: state.mainSearch.displayIcons,
+    // state: state.mainSearch.state,
+    // results: state.mainSearch.results,
+    // totalResults: state.mainSearch.totalResults,
+    // limitResults: state.mainSearch.limitResults,
+    // offsetResults: state.mainSearch.offsetResults,
+    // updateRecordAlert: state.mainSearch.updateRecordAlert,
+    // searchBarData: state.mainSearch.searchBarData,
+    // search: state.search.search,
+    // isDisplayIcons: state.mainSearch.displayIcons,
   };
 }
 

@@ -21,9 +21,8 @@ class Html extends Component {
     const head = Helmet.rewind();
 
     return (
-      <html lang="en-us" dir="rtl">
+      <html lang="en-us">
         <head>
-          <script src="https://cdn.optimizely.com/js/8593670089.js"></script>
           {head.base.toComponent()}
           {head.title.toComponent()}
           {head.meta.toComponent()}
@@ -37,10 +36,7 @@ class Html extends Component {
           {Object.keys(assets.styles).map((style, key) =>
             <link href={assets.styles[style]} key={key} media="screen, projection" rel="stylesheet" type="text/css" charSet="UTF-8" />
           )}
-
-          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhTI0krUB7cDYMDYDxuXV1aSAFQ25w7Lw" async defer></script>
-          {/* <script id='pixel-script-poptin' src='https://cdn.popt.in/pixel.js?id=f90ba10596814' async='true'></script> */}
-
+                  
         </head>
         <body>
           <div id="content" dangerouslySetInnerHTML={{ __html: content }}/>

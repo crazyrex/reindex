@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import config from '402Config';
+import config from 'config';
 import {
   browserHistory
 } from 'react-router';
