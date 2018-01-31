@@ -7,20 +7,15 @@ import RegisterForm from 'components/RegisterForm';
 import { browserHistory } from 'react-router';
 import { login, register } from './actions';
 import './AuthPage.scss';
-console.log('aaaaaaauthpage')
-export class AuthPage extends React.PureComponent {
-  // componentWillReceiveProps(nextProps) {
-  //   if (nextProps.loggedIn) {
-  //     browserHistory.push('/admin');
-  //   }
-  // }
-componentWillMount()
-{
-  console.log('in calss')
 
-}
+export class AuthPage extends React.PureComponent {
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.loggedIn) {
+      browserHistory.push('/admin');
+    }
+  }
+
   render() {
-    console.log('render auth')
     if (this.props.loggedIn) {
       browserHistory.push('/admin');
     }
@@ -34,13 +29,10 @@ componentWillMount()
         />
         {/* <HeaderSite logoClicked={this.props.changeState} /> */}
         <div className="wrapper-form">
-          {/* {this.props.routeParams.loginType === 'register' ?
+          {this.props.routeParams.loginType === 'register' ?
             <RegisterForm onSubmit={this.props.register} />
             : <LoginForm onSubmit={this.props.login} />
-          } */}
-<RegisterForm onSubmit={this.props.register} />
-
-          rivvvvvvvka
+          }
         </div>
       </div>
     );
