@@ -8,13 +8,13 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 // import Filters from 'components/Filters';
-// import logo from 'assets/img/Hamadruch-Hachredi-logo.png';
-// import beta from 'assets/img/beta-large.png';
-// import HeaderSite from 'components/HeaderSite';
+import logo from 'assets/img/logo.jpg';
+import beta from 'assets/img/logo.jpg';
+import HeaderSite from 'components/HeaderSite';
 // import SearchIcons from 'components/SearchIcons';
 // import NoResults from 'components/NoResults';
 // import Results from 'components/Results';
-// import SearchBar from 'components/SearchBar';
+import SearchBar from 'components/SearchBar';
 // import Snackbar from 'material-ui/Snackbar';
 // import DrawerFilter from 'components/DrawerFilter';
 import { detectmob } from '../../utils/functions';
@@ -119,20 +119,20 @@ export class MainSearch extends React.PureComponent {
             // { property: 'og:image', content: `https://402.co.il${seoImage}` },
           ]}
         />
-        {/*  <HeaderSite logoClicked={this.changeState} />
+        <HeaderSite logoClicked={this.changeState} />
         <div className={'wrapper-autocomplete'}>
-         <div className={styles["header"]}>
-            <img src={logo} role="presentation" /> &nbsp;
+          <div className={styles["header"]}>
+            {/* <img src={logo} role="presentation" /> &nbsp;
             {config.beta ?
-              <img src={beta} role="presentation" /> : ''}
+              <img src={beta} role="presentation" /> : ''} */}
           </div>
           <SearchBar
             onNewRequest={this.props.handleNewRequest}
             handleSearchBtn={this.props.handleSearchBtn}
-            data={this.props.searchBarData}
+            // data={this.props.searchBarData}
           />
         </div>
-        {this.state.goToApp && this.state.goToApp === true && this.state.detectmob && !this.state.ifApp && ifApp === false ?
+        {/* {this.state.goToApp && this.state.goToApp === true && this.state.detectmob && !this.state.ifApp && ifApp === false ?
           <div className="goToApp">
             <div className="close" onClick={this.handleClose}>
               <IconButton ><PlaceIcon /></IconButton>
@@ -188,7 +188,7 @@ MainSearch.propTypes = {
   totalResults: React.PropTypes.number,
   limitResults: React.PropTypes.number,
   handleResultsPageClick: React.PropTypes.func,
-  searchBarData: React.PropTypes.object,
+  // searchBarData: React.PropTypes.object,
   offsetResults: React.PropTypes.number,
   height: React.PropTypes.number,
   isDisplayIcons: React.PropTypes.bool,
@@ -202,7 +202,7 @@ export function mapStateToProps(state) {
     // limitResults: state.mainSearch.limitResults,
     // offsetResults: state.mainSearch.offsetResults,
     // updateRecordAlert: state.mainSearch.updateRecordAlert,
-    // searchBarData: state.mainSearch.searchBarData,
+      // searchBarData: state.mainSearch.searchBarData,
     // search: state.search.search,
     // isDisplayIcons: state.mainSearch.displayIcons,
   };
