@@ -1,6 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
+import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+
 
 import {
   navigate,
@@ -46,6 +50,7 @@ class App extends Component {
   render() {
     const { children } = this.props;
     return (
+      <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
       <div className={styles.app}>
         <Helmet
           title="React Universal Saga"
@@ -55,6 +60,7 @@ class App extends Component {
           {children}
         </div>
       </div>
+      </MuiThemeProvider>
     );
   }
 }

@@ -3,6 +3,7 @@ import merge from 'lodash/merge';
 import paginate from './paginate';
 import { combineReducers } from 'redux';
 import authPageReducer from '../containers/AuthPage/reducer';
+import { reducer as form } from 'redux-form';
 
 
 // Updates an entity cache in response to any action with response.entities.
@@ -61,7 +62,8 @@ const rootReducer = combineReducers({
   pagination,
   errorMessage,
   authPage: authPageReducer,
-  router
+  router,
+  form
 });
 
 export default rootReducer;

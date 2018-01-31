@@ -15,7 +15,7 @@ import { push } from 'react-router-redux';
 import FlatButton from 'material-ui/FlatButton';
 
 import './Admin.scss';
-console.log('aaaaaaaaadmin')
+
 class Admin extends React.PureComponent {
 
   constructor(props) {

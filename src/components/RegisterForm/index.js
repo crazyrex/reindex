@@ -1,7 +1,9 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form/immutable';
-import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import {
+  TextField,
+} from 'redux-form-material-ui';
 
 const renderField = ({ input, type, label, meta: { touched, error } }) => (
   <div>
@@ -24,11 +26,11 @@ renderField.propTypes = {
 
 const RegisterForm = (props) => (
   <form onSubmit={props.handleSubmit}>
-    <Field name="email" type="email" component={renderField} label="אימייל" />
-    <Field name="firstName" type="text" component={renderField} label="שם פרטי" />
-    <Field name="lastName" type="text" component={renderField} label="שם משפחה" />
-    <Field name="password" type="password" component={renderField} label="סיסמא" />
-    <div><RaisedButton type="submit" label="שלח" /></div>
+    <Field name="email" type="email" component={renderField} label="email" />
+    <Field name="firstName" type="text" component={renderField} label="fiest name" />
+    <Field name="lastName" type="text" component={renderField} label="last name" />
+    <Field name="password" type="password" component={renderField} label="password" />
+    <div><RaisedButton type="submit" label="register" /></div>
   </form>
 );
 
