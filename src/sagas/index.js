@@ -4,6 +4,7 @@ import { api, history } from '../services';
 import * as actions from '../actions';
 
 import { getUser, getRepo, getStarredByUser, getStargazersByRepo } from '../reducers/selectors';
+import AuthPage from '../containers/AuthPage/sagas';
 
 // each entity defines 3 creators { request, success, failure }
 const { user, repo, starred, stargazers } = actions;
@@ -131,6 +132,7 @@ function* watchLoadMoreStargazers() {
 export default function* root() {
   yield [
     fork(watchNavigate),
+    ...AuthPage,
     fork(watchLoadUserPage),
     fork(watchLoadRepoPage),
     fork(watchLoadMoreStarred),
