@@ -4,7 +4,7 @@ import paginate from './paginate';
 import { combineReducers } from 'redux';
 import authPageReducer from '../containers/AuthPage/reducer';
 import { reducer as form } from 'redux-form';
-
+import searchReducer from '../components/SearchBar/reducer';
 
 // Updates an entity cache in response to any action with response.entities.
 function entities(state = { users: {}, repos: {} }, action) {
@@ -63,7 +63,10 @@ const rootReducer = combineReducers({
   errorMessage,
   authPage: authPageReducer,
   router,
-  form
+  form,
+  search: searchReducer,
+
+  router
 });
 
 export default rootReducer;

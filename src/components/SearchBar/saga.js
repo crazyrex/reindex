@@ -1,7 +1,7 @@
 import { take, put, call, cancel, takeLatest } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import request from 'utils/request';
-import config from '../../402Config';
+import config from '../../config';
 import { LOAD_FILTER_DATA, LOAD_SUBCATEGORIES, LOAD_CATEGORIES_FILTER_DATA, LOAD_HIERARCHY_FILTER_DATA } from './constants';
 import { filterDataLoaded, subCategoriesLoaded, categoriesFilterDataLoaded, hierarchyFilterDataLoaded } from './actions';
 

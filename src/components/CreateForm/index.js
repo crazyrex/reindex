@@ -12,7 +12,7 @@ import { Checkbox } from 'redux-form-material-ui';
 import Snackbar from 'material-ui/Snackbar';
 import validate from './validate';
 import CategoriesTree from '../CategoriesTree';
-import config from '../../402Config';
+import config from '../../config';
 import { createRecord, closeCreateRecordModal, register2MailingList } from './actions';
 import { detectmob } from 'utils/functions';
 import IconButton from 'material-ui/IconButton';

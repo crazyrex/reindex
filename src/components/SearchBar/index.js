@@ -1,21 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Autocomplete from 'components/Autocomplete';
 import SearchIcon from 'material-ui/svg-icons/action/search';
+import AutoComplete from 'material-ui/AutoComplete';
 import { updateSearchLocation } from 'utils/functions';
 import config from 'config';
-import translat from 'globalTranslate.json';
+import translate from 'globalTranslate.json';
 import arrow from 'assets/img/icon-arrow-down.svg';
 import './SearchBar.scss';
 import { loadFilterData, loadSubCategories, setActiveTab, loadCategoriesFilterData, updateSearchObj, emptySubCategories, loadHierarchyFilterData } from './actions';
-console.log('translatetranslate',translat);
+import search from 'material-ui/svg-icons/action/search';
 const hierarchyFilters = config.hierarchyFilters;
-
-const translate = {
-  businesses: 'עסקים',
-  people: 'אנשים',
-};
-
 class SearchBar extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -42,7 +36,7 @@ class SearchBar extends React.PureComponent {
   }
 
   componentDidMount() {
-    this.setState({TABS_STATE:(window.location.search.indexOf('test') > -1||window.location.search.indexOf('terms') > -1 ) ? true : false})  // eslint-disable-line
+    this.setState({ TABS_STATE: (window.location.search.indexOf('test') > -1 || window.location.search.indexOf('terms') > -1) ? true : false })  // eslint-disable-line
   }
 
   handleCategoriesRequest(searchText, index, tabType) {
@@ -63,46 +57,26 @@ class SearchBar extends React.PureComponent {
   }
 
   render() {
-    console.log('search bbbbar');
     return (
       <div>
-        <div className={`search-bar ${this.state.TABS_STATE ? 'tabs-state' : ''}`}>
-          {/* <div className={`select ${this.state.TABS_STATE ? 'active' : ''}`}>
-            <div onClick={() => { this.props.setActiveTab('businesses'); }} className="businesses">עסקים</div>
-          </div> */}
-          {/* <div className={`select ${!this.state.TABS_STATE ? 'active' : ''}`}>
-            <div onClick={this.toggleSelect} className="selectBtn"><span>{translate[this.props.search.activeTab]}</span><div style={{ backgroundImage: `url(${arrow})` }}></div></div>
-            <ul className={`selectList ${this.state.selectActive ? 'active' : ''}`}>
-              <li onClick={() => { this.closeSelect(); this.props.setActiveTab('businesses'); }}><span>עסקים</span></li>
-              <li onClick={() => { this.closeSelect(); this.props.setActiveTab('people'); }}><span>אנשים</span></li>
-            </ul>
-          </div> */}
-          {/* <div>
+        <div className="search-bar">
+          <div>
             <div className="full-width">
-              {this.props.search.activeTab === 'businesses' ?
-                <Autocomplete
-                  text={this.props.search.businesses.value[0]}
-                  hintText={this.props.txt || "חפשת ומצאת ..."}
+              <div className="autoComplete">
+                <AutoComplete
+                  hintText={translate.search}
                   dataSource={this.props.categories}
-                  handleUpdateInput={(searchText) => { this.props.handleInput(searchText, 'businesses', 'categories'); }}
-                  onNewRequest={(chosenRequest, index) => { this.closeSelect(); this.props.emptySubCategories(index); this.handleCategoriesRequest(chosenRequest, index, 'businesses'); this.props.loadHierarchyFilterData(hierarchyFilters.kashrut, 0, hierarchyFilters.kashrut.content, true);}}
-                /> :
-                <Autocomplete
-                  text={this.props.search.people.value[0]}
-                  hintText="חפשת ומצאת ..."
-                  dataSource={[]}
-                  handleUpdateInput={(searchText) => this.props.updateSearchObj(searchText, 'people', 'categories')}
-                  onNewRequest={() => { this.closeSelect(); this.updateSearchLocation('s', this.props.search.people.value[0], 'people', -1); }}
-                />}
+                  fullWidth={true} />
+              </div>
             </div>
             <div className="search-icon-wrapper" onClick={() => { this.closeSelect(); this.handleSearchBtn(); }}>
               <a>
                 <i><SearchIcon /></i>
               </a>
             </div>
-          </div> */}
+          </div>
         </div>
-      </div>
+      </div >
     );
   }
 }
@@ -124,8 +98,8 @@ SearchBar.propTypes = {
 
 export function mapStateToProps(state) {
   return {
-    // categories: state.search.categories,
-    // search: state.search.search,
+    categories: state.search.categories,
+    search: state.search.search,
   };
 }
 

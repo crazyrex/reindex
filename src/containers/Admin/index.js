@@ -6,8 +6,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
-import logo from 'assets/img/Hamadruch-Hachredi-logo.png';
-// import HeaderSite from 'components/HeaderSite';
+import HeaderSite from 'components/HeaderSite';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import { Link, browserHistory } from 'react-router'
@@ -42,10 +41,10 @@ class Admin extends React.PureComponent {
         <Helmet
           title="Admin Page"
           meta={[
-            { name: 'description', content: 'Admin page of 402' },
+            { name: 'description', content: 'Admin page of reindex' },
           ]}
         />
-        {/* <HeaderSite logoClicked={this.goToHomePage}/> */}
+        <HeaderSite logoClicked={this.goToHomePage} />
         <Drawer className="drawer" open={this.state.open}>
           <MenuItem><Link to="/admin/search">חיפוש</Link></MenuItem>
           <MenuItem><Link to="/admin/requests">עדכונים</Link></MenuItem>
@@ -55,10 +54,10 @@ class Admin extends React.PureComponent {
           <MenuItem><Link to="/admin/archivesRecords">ארכיון רשומות</Link></MenuItem>
         </Drawer>
         {this.state.open ?
-          <FlatButton className="show-menu" onClick={()=>this.setState({open :false})}>הסתר תפריט</FlatButton>     
-          : <FlatButton className="hide-menu" onClick={()=>this.setState({open :true})}>הצג תפריט</FlatButton>     
+          <FlatButton className="show-menu" onClick={() => this.setState({ open: false })}>הסתר תפריט</FlatButton>
+          : <FlatButton className="hide-menu" onClick={() => this.setState({ open: true })}>הצג תפריט</FlatButton>
         }
-        <div className={`children ${!this.state.open ? `close`:""}`}>{this.props.children}</div>
+        <div className={`children ${!this.state.open ? `close` : ""}`}>{this.props.children}</div>
       </div>
     );
   }

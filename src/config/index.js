@@ -4,11 +4,7 @@ export default {
   apiRoot:'https://dev.402.co.il',
   resultsIndex: '402demo11',
   categoriesIndex: 'cat1',
-  searchTabs: {
-    people: {
-      type: '1',
-      route: 'ppls'
-    },
+  searchTabs: {   
     businesses: {
       type: '2,3',
       route: 'cat'

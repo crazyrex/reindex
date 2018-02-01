@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import CreateForm from 'components/CreateForm';
 import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
 import Drawer from 'material-ui/Drawer';
 import { browserHistory } from 'react-router';
@@ -31,13 +30,9 @@ class HeaderSite extends React.Component {
                     <div className={styles["logo-wrapper"]}>
                         <div className={styles["logo"]} style={{ backgroundImage: `url(${logo})` }} onClick={() => { browserHistory.push('/'); this.props.initSearch(); }}></div>
                         {config.beta ?
-                            <div className={styles["beta"]} style={{ backgroundImage: `url(${beta})`, width:"50px"}}></div> : ''}
+                            <div className={styles["beta"]} style={{ backgroundImage: `url(${beta})`, width: "50px" }}></div> : ''}
                     </div>
-                    {/* {!this.state.detectmob ?
-                        <div className={styles["create-wrapper"]}><CreateForm /></div>
-                        : ''} */}
                     <div className={styles["header-searchIcon"]} onClick={() => browserHistory.push('/')}>
-                        {/* <IconButton className={styles["searchIcon"]} hoveredStyle={{ backgroundColor: '#ffd800' }} iconStyle={{ color: 'white', fontSize: 30 }} style={{ backgroundColor: '#1b1b1b' }}><SearchIcon /></IconButton> */}
                     </div>
                 </div>
             </div>

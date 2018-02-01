@@ -68,7 +68,6 @@ module.exports = {
   entry: {
     'main': [
       'webpack-hot-middleware/client?path=http://' + host + ':' + port + '/__webpack_hmr',
-      'bootstrap-loader',
       'font-awesome-webpack!./src/theme/font-awesome.config.js',
       './src/client.js'
     ]
@@ -83,14 +82,15 @@ module.exports = {
     loaders: [
       { test: /\.jsx?$/, exclude: /node_modules/, loaders: ['babel?' + JSON.stringify(babelLoaderQuery)]},
       { test: /\.json$/, loader: 'json-loader' },
-      { test: /\.less$/, loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!postcss-loader!less?outputStyle=expanded&sourceMap' },
-      { test: /\.scss$/, loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!postcss-loader!sass?outputStyle=expanded&sourceMap' },
+      { test: /\.less$/, loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]!postcss-loader!less?outputStyle=expanded&sourceMap' },
+      { test: /\.scss$/, loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]!postcss-loader!sass?outputStyle=expanded&sourceMap' },
       { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/font-woff" },
       { test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/font-woff" },
       { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/octet-stream" },
       { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file" },
       { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=image/svg+xml" },
-      { test: webpackIsomorphicToolsPlugin.regular_expression('images'), loader: 'url-loader?limit=10240' }
+      { test: webpackIsomorphicToolsPlugin.regular_expression('images'), loader: 'url-loader?limit=10240' },
+      { test: /\.css$/, loader: 'style-loader!css-loader' }
     ]
   },
   postcss: function () {
@@ -100,7 +100,8 @@ module.exports = {
   resolve: {
     modulesDirectories: [
       'src',
-      'node_modules'
+      'node_modules',
+      'saved_node_modules'
     ],
     extensions: ['', '.json', '.js', '.jsx']
   },
@@ -108,6 +109,7 @@ module.exports = {
     // hot reload
     new webpack.HotModuleReplacementPlugin(),
     new webpack.IgnorePlugin(/webpack-stats\.json$/),
+    new webpack.EnvironmentPlugin(['NODE_ENV', 'PORT', 'API_ROOT']),
     new webpack.DefinePlugin({
       __CLIENT__: true,
       __SERVER__: false,

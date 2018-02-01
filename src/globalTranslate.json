@@ -1,3 +1,5 @@
 {
-    "businesses":"עסקים"
+    "businesses":"businesses",
+    "people": "people",
+    "search":"search"
 }

@@ -1,7 +1,7 @@
 import { take, put, call, cancel, takeLatest } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import { requestNoParse } from 'utils/request';
-import config from '402Config';
+import config from 'config';
 import { CREATE_RECORD ,CREATE_RECORD_FAILED, REGISTER_TO_MAILING_LIST} from './constants';
 import { recordCreated ,recordFailed } from './actions';
 

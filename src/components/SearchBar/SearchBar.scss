@@ -2,6 +2,10 @@
 .search-bar {
     display: flex;
     width: 100%;
+    border:  solid 1px;
+    .full-width{
+        width: 100%;
+    }
     & > div {
         background-color: white;
         height: 62px;
@@ -87,7 +91,8 @@
             }
         }
         &:last-child {
-            width: 80%;
+            margin: 0 auto;
+            width: 95%;
             display: flex;
             justify-content: space-between;
             border-top-left-radius: 31px;
@@ -100,7 +105,7 @@
             }
         }
     }
-    .autocomplete {
+    .autoComplete {
         font-size: 22px !important;
         hr {
             display: none !important;
@@ -144,7 +149,7 @@
                 top: 0;
                 border-radius: inherit;
                 right: 0;
-                background: #fad700;
+                background: $light-blue;
                 width: 100%;
                 opacity: 0;
                 transform: scale3d(0, 0, 0);
@@ -224,7 +229,7 @@
         }
     }
     .search-bar > div:last-child > div:first-child {
-        width: 80%;
+        width: 100%;
         & > div {
             width: 100% !important;
         }
@@ -257,7 +262,7 @@
                 font-family: 'Heebo-Bold';
                 &.active {
                     background-color: black;
-                    color: $yellow;
+                    color: $light-blue;
                 }
             }
         }
