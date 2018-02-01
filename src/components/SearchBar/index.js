@@ -10,7 +10,6 @@ import './SearchBar.scss';
 import { loadFilterData, loadSubCategories, setActiveTab, loadCategoriesFilterData, updateSearchObj, emptySubCategories, loadHierarchyFilterData } from './actions';
 import search from 'material-ui/svg-icons/action/search';
 const hierarchyFilters = config.hierarchyFilters;
-console.log('test')
 class SearchBar extends React.PureComponent {
   constructor(props) {
     super(props);
