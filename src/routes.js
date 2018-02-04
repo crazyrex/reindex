@@ -4,11 +4,12 @@ import {
   App,
   NotFound,
   Admin,
+  AdminSearch,
   MainSearch,
   AuthPage,
-  AdminCategories, 
+  AdminCategories,
 } from 'containers';
-
+console.log('AAAdmin', Admin, 'AdminSearchAdminSearch', AdminSearch)
 export default () => {
   const routes = (
     <Route path="/" component={App}>
@@ -19,9 +20,9 @@ export default () => {
       {/* <Route path="/thank" component={Thank} /> */}
       <Route path="/auth/:loginType" component={AuthPage} />
       <Route path="/admin" component={Admin}>
-      <Route path="/admin/categories" component={AdminCategories} />
-      {/* <Route path="/admin/search" component={AdminSearch} />
-        <Route path="/admin/requests" component={AdminRequests} />
+        <Route path="/admin/categories" component={AdminCategories} />
+        <Route path="/admin/search" component={AdminSearch} />
+        {/*   <Route path="/admin/requests" component={AdminRequests} />
         <Route path="/admin/history" component={AdminSearchHistory} />
         <Route path="/admin/archivesrequests" component={ArchivesRequests} />
         <Route path="/admin/ArchivesRecords" component={ArchivesRecords} /> */}

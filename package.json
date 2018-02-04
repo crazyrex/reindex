@@ -106,6 +106,7 @@
     "react-redux": "^5.0.3",
     "react-router": "^2.5.2",
     "react-router-redux": "^4.0.8",
+    "react-sortable-tree": "^1.8.1",
     "redux": "^3.5.2",
     "redux-form": "^7.2.1",
     "redux-form-material-ui": "^4.3.3",

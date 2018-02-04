@@ -6,7 +6,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
-// import HeaderSite from 'components/HeaderSite';
+import HeaderSite from 'components/HeaderSite';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import { Link, browserHistory } from 'react-router'
@@ -44,17 +44,17 @@ class Admin extends React.PureComponent {
             { name: 'description', content: 'Admin page of reindex' },
           ]}
         />
-        {/* <HeaderSite logoClicked={this.goToHomePage}/> */}
+        <HeaderSite logoClicked={this.goToHomePage} />
         <Drawer className="drawer" open={this.state.open}>
           <MenuItem><Link to="/admin/search">search</Link></MenuItem>
           <MenuItem><Link to="/admin/history">history</Link></MenuItem>
           <MenuItem><Link to="/admin/categories">categories</Link></MenuItem>
         </Drawer>
         {this.state.open ?
-          <FlatButton className="show-menu" onClick={()=>this.setState({open :false})}>הסתר תפריט</FlatButton>     
-          : <FlatButton className="hide-menu" onClick={()=>this.setState({open :true})}>הצג תפריט</FlatButton>     
+          <FlatButton className="show-menu" onClick={() => this.setState({ open: false })}>הסתר תפריט</FlatButton>
+          : <FlatButton className="hide-menu" onClick={() => this.setState({ open: true })}>הצג תפריט</FlatButton>
         }
-        <div className={`children ${!this.state.open ? `close`:""}`}>{this.props.children}</div>
+        <div className={`children ${!this.state.open ? `close` : ""}`}>{this.props.children}</div>
       </div>
     );
   }
