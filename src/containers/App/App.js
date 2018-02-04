@@ -55,12 +55,12 @@ class App extends Component {
     const { children } = this.props;
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
-       <div className={styles.app}>
+       <div className="app">
         <Helmet
           title="React Universal Saga"
           meta={[{ property: 'og:site_name', content: 'React Universal Saga' }]}
         />
-        <div className={styles.content}>
+        <div className="content">
           {children}
         </div>
       </div>

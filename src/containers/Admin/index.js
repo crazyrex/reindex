@@ -6,7 +6,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
-import logo from 'assets/img/Hamadruch-Hachredi-logo.png';
 // import HeaderSite from 'components/HeaderSite';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
@@ -42,7 +41,7 @@ class Admin extends React.PureComponent {
         <Helmet
           title="Admin Page"
           meta={[
-            { name: 'description', content: 'Admin page of 402' },
+            { name: 'description', content: 'Admin page of reindex' },
           ]}
         />
         {/* <HeaderSite logoClicked={this.goToHomePage}/> */}

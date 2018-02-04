@@ -27,7 +27,7 @@ export class AuthPage extends React.PureComponent {
             { name: 'description', content: 'Feature page of React.js Boilerplate application' },
           ]}
         />
-        {/* <HeaderSite logoClicked={this.props.changeState} /> */}
+        <HeaderSite logoClicked={this.props.changeState} />
         <div className="wrapper-form">
           {this.props.routeParams.loginType === 'register' ?
             <RegisterForm onSubmit={this.props.register} />

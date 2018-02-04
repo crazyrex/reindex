@@ -4,11 +4,7 @@ export default {
   apiRoot:'http://localhost:3005/api/v1/',
   resultsIndex: 'results',
   categoriesIndex: 'cat1',
-  searchTabs: {
-    people: {
-      type: '1',
-      route: 'ppls'
-    },
+  searchTabs: {   
     businesses: {
       type: '2,3',
       route: 'cat'
