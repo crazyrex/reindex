@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import SearchIcon from 'material-ui/svg-icons/action/search';
 import AutoComplete from 'material-ui/AutoComplete';
 import { updateSearchLocation } from 'utils/functions';
-import config from 'config';
+import config from 'ReindexConfig';
 import translate from 'globalTranslate.json';
 import arrow from 'assets/img/icon-arrow-down.svg';
 import './SearchBar.scss';
@@ -42,7 +42,7 @@ class SearchBar extends React.PureComponent {
   handleCategoriesRequest(searchText, index, tabType) {
     if (index !== -1) this.props.loadSubCategories(searchText, tabType, false);
     if (index === -1) this.props.loadSubCategoriesForText(searchText);
-    this.props.loadHierarchyFilterData(hierarchyFilters.kashrut, 0, hierarchyFilters.kashrut.content, true);
+    //this.props.loadHierarchyFilterData(hierarchyFilters.kashrut, 0, hierarchyFilters.kashrut.content, true);
     const key = (index !== -1) ? 'categories' : 'q';
     this.updateSearchLocation(key, searchText, 'businesses', index);
     // this.props.onNewRequest();
@@ -66,7 +66,10 @@ class SearchBar extends React.PureComponent {
                 <AutoComplete
                   hintText={translate.search}
                   dataSource={this.props.categories}
-                  fullWidth={true} />
+                  fullWidth={true}
+                  onUpdateInput={(searchText) => { this.props.handleInput(searchText, 'businesses', 'categories'); }}
+                  onNewRequest={(chosenRequest, index) => { this.closeSelect(); this.props.emptySubCategories(index); this.handleCategoriesRequest(chosenRequest, index, 'businesses'); this.props.loadHierarchyFilterData(hierarchyFilters.kashrut, 0, hierarchyFilters.kashrut.content, true); }}
+                />
               </div>
             </div>
             <div className="search-icon-wrapper" onClick={() => { this.closeSelect(); this.handleSearchBtn(); }}>

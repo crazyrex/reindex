@@ -1,4 +1,4 @@
-import config from 'config';
+import config from 'ReindexConfig';
 import {
   LOAD_FILTER_DATA,
   LOAD_FILTER_DATA_SUCCESS,

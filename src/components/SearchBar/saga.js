@@ -1,7 +1,7 @@
 import { take, put, call, cancel, takeLatest } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import request from 'utils/request';
-import config from '../../config';
+import config from '../../ReindexConfig';
 import { LOAD_FILTER_DATA, LOAD_SUBCATEGORIES, LOAD_CATEGORIES_FILTER_DATA, LOAD_HIERARCHY_FILTER_DATA } from './constants';
 import { filterDataLoaded, subCategoriesLoaded, categoriesFilterDataLoaded, hierarchyFilterDataLoaded } from './actions';
 
@@ -17,8 +17,8 @@ export function* loadFilterData(data) {
       body: JSON.stringify({
         term: 'content.ac',
         value: data.data.searchText,
-        index: config.filtersTypes[data.data.filterType].index,
-        type: config.filtersTypes[data.data.filterType].type,
+        index: config.filtersTypes.cities.index,
+        type: config.filtersTypes.cities.type,
       }),
     };
     const response = yield call(request, requestURL, options);
@@ -54,7 +54,7 @@ export function* loadHierarchyFilterData(data) {
       },
     };
     const subCategories = yield call(request, requestURL, options);
-    yield put(hierarchyFilterDataLoaded({key: data.data.filter, categories: subCategories.data}));
+    yield put(hierarchyFilterDataLoaded({ key: data.data.filter, categories: subCategories.data }));
   } catch (err) {
     console.log(err);
   }

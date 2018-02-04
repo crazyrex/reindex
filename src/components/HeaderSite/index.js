@@ -4,7 +4,7 @@ import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
 import Drawer from 'material-ui/Drawer';
 import { browserHistory } from 'react-router';
 import MenuItem from 'material-ui/MenuItem';
-import config from 'config';
+import config from 'ReindexConfig';
 import IconButton from 'material-ui/IconButton';
 import SearchIcon from 'material-ui/svg-icons/action/search';
 import logo from 'assets/img/logo.jpg';

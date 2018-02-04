@@ -92,9 +92,8 @@ export function getLocationData(location) {
   if (pathnameArray[0] === '') pathnameArray.shift();
   const obj = {};
   obj.search = searchToObject(location);
-  obj.tab = pathnameArray[0] === config.searchTabs.businesses.route ? 'businesses' :
-    (pathnameArray[0] === config.searchTabs.people.route ? 'people' : '');
-  obj.tabRoute = (obj.tab === 'businesses' || obj.tab === 'people') ? config.searchTabs[obj.tab].route : '';
+  obj.tab = 'businesses';
+  obj.tabRoute='cat';
   obj.pathname = location.pathname;
   if (obj.tab === 'businesses' && pathnameArray[1]) {
     obj.lastCategory = {
@@ -118,7 +117,7 @@ export function updateSearchLocation(key, value, tab, bool) {
   let val = (typeof value === 'object') ? value.text || value._source.content : value;
   if (['s', 'q', 'categories'].indexOf(key) !== -1) val = val.replace(/-/g, '_');
   if (tab) {
-    path = config.searchTabs[tab].route;
+    path = 'cat';
     for (const index of Object.keys(locationData.search)) {
       delete locationData.search[index];
     }
