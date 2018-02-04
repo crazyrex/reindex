@@ -1,7 +1,7 @@
 import config from 'config';
 
 export default {
-  apiRoot:'https://dev.402.co.il',
+  apiRoot:'https://dev.402.co.il/api/v1/',
   resultsIndex: '402demo11',
   categoriesIndex: 'cat1',
   searchTabs: {   

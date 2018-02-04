@@ -18,7 +18,7 @@ import SearchBar from 'components/SearchBar';
 // import Snackbar from 'material-ui/Snackbar';
 // import DrawerFilter from 'components/DrawerFilter';
 import { detectmob } from '../../utils/functions';
-import config from '../../config';
+import config from '../../ReindexConfig';
 // import Tabs from 'components/Tabs';
 import { loadResults, changeState, updateRecord, displayIcons, closeUpdateRecordModal } from './actions';
 // import { spacing } from 'material-ui/styles';

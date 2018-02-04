@@ -194,7 +194,7 @@ let CreateForm = class CreateForm extends React.Component {
                   <MenuItem value={1} primaryText="אנשים" />
                   <MenuItem value={2} primaryText="עסקים" />
                 </Field>
-                {(this.state.type && config.searchTabs.businesses.type.indexOf(this.state.type.toString()) > -1) ?
+                {(this.state.type && config.searchTabs.type.indexOf(this.state.type.toString()) > -1) ?
                   <div>
                     <Field name="business_name" type="text" component={renderField} label="שם העסק" />
                     <Field name="business_description" type="text" component={renderField} label="תאור" />
@@ -224,7 +224,7 @@ let CreateForm = class CreateForm extends React.Component {
                 <Field name="sender.is_agreed_to_receive_data" component={Checkbox} label="אשר לנו לעדכן אותך על חדשות ואפשרויות נוספות במדריך" labelPosition="left" className="wrapper-checkbox" />
               </div>
             </div>
-            {(this.state.type && config.searchTabs.businesses.type.indexOf(this.state.type.toString()) > -1) ?
+            {(this.state.type && config.searchTabs.type.indexOf(this.state.type.toString()) > -1) ?
               <CategoriesTree onUpdate={this.updateSelectedCategories} /> : ''}
             <div className="wrapper-actions">
               <div onClick={this.handleModalClose}><FlatButton label="ביטול" labelStyle={{ color: '#b3b3b3', fontSize: 16 }} /></div>
