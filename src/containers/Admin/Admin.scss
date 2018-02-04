@@ -30,10 +30,10 @@
     width: calc(97% - 256px);
     position: absolute;
     top: calc((100px) + (2 * #{$headerPadding})) !important;
-    left: 20px;
+    right: 20px;
 }
 .children.close {
     width: 100% !important;
     position: absolute;
-    right: 7px;
+    left: 7px;
 }

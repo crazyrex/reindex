@@ -1,7 +1,7 @@
 import { take, put, call, cancel, select, takeLatest } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import request, { requestNoParse } from 'utils/request';
-import config from '../../config';
+import config from '../../ReindexConfig';
 import { LOAD_RESULTS, UPDATE_RECORD } from './constants';
 import { resultsLoaded, recordUpdated } from './actions';
 

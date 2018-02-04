@@ -10,7 +10,7 @@ const environment = {
 module.exports = Object.assign({
   host: process.env.HOST || 'localhost',
   port: process.env.PORT || '3000',
-  apiRoot: process.env.API_ROOT || 'https://dev.402.co.il/api/v1/',
+  apiRoot: 'http://localhost:3005/api/v1/',
   apiBaseUrl: process.env.API_URL || 'https://api.github.com',
   app: {
     googleAnalytics: {

@@ -5,6 +5,8 @@ import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
+const muiTheme = getMuiTheme({ isRtl: false, fontFamily: 'Heebo' });
+
 
 import {
   navigate,
@@ -12,6 +14,8 @@ import {
   resetErrorMessage
 } from '../../actions';
 import styles from './App.scss'; // eslint-disable-line
+import 'assets/css/global-styles.scss';
+
 
 class App extends Component {
   constructor(props) {
@@ -50,8 +54,8 @@ class App extends Component {
   render() {
     const { children } = this.props;
     return (
-      <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
-      <div className={styles.app}>
+      <MuiThemeProvider muiTheme={muiTheme}>
+       <div className={styles.app}>
         <Helmet
           title="React Universal Saga"
           meta={[{ property: 'og:site_name', content: 'React Universal Saga' }]}

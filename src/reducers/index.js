@@ -3,6 +3,8 @@ import merge from 'lodash/merge';
 import paginate from './paginate';
 import { combineReducers } from 'redux';
 import authPageReducer from '../containers/AuthPage/reducer';
+import categoriesTreeReducer from '../components/CategoriesTree/reducer';
+import adminCategoriesReducer from '../containers/AdminCategories/reducer';
 import { reducer as form } from 'redux-form';
 
 
@@ -62,6 +64,8 @@ const rootReducer = combineReducers({
   pagination,
   errorMessage,
   authPage: authPageReducer,
+  categoriesTree: categoriesTreeReducer,
+  adminCategories: adminCategoriesReducer,
   router,
   form
 });

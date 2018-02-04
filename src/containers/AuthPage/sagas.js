@@ -1,7 +1,7 @@
 import { take, call, put, cancel, takeLatest } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import request from 'utils/request';
-import config from 'config';
+import config from 'ReindexConfig';
 import { authSuccess } from './actions';
 import { LOGIN, REGISTER } from './constants';
 

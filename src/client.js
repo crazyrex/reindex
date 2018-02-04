@@ -12,7 +12,7 @@ import config from './config';
 const dest = document.getElementById('content');
 const store = configureStore(window.__data); // eslint-disable-line
 
-GoogleAnalytics.initialize(config.app.googleAnalytics.appId);
+// GoogleAnalytics.initialize(config.app.googleAnalytics.appId);
 
 store.runSaga(rootSaga);
 

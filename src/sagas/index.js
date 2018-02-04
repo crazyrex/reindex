@@ -5,6 +5,8 @@ import * as actions from '../actions';
 
 import { getUser, getRepo, getStarredByUser, getStargazersByRepo } from '../reducers/selectors';
 import AuthPage from '../containers/AuthPage/sagas';
+import categoriesTreeSaga from '../components/CategoriesTree/saga';
+
 
 // each entity defines 3 creators { request, success, failure }
 const { user, repo, starred, stargazers } = actions;
@@ -133,6 +135,7 @@ export default function* root() {
   yield [
     fork(watchNavigate),
     ...AuthPage,
+    ...categoriesTreeSaga,
     fork(watchLoadUserPage),
     fork(watchLoadRepoPage),
     fork(watchLoadMoreStarred),

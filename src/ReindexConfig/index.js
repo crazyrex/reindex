@@ -1,8 +1,9 @@
+import config from 'config';
+
 export default {
-  // apiRoot: 'https://402.co.il/api/v1/',
-  apiRoot: 'http://localhost:3005/api/v1/',
-  resultsIndex: '402demo11',
-  categoriesIndex: 'cat3',
+  apiRoot:'http://localhost:3005/api/v1/',
+  resultsIndex: 'results',
+  categoriesIndex: 'cat1',
   searchTabs: {
     people: {
       type: '1',
@@ -18,10 +19,10 @@ export default {
   },
   filtersTypes: {
     categories: {
-      index: 'cat3'
+      index: 'reindex-categories'
     },
     cities: {
-      index: '402autocomplete',
+      index: 'reindex-cities',
       type: 'cities',
       queryParam: 'city'
     },
