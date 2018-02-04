@@ -108,6 +108,7 @@ export class MainSearch extends React.PureComponent {
     this.setState({ goToApp: false, ifApp: true });
   }
 
+
   render() {
     return (
       // <div className={`main-search full-height-container main ${this.props.state === 'main' ? 'main' : 'search'} ${!this.state.ifApp  ? 'gotoapp' : ''}`}>
@@ -129,31 +130,18 @@ export class MainSearch extends React.PureComponent {
           <SearchBar
             onNewRequest={this.props.handleNewRequest}
             handleSearchBtn={this.props.handleSearchBtn}
-            // data={this.props.searchBarData}
+            data={this.props.searchBarData}
           />
         </div>
-        {/* {this.state.goToApp && this.state.goToApp === true && this.state.detectmob && !this.state.ifApp && ifApp === false ?
-          <div className="goToApp">
-            <div className="close" onClick={this.handleClose}>
-              <IconButton ><PlaceIcon /></IconButton>
-            </div>
-            <div>
-              <img src={seoImage} />
-            </div>
-            <div className="txt">
-              <span>Reindex</span>
-            </div>
-            <a className="linkToGP" href="https://play.google.com/store/apps/details?id=com.app.thecharedidirectory">הורד</a>
-          </div>
-          : ''}
 
-        {!this.state.detectmob ?
+        {/* {!this.state.detectmob ?
           <div className={styles["wrapper-filters"]}>
             <Filters onNewRequest={this.props.handleNewRequest} pageState={this.props.state} />
-          </div> : ''}
-        {this.props.isDisplayIcons && this.state.displayIcons && <div className={styles["bottom-icons"]}><SearchIcons /></div>}
-        {this.state.detectmob && this.props.results.length > 0 ?
+          </div> : ''} */}
+        {/* {this.props.isDisplayIcons && this.state.displayIcons && <div className={styles["bottom-icons"]}><SearchIcons /></div>} */}
+        {/* {this.state.detectmob && this.props.results.length > 0 ?
           <DrawerFilter onNewRequest={this.props.handleNewRequest} pageState={this.props.state} /> : ''}
+        */}
         {this.props.results.length > 0 ? <div className={styles["wrapper-results"]}>
           <div className={styles["results-count"]}>נמצאו {this.props.totalResults} תוצאות </div>
           <Results
@@ -163,8 +151,10 @@ export class MainSearch extends React.PureComponent {
             offset={this.props.offsetResults}
             updateRecord={this.props.updateRecord}
             handlePageClick={this.props.handleResultsPageClick}
-          /></div> : <NoResults />}
-        <Snackbar
+          /></div> :
+          //  <NoResults />
+           ''}
+        {/* <Snackbar
           open={this.props.updateRecordAlert.open}
           message={this.props.updateRecordAlert.text}
           autoHideDuration={4000}
@@ -188,7 +178,7 @@ MainSearch.propTypes = {
   totalResults: React.PropTypes.number,
   limitResults: React.PropTypes.number,
   handleResultsPageClick: React.PropTypes.func,
-  // searchBarData: React.PropTypes.object,
+  searchBarData: React.PropTypes.object,
   offsetResults: React.PropTypes.number,
   height: React.PropTypes.number,
   isDisplayIcons: React.PropTypes.bool,
@@ -196,15 +186,15 @@ MainSearch.propTypes = {
 
 export function mapStateToProps(state) {
   return {
-    // state: state.mainSearch.state,
-    // results: state.mainSearch.results,
-    // totalResults: state.mainSearch.totalResults,
-    // limitResults: state.mainSearch.limitResults,
-    // offsetResults: state.mainSearch.offsetResults,
-    // updateRecordAlert: state.mainSearch.updateRecordAlert,
-      // searchBarData: state.mainSearch.searchBarData,
-    // search: state.search.search,
-    // isDisplayIcons: state.mainSearch.displayIcons,
+    state: state.mainSearch.state,
+    results: state.mainSearch.results,
+    totalResults: state.mainSearch.totalResults,
+    limitResults: state.mainSearch.limitResults,
+    offsetResults: state.mainSearch.offsetResults,
+    updateRecordAlert: state.mainSearch.updateRecordAlert,
+    searchBarData: state.mainSearch.searchBarData,
+    search: state.search.search,
+    isDisplayIcons: state.mainSearch.displayIcons,
   };
 }
 
@@ -213,21 +203,21 @@ export function mapDispatchToProps(dispatch) {
     changeState: () => {
       dispatch(changeState());
     },
-    updateRecord: (values, categories) => {
-      values.categories = categories;
-      dispatch(updateRecord({ values: values, categories }));
-    },
+    // updateRecord: (values, categories) => {
+    //   values.categories = categories;
+    //   dispatch(updateRecord({ values: values, categories }));
+    // },
     handleNewRequest: () => {
-      // dispatch(loadResults({ page: 1 }));
+      dispatch(loadResults({ page: 1 }));
     },
     handleSearchBtn: () => {
-      // dispatch(loadResults({ page: 1 }));
+      dispatch(loadResults({ page: 1 }));
     },
     closeUpdateRecordModal: () => {
       dispatch(closeUpdateRecordModal());
     },
     handleResultsPageClick: (offset, captcha) => {
-      // dispatch(loadResults({ page: offset, captcha }));
+      dispatch(loadResults({ page: offset, captcha }));
     },
     displayIcons: (isDisplay) => {
       dispatch(displayIcons({ displayIcons: isDisplay }))

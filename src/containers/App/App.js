@@ -1,44 +1,67 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import { Explore } from 'components';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import CopyRightIcon from 'material-ui/svg-icons/action/copyright';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import { getLocationData } from 'utils/functions';
+import { detectmob } from '../../utils/functions';
 
-const muiTheme = getMuiTheme({ isRtl: false, fontFamily: 'Heebo' });
 
+
+const muiTheme = getMuiTheme({ isRtl: true, fontFamily: 'Heebo' });
 
 import {
   navigate,
   updateRouterState,
   resetErrorMessage
 } from '../../actions';
+
+import { loadResults } from '../ResultsPage/actions';
+
 import styles from './App.scss'; // eslint-disable-line
 import 'assets/css/global-styles.scss';
-
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
+    this.state = {
+      detectmob: detectmob(),
+    };
   }
+
 
   componentWillMount() {
     this.props.updateRouterState({
       pathname: this.props.location.pathname,
-      params: this.props.params
+      params: this.props.params,
+      query: this.props.location.query,
     });
   }
 
+  loadResults(location, locationData) {
+    if (locationData.tab === 'businesses' || locationData.tab === 'people') {
+      this.props.loadResults({ page: 1, location: location });
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
+    const locationData = getLocationData(nextProps.location);
     if (nextProps.errorMessage) {
       // handle error here
     }
     if (this.props.location.pathname !== nextProps.location.pathname) {
       this.props.updateRouterState({
         pathname: nextProps.location.pathname,
-        params: nextProps.params
+        params: nextProps.params,
+        query: nextProps.location.query,
       });
+      return this.loadResults(nextProps.location, locationData);
+    }
+    if (this.props.location.search !== nextProps.location.search) {
+      this.loadResults(nextProps.location, locationData);
     }
   }
 
@@ -52,18 +75,15 @@ class App extends Component {
   }
 
   render() {
-    const { children } = this.props;
+    const { children, inputValue, location } = this.props;
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
-       <div className="app">
-        <Helmet
-          title="React Universal Saga"
-          meta={[{ property: 'og:site_name', content: 'React Universal Saga' }]}
-        />
-        <div className="content">
-          {children}
+        <div className={`${styles.app}`}>
+          <div className={styles.content}>
+            {children}
+
+          </div>
         </div>
-      </div>
       </MuiThemeProvider>
     );
   }
@@ -71,6 +91,7 @@ class App extends Component {
 
 App.propTypes = {
   errorMessage: PropTypes.string,
+  inputValue: PropTypes.string.isRequired,
   navigate: PropTypes.func.isRequired,
   updateRouterState: PropTypes.func.isRequired,
   resetErrorMessage: PropTypes.func.isRequired,
@@ -91,11 +112,13 @@ App.propTypes = {
 function mapStateToProps(state) {
   return {
     errorMessage: state.errorMessage,
+    inputValue: state.router.pathname.substring(1)
   };
 }
 
 export default connect(mapStateToProps, {
   navigate,
   updateRouterState,
-  resetErrorMessage
+  resetErrorMessage,
+  loadResults,
 })(App);

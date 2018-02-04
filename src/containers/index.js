@@ -5,4 +5,5 @@ export NotFound from './NotFound/NotFound';
 export Admin from './Admin';
 export AuthPage from './AuthPage/index';
 export AdminCategories from './AdminCategories';
+export ResultsPage from './ResultsPage';
 

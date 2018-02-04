@@ -7,6 +7,10 @@ import categoriesTreeReducer from '../components/CategoriesTree/reducer';
 import adminCategoriesReducer from '../containers/AdminCategories/reducer';
 import { reducer as form } from 'redux-form';
 import searchReducer from '../components/SearchBar/reducer';
+import resultsPageReducer from '../containers/ResultsPage/reducer';
+import mainSearchReducer from '../containers/MainSearch/reducer';
+
+
 
 // Updates an entity cache in response to any action with response.entities.
 function entities(state = { users: {}, repos: {} }, action) {
@@ -66,10 +70,11 @@ const rootReducer = combineReducers({
   authPage: authPageReducer,
   categoriesTree: categoriesTreeReducer,
   adminCategories: adminCategoriesReducer,
+  mainSearch: mainSearchReducer,
   router,
   form,
   search: searchReducer,
-
+  results: resultsPageReducer,
   router
 });
 
