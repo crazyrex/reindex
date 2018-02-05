@@ -7,4 +7,5 @@ export AdminSearch from './AdminSearch';
 export AuthPage from './AuthPage/index';
 export AdminCategories from './AdminCategories';
 export ResultsPage from './ResultsPage';
+export RecordPage from './RecordPage';
 

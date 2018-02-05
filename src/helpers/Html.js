@@ -36,6 +36,8 @@ class Html extends Component {
           {Object.keys(assets.styles).map((style, key) =>
             <link href={assets.styles[style]} key={key} media="screen, projection" rel="stylesheet" type="text/css" charSet="UTF-8" />
           )}
+          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7XnBe82IfEqcZkbScrVfzHZvL8czP9v0" async defer></script>
+
                   
         </head>
         <body>

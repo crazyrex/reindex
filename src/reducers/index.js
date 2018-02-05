@@ -9,6 +9,7 @@ import { reducer as form } from 'redux-form';
 import searchReducer from '../components/SearchBar/reducer';
 import resultsPageReducer from '../containers/ResultsPage/reducer';
 import mainSearchReducer from '../containers/MainSearch/reducer';
+import recordReducer from '../containers/RecordPage/reducer';
 
 
 
@@ -67,6 +68,7 @@ const rootReducer = combineReducers({
   entities,
   pagination,
   errorMessage,
+  recordReducer,
   authPage: authPageReducer,
   categoriesTree: categoriesTreeReducer,
   adminCategories: adminCategoriesReducer,
