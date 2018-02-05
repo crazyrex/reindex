@@ -23,14 +23,13 @@ function spliceArray(array, index) {
 
 function initSearchObj() {
   const obj = {};
-  console.log('config', config)
-
-  obj['businesses'] = {
-    city: '',
-    value: [],
-    type: '2,3',
-  };
-
+  Object.keys(config.searchTabs).forEach((key) => {
+    obj[key] = {
+      city: '',
+      value: [],
+      type: config.searchTabs[key].type,
+    };
+  });
   obj.activeTab = 'businesses';
   obj.filtersValue = {};
   obj.textToSearch = '';
@@ -111,7 +110,7 @@ function searchReducer(state = initialState, action) {
         [action.data.dataParams.filterType]: processFiltersData(action.data.response),
       });
     case REDUCE_FILTERS:
-      if (!action.data.filter)
+     if (!action.data.filter)
         return Object.assign({}, state, {
           search: updateCategoriesValue(state.search, action.data),
           subCategories: [...spliceArray(state.subCategories, action.data.index + 1)],

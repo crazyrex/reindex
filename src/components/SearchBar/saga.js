@@ -17,8 +17,8 @@ export function* loadFilterData(data) {
       body: JSON.stringify({
         term: 'content.ac',
         value: data.data.searchText,
-        index: config.filtersTypes.cities.index,
-        type: config.filtersTypes.cities.type,
+        index: config.filtersTypes[data.data.filterType].index,
+        type: config.filtersTypes[data.data.filterType].type,
       }),
     };
     const response = yield call(request, requestURL, options);
@@ -54,7 +54,7 @@ export function* loadHierarchyFilterData(data) {
       },
     };
     const subCategories = yield call(request, requestURL, options);
-    yield put(hierarchyFilterDataLoaded({ key: data.data.filter, categories: subCategories.data }));
+    yield put(hierarchyFilterDataLoaded({key: data.data.filter, categories: subCategories.data}));
   } catch (err) {
     console.log(err);
   }

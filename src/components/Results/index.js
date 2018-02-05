@@ -1,0 +1,371 @@
+import React from 'react';
+import { connect } from 'react-redux';
+import { Card, CardHeader, CardText } from 'material-ui/Card';
+import IconButton from 'material-ui/IconButton';
+import FlatButton from 'material-ui/FlatButton';
+import Chip from 'material-ui/Chip';
+import _ from 'lodash';
+// import GMap from 'components/GMap';
+// import Phone from 'components/Phone';
+import { Link } from 'react-router';
+import { detectmob } from 'utils/functions';
+// import DetailsForm from 'components/DetailsForm';
+import RaisedButton from 'material-ui/RaisedButton';
+//import ReCAPTCHA from 'react-google-recaptcha';
+// import SocialBtns from 'components/SocialBtns';
+import { requestNoParse } from 'utils/request';
+import PhoneIcon from 'material-ui/svg-icons/communication/call';
+import HomeIcon from 'material-ui/svg-icons/action/home';
+import UpdateIcon from 'material-ui/svg-icons/action/update';
+import BusinessIcon from 'material-ui/svg-icons/places/business-center';
+// import { cleanData } from 'components/DetailsForm/actions';
+import PlaceIcon from 'material-ui/svg-icons/maps/place';
+
+
+import config from 'ReindexConfig';
+
+import './Results.scss';
+
+const monthArr = [
+  'ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר',
+  'אוקטובר', 'נובמבר', 'דצמבר',
+];
+
+function splitTags(tagsStr, catArr, isDetectmob) {
+  let arr = tagsStr ? tagsStr.split('|') : [];
+  arr = arr.concat(catArr);
+  arr = arr.map((e) => { if (e) return e.trim(); return e; });
+  arr = _.uniq(arr);
+  if (isDetectmob)
+    _.reverse(arr);
+  return (<div className="wrapper-tags">{arr.map((tag, index) =>
+    (tag !== '' ? <Chip className="chip" key={index} onTouchTap={() => this.onTouchTap(tag)}>
+      {tag}
+    </Chip> : '')
+  )}
+  </div>);
+}
+
+class Results extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showResults: false,
+      modalOpen: false,
+      showCaptcha: false,
+      results: {},
+      detectmob: detectmob(),
+    };
+
+    this.updateRecord = this.updateRecord.bind(this);
+    this.handleModalClose = this.handleModalClose.bind(this);
+    this.handlePageClick = this.handlePageClick.bind(this);
+    this.getDistanceFromLatLonInKm = this.getDistanceFromLatLonInKm.bind(this);
+    this.d = null;
+    //this.handleExpandChange = this.handleExpandChange.bind(this);
+  }
+
+  getDataGTM(data) {
+    let topArr = [];
+    for (let i = 0; i < 5; i++) {
+      if (data[i]) {
+        let tmp = data[i]._source.business_name ? data[i]._source.business_name : data[i]._source.first_name + ' ' + data[i]._source.last_name;
+        if (data[i]._source.score_value)
+          tmp += ' - top5'
+        topArr.push(tmp);
+      }
+
+    }
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      'event': 'load Data',
+      'top': topArr
+    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.getDataGTM(nextProps.data);
+  }
+
+  componentDidMount() {
+    this.getDataGTM(this.props.data);
+  }
+
+  scroll2Bottom() {
+    setTimeout(() => {
+      window.scrollTo(0, document.body.scrollHeight);
+    }, 50);
+  }
+
+  register2MailingList(values) {
+    const email = values.sender.email;
+    const fname = values.sender.fname;
+    const lname = values.sender.lname;
+    const requestURL = `${config.apiRoot}registerToMailingList?email=${email}&&fname=${fname}&&lname=${lname}`;
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    requestNoParse(requestURL, options)
+  }
+
+  updateRecord(values, categories) {
+    if (values.sender && values.sender.is_agreed_to_receive_data)
+      this.register2MailingList(values);
+    this.handleModalClose();
+    this.props.updateRecord(values, categories);
+  }
+  handleModalClose() {
+    this.props.cleanSelectedRecordData();
+    this.setState({ modalOpen: false });
+  }
+
+  deg2rad(deg) {
+    return deg * (Math.PI / 180)
+  }
+
+  getDistanceFromLatLonInKm(pos) {
+    let lat1 = this.props.lat;
+    let lon1 = this.props.lon;
+    let lat2 = pos[1];
+    let lon2 = pos[0];
+    var R = 6371; // Radius of the earth in km
+    var dLat = this.deg2rad(lat2 - lat1);  // deg2rad below
+    var dLon = this.deg2rad(lon2 - lon1);
+    var a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) *
+      Math.sin(dLon / 2) * Math.sin(dLon / 2)
+      ;
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    var d = R * c; // Distance in km
+    return d.toFixed(2);;
+  }
+
+  handlePageClick(value) {
+    this.setState({ showCaptcha: false });
+    if (this.props.offset === Math.ceil(this.props.total / this.props.limit)) return;
+    if (value) this.props.handlePageClick(this.props.offset + 1, value, this.props.location);
+  }
+  handleExpandChange = (val, index) => {
+    if (val) {
+      this.x = new Date().getMilliseconds();
+      if (!this.d || (this.d && Math.abs(this.d - this.x > 100))) {
+        window.dataLayer.push({
+          'event': 'click',
+          'cardname': this.props.data[index]._source.business_name
+        });
+        if (this.d && Math.abs(this.d - this.x > 100)) {
+          this.d = null;
+        }
+        else this.d = this.x;
+      }
+    }
+    const tmp = this.state.results;
+    tmp[index] = val;
+    this.setState({ results: tmp });
+  }
+  parseDate(date) {
+    const tmpDate = new Date(date || 0);
+    return `עודכן לאחרונה ב-${tmpDate.getDate()} ל${monthArr[tmpDate.getMonth()]} 
+    ${tmpDate.getFullYear()}`;
+  }
+
+  clickUpdateRecoed(index) {
+    const record = this.props.data[index];
+    window.dataLayer.push({
+      'event': 'click Update',
+      'type': record._source.listing_type_1 === 1 ? 'people' : 'business',
+      'name': record._source.listing_type_1 === 1 ? record._source.first_name + ' ' + record._source.last_name : record._source.business_name,
+      'status': 'open'
+    });
+  }
+  render() {
+    return (
+      <div>
+        {this.props.data.map((res, index) =>
+          <Card
+            key={index}
+            onExpandChange={(val) => this.handleExpandChange(val, index)}
+            className={`card ${res._source.score_value && res._source.score_value > 0 ? 'top' : ''}`}
+          >
+            <CardHeader
+              showExpandableButton={!this.state.detectmob ||
+                config.searchTabs[res._source.listing_type_1] === 'people'}
+              className={`card-header ${this.state.results[index] ? '' : ''}`}
+              actAsExpander={!this.state.detectmob}
+            >
+              <div className="wrapper-header">
+                <div className="wrapper-details">
+                  <div className={`${this.state.results[index] ? '' : ''}`}>
+                    <div>
+                      {this.props.lat && this.props.lon && res._source.location && res._source.location.length > 0 ?
+                        <div className="km" >
+                          <IconButton ><PlaceIcon /></IconButton>
+
+                          <span >{this.getDistanceFromLatLonInKm(res._source.location)} ק"מ</span>
+                        </div>
+                        : ''}
+                      <span className="name">
+                        {res._source.business_name ||
+                          `${res._source.first_name} ${res._source.last_name}`}
+                      </span>
+                      <div className="desc">{res._source.business_description}</div>
+                    </div>
+                    <div>
+                      {res._source.phone || res._source.phone_2 ?
+                        <div className="wrapper-icon-content">
+                          <IconButton className="icon-phone" ><PhoneIcon /></IconButton>
+                          {/* <Phone
+                            data={res._source}
+                            cardName={res._source.business_name}
+                            recordId={res._id}
+                            isVirtual={config.searchTabs[res._source.listing_type_1] === 'businesses'}
+                          /> */}
+                        </div>
+                        : ''}
+                      <div className="wrapper-icon-content">
+                        <IconButton className="icon-home" ><HomeIcon /></IconButton>
+                        <span className="house">{res._source.address_street_name}
+                          &nbsp;{res._source.address_street_number}
+                          &nbsp;{res._source.address_street_entrance}
+                          &nbsp;{res._source.address_neighborhood}
+                          &nbsp;{res._source.address_city}
+                        </span>
+                      </div>
+                      {this.state.detectmob
+                        && config.searchTabs[res._source.listing_type_1] === 'businesses' ?
+                        <div className="wrapper-icon-content">
+                          <IconButton className="icon-businesspage" ><BusinessIcon /></IconButton>
+                          <span className="businesspage">
+                            <Link to={res._source.link} >דף עסק</Link>
+                          </span>
+                        </div> : ''}
+
+                    </div>
+                  </div>
+                </div>
+                <div className="separate"></div>
+                <div className="tags">
+                  {splitTags(res._source.tags, res._source.categories, this.state.detectmob)}
+                </div>
+              </div>
+            </CardHeader>
+            <CardText expandable>
+              <div className="wrapper-expand">
+                <div className="expand-mobile">
+                  { /* <div className="name-wrapper">
+                    <span className="name">{res._source.business_name ||
+                      `${res._source.first_name} ${res._source.last_name}`}</span>
+                    <span>{res._source.business_description}</span>
+                  </div>
+                  <div className="tags">
+                    {splitTags(res._source.tags, res._source.categories)}
+                  </div>
+                  <div className="separate"></div>
+                  <div>
+                    <IconButton className="icon-phone" ><PhoneIcon /></IconButton>
+                    <Phone
+                      data={res._source}
+                      recordId={res._id}
+                      isVirtual={config.searchTabs[res._source.listing_type_1 === 'businesses']}
+                    />
+                  </div>
+                  <div>
+                    <IconButton className="icon-home"><HomeIcon /></IconButton>
+                    <span className="house">{res._source.address_street_name}
+                      &nbsp;{res._source.address_street_number}
+                      &nbsp;{res._source.address_street_entrance}
+                      &nbsp;{res._source.address_neighborhood}
+                      &nbsp;{res._source.address_city}
+                    </span>
+                  </div>*/}
+                </div>
+                <div className="wrapper-map">
+                  {/* <GMap location={res._source} /> */}
+                </div>
+                <div className="wrapper-actions">
+                  <div style={{ margin: '10px 0' }}>
+                    <Link to={res._source.link}>{config.searchTabs[res._source.listing_type_1] === 'businesses' ? 'עבור לדף עסק' : 'עבור לדף איש קשר'}</Link>
+                  </div>
+                  <div
+                    onClick={() => {
+                      this.clickUpdateRecoed(index);
+                      this.setState({ modalOpen: !this.state.modalOpen });
+                      this.setState({ selectedRes: res });
+                    }}
+                  >
+                    <RaisedButton label="עדכן פרטים" />
+                  </div>
+                  {/* <SocialBtns data={res._source} /> */}
+                  <div className="wrapper-icon-content">
+                    <IconButton className="icon-update" ><UpdateIcon /></IconButton>
+                    <span className="updated">{this.parseDate(res._source.updated)}</span>
+                  </div>
+                </div>
+              </div>
+            </CardText>
+          </Card>
+        )}
+
+        {this.props.offset !== Math.ceil(this.props.total / this.props.limit)
+          && this.props.data.length < 200 ?
+          <div
+            className="wrapper-paginate"
+            onClick={() => {
+              this.setState({ showCaptcha: true }); this.scroll2Bottom();
+            }}
+          ><FlatButton
+              labelStyle={{ paddingRight: 44, paddingLeft: 44, fontSize: 18 }}
+              label="הצג תוצאות נוספות"
+            /></div>
+          : ''}
+        {/*   {this.state.showCaptcha ?
+          <ReCAPTCHA
+            ref="recaptcha"
+            sitekey={config.recaptcha.key}
+            onChange={this.handlePageClick}
+     /> : ''}  */}
+        {this.state.modalOpen && this.state.selectedRes ?
+          <DetailsForm
+            open={this.state.modalOpen}
+            handleClose={this.handleModalClose}
+            onSubmit={this.updateRecord}
+            id={this.state.selectedRes._id}
+            type={this.state.selectedRes._source.listing_type_1}
+          /> : ''}
+      </div>
+
+    );
+  }
+
+}
+
+Results.propTypes = {
+  data: React.PropTypes.array,
+  updateRecord: React.PropTypes.func,
+  total: React.PropTypes.number,
+  limit: React.PropTypes.number,
+  offset: React.PropTypes.number,
+  handlePageClick: React.PropTypes.func,
+  location: React.PropTypes.object,
+  cleanSelectedRecordData: React.PropTypes.func,
+};
+
+export function mapStateToProps() {
+  return {
+  };
+}
+
+export function mapDispatchToProps(dispatch) {
+  return {
+    cleanSelectedRecordData: () => {
+      dispatch(cleanData([]));
+    }
+  };
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Results);

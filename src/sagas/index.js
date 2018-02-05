@@ -6,6 +6,8 @@ import * as actions from '../actions';
 import { getUser, getRepo, getStarredByUser, getStargazersByRepo } from '../reducers/selectors';
 import AuthPage from '../containers/AuthPage/sagas';
 import categoriesTreeSaga from '../components/CategoriesTree/saga';
+import ResultsSaga from '../containers/ResultsPage/sagas';
+import MainSearchSaga from '../containers/MainSearch/sagas';
 
 
 import Search from '../components/SearchBar/saga';
@@ -138,6 +140,8 @@ export default function* root() {
     ...AuthPage,
     ...Search,
     ...categoriesTreeSaga,
+    ...ResultsSaga,
+    ...MainSearchSaga,
     fork(watchLoadUserPage),
     fork(watchLoadRepoPage),
     fork(watchLoadMoreStarred),

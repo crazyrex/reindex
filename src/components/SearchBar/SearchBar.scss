@@ -30,7 +30,6 @@
                     height: 9px;
                 }
             }
-
             .selectList {
                 display: none;
                 position: absolute;
@@ -53,7 +52,6 @@
                     font-size: 18px;
                     transition: 300ms;
                 }
-
                 & > li:hover {
                     background: black;
                     color: white;
@@ -72,7 +70,6 @@
                     border-right: solid 8px transparent;
                 }
             }
-
             select {
                 font-family: 'Heebo';
                 font-size: 22px;
@@ -188,8 +185,6 @@
         font-size: 17px !important;
     }
 }
-
-
 @media screen and (max-width: 767px) {
     .search-bar .autocomplete {
             width: 100% !important;
@@ -239,8 +234,6 @@
         }
     }
 }
-
-
 .main-search.main {
     @media screen and (min-width: 767px){
     .search-bar.tabs-state {
@@ -271,7 +264,6 @@
         }
     }
 }
-
 }
 .search-bar.tabs-state {
     & > div.select.active {
@@ -310,3 +302,5 @@
         display: flex;
     }
 }
+
+

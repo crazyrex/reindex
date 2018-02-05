@@ -13,7 +13,6 @@ const hierarchyFilters = config.hierarchyFilters;
 class SearchBar extends React.PureComponent {
   constructor(props) {
     super(props);
-
     this.handleCategoriesRequest = this.handleCategoriesRequest.bind(this);
     this.toggleSelect = this.toggleSelect.bind(this);
     this.closeSelect = this.closeSelect.bind(this);
@@ -23,22 +22,18 @@ class SearchBar extends React.PureComponent {
       TABS_STATE: false
     };
   }
-
   updateSearchLocation(key, value, tab) {
     updateSearchLocation(key, value, tab);
   }
-
   toggleSelect() {
     this.setState({ selectActive: !this.state.selectActive });
   }
   closeSelect() {
     this.setState({ selectActive: false });
   }
-
   componentDidMount() {
     this.setState({ TABS_STATE: (window.location.search.indexOf('test') > -1 || window.location.search.indexOf('terms') > -1) ? true : false })  // eslint-disable-line
   }
-
   handleCategoriesRequest(searchText, index, tabType) {
     if (index !== -1) this.props.loadSubCategories(searchText, tabType, false);
     if (index === -1) this.props.loadSubCategoriesForText(searchText);
@@ -47,7 +42,6 @@ class SearchBar extends React.PureComponent {
     this.updateSearchLocation(key, searchText, 'businesses', index);
     // this.props.onNewRequest();
   }
-
   handleSearchBtn = () => {
     const tab = this.props.search.activeTab;
     const key = (tab === 'people') ? 's' : 'q';
@@ -55,7 +49,6 @@ class SearchBar extends React.PureComponent {
     if (!searchText) return;
     this.updateSearchLocation(key, searchText, tab);
   }
-
   render() {
     return (
       <div>
@@ -83,7 +76,6 @@ class SearchBar extends React.PureComponent {
     );
   }
 }
-
 SearchBar.propTypes = {
   categories: React.PropTypes.array,
   onNewRequest: React.PropTypes.func,
@@ -98,14 +90,12 @@ SearchBar.propTypes = {
   loadCategoriesFilterData: React.PropTypes.func,
   loadHierarchyFilterData: React.PropTypes.func,
 };
-
 export function mapStateToProps(state) {
   return {
     categories: state.search.categories,
     search: state.search.search,
   };
 }
-
 export function mapDispatchToProps(dispatch) {
   return {
     handleInput: (searchText, tabType, filterType) => {
@@ -141,6 +131,4 @@ export function mapDispatchToProps(dispatch) {
     },
   };
 }
-
-
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
