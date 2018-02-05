@@ -117,7 +117,7 @@ export class MainSearch extends React.PureComponent {
           title="Reindex"
           meta={[
             { name: 'description', content: 'Reindex' },
-            // { property: 'og:image', content: `https://402.co.il${seoImage}` },
+            // { property: 'og:image', content: `https://${seoImage}` },
           ]}
         />
         <HeaderSite logoClicked={this.changeState} />

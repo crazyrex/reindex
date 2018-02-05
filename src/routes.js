@@ -8,6 +8,7 @@ import {
   AuthPage,
   AdminCategories, 
   ResultsPage,
+  RecordPage,
 } from 'containers';
 
 export default () => {
@@ -28,8 +29,8 @@ export default () => {
         <Route path="/admin/ArchivesRecords" component={ArchivesRecords} /> */}
       </Route>
       <Route path="/cat(/:catName)" component={ResultsPage} />
-      {/* <Route path="/biz" component={RecordPage} /> */}
-      {/* <Route path="/biz/:recordId/:recordName" component={RecordPage} /> */}
+      <Route path="/biz" component={RecordPage} />
+      <Route path="/biz/:recordId/:recordName" component={RecordPage} />
       <Route path="/404" component={NotFound} />
       <Route path="*" component={NotFound} />
     </Route>

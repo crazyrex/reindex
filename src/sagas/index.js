@@ -8,8 +8,7 @@ import AuthPage from '../containers/AuthPage/sagas';
 import categoriesTreeSaga from '../components/CategoriesTree/saga';
 import ResultsSaga from '../containers/ResultsPage/sagas';
 import MainSearchSaga from '../containers/MainSearch/sagas';
-
-
+import recordSaga from '../containers/RecordPage/sagas';
 import Search from '../components/SearchBar/saga';
 // each entity defines 3 creators { request, success, failure }
 const { user, repo, starred, stargazers } = actions;
@@ -142,6 +141,7 @@ export default function* root() {
     ...categoriesTreeSaga,
     ...ResultsSaga,
     ...MainSearchSaga,
+    ...recordSaga,
     fork(watchLoadUserPage),
     fork(watchLoadRepoPage),
     fork(watchLoadMoreStarred),
