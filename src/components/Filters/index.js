@@ -7,7 +7,7 @@ import IconButton from 'material-ui/IconButton';
 import BackIcon from 'material-ui/svg-icons/navigation/arrow-back';
 import Divider from 'material-ui/Divider';
 import IconsStyle from 'utils/iconsStyle';
-import config from '402Config';
+import config from 'ReindexConfig';
 import { updateSearchLocation } from 'utils/functions';
 import { loadSubCategories, updateSearchObj, reduceFilters, loadHierarchyFilterData } from 'components/SearchBar/actions';
 

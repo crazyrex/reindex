@@ -1,10 +1,10 @@
 import React from 'react';
-import { ShareButtons, generateShareIcon } from 'react-share';
+//import { ShareButtons, generateShareIcon } from 'react-share';
 import IconButton from 'material-ui/IconButton';
 import PhoneIcon from 'material-ui/svg-icons/communication/call';
 import MailIcon from 'material-ui/svg-icons/content/mail';
 import './SocialBtns.scss';
-import { generateIcon } from 'react-share/lib/generateIcon';
+//import { generateIcon } from 'react-share/lib/generateIcon';
 
 const {
   FacebookShareButton,

@@ -1,7 +1,7 @@
 import { take, put, call, cancel, takeLatest } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import request , { requestNoParse } from 'utils/request';
-import config from '402Config';
+import config from 'ReindexConfig';
 import { GET_VIRTUAL_NUMBER } from './constants';
 import { virtualNumberCreated } from './actions';
 

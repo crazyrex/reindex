@@ -7,11 +7,10 @@ import {
   AdminSearch,
   MainSearch,
   AuthPage,
-  AdminCategories, 
+  AdminCategories,
   ResultsPage,
   RecordPage,
 } from 'containers';
-console.log('AAAdmin', Admin, 'AdminSearchAdminSearch', AdminSearch)
 export default () => {
   const routes = (
     <Route path="/" component={App}>

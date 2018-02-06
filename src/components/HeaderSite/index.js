@@ -29,10 +29,11 @@ class HeaderSite extends React.Component {
                 <div className={styles["header-content"]}>
                     <div className={styles["logo-wrapper"]}>
                         <div className={styles["logo"]} style={{ backgroundImage: `url(${logo})` }} onClick={() => { browserHistory.push('/'); this.props.initSearch(); }}></div>
-                        {config.beta ?
-                            <div className={styles["beta"]} style={{ backgroundImage: `url(${beta})`, width: "50px" }}></div> : ''}
                     </div>
                     <div className={styles["header-searchIcon"]} onClick={() => browserHistory.push('/')}>
+                    </div>
+                    <div className={styles["header-searchIcon"]} onClick={() => browserHistory.push('/')}>
+                        <IconButton className={styles["searchIcon"]} hoveredStyle={{ backgroundColor: '#ffd800' }} iconStyle={{ color: 'white', fontSize: 30 }} style={{ backgroundColor: '#1b1b1b' }}><SearchIcon /></IconButton>
                     </div>
                 </div>
             </div>

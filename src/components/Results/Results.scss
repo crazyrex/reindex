@@ -16,12 +16,18 @@
 }
 
 .card-header {
-  padding: 13px 16px 13px 15% !important;
+  padding: 13px 15% 16px 13px!important;
   &>div:first-child {
     display: block !important;
   }
 }
 
+.card-header{
+  button{
+    right: 3px;
+    left: none !important;
+  }
+}
 
 .wrapper-header .wrapper-details {
   &>div {

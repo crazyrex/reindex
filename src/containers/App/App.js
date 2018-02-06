@@ -10,7 +10,7 @@ import { detectmob } from '../../utils/functions';
 
 
 
-const muiTheme = getMuiTheme({ isRtl: true, fontFamily: 'Heebo' });
+const muiTheme = getMuiTheme({ isRtl: false, fontFamily: 'Heebo' });
 
 import {
   navigate,
@@ -21,7 +21,7 @@ import {
 import { loadResults } from '../ResultsPage/actions';
 
 import styles from './App.scss'; // eslint-disable-line
-//import 'assets/css/global-styles.scss';
+import  'assets/css/global-styles.scss';
 
 class App extends Component {
   constructor(props) {
@@ -78,10 +78,9 @@ class App extends Component {
     const { children, inputValue, location } = this.props;
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
-        <div className={`${styles.app}`}>
-          <div className={styles.content}>
+        <div className={`${styles.app} ${(location.pathname.split('/')[1]) ? location.pathname.split('/')[1] : 'home'}`}>
+        <div className={styles.content}>
             {children}
-
           </div>
         </div>
       </MuiThemeProvider>

@@ -18,7 +18,7 @@ import { browserHistory } from 'react-router';
 import Chip from 'material-ui/Chip';
 import _ from 'lodash';
 import { getPhone, detectmob, getWebsite, getLocationData } from '../../utils/functions';
-import SocialBtns from 'components/SocialBtns';
+//import SocialBtns from 'components/SocialBtns';
 import Dialog from 'material-ui/Dialog';
 import PhoneIcon from 'material-ui/svg-icons/communication/call';
 import HomeIcon from 'material-ui/svg-icons/action/home';
@@ -169,7 +169,7 @@ class RecordPage extends React.Component {
         />
         {(typeof window !== undefined || typeof window !== 'undefined') ?
           <div>
-            <HeaderSite />
+            <HeaderSite />  
             {this.state.detectmob ?
               <div className="wrapper-titles">
                 <IconButton className="editBtn" onClick={() => { this.setState({ modalOpen: !this.state.modalOpen }); }}><EditIcon /></IconButton>
@@ -177,8 +177,8 @@ class RecordPage extends React.Component {
                   <div>{this.props.data.business_name || `${this.props.data.first_name} ${this.props.data.last_name}`}</div>
                   <div>{this.props.data.business_description}</div>
                 </div>
-                {this.state.showSocialBtns ?
-                  <SocialBtns data={this.props.data} /> : ''}
+                {/*  {this.state.showSocialBtns ?
+                 <SocialBtns data={this.props.data} /> : ''} */}
                 <IconButton className="shareBtn" onClick={() => { this.setState({ showSocialBtns: true }); }}><ShareIcon /></IconButton>
               </div>
               : ''}
@@ -220,7 +220,7 @@ class RecordPage extends React.Component {
               <div className="more-details">
                 <div><GMap location={this.props.data} /></div>
                 <div>
-                  {!this.state.detectmob ? <SocialBtns data={this.props.data} /> : ''}
+                  {/* {!this.state.detectmob ? <SocialBtns data={this.props.data} /> : ''}*/}
                   <div className="wrapper-icon-content">
                     <IconButton className="icon-update"> <UpdateIcon /> </IconButton>
                     <span className="updated">{this.parseDate(this.props.data.updated)}</span>

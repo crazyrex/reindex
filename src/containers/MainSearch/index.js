@@ -1,22 +1,17 @@
-/*
- * ChildrenData
- *
- * List all the features
- */
 'use strict';
 import React from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
-// import Filters from 'components/Filters';
+import Filters from 'components/Filters';
 import logo from 'assets/img/logo.png';
 import beta from 'assets/img/logo.png';
 import HeaderSite from 'components/HeaderSite';
-// import SearchIcons from 'components/SearchIcons';
+//import SearchIcons from 'components/SearchIcons';
 // import NoResults from 'components/NoResults';
 // import Results from 'components/Results';
 import SearchBar from 'components/SearchBar';
 // import Snackbar from 'material-ui/Snackbar';
-// import DrawerFilter from 'components/DrawerFilter';
+import DrawerFilter from 'components/DrawerFilter';
 import { detectmob } from '../../utils/functions';
 import config from '../../ReindexConfig';
 // import Tabs from 'components/Tabs';
@@ -25,7 +20,6 @@ import { loadResults, changeState, updateRecord, displayIcons, closeUpdateRecord
 // const seoImage = require('assets/img/hp.png');
 // import IconButton from 'material-ui/IconButton';
 // import PlaceIcon from 'material-ui/svg-icons/navigation/cancel';
-
 
 const styles = require('./MainSearch.scss');
 let ifApp = true;
@@ -108,61 +102,51 @@ export class MainSearch extends React.PureComponent {
     this.setState({ goToApp: false, ifApp: true });
   }
 
-
   render() {
     return (
-      // <div className={`main-search full-height-container main ${this.props.state === 'main' ? 'main' : 'search'} ${!this.state.ifApp  ? 'gotoapp' : ''}`}>
-      <div className="main-search full-height-container main">
+      <div className={`main-search full-height-container main ${this.props.state === 'main' ? 'main' : 'search'} ${!this.state.ifApp ? 'gotoapp' : ''}`}>
         <Helmet
           title="Reindex"
           meta={[
-            { name: 'description', content: 'Reindex' },
-            // { property: 'og:image', content: `https://${seoImage}` },
+            { name: 'description', content: 'Reindexי' },
           ]}
         />
         <HeaderSite logoClicked={this.changeState} />
         <div className={'wrapper-autocomplete'}>
-          <div className={styles["header"]}>
+          <div className="header">
             <img src={logo} role="presentation" />
           </div>
           <SearchBar
             onNewRequest={this.props.handleNewRequest}
             handleSearchBtn={this.props.handleSearchBtn}
-          data={this.props.searchBarData}
-          />
-        </div>
-        {/* 
-        {!this.state.detectmob ?
             data={this.props.searchBarData}
           />
         </div>
 
-        {/* {!this.state.detectmob ?
-          <div className={styles["wrapper-filters"]}>
+
+      {/*  {!this.state.detectmob ?
+          <div className="wrapper-filters">
             <Filters onNewRequest={this.props.handleNewRequest} pageState={this.props.state} />
-          </div> : ''} */}
-        {/* {this.props.isDisplayIcons && this.state.displayIcons && <div className={styles["bottom-icons"]}><SearchIcons /></div>} */}
-        {/* {this.state.detectmob && this.props.results.length > 0 ?
+          </div> : ''}
+        {this.props.isDisplayIcons && this.state.displayIcons && <div className="bottom-icons"><SearchIcons /></div>}
+        {this.state.detectmob && this.props.results.length > 0 ?
           <DrawerFilter onNewRequest={this.props.handleNewRequest} pageState={this.props.state} /> : ''}
-        */}
         {this.props.results.length > 0 ? <div className={styles["wrapper-results"]}>
           <div className={styles["results-count"]}>נמצאו {this.props.totalResults} תוצאות </div>
-          <Results
+           <Results
             data={this.props.results}
             total={this.props.totalResults}
             limit={this.props.limitResults}
             offset={this.props.offsetResults}
             updateRecord={this.props.updateRecord}
             handlePageClick={this.props.handleResultsPageClick}
-          /></div> :
-          //  <NoResults />
-           ''}
-        {/* <Snackbar
+          /></div> : <NoResults />} 
+        <Snackbar
           open={this.props.updateRecordAlert.open}
           message={this.props.updateRecordAlert.text}
           autoHideDuration={4000}
           onRequestClose={this.props.closeUpdateRecordModal}
-        /> */}
+        />*/}
       </div>
     );
   }
@@ -206,21 +190,21 @@ export function mapDispatchToProps(dispatch) {
     changeState: () => {
       dispatch(changeState());
     },
-    // updateRecord: (values, categories) => {
-    //   values.categories = categories;
-    //   dispatch(updateRecord({ values: values, categories }));
-    // },
+    updateRecord: (values, categories) => {
+      values.categories = categories;
+      dispatch(updateRecord({ values: values, categories }));
+    },
     handleNewRequest: () => {
-      dispatch(loadResults({ page: 1 }));
+      // dispatch(loadResults({ page: 1 }));
     },
     handleSearchBtn: () => {
-      dispatch(loadResults({ page: 1 }));
+      // dispatch(loadResults({ page: 1 }));
     },
     closeUpdateRecordModal: () => {
       dispatch(closeUpdateRecordModal());
     },
     handleResultsPageClick: (offset, captcha) => {
-      dispatch(loadResults({ page: offset, captcha }));
+      // dispatch(loadResults({ page: offset, captcha }));
     },
     displayIcons: (isDisplay) => {
       dispatch(displayIcons({ displayIcons: isDisplay }))

@@ -1,7 +1,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
-// import Filters from 'components/Filters';
+import Filters from 'components/Filters';
 import HeaderSite from 'components/HeaderSite';
 // import NoResults from 'components/NoResults';
 import Results from 'components/Results';
@@ -13,12 +13,13 @@ import Snackbar from 'material-ui/Snackbar';
 import { detectmob, updateSearchLocation, str2spc, getLocationData } from 'utils/functions';
 import { browserHistory } from 'react-router';
 // import { loadResults } from './sagas';
-import { loadResults  } from './actions';
+import { loadResults } from './actions';
 import { loadSubcategories } from 'components/SearchBar/saga';
 import { updateSearchObj } from 'components/SearchBar/actions';
 import FlatButton from 'material-ui/FlatButton';
 import Slider from 'material-ui/Slider';
 import Drawer from 'material-ui/Drawer';
+import translate from 'globalTranslate.json';
 import { updateRecord, closeUpdateRecordModal } from './actions';
 import CreateForm from 'components/CreateForm';
 
@@ -76,23 +77,23 @@ export class ResultsPage extends React.PureComponent {
     if (locationData.pathname.indexOf(config.searchTabs.businesses.route) > -1) {
       if (q) {
         if (city) {
-          this.strTitle = q + ' ב' + city + ' - חיפוש עסקים במגזר החרדי - המדריך החרדי';
-          this.description = 'המדריך החרדי | ' + q + ' מ' + city + ' - תוצאות חיפוש עסקים וארגונים במגזר החרדי ב' + city;
+          this.strTitle = q + ' ב' + city + ' - חיפוש עסקים במגזר החרדי - Reindex';
+          this.description = 'Reindex | ' + q + ' מ' + city + ' - תוצאות חיפוש עסקים וארגונים במגזר החרדי ב' + city;
         }
         else {
-          this.strTitle = q + ' - חיפוש עסקים במגזר החרדי - המדריך החרדי';
-          this.description = 'המדריך החרדי | ' + q + ' - תוצאות חיפוש עסקים וארגונים במגזר החרדי'
+          this.strTitle = q + ' - חיפוש עסקים במגזר החרדי - Reindex';
+          this.description = 'Reindex | ' + q + ' - תוצאות חיפוש עסקים וארגונים במגזר החרדי'
         }
       }
       else {
-        const title = ' - אינדקס עסקים המדריך החרדי';
+        const title = ' - אינדקס עסקים Reindex';
         if (city) {
-          this.strTitle = catName + ' ב' + city + ' - אינדקס עסקים המדריך החרדי ';
-          this.description = catName + ' במדריך החרדי |  רשימת עסקים ב' + city + ' ומידע מפורט באתר המדריך החרדי';
+          this.strTitle = catName + ' ב' + city + ' - אינדקס עסקים Reindex ';
+          this.description = catName + ' במדריך החרדי |  רשימת עסקים ב' + city + ' ומידע מפורט באתר Reindex';
         }
         else {
           this.strTitle = catName + title;
-          this.description = catName + ' במדריך החרדי | רשימת עסקים ומידע מפורט באתר המדריך החרדי'
+          this.description = catName + ' במדריך החרדי | רשימת עסקים ומידע מפורט באתר Reindex'
         }
       }
     }
@@ -101,7 +102,7 @@ export class ResultsPage extends React.PureComponent {
       const title = ' - חיפוש אנשים במדריך החרדי';
       if (city) {
         this.strTitle = s + ' - חיפוש אנשים ב' + city + ' במדריך החרדי';
-        this.description = '.המדריך החרדי | ' + s + ' מ' + city + ' - תוצאות חיפוש אנשים ומספרי טלפון במגזר החרדי - ' + locationData.search.location;
+        this.description = '.Reindex | ' + s + ' מ' + city + ' - תוצאות חיפוש אנשים ומספרי טלפון במגזר החרדי - ' + locationData.search.location;
       }
       else {
         this.strTitle = s + title;
@@ -123,7 +124,7 @@ export class ResultsPage extends React.PureComponent {
     }
     if (nextProps.goToTnxPage) {
       this.props.closeUpdateRecordModal();
-      if (window.location.pathname.indexOf('cat') >-1)
+      if (window.location.pathname.indexOf('cat') > -1)
         browserHistory.push('/updatedBusiness');
       else browserHistory.push('/updatedPeople');
     }
@@ -197,8 +198,6 @@ export class ResultsPage extends React.PureComponent {
   }
 
   render() {
-    
-    console.log('ppppppppppp')
     return (
       <div className="main-search full-height-container search">
         <Helmet
@@ -215,34 +214,15 @@ export class ResultsPage extends React.PureComponent {
             data={this.props.searchBarData}
           />
         </div>
-        {this.state.detectmob && this.state.showSideBarNearMe ?
-          <div className="wrapper-slider">
-            <span>{'קרוב יותר'}</span>
-            <Slider
-              min={this.min}
-              max={this.max}
-              step={this.max / 100}
-              value={this.reverse(this.state.slider)}
-              onChange={this.handleSlider}
-            />
-            <span>{'רחוק יותר'}</span>
-          </div> : ''}
-       {/* {!this.state.detectmob ?
-          <div className={`wrapper-filters`}>
-            <Filters onNewRequest={this.updateSearchLocation} pageState={this.props.state} location={this.props.location} />
-          </div> : ''} */}
-        {this.state.detectmob && this.props.results.length > 0?
-          <div onTouchTap={this.handleClose}><CreateForm /></div>
-          : ''}
 
         {/* {this.state.detectmob && this.props.results.length > 0 ?
           <DrawerFilter onNewRequest={this.updateSearchLocation} pageState={this.props.state} location={this.props.location} /> : ''} */}
 
         {this.props.results.length > 0 ? <div className={`wrapper-results ${this.state.showSideBarNearMe ? 'geo' : ''}`}>
-          <div className="results-count">נמצאו {this.props.totalResults} תוצאות </div>
+          <div className="results-count"> {this.props.totalResults} {translate.resultsFound} </div>
           {(this.state.detectmob && !this.state.changeLocation && this.props.location.pathname.indexOf(config.searchTabs.businesses.route) > -1) ?
             <div onClick={this.showSideBarNearMe} className='wrapper-nearme' >
-              <FlatButton label='עסקים בקרבתך' labelStyle={{ paddingRight: 11, paddingLeft: 11, fontSize: 18 }} />
+              <FlatButton label={translate.businessesNearby} labelStyle={{ paddingRight: 11, paddingLeft: 11, fontSize: 18 }} />
             </div> : ''}
           {this.state.detectmob && this.state.changeLocation ?
             <div onClick={this.openChangeLocation} className='change-loc' >
@@ -258,7 +238,23 @@ export class ResultsPage extends React.PureComponent {
             lat={this.lat}
             lon={this.lon}
           /></div> : ''}
-          {/* {!this.props.loading ? 
+        {this.state.detectmob && this.state.showSideBarNearMe ?
+          <div className="wrapper-slider">
+            <span>{translate.closer}</span>
+            <Slider
+              min={this.min}
+              max={this.max}
+              step={this.max / 100}
+              value={this.reverse(this.state.slider)}
+              onChange={this.handleSlider}
+            />
+            <span>{translate.Further}</span>
+          </div> : ''}
+        {!this.state.detectmob ?
+          <div className={`wrapper-filters`}>
+            <Filters onNewRequest={this.updateSearchLocation} pageState={this.props.state} location={this.props.location} />
+          </div> : ''}
+        {/* {!this.props.loading ? 
            <NoResults data={{ query: this.props.query }} />
            : <span>Loading...</span>} */}
         {/*<Snackbar
@@ -291,7 +287,6 @@ ResultsPage.propTypes = {
 };
 
 export function mapStateToProps(state) {
-  console.log('ssssssssstate',state)
   return {
     results: state.results.results,
     totalResults: state.results.totalResults,
@@ -315,7 +310,6 @@ export function mapDispatchToProps(dispatch) {
       dispatch(updateRecord({ values: values, categories }));
     },
     handleResultsPageClick: (offset, captcha) => {
-      alert('222222222222')
       const location = window.location;
       dispatch(loadResults({ page: offset, captcha, location }));
     },
@@ -333,7 +327,6 @@ export function mapDispatchToProps(dispatch) {
 }
 
 function preload(state, req) {
-  console.log('prrrrrrrrrrrrew')
   const loaders = [];
   loaders.push([loadResults, {
     data: {

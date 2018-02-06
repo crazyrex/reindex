@@ -308,6 +308,7 @@ class Results extends React.Component {
               </div>
             </CardText>
           </Card>
+          
         )}
 
         {this.props.offset !== Math.ceil(this.props.total / this.props.limit)

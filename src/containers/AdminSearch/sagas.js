@@ -2,7 +2,7 @@
 import { take, put, call, cancel, select, takeLatest } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import request, { requestNoParse } from 'utils/request';
-import config from '402Config';
+import config from 'ReindexConfig';
 import { LOAD_RESULTS, LOAD_CATEGORIES_TREE, RELATE_TO_CATEGORY, LOAD_SCORE_DATA , UPDATE_RECORD} from './constants';
 import { resultsLoaded, categoriesTreeLoaded, relationSuccess, scoreDataSuccess  } from './actions';
 

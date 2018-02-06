@@ -10,7 +10,7 @@ children-data
     .wrapper-no-results {
       display: none;
     }
-    background-color:$light-blue;
+    background-color: $yellow;
     .tabs {
       display: none;
     }
@@ -45,19 +45,18 @@ children-data
   &.main .wrapper-filters {
     display: none;
   }
-  .wrapper-filters {
+  .wrapper-filters { 
+   
     width: 19%;
-    right: 0;
+    left: 0;
     position: fixed;
     overflow-y: auto;
     direction: ltr;
     height: 100%;
     top: 82px;
-    padding-right: 40px;
     padding-top: 34px;
-    // & > div {
-      //   width: 173px;
-      // }
+    margin-left: 2%;
+    padding-right: 42px;
     }
     .bottom-icons {
       position: absolute;
@@ -69,11 +68,9 @@ children-data
       display: none;
     }
     .wrapper-results {
-      width: 73%;
-      margin-right: 18%;
-      // margin: auto;
+       width: 73%;
+       margin-left: 24%;
       margin-top: 116px;
-      padding-right: 42px;
       .results-count {
         font-size: 22px;
         margin-bottom: 15px;
@@ -87,6 +84,7 @@ children-data
       margin-right: 0;
       padding-right: 0;
       margin-top: 127px;
+      margin-left: 0;
     }
     .main-search .wrapper-results.geo {
       margin-top: 196px;
@@ -265,7 +263,7 @@ children-data
                       top: 55px;
                       width: 100%;
                       padding: 0 5%;
-                      background-color: $light-blue;
+                      background-color: $yellow;
                       padding-bottom: 7px;
                       z-index: 99;
                     }

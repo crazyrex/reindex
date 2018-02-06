@@ -1,5 +1,9 @@
 {
     "businesses":"businesses",
     "people": "people",
-    "search":"search"
+    "search":"search",
+    "resultsFound":  "results found"  ,
+    "Further":"Further",
+    "closer":"closer",
+    "businessesNearby":"Businesses nearby"                                                                                                                                                                                                                                                                                                
 }

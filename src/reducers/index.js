@@ -5,6 +5,7 @@ import { combineReducers } from 'redux';
 import authPageReducer from '../containers/AuthPage/reducer';
 import categoriesTreeReducer from '../components/CategoriesTree/reducer';
 import adminCategoriesReducer from '../containers/AdminCategories/reducer';
+import adminSearch from '../containers/AdminSearch/reducer';
 import { reducer as form } from 'redux-form';
 import searchReducer from '../components/SearchBar/reducer';
 import resultsPageReducer from '../containers/ResultsPage/reducer';
@@ -72,6 +73,7 @@ const rootReducer = combineReducers({
   authPage: authPageReducer,
   categoriesTree: categoriesTreeReducer,
   adminCategories: adminCategoriesReducer,
+  adminSearch: adminSearch,
   mainSearch: mainSearchReducer,
   router,
   form,

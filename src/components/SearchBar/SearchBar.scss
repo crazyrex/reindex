@@ -89,7 +89,7 @@
         }
         &:last-child {
             margin: 0 auto;
-            width: 98%;
+            width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -144,7 +144,7 @@
                 top: 0;
                 border-radius: inherit;
                 right: 0;
-                background: $light-blue;
+                background: $yellow;
                 width: 100%;
                 opacity: 0;
                 transform: scale3d(0, 0, 0);
@@ -218,7 +218,7 @@
             width: 35%;
         }
         &:last-child{
-            width: 65%;
+            width: 100%;
         }
     }
     .search-bar > div:last-child > div:first-child {
@@ -253,7 +253,7 @@
                 font-family: 'Heebo-Bold';
                 &.active {
                     background-color: black;
-                    color: $light-blue;
+                    color: $yellow;
                 }
             }
         }
@@ -302,5 +302,3 @@
         display: flex;
     }
 }
-
-
