@@ -8,7 +8,7 @@
   font-weight: bold;
   margin-bottom: 15px;
   padding-right: 10px;
-  direction: rtl;
+  direction: ltr;//yehudit   /*rtl:ignore*/
   svg {
     color: $gray !important;
   }
@@ -35,7 +35,7 @@
 .filters-list {
   font-family: 'Heebo-Light';
   font-size: 16px;
-  direction: rtl;
+  direction: ltr;//yehudit   /*rtl:ignore*/ 
   &>div {
     cursor: pointer;
     padding: 5px 0;

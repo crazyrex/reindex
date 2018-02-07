@@ -8,11 +8,11 @@ import Results from 'components/Results';
 import config from 'ReindexConfig';
 import SearchBar from 'components/SearchBar';
 import Snackbar from 'material-ui/Snackbar';
-// import DrawerFilter from 'components/DrawerFilter';
-// import LocationChange from 'components/LocationChange';
+ import DrawerFilter from 'components/DrawerFilter';
+import LocationChange from 'components/LocationChange';
 import { detectmob, updateSearchLocation, str2spc, getLocationData } from 'utils/functions';
 import { browserHistory } from 'react-router';
-// import { loadResults } from './sagas';
+//import { loadResults } from './sagas';
 import { loadResults } from './actions';
 import { loadSubcategories } from 'components/SearchBar/saga';
 import { updateSearchObj } from 'components/SearchBar/actions';
@@ -214,15 +214,13 @@ export class ResultsPage extends React.PureComponent {
             data={this.props.searchBarData}
           />
         </div>
-
-        {/* {this.state.detectmob && this.props.results.length > 0 ?
-          <DrawerFilter onNewRequest={this.updateSearchLocation} pageState={this.props.state} location={this.props.location} /> : ''} */}
-
+        {this.state.detectmob && this.props.results.length > 0 ?
+          <DrawerFilter onNewRequest={this.updateSearchLocation} pageState={this.props.state} location={this.props.location} /> : ''}
         {this.props.results.length > 0 ? <div className={`wrapper-results ${this.state.showSideBarNearMe ? 'geo' : ''}`}>
           <div className="results-count"> {this.props.totalResults} {translate.resultsFound} </div>
           {(this.state.detectmob && !this.state.changeLocation && this.props.location.pathname.indexOf(config.searchTabs.businesses.route) > -1) ?
             <div onClick={this.showSideBarNearMe} className='wrapper-nearme' >
-              <FlatButton label={translate.businessesNearby} labelStyle={{ paddingRight: 11, paddingLeft: 11, fontSize: 18 }} />
+              <FlatButton label={translate.businessesNearby} labelStyle={{ paddingRight: 11, paddingLeft: 11, fontSize: 18,textTransform:'lowercase' }} />
             </div> : ''}
           {this.state.detectmob && this.state.changeLocation ?
             <div onClick={this.openChangeLocation} className='change-loc' >
@@ -248,7 +246,7 @@ export class ResultsPage extends React.PureComponent {
               value={this.reverse(this.state.slider)}
               onChange={this.handleSlider}
             />
-            <span>{translate.Further}</span>
+            <span>{translate.further}</span>
           </div> : ''}
         {!this.state.detectmob ?
           <div className={`wrapper-filters`}>

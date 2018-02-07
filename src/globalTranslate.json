@@ -1,9 +1,13 @@
 {
-    "businesses":"businesses",
+    "businesses": "businesses",
+    "businessesNearby": "Businesses nearby",
+    "changeLocation": "change location",
+    "close": "close",
+    "closer": "closer",
+    "currentLocation": "Your current location",
+    "filter": "filter",
+    "further": "further",
     "people": "people",
-    "search":"search",
-    "resultsFound":  "results found"  ,
-    "Further":"Further",
-    "closer":"closer",
-    "businessesNearby":"Businesses nearby"                                                                                                                                                                                                                                                                                                
+    "resultsFound": "results found",
+    "search": "search"
 }

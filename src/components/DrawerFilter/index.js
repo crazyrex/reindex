@@ -4,6 +4,7 @@ import IconButton from 'material-ui/IconButton';
 import CloseIcon from 'material-ui/svg-icons/navigation/close';
 import FilterListIcon from 'material-ui/svg-icons/content/filter-list';
 import Filters from 'components/Filters';
+import translate from 'globalTranslate.json';
 
 import './DrawerFilter.scss';
 
@@ -21,9 +22,9 @@ class DrawerFilter extends React.Component {
   render() {
     return (
       <div className={`drawer-filter ${this.state.open ? 'active' : ''}`}>
-       <div className={`wrapper-filterBtn ${this.state.open ? 'open' : ''}`} onClick={this.handleToggle}>
-          {this.state.open ? <IconButton><CloseIcon /></IconButton> : <IconButton><FilterListIcon /></IconButton> }
-          <span>{`${this.state.open ? 'סגור' : 'סנן'}`}</span>
+        <div className={`wrapper-filterBtn ${this.state.open ? 'open' : ''}`} onClick={this.handleToggle}>
+          {this.state.open ? <IconButton><CloseIcon /></IconButton> : <IconButton><FilterListIcon /></IconButton>}
+          <span>{this.state.open ? `${translate.close}` : `${translate.filter}`}</span>
         </div>
         <Drawer
           docked={false}
@@ -31,10 +32,9 @@ class DrawerFilter extends React.Component {
           overlayClassName="overlay"
           containerClassName="container"
           open={this.state.open}
-          openSecondary
           onRequestChange={(open) => this.setState({ open })}
         >
-          <Filters onNewRequest={this.props.onNewRequest} pageState={this.props.pageState} location={this.props.location}/>
+          <Filters onNewRequest={this.props.onNewRequest} pageState={this.props.pageState} location={this.props.location} />
         </Drawer>
       </div>
     );
