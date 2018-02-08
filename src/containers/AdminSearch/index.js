@@ -213,7 +213,7 @@ export class AdminSearch extends React.PureComponent {
         <Helmet
           title="Admin Search Page"
           meta={[
-            { name: 'description', content: 'Admin search page of 402' },
+            { name: 'description', content: 'Admin search page of Reindex' },
           ]}
         />
         <div className="wrapper-autocomplete">
