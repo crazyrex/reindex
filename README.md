@@ -16,7 +16,7 @@ docker-compose up
 ```
 
 # Credits
- - [react-universal-saga](https://github.com/xkawi/react-universal-saga/blob/master/README.md)  
+ - This repository is forked from the awesome [react-universal-saga](https://github.com/xkawi/react-universal-saga/blob/master/README.md) project
  - Orit Rivka and Yehudit that helped create this boilerplate  
  - Israel David Isidor that sponsered the translation and rebuilding of the repository.
  - Avreimi Klinger that created the challanges that taught us to build awesome index sites (checkout http://402.co.il )
