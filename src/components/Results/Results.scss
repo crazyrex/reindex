@@ -23,9 +23,9 @@
 }
 
 .card-header{
-  button{
-    right: 3px;
-    left: none !important;
+ button{
+   right: 3px;
+   left: none !important;
   }
 }
 
@@ -207,12 +207,7 @@
     .wrapper-tags {
       max-height: 32px;
     }
-    // .separate {
-    //   display: none !important;
-    // }
-    // .tags {
-    //   display: none !important;
-    // }
+   
     &.expanded {
         margin-top: -30px;
     }

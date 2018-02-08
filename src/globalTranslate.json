@@ -7,7 +7,14 @@
     "currentLocation": "Your current location",
     "filter": "filter",
     "further": "further",
+    "goToBusinessPage":"go to business page",
+    "goToContactPage":"go to contact page",
+    "israel": "Israel",
+    "lastUpdate": "last update",
+    "on":"on",  
     "people": "people",
     "resultsFound": "results found",
-    "search": "search"
+    "search": "search",
+    "searchByArea": "Search by area",
+    "updateDetails": "update details"
 }

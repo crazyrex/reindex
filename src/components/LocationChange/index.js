@@ -86,7 +86,7 @@ class LocationChange extends React.Component {
                   <label>{translate.changeLocation}</label>
                   {this.state.change ? <AutoComplete
                     fullWidth
-                    hintText="חפש לפי אזור/ישוב"
+                    hintText={translate.searchByArea}
                     dataSource={this.props.filters.cities}
                     filter={AutoComplete.fuzzyFilter}
                     onNewRequest={(chosenRequest, index) => {this.updateCity(chosenRequest)}}

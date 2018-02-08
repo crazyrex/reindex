@@ -10,6 +10,7 @@ import IconsStyle from 'utils/iconsStyle';
 import config from 'ReindexConfig';
 import { updateSearchLocation } from 'utils/functions';
 import { loadSubCategories, updateSearchObj, reduceFilters, loadHierarchyFilterData } from 'components/SearchBar/actions';
+import translate from 'globalTranslate.json';
 
 const styles = require('./Filters.scss');
 
@@ -116,11 +117,11 @@ class Filters extends React.PureComponent {
           : <div></div>}
         {this.props.filters.cities ?
           <div className={styles["wrapper-auto-complete"]}>
-            <div className={styles["filters-header"]}>ישראל</div>
+            <div className={styles["filters-header"]}>{translate.israel}</div>
             <AutoComplete
               fullWidth
               searchText={this.state.searchText}
-              hintText="חפש לפי אזור/ישוב"
+              hintText={translate.searchByArea}
               dataSource={this.props.filters.cities}
               onUpdateInput={(searchText) => this.updateSearch(searchText, this.props.search.activeTab, 'cities')}
               onNewRequest={(chosenRequest) => this.onNewRequest('location', chosenRequest)}

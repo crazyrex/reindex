@@ -20,15 +20,19 @@ import UpdateIcon from 'material-ui/svg-icons/action/update';
 import BusinessIcon from 'material-ui/svg-icons/places/business-center';
 // import { cleanData } from 'components/DetailsForm/actions';
 import PlaceIcon from 'material-ui/svg-icons/maps/place';
-
+import translate from 'globalTranslate.json';
 
 import config from 'ReindexConfig';
 
 import './Results.scss';
 
+//const monthArrHE = [
+//'ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר',
+//'אוקטובר', 'נובמבר', 'דצמבר',
+//];
 const monthArr = [
-  'ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר',
-  'אוקטובר', 'נובמבר', 'דצמבר',
+  'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
+  'October', 'November', 'December',
 ];
 
 function splitTags(tagsStr, catArr, isDetectmob) {
@@ -169,7 +173,9 @@ class Results extends React.Component {
   }
   parseDate(date) {
     const tmpDate = new Date(date || 0);
-    return `עודכן לאחרונה ב-${tmpDate.getDate()} ל${monthArr[tmpDate.getMonth()]} 
+    //TO-DO 
+    // add if to he translate
+    return `${translate.lastUpdate} ${translate.on}- ${tmpDate.getDate()}  ${monthArr[tmpDate.getMonth()]} 
     ${tmpDate.getFullYear()}`;
   }
 
@@ -288,7 +294,7 @@ class Results extends React.Component {
                 </div>
                 <div className="wrapper-actions">
                   <div style={{ margin: '10px 0' }}>
-                    <Link to={res._source.link}>{config.searchTabs[res._source.listing_type_1] === 'businesses' ? 'עבור לדף עסק' : 'עבור לדף איש קשר'}</Link>
+                    <Link to={res._source.link}>{config.searchTabs[res._source.listing_type_1] === 'businesses' ? `${translate.goToBusinessPage}` : `${translate.goToContactPage}`}</Link>
                   </div>
                   <div
                     onClick={() => {
@@ -297,7 +303,7 @@ class Results extends React.Component {
                       this.setState({ selectedRes: res });
                     }}
                   >
-                    <RaisedButton label="עדכן פרטים" />
+                    <RaisedButton label={translate.updateDetails} />
                   </div>
                   {/* <SocialBtns data={res._source} /> */}
                   <div className="wrapper-icon-content">
@@ -308,7 +314,7 @@ class Results extends React.Component {
               </div>
             </CardText>
           </Card>
-          
+
         )}
 
         {this.props.offset !== Math.ceil(this.props.total / this.props.limit)
