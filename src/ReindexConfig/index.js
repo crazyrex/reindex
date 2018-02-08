@@ -1,10 +1,7 @@
 import config from 'config';
 
 export default {
-  // apiRoot:'https://dev.402.co.il/api/v1/',
   apiRoot:'http://localhost:3005/api/v1/',
-  resultsIndex: '402demo11',
-  // categoriesIndex: 'cat1',
   categoriesIndex: 'reindex-categories',
   searchTabs: {
     people: {
@@ -21,7 +18,6 @@ export default {
   },
   filtersTypes: {
     categories: {
-      // index: 'cat1'
       index: 'reindex-categories'
     },
     cities: {
