@@ -12,7 +12,10 @@ cd reindex-repos
 git clone git@github.com:linnovate/reindex.git
 git clone git@github.com:linnovate/reindex-api.git
 cd reindex/docker
-docker-compose up
+mv env-example .env
+modified ...  
+source .env
+docker-compose up --build -d
 ```
 
 # Credits
