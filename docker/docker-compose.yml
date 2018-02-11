@@ -1,4 +1,4 @@
-version: "3"
+version: "2"
 
 services:
    db:
@@ -51,7 +51,7 @@ services:
 
    app-api:
      container_name: "${PROJECT_NAME}-api"
-     build: ./reindex-api
+     build: ../../reindex-api
 #     volumes:
 #      - "${CODE_PATH}:/usr/src/app"
      ports:
