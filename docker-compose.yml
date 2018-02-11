@@ -1,0 +1,60 @@
+version: "2"
+
+services:
+   db:
+     image: mongo:3.0.14
+     container_name: "${PROJECT_NAME}-mongodb"
+     ports:
+       - "27017:27017"
+#    environment:
+   #   - "MONGO_DATA_DIR:/data/db"
+#      MONGODB_ADMIN_USER: "${MONGODB_ADMIN_USER}"
+#      MONGODB_ADMIN_PASS: "${MONGODB_ADMIN_PASS}"
+#    volumes:
+#      - "${HOST_DB_PATH}:/data/db"
+     restart: always
+
+##################################################################################
+
+   rabbit:
+     image: rabbitmq:3.6.14
+     container_name: "${PROJECT_NAME}-rabbit"
+     ports:
+       - "15672:15672"
+     restart: always
+
+##################################################################################
+
+
+   elasticsearch:
+     container_name: "${PROJECT_NAME}-elasticsearch"
+     image: elasticsearch:2.4.2
+     ports:
+       - "9200:9200"
+#    volumes:
+#      - "./elasticsearch/logging.yml:/etc/elasticsearch/logging.yml"
+     restart: always
+
+#################################################################################
+
+   app:
+     container_name: "${PROJECT_NAME}-app"
+     build: .
+#     volumes:
+#      - "${CODE_PATH}:/usr/src/app"
+     ports:
+      - "${APP_HTTP_PORT}:3000"
+      - "3001:3001"
+     restart: always
+
+#################################################################################
+
+   app-api:
+     container_name: "${PROJECT_NAME}-api"
+     build: ../reindex-api
+#     volumes:
+#      - "${CODE_PATH}:/usr/src/app"
+     ports:
+      - "${API_HTTP_PORT}:3005"
+     restart: always
+
