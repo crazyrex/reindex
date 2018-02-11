@@ -9,8 +9,8 @@ Currently tested only on Linux and OSX
 ```
 mkdir reindex-repos
 cd reindex-repos
-git clone git@github.com:linnovate/reindex.git
-git clone git@github.com:linnovate/reindex-api.git
+git clone https://github.com/linnovate/reindex.git
+git clone https://github.com/linnovate/reindex.git
 cd reindex/docker
 mv env-example .env
 modified ...  
