@@ -5,13 +5,13 @@ import IconButton from 'material-ui/IconButton';
 import FlatButton from 'material-ui/FlatButton';
 import Chip from 'material-ui/Chip';
 import _ from 'lodash';
-// import GMap from 'components/GMap';
-// import Phone from 'components/Phone';
+import GMap from 'components/GMap';
+import Phone from 'components/Phone';
 import { Link } from 'react-router';
 import { detectmob } from 'utils/functions';
 // import DetailsForm from 'components/DetailsForm';
 import RaisedButton from 'material-ui/RaisedButton';
-//import ReCAPTCHA from 'react-google-recaptcha';
+import { ReCAPTCHA } from 'react-google-recaptcha';
 // import SocialBtns from 'components/SocialBtns';
 import { requestNoParse } from 'utils/request';
 import PhoneIcon from 'material-ui/svg-icons/communication/call';
@@ -21,19 +21,9 @@ import BusinessIcon from 'material-ui/svg-icons/places/business-center';
 // import { cleanData } from 'components/DetailsForm/actions';
 import PlaceIcon from 'material-ui/svg-icons/maps/place';
 import translate from 'globalTranslate.json';
-
 import config from 'ReindexConfig';
 
 import './Results.scss';
-
-//const monthArrHE = [
-//'ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר',
-//'אוקטובר', 'נובמבר', 'דצמבר',
-//];
-const monthArr = [
-  'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
-  'October', 'November', 'December',
-];
 
 function splitTags(tagsStr, catArr, isDetectmob) {
   let arr = tagsStr ? tagsStr.split('|') : [];
@@ -175,7 +165,7 @@ class Results extends React.Component {
     const tmpDate = new Date(date || 0);
     //TO-DO 
     // add if to he translate
-    return `${translate.lastUpdate} ${translate.on}- ${tmpDate.getDate()}  ${monthArr[tmpDate.getMonth()]} 
+    return ` ${translate.lastUpdate} - ${tmpDate.getDate()}  ${translate.months[tmpDate.getMonth()]} 
     ${tmpDate.getFullYear()}`;
   }
 
@@ -290,7 +280,7 @@ class Results extends React.Component {
                   </div>*/}
                 </div>
                 <div className="wrapper-map">
-                  {/* <GMap location={res._source} /> */}
+                  <GMap location={res._source} />
                 </div>
                 <div className="wrapper-actions">
                   <div style={{ margin: '10px 0' }}>
@@ -329,12 +319,12 @@ class Results extends React.Component {
               label="הצג תוצאות נוספות"
             /></div>
           : ''}
-        {/*   {this.state.showCaptcha ?
+        {this.state.showCaptcha ?
           <ReCAPTCHA
             ref="recaptcha"
             sitekey={config.recaptcha.key}
             onChange={this.handlePageClick}
-     /> : ''}  */}
+          /> : ''}
         {this.state.modalOpen && this.state.selectedRes ?
           <DetailsForm
             open={this.state.modalOpen}

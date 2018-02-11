@@ -117,7 +117,7 @@ class Filters extends React.PureComponent {
           : <div></div>}
         {this.props.filters.cities ?
           <div className={styles["wrapper-auto-complete"]}>
-            <div className={styles["filters-header"]}>{translate.israel}</div>
+            <div className={styles["filters-header"]}>New york</div>
             <AutoComplete
               fullWidth
               searchText={this.state.searchText}

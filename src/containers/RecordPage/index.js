@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 
 import HeaderSite from 'components/HeaderSite';
-// import DetailsForm from 'components/DetailsForm';
+import DetailsForm from 'components/DetailsForm';
 import Phone from 'components/Phone';
 import FlatButton from 'material-ui/FlatButton';
 import Snackbar from 'material-ui/Snackbar';
@@ -32,13 +32,11 @@ import { updateRecord, closeUpdateRecordModal } from './actions';
 // import businessBgImg from '../../assets/img/business-bg.png';
 import { loadData } from './sagas';
 import { loadDataAction } from './actions';
-// import { cleanData } from 'components/DetailsForm/actions';
+import translate from 'globalTranslate.json';
+
+import { cleanData } from 'components/DetailsForm/actions';
 
 import './RecordPage.scss';
-
-const monthArr = [
-  'ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר',
-];
 
 
 function catNTagsArr(tagsStr = '', catArr = []) {
@@ -115,7 +113,7 @@ class RecordPage extends React.Component {
   }
   parseDate(date) {
     const tmpDate = new Date(date || 0);
-    return `עודכן לאחרונה ב-${tmpDate.getDate()} ל${monthArr[tmpDate.getMonth()]} ${tmpDate.getFullYear()}`;
+    return ` ${translate.lastUpdate} - ${tmpDate.getDate()} ${translate.months[tmpDate.getMonth()]} ${tmpDate.getFullYear()}`;
   }
   updateRecord(values, categories) {
     this.handleModalClose();
@@ -148,13 +146,14 @@ class RecordPage extends React.Component {
       const lastCategory = (categories.length) ? categories[categories.length - 1] : '';
       let categoriesStr = categories.toString();
       categoriesStr = categoriesStr.replace(/,/g, ' > ');
-      this.strTitle = data.business_name + ' ב' + data.address_city + ' - אינדקס ' + lastCategory + ' - המדריך החרדי';
-      this.description = '.המדריך החרדי | ' + data.business_name + ' מ' + data.address_city + ' | אינדקס עסקים ' + categoriesStr + '. לפרטי יצירת קשר, כתובת, טלפון ומידע נוסף כנסו';
+      this.strTitle = 'Reindex - ' + lastCategory + 'Reindex - ' + data.business_name + ' in ' + data.address_city;
+      this.description = 'Contact information, address, phone and other information ' + 'Reindex | ' + categoriesStr + 'Index Bussines | ' + data.business_name + ' from ' + data.address_city;
     }
     else {
       const name = `${data.first_name} ${data.last_name}`;
-      this.strTitle = name + ' מ' + data.address_city + ' - חיפוש מספרי טלפון במדריך החרדי';
-      this.description = '.המדריך החרדי | ' + name + ' מ' + data.address_city + ' - חיפוש אנשים ואיתור מספרי טלפון במגזר החרדי.לפרטי יצירת קשר, כתובת, טלפון ומידע נוסף כנסו.';
+      this.strTitle = 'Reindex - ' + name + ' from ' + data.address_city;
+
+      this.description = 'Search for business and find phone numbers. Contact details, address, phone and other information ' + data.address_city + 'from' + name + ' | Reindex.';
     }
   }
 
@@ -169,7 +168,7 @@ class RecordPage extends React.Component {
         />
         {(typeof window !== undefined || typeof window !== 'undefined') ?
           <div>
-            <HeaderSite />  
+            <HeaderSite />
             {this.state.detectmob ?
               <div className="wrapper-titles">
                 <IconButton className="editBtn" onClick={() => { this.setState({ modalOpen: !this.state.modalOpen }); }}><EditIcon /></IconButton>
@@ -249,14 +248,14 @@ class RecordPage extends React.Component {
               {this.props.data.phone_2 || this.props.data.phone ? <div>
                 <IconButton ><PhoneIcon /></IconButton>
                 <span >
-                  התקשר
+                  translate.call
                 </span>
               </div> : ''}
               {this.state.geolocation && this.state.geolocation.lat && this.state.geolocation.lng ? <div>
                 <IconButton target="_blank" href={`waze://?ll=${this.state.geolocation.lat},${this.state.geolocation.lng}`}><PlaceIcon /></IconButton>
                 <span>
                   <a target="_blank" href={`waze://?ll=${this.state.geolocation.lat},${this.state.geolocation.lng}`}>
-                    נווט
+                  translate.navigataion
                         </a></span>
               </div> : ''}
               {this.props.data.business_website ? <div>
@@ -279,10 +278,10 @@ class RecordPage extends React.Component {
               bodyStyle={{ padding: '0', 'borderRadius': '20px' }}
             >
               <div className="number">{this.state.currentPhone}</div>
-              <div className="text"> זהו מספר מקשר: מערכת דיגיטלית להפניית שיחות מהאתר לבית העסק בכפוף <a href='/terms' target="_blank">לתקנון האתר.</a></div>
+              <div className="text"> This is a link number: a digital system for directing calls from the site to the business, in accordance<a href='/terms' target="_blank"> to site policies.</a></div>
               <a href={`tel:${this.state.currentPhone}`} className="wrapper-in-dialog">
                 <IconButton className="icon-phone" ><PhoneIcon /></IconButton>
-                <div>התקשר</div>
+                <div>translate.call</div>
               </a>
             </Dialog>
           </div> : ''}
