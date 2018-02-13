@@ -11,9 +11,9 @@ mkdir reindex-repos
 cd reindex-repos
 git clone https://github.com/linnovate/reindex.git
 git clone https://github.com/linnovate/reindex.git
-cd reindex/docker
+cd reindex
 mv env-example .env
-modified ...  
+modified name project  
 source .env
 docker-compose up --build -d
 ```
