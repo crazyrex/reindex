@@ -8,9 +8,9 @@
     "currentLocation": "Your current location",
     "filter": "filter",
     "further": "further",
-    "goToBusinessPage": "go to business page",
-    "goToContactPage": "go to contact page",
-    "lastUpdate": "last update on",
+    "goToBusinessPage": "Go to business page",
+    "goToContactPage": "Go to contact page",
+    "lastUpdate": "Last update on",
     "months": [
         "January",
         "February",
@@ -31,5 +31,6 @@
     "resultsFound": "results found",
     "search": "search",
     "searchByArea": "Search by area",
-    "updateDetails": "update details"
+    "updateDetails": "update details",
+    "website":"website"
 }

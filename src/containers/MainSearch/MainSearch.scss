@@ -103,7 +103,6 @@ children-data
       background: #ffd800;
       position: fixed;
       width: 100%;
-      z-index: 99;
       span {
         display: inline-block;
         width: 15%;
@@ -167,7 +166,7 @@ children-data
       text-align: right;
       display: inline-block;
       position: fixed;
-      left: 14px;
+      right: 14px;
       top: 119px;
       z-index: 99;
       button {

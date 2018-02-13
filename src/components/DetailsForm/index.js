@@ -130,8 +130,8 @@ let DetailsForm = class DetailsForm extends React.Component {
   render() {
     return (
       <Dialog
-        title={<div>{!this.isPpl ? <span>עדכן את פרטי העסק</span> : <span>עדכן פרטים</span>}
-          <span>עזור לנו למלא פרטים חסרים ולהעשיר את המאגר</span></div>}
+        title={<div>{!this.isPpl ? <span>Update business information</span> : <span>Update information</span>}
+          <span>Help us fill out missing details and enrich the database</span></div>}
         modal={false}
         autoScrollBodyContent
         open={this.props.open}
@@ -185,7 +185,7 @@ let DetailsForm = class DetailsForm extends React.Component {
           {config.searchTabs[this.state.type] === 'businesses' ?
             <CategoriesTree onUpdate={this.updateSelectedCategories} initialValues={this.props.initialValues.categories} /> : ''}
           <div className="wrapper-actions">
-            <div onClick={this.props.handleClose}><FlatButton label="ביטול שינויים" labelStyle={{ color: '#b3b3b3', fontSize: 16 }} /></div>
+            <div onClick={this.props.handleClose}><FlatButton label="Cancel changes" labelStyle={{ color: '#b3b3b3', fontSize: 16 }} /></div>
             {config.searchTabs[this.state.type] === 'businesses' ?
               <RaisedButton className="submitBtn" type="submit" label="עדכן פרטי עסק" labelStyle={{ fontSize: 16 }} overlayStyle={{ backgroundColor: 'transparent' }} /> : <RaisedButton className="submitBtn" type="submit" label="עדכן פרטים " labelStyle={{ fontSize: 16 }} overlayStyle={{ backgroundColor: 'transparent' }} />
             }

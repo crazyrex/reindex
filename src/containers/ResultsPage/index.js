@@ -8,7 +8,7 @@ import Results from 'components/Results';
 import config from 'ReindexConfig';
 import SearchBar from 'components/SearchBar';
 import Snackbar from 'material-ui/Snackbar';
- import DrawerFilter from 'components/DrawerFilter';
+import DrawerFilter from 'components/DrawerFilter';
 import LocationChange from 'components/LocationChange';
 import { detectmob, updateSearchLocation, str2spc, getLocationData } from 'utils/functions';
 import { browserHistory } from 'react-router';
@@ -220,7 +220,7 @@ export class ResultsPage extends React.PureComponent {
           <div className="results-count"> {this.props.totalResults} {translate.resultsFound} </div>
           {(this.state.detectmob && !this.state.changeLocation && this.props.location.pathname.indexOf(config.searchTabs.businesses.route) > -1) ?
             <div onClick={this.showSideBarNearMe} className='wrapper-nearme' >
-              <FlatButton label={translate.businessesNearby} labelStyle={{ paddingRight: 11, paddingLeft: 11, fontSize: 18,textTransform:'lowercase' }} />
+              <FlatButton label={translate.businessesNearby} labelStyle={{ paddingRight: 11, paddingLeft: 11, fontSize: 18, textTransform: 'lowercase' }} />
             </div> : ''}
           {this.state.detectmob && this.state.changeLocation ?
             <div onClick={this.openChangeLocation} className='change-loc' >

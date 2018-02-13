@@ -261,7 +261,7 @@ class RecordPage extends React.Component {
               {this.props.data.business_website ? <div>
                 <IconButton href={getWebsite(this.props.data.business_website)}><LaptopIcon /></IconButton>
                 <span><a href={getWebsite(this.props.data.business_website)}>
-                  אתר
+                translate.website
                           </a></span>
               </div> : ''}
               {this.props.data._id ?

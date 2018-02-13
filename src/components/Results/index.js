@@ -5,7 +5,7 @@ import IconButton from 'material-ui/IconButton';
 import FlatButton from 'material-ui/FlatButton';
 import Chip from 'material-ui/Chip';
 import _ from 'lodash';
-import GMap from 'components/GMap';
+//import  GMap  from 'components/GMap';
 import Phone from 'components/Phone';
 import { Link } from 'react-router';
 import { detectmob } from 'utils/functions';
@@ -211,17 +211,17 @@ class Results extends React.Component {
                       <div className="desc">{res._source.business_description}</div>
                     </div>
                     <div>
-                      {res._source.phone || res._source.phone_2 ?
-                        <div className="wrapper-icon-content">
+                      {/*  {res._source.phone || res._source.phone_2 ?
+                         <div className="wrapper-icon-content">
                           <IconButton className="icon-phone" ><PhoneIcon /></IconButton>
-                          {/* <Phone
+                          <Phone
                             data={res._source}
                             cardName={res._source.business_name}
                             recordId={res._id}
                             isVirtual={config.searchTabs[res._source.listing_type_1] === 'businesses'}
-                          /> */}
+                          />
                         </div>
-                        : ''}
+                        : ''} */}
                       <div className="wrapper-icon-content">
                         <IconButton className="icon-home" ><HomeIcon /></IconButton>
                         <span className="house">{res._source.address_street_name}
@@ -280,22 +280,12 @@ class Results extends React.Component {
                   </div>*/}
                 </div>
                 <div className="wrapper-map">
-                  <GMap location={res._source} />
+                  { /*<GMap location={res._source} />*/}
                 </div>
                 <div className="wrapper-actions">
                   <div style={{ margin: '10px 0' }}>
                     <Link to={res._source.link}>{config.searchTabs[res._source.listing_type_1] === 'businesses' ? `${translate.goToBusinessPage}` : `${translate.goToContactPage}`}</Link>
                   </div>
-                  <div
-                    onClick={() => {
-                      this.clickUpdateRecoed(index);
-                      this.setState({ modalOpen: !this.state.modalOpen });
-                      this.setState({ selectedRes: res });
-                    }}
-                  >
-                    <RaisedButton label={translate.updateDetails} />
-                  </div>
-                  {/* <SocialBtns data={res._source} /> */}
                   <div className="wrapper-icon-content">
                     <IconButton className="icon-update" ><UpdateIcon /></IconButton>
                     <span className="updated">{this.parseDate(res._source.updated)}</span>
@@ -304,7 +294,6 @@ class Results extends React.Component {
               </div>
             </CardText>
           </Card>
-
         )}
 
         {this.props.offset !== Math.ceil(this.props.total / this.props.limit)
