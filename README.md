@@ -10,7 +10,7 @@ Currently tested only on Linux and OSX
 mkdir reindex-repos
 cd reindex-repos
 git clone https://github.com/linnovate/reindex.git
-git clone https://github.com/linnovate/reindex.git
+git clone https://github.com/linnovate/reindex-api.git
 cd reindex
 mv env-example .env
 modified name project  
