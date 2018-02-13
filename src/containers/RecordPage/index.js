@@ -13,12 +13,12 @@ import Phone from 'components/Phone';
 import FlatButton from 'material-ui/FlatButton';
 import Snackbar from 'material-ui/Snackbar';
 import IconButton from 'material-ui/IconButton';
-import GMap from 'components/GMap';
+// import GMap from 'components/GMap';
 import { browserHistory } from 'react-router';
 import Chip from 'material-ui/Chip';
 import _ from 'lodash';
 import { getPhone, detectmob, getWebsite, getLocationData } from '../../utils/functions';
-//import SocialBtns from 'components/SocialBtns';
+import SocialBtns from 'components/SocialBtns';
 import Dialog from 'material-ui/Dialog';
 import PhoneIcon from 'material-ui/svg-icons/communication/call';
 import HomeIcon from 'material-ui/svg-icons/action/home';
@@ -176,13 +176,13 @@ class RecordPage extends React.Component {
                   <div>{this.props.data.business_name || `${this.props.data.first_name} ${this.props.data.last_name}`}</div>
                   <div>{this.props.data.business_description}</div>
                 </div>
-                {/*  {this.state.showSocialBtns ?
-                 <SocialBtns data={this.props.data} /> : ''} */}
+                 {this.state.showSocialBtns ?
+                 <SocialBtns data={this.props.data} /> : ''}
                 <IconButton className="shareBtn" onClick={() => { this.setState({ showSocialBtns: true }); }}><ShareIcon /></IconButton>
               </div>
               : ''}
             <div className="wrapper-record-content">
-              <div className="backLink"><span onClick={() => browserHistory.goBack()}>{'<'} חזור לתוצאות החיפוש</span></div>
+              <div className="backLink"><span onClick={() => browserHistory.goBack()}>{'<'} Back to search results</span></div>
               <div className="wrapper-header">
                 {!this.state.detectmob ?
                   <div>
@@ -217,17 +217,13 @@ class RecordPage extends React.Component {
                 {(this.props.data.tags || this.props.data.categories) && splitTags(this.props.data.tags, this.props.data.categories, this.state.detectmob)}
               </div>
               <div className="more-details">
-                <div><GMap location={this.props.data} /></div>
+                {/* <div><GMap location={this.props.data} /></div> */}
                 <div>
-                  {/* {!this.state.detectmob ? <SocialBtns data={this.props.data} /> : ''}*/}
+                  {!this.state.detectmob ? <SocialBtns data={this.props.data} /> : ''}
                   <div className="wrapper-icon-content">
                     <IconButton className="icon-update"> <UpdateIcon /> </IconButton>
                     <span className="updated">{this.parseDate(this.props.data.updated)}</span>
                   </div>
-                  {!this.state.detectmob ?
-                    this.locationData.pathname.indexOf('/biz') > -1 ?
-                      <div className="wrapper-updateBtn" onClick={() => { this.setState({ modalOpen: !this.state.modalOpen }); }}><FlatButton labelStyle={{ paddingRight: 34, paddingLeft: 34, fontSize: 18 }} label="עדכן פרטי עסק" /></div> : <div className="wrapper-updateBtn" onClick={() => { this.setState({ modalOpen: !this.state.modalOpen }); }}><FlatButton labelStyle={{ paddingRight: 34, paddingLeft: 34, fontSize: 18 }} label="עדכן פרטים" /></div>
-                    : ''}
                   {this.props.data.listing_type_1 && this.state.modalOpen ? <DetailsForm
                     type={this.props.data.listing_type_1}
                     open={this.state.modalOpen}
@@ -255,13 +251,13 @@ class RecordPage extends React.Component {
                 <IconButton target="_blank" href={`waze://?ll=${this.state.geolocation.lat},${this.state.geolocation.lng}`}><PlaceIcon /></IconButton>
                 <span>
                   <a target="_blank" href={`waze://?ll=${this.state.geolocation.lat},${this.state.geolocation.lng}`}>
-                  translate.navigataion
+                    translate.navigataion
                         </a></span>
               </div> : ''}
               {this.props.data.business_website ? <div>
                 <IconButton href={getWebsite(this.props.data.business_website)}><LaptopIcon /></IconButton>
                 <span><a href={getWebsite(this.props.data.business_website)}>
-                translate.website
+                  translate.website
                           </a></span>
               </div> : ''}
               {this.props.data._id ?

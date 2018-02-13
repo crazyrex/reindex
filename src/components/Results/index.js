@@ -211,7 +211,7 @@ class Results extends React.Component {
                       <div className="desc">{res._source.business_description}</div>
                     </div>
                     <div>
-                      {/*  {res._source.phone || res._source.phone_2 ?
+                        {res._source.phone || res._source.phone_2 ?
                          <div className="wrapper-icon-content">
                           <IconButton className="icon-phone" ><PhoneIcon /></IconButton>
                           <Phone
@@ -221,7 +221,7 @@ class Results extends React.Component {
                             isVirtual={config.searchTabs[res._source.listing_type_1] === 'businesses'}
                           />
                         </div>
-                        : ''} */}
+                        : ''} 
                       <div className="wrapper-icon-content">
                         <IconButton className="icon-home" ><HomeIcon /></IconButton>
                         <span className="house">{res._source.address_street_name}
