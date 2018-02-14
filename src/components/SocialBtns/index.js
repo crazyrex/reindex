@@ -1,21 +1,23 @@
 import React from 'react';
-//import { ShareButtons, generateShareIcon } from 'react-share';
+import {
+  FacebookShareButton,
+  GooglePlusShareButton,
+  TwitterShareButton,
+  WhatsappShareButton,
+  FacebookIcon,
+  TwitterIcon,
+  WhatsappIcon,
+  GooglePlusIcon,
+} from 'react-share';
+
+import { generateShareIcon } from 'react-share';
+
 import IconButton from 'material-ui/IconButton';
 import PhoneIcon from 'material-ui/svg-icons/communication/call';
 import MailIcon from 'material-ui/svg-icons/content/mail';
 import './SocialBtns.scss';
-//import { generateIcon } from 'react-share/lib/generateIcon';
 
-const {
-  FacebookShareButton,
-  GooglePlusShareButton,
-  TwitterShareButton,
-  WhatsappShareButton
-} = ShareButtons;
-const FacebookIcon = generateShareIcon('facebook');
-const TwitterIcon = generateShareIcon('twitter');
-const GooglePlusIcon = generateShareIcon('google');
-const WhatsappIcon = generateShareIcon('whatsapp');
+
 
 const saveToGTM = (type, cardname) => {
   dataLayer.push({

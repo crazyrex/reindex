@@ -23,8 +23,8 @@
     }
 }
 .dialog-phone {
-  direction: ltr !important;
-  text-align: left;
+  direction: rtl !important;
+  text-align: right;
   border: none !important;
   padding: 0 !important;
   
@@ -81,7 +81,7 @@
        display: inline-block;
        vertical-align: bottom;
        height: 36px;
-       margin-right: 4px;
+       margin-left: 4px;
      }
      .icon-phone {
        svg {

@@ -75,11 +75,10 @@ class LocationChange extends React.Component {
             overlayClassName="overlay"
             containerClassName="container"
             open={this.state.open}
-            openSecondary
             onRequestChange={(open) => this.setState({ open: false })}
           >
             <div className="wrapper-location">
-              <div className="title">שינוי מקום</div>
+              <div className="title">change location</div>
               <form name='myform'>
                 <div className="change">
                   <input type="radio" name='myradio' value="1" onClick={() => this.onChange('change')} />
@@ -102,13 +101,13 @@ class LocationChange extends React.Component {
                 </div>
                 <div className="change">
                   <input type="radio" name='myradio' value="3" onClick={() => this.onChange('all')} />
-                  <label>כל הארץ</label>
+                  <label>All</label>
                 </div>
 
               </form>
 
             </div>
-            <RaisedButton className="submitBtn" type="submit" label={'עדכן'} labelStyle={{ fontSize: 16 }} overlayStyle={{ backgroundColor: 'transparent' }} onClick={() => this.close()} />
+            <RaisedButton className="submitBtn" type="submit" label={'Update'} labelStyle={{ fontSize: 16 }} overlayStyle={{ backgroundColor: 'transparent' }} onClick={() => this.close()} />
 
           </Drawer>
         </div>

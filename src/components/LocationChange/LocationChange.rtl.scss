@@ -1,9 +1,9 @@
 @import "../../assets/css/variables";
 .loc {
-  text-align: left;
+  text-align: right;
   display: inline-block;
   position: fixed;
-  right: 14px;
+  left: 14px;
   top: 188px;
   z-index: 99;
     button {
@@ -16,10 +16,10 @@
 .location-change {
   position: fixed;
   bottom: 20px;
-  left: 20px;
+  right: 20px;
   z-index: 9;
   &.active {
-    right: 20px;
+    left: 20px;
   }
   .overlay,
   .container {
@@ -43,7 +43,7 @@
     .change {
       margin: 8px -3px;
       label {
-        margin-right: 10px;
+        margin-left: 10px;
       }
     }
  
@@ -54,8 +54,8 @@
     background-color: transparent!important;
     position: absolute;
     bottom: 131px;
-    right: 0;
     left: 0;
+    right: 0;
     width: 20%;
     margin: 0 auto;
     button {
