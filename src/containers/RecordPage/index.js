@@ -146,7 +146,7 @@ class RecordPage extends React.Component {
       const lastCategory = (categories.length) ? categories[categories.length - 1] : '';
       let categoriesStr = categories.toString();
       categoriesStr = categoriesStr.replace(/,/g, ' > ');
-      this.strTitle = 'Reindex - ' + lastCategory + 'Reindex - ' + data.business_name + ' in ' + data.address_city;
+      this.strTitle = 'Reindex - ' + lastCategory + ' - ' + data.business_name + ' in ' + data.address_city;
       this.description = 'Contact information, address, phone and other information ' + 'Reindex | ' + categoriesStr + 'Index Bussines | ' + data.business_name + ' from ' + data.address_city;
     }
     else {

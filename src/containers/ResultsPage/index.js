@@ -77,36 +77,36 @@ export class ResultsPage extends React.PureComponent {
     if (locationData.pathname.indexOf(config.searchTabs.businesses.route) > -1) {
       if (q) {
         if (city) {
-          this.strTitle = q + ' ב' + city + ' - חיפוש עסקים במגזר החרדי - Reindex';
-          this.description = 'Reindex | ' + q + ' מ' + city + ' - תוצאות חיפוש עסקים וארגונים במגזר החרדי ב' + city;
+          this.strTitle = 'Reindex - search ' + q + 'in ' + city;
+          this.description = 'Reindex | ' + q + ' from' + city;
         }
         else {
-          this.strTitle = q + ' - חיפוש עסקים במגזר החרדי - Reindex';
-          this.description = 'Reindex | ' + q + ' - תוצאות חיפוש עסקים וארגונים במגזר החרדי'
+          this.strTitle = 'Reindex -' + q;
+          this.description = 'Reindex | ' + q;
         }
       }
       else {
-        const title = ' - אינדקס עסקים Reindex';
+        const title = 'Reindex - business Index';
         if (city) {
-          this.strTitle = catName + ' ב' + city + ' - אינדקס עסקים Reindex ';
-          this.description = catName + ' במדריך החרדי |  רשימת עסקים ב' + city + ' ומידע מפורט באתר Reindex';
+          this.strTitle = 'Reindex business Index - ' + city + 'in ' + catName;
+          this.description = 'Reindex - list business in ' + city + catName;
         }
         else {
           this.strTitle = catName + title;
-          this.description = catName + ' במדריך החרדי | רשימת עסקים ומידע מפורט באתר Reindex'
+          this.description = 'Reindex ' + catName;
         }
       }
     }
 
     else if (this.props.location.pathname.indexOf(config.searchTabs.people.route) > -1) {
-      const title = ' - חיפוש אנשים במדריך החרדי';
+      const title = 'Serch business in Reindex';
       if (city) {
-        this.strTitle = s + ' - חיפוש אנשים ב' + city + ' במדריך החרדי';
-        this.description = '.Reindex | ' + s + ' מ' + city + ' - תוצאות חיפוש אנשים ומספרי טלפון במגזר החרדי - ' + locationData.search.location;
+        this.strTitle = 'Reindex search people in ' + city + ' ' + s;
+        this.description = 'Reindex |  serch results in ' + city + 'from ' + s + ' מ' + '' + locationData.search.location;
       }
       else {
         this.strTitle = s + title;
-        this.description = '.' + s + ' - תוצאות חיפוש אנשים ומספרי טלפון במגזר החרדי'
+        this.description = 'Search results ' + s + '.';
       }
     }
 
