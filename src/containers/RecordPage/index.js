@@ -6,14 +6,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-
 import HeaderSite from 'components/HeaderSite';
 import DetailsForm from 'components/DetailsForm';
 import Phone from 'components/Phone';
 import FlatButton from 'material-ui/FlatButton';
 import Snackbar from 'material-ui/Snackbar';
 import IconButton from 'material-ui/IconButton';
-// import GMap from 'components/GMap';
+import GMap from 'components/GMap';
 import { browserHistory } from 'react-router';
 import Chip from 'material-ui/Chip';
 import _ from 'lodash';
@@ -37,7 +36,6 @@ import translate from 'globalTranslate.json';
 import { cleanData } from 'components/DetailsForm/actions';
 
 import './RecordPage.scss';
-
 
 function catNTagsArr(tagsStr = '', catArr = []) {
   let arr = catArr;
@@ -176,8 +174,8 @@ class RecordPage extends React.Component {
                   <div>{this.props.data.business_name || `${this.props.data.first_name} ${this.props.data.last_name}`}</div>
                   <div>{this.props.data.business_description}</div>
                 </div>
-                 {this.state.showSocialBtns ?
-                 <SocialBtns data={this.props.data} /> : ''}
+                {this.state.showSocialBtns ?
+                  <SocialBtns data={this.props.data} /> : ''}
                 <IconButton className="shareBtn" onClick={() => { this.setState({ showSocialBtns: true }); }}><ShareIcon /></IconButton>
               </div>
               : ''}
@@ -217,7 +215,7 @@ class RecordPage extends React.Component {
                 {(this.props.data.tags || this.props.data.categories) && splitTags(this.props.data.tags, this.props.data.categories, this.state.detectmob)}
               </div>
               <div className="more-details">
-                {/* <div><GMap location={this.props.data} /></div> */}
+                <div><GMap location={this.props.data} /></div>
                 <div>
                   {!this.state.detectmob ? <SocialBtns data={this.props.data} /> : ''}
                   <div className="wrapper-icon-content">
