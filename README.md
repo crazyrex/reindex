@@ -13,7 +13,7 @@ git clone https://github.com/linnovate/reindex.git
 git clone https://github.com/linnovate/reindex-api.git
 cd reindex
 mv env-example .env
-modified name project  
+Edit the .env file and name your project by changing the PROJECT_NAME variable  
 source .env
 docker-compose up --build -d
 ```
