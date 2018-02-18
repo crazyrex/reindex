@@ -17,6 +17,10 @@ Edit the .env file and name your project by changing the PROJECT_NAME variable
 source .env
 docker-compose up --build -d
 ```
+# Getting started
+Cool, So in order to populate the db - you have to index your data by running the tools from the [reindex-api](https://github.com/linnovate/reindex-api/wiki) repository.
+
+
 
 # Credits
  - This repository is forked from the awesome [react-universal-saga](https://github.com/xkawi/react-universal-saga/blob/master/README.md) project
