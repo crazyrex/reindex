@@ -4,9 +4,17 @@ import IconButton from 'material-ui/IconButton';
 import CloseIcon from 'material-ui/svg-icons/navigation/close';
 import FilterListIcon from 'material-ui/svg-icons/content/filter-list';
 import Filters from 'components/Filters';
-import translate from 'globalTranslate.json';
+import config from 'ReindexConfig';
 
-import './DrawerFilter.scss';
+let translate;
+if (config.lang == "he") {
+  require('./DrawerFilter.rtl.scss');
+  translate = require('globalTranslateHE.json');
+}
+else {
+  translate = require('globalTranslate.json');
+  require('./DrawerFilter.scss');
+}
 
 class DrawerFilter extends React.Component {
 

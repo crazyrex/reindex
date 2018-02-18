@@ -31,11 +31,19 @@ import { updateRecord, closeUpdateRecordModal } from './actions';
 // import businessBgImg from '../../assets/img/business-bg.png';
 import { loadData } from './sagas';
 import { loadDataAction } from './actions';
-import translate from 'globalTranslate.json';
+import config from 'ReindexConfig';
 
 import { cleanData } from 'components/DetailsForm/actions';
 
-import './RecordPage.scss';
+let translate;
+if (config.lang == "he") {
+  require('./RecordPage.rtl.scss');
+  translate = require('globalTranslateHE.json');
+}
+else {
+  translate = require('globalTranslate.json');
+  require('./RecordPage.scss');
+}
 
 function catNTagsArr(tagsStr = '', catArr = []) {
   let arr = catArr;
@@ -180,7 +188,7 @@ class RecordPage extends React.Component {
               </div>
               : ''}
             <div className="wrapper-record-content">
-              <div className="backLink"><span onClick={() => browserHistory.goBack()}>{'<'} Back to search results</span></div>
+              <div className="backLink"><span onClick={() => browserHistory.goBack()}>{'<'} {translate.BackToSearchResults}</span></div>
               <div className="wrapper-header">
                 {!this.state.detectmob ?
                   <div>

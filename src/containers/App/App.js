@@ -7,10 +7,11 @@ import CopyRightIcon from 'material-ui/svg-icons/action/copyright';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import { getLocationData } from 'utils/functions';
 import { detectmob } from '../../utils/functions';
+import config from 'ReindexConfig';
 
-
-
-const muiTheme = getMuiTheme({ isRtl: false, fontFamily: 'Heebo' });
+let isRtl;
+config.lang == "he" ? isRtl = true : false;
+const muiTheme = getMuiTheme({ isRtl: isRtl, fontFamily: 'Heebo' });
 
 import {
   navigate,
@@ -21,7 +22,7 @@ import {
 import { loadResults } from '../ResultsPage/actions';
 
 import styles from './App.scss'; // eslint-disable-line
-import  'assets/css/global-styles.scss';
+import 'assets/css/global-styles.scss';
 
 class App extends Component {
   constructor(props) {
@@ -79,7 +80,7 @@ class App extends Component {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div className={`${styles.app} ${(location.pathname.split('/')[1]) ? location.pathname.split('/')[1] : 'home'}`}>
-        <div className={styles.content}>
+          <div className={styles.content}>
             {children}
           </div>
         </div>

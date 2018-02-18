@@ -20,10 +20,20 @@ import UpdateIcon from 'material-ui/svg-icons/action/update';
 import BusinessIcon from 'material-ui/svg-icons/places/business-center';
 // import { cleanData } from 'components/DetailsForm/actions';
 import PlaceIcon from 'material-ui/svg-icons/maps/place';
-import translate from 'globalTranslate.json';
 import config from 'ReindexConfig';
 
-import './Results.scss';
+let translate;
+let unit;
+if (config.lang == "he") {
+  require('./Results.rtl.scss');
+  translate = require('globalTranslateHE.json');
+  unit = "K";
+}
+else {
+  translate = require('globalTranslate.json');
+  require('./Results.scss');
+  unit = "M";
+}
 
 function splitTags(tagsStr, catArr, isDetectmob) {
   let arr = tagsStr ? tagsStr.split('|') : [];
@@ -132,13 +142,11 @@ class Results extends React.Component {
     let a =
       Math.sin(dLat / 2) * Math.sin(dLat / 2) +
       Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) *
-      Math.sin(dLon / 2) * Math.sin(dLon / 2)
-      ;
+      Math.sin(dLon / 2) * Math.sin(dLon / 2);
     let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     let d = R * c; // Distance in km
     if (unit == 'M')
       d = d * 0.62137;
-      console.log('ddddd',d);
     return d.toFixed(2);
   }
 
@@ -207,7 +215,7 @@ class Results extends React.Component {
                         <div className="km" >
                           <IconButton ><PlaceIcon /></IconButton>
                           {/*if send "K" get distance in  kilometers*/}
-                          <span >{this.getDistanceFromLatLonInKm(res._source.location, 'M')} mi</span>
+                          <span >{this.getDistanceFromLatLonInKm(res._source.location)} mi</span>
                         </div>
                         : ''}
                       <span className="name">
