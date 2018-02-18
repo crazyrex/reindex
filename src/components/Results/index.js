@@ -55,6 +55,7 @@ class Results extends React.Component {
     this.handleModalClose = this.handleModalClose.bind(this);
     this.handlePageClick = this.handlePageClick.bind(this);
     this.getDistanceFromLatLonInKm = this.getDistanceFromLatLonInKm.bind(this);
+
     this.d = null;
     //this.handleExpandChange = this.handleExpandChange.bind(this);
   }
@@ -120,23 +121,28 @@ class Results extends React.Component {
     return deg * (Math.PI / 180)
   }
 
-  getDistanceFromLatLonInKm(pos) {
+  getDistanceFromLatLonInKm(pos, unit) {
     let lat1 = this.props.lat;
     let lon1 = this.props.lon;
     let lat2 = pos[1];
     let lon2 = pos[0];
-    var R = 6371; // Radius of the earth in km
-    var dLat = this.deg2rad(lat2 - lat1);  // deg2rad below
-    var dLon = this.deg2rad(lon2 - lon1);
-    var a =
+    let R = 6371; // Radius of the earth in km
+    let dLat = this.deg2rad(lat2 - lat1);  // deg2rad below
+    let dLon = this.deg2rad(lon2 - lon1);
+    let a =
       Math.sin(dLat / 2) * Math.sin(dLat / 2) +
       Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) *
       Math.sin(dLon / 2) * Math.sin(dLon / 2)
       ;
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    var d = R * c; // Distance in km
-    return d.toFixed(2);;
+    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    let d = R * c; // Distance in km
+    if (unit == 'M')
+      d = d * 0.62137;
+      console.log('ddddd',d);
+    return d.toFixed(2);
   }
+
+
 
   handlePageClick(value) {
     this.setState({ showCaptcha: false });
@@ -200,8 +206,8 @@ class Results extends React.Component {
                       {this.props.lat && this.props.lon && res._source.location && res._source.location.length > 0 ?
                         <div className="km" >
                           <IconButton ><PlaceIcon /></IconButton>
-
-                          <span >{this.getDistanceFromLatLonInKm(res._source.location)} ק"מ</span>
+                          {/*if send "K" get distance in  kilometers*/}
+                          <span >{this.getDistanceFromLatLonInKm(res._source.location, 'M')} mi</span>
                         </div>
                         : ''}
                       <span className="name">
@@ -211,8 +217,8 @@ class Results extends React.Component {
                       <div className="desc">{res._source.business_description}</div>
                     </div>
                     <div>
-                        {res._source.phone || res._source.phone_2 ?
-                         <div className="wrapper-icon-content">
+                      {res._source.phone || res._source.phone_2 ?
+                        <div className="wrapper-icon-content">
                           <IconButton className="icon-phone" ><PhoneIcon /></IconButton>
                           <Phone
                             data={res._source}
@@ -221,7 +227,7 @@ class Results extends React.Component {
                             isVirtual={config.searchTabs[res._source.listing_type_1] === 'businesses'}
                           />
                         </div>
-                        : ''} 
+                        : ''}
                       <div className="wrapper-icon-content">
                         <IconButton className="icon-home" ><HomeIcon /></IconButton>
                         <span className="house">{res._source.address_street_name}
@@ -236,7 +242,7 @@ class Results extends React.Component {
                         <div className="wrapper-icon-content">
                           <IconButton className="icon-businesspage" ><BusinessIcon /></IconButton>
                           <span className="businesspage">
-                            <Link to={res._source.link} >דף עסק</Link>
+                            <Link to={res._source.link}>translate.businessesPage</Link>
                           </span>
                         </div> : ''}
 
