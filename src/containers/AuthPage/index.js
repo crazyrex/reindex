@@ -1,9 +1,9 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
-// import HeaderSite from 'components/HeaderSite';
-// import LoginForm from 'components/LoginForm';
-// import RegisterForm from 'components/RegisterForm';
+ import HeaderSite from 'components/HeaderSite';
+ import LoginForm from 'components/LoginForm';
+ import RegisterForm from 'components/RegisterForm';
 import { browserHistory } from 'react-router';
 import { login, register } from './actions';
 import './AuthPage.scss';
