@@ -28,7 +28,7 @@ const getTree = (data) => {
     _routing: '0',
     _parent: '0',
     _source: {
-      content: 'categories',
+      content: 'קטגוריות',
     }
   };
   flatData = data;

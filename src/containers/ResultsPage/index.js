@@ -8,26 +8,19 @@ import Results from 'components/Results';
 import config from 'ReindexConfig';
 import SearchBar from 'components/SearchBar';
 import Snackbar from 'material-ui/Snackbar';
-import DrawerFilter from 'components/DrawerFilter';
+ import DrawerFilter from 'components/DrawerFilter';
 import LocationChange from 'components/LocationChange';
 import { detectmob, updateSearchLocation, str2spc, getLocationData } from 'utils/functions';
 import { browserHistory } from 'react-router';
-//import { loadResults } from './sagas';
-import { loadResults } from './actions';
+import { loadResults } from './sagas';
+import { loadResults as loadResultsAction } from './actions';
 import { loadSubcategories } from 'components/SearchBar/saga';
 import { updateSearchObj } from 'components/SearchBar/actions';
 import FlatButton from 'material-ui/FlatButton';
 import Slider from 'material-ui/Slider';
 import Drawer from 'material-ui/Drawer';
+import translate from 'globalTranslate.json';
 import { updateRecord, closeUpdateRecordModal } from './actions';
-import CreateForm from 'components/CreateForm';
-
-let translate;
-if (config.lang == "he")
-  translate = require('globalTranslateHE.json');
-else
-  translate = require('globalTranslate.json');
-
 export class ResultsPage extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -82,36 +75,36 @@ export class ResultsPage extends React.PureComponent {
     if (locationData.pathname.indexOf(config.searchTabs.businesses.route) > -1) {
       if (q) {
         if (city) {
-          this.strTitle = 'Reindex - search ' + q + 'in ' + city;
-          this.description = 'Reindex | ' + q + ' from' + city;
+          this.strTitle = q + ' ב' + city + ' - חיפוש עסקים במגזר החרדי - Reindex';
+          this.description = 'Reindex | ' + q + ' מ' + city + ' - תוצאות חיפוש עסקים וארגונים במגזר החרדי ב' + city;
         }
         else {
-          this.strTitle = 'Reindex -' + q;
-          this.description = 'Reindex | ' + q;
+          this.strTitle = q + ' - חיפוש עסקים במגזר החרדי - Reindex';
+          this.description = 'Reindex | ' + q + ' - תוצאות חיפוש עסקים וארגונים במגזר החרדי'
         }
       }
       else {
-        const title = 'Reindex - business Index';
+        const title = ' - אינדקס עסקים Reindex';
         if (city) {
-          this.strTitle = 'Reindex business Index - ' + city + 'in ' + catName;
-          this.description = 'Reindex - list business in ' + city + catName;
+          this.strTitle = catName + ' ב' + city + ' - אינדקס עסקים Reindex ';
+          this.description = catName + ' במדריך החרדי |  רשימת עסקים ב' + city + ' ומידע מפורט באתר Reindex';
         }
         else {
           this.strTitle = catName + title;
-          this.description = 'Reindex ' + catName;
+          this.description = catName + ' במדריך החרדי | רשימת עסקים ומידע מפורט באתר Reindex'
         }
       }
     }
 
     else if (this.props.location.pathname.indexOf(config.searchTabs.people.route) > -1) {
-      const title = 'Serch business in Reindex';
+      const title = ' - חיפוש אנשים במדריך החרדי';
       if (city) {
-        this.strTitle = 'Reindex search people in ' + city + ' ' + s;
-        this.description = 'Reindex |  serch results in ' + city + 'from ' + s + ' מ' + '' + locationData.search.location;
+        this.strTitle = s + ' - חיפוש אנשים ב' + city + ' במדריך החרדי';
+        this.description = '.Reindex | ' + s + ' מ' + city + ' - תוצאות חיפוש אנשים ומספרי טלפון במגזר החרדי - ' + locationData.search.location;
       }
       else {
         this.strTitle = s + title;
-        this.description = 'Search results ' + s + '.';
+        this.description = '.' + s + ' - תוצאות חיפוש אנשים ומספרי טלפון במגזר החרדי'
       }
     }
 
@@ -225,7 +218,7 @@ export class ResultsPage extends React.PureComponent {
           <div className="results-count"> {this.props.totalResults} {translate.resultsFound} </div>
           {(this.state.detectmob && !this.state.changeLocation && this.props.location.pathname.indexOf(config.searchTabs.businesses.route) > -1) ?
             <div onClick={this.showSideBarNearMe} className='wrapper-nearme' >
-              <FlatButton label={translate.businessesNearby} labelStyle={{ paddingRight: 11, paddingLeft: 11, fontSize: 18, textTransform: 'lowercase' }} />
+              <FlatButton label={translate.businessesNearby} labelStyle={{ paddingRight: 11, paddingLeft: 11, fontSize: 18,textTransform:'lowercase' }} />
             </div> : ''}
           {this.state.detectmob && this.state.changeLocation ?
             <div onClick={this.openChangeLocation} className='change-loc' >

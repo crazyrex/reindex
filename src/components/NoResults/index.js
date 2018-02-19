@@ -1,10 +1,8 @@
 import React from 'react';
 import NavigationExpandMore from 'material-ui/svg-icons/navigation/expand-more';
 import NavigationExpandLess from 'material-ui/svg-icons/navigation/expand-less';
-import CreateForm from 'components/CreateForm';
 import abroch from 'assets/img/no-results.png';
 import { detectmob } from 'utils/functions';
-import SendEmailForm from '../SendEmailForm';
 import { NO_RESULTS_TEXT, NO_RESULTS_TEXT_FROM_CAMPAIGN } from './constants';
 
 const styles = require('./NoResults.scss');

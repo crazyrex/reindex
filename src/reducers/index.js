@@ -1,21 +1,30 @@
 import * as ActionTypes from '../actions';
 import merge from 'lodash/merge';
 import paginate from './paginate';
-import { combineReducers } from 'redux';
-import authPageReducer from '../containers/AuthPage/reducer';
-import categoriesTreeReducer from '../components/CategoriesTree/reducer';
-import adminCategoriesReducer from '../containers/AdminCategories/reducer';
-import adminSearch from '../containers/AdminSearch/reducer';
-import { reducer as form } from 'redux-form';
-import searchReducer from '../components/SearchBar/reducer';
-import resultsPageReducer from '../containers/ResultsPage/reducer';
-import mainSearchReducer from '../containers/MainSearch/reducer';
-import recordReducer from '../containers/RecordPage/reducer';
+import {
+  combineReducers
+} from 'redux';
 
+import recordReducer from '../containers/RecordPage/reducer';
+import mainSearchReducer from '../containers/MainSearch/reducer';
+import authPageReducer from '../containers/AuthPage/reducer';
+import adminSearchReducer from '../containers/AdminSearch/reducer';
+import adminCategoriesReducer from '../containers/AdminCategories/reducer';
+import recordSettingsReducer from '../components/RecordSettings/reducer';
+
+import adminSearchBarReducer from '../components/AdminSearchBar/reducer';
+import searchReducer from '../components/SearchBar/reducer';
+import categoriesTreeReducer from '../components/CategoriesTree/reducer';
+
+import resultsPageReducer from '../containers/ResultsPage/reducer';
+import { reducer as form } from 'redux-form';
 
 
 // Updates an entity cache in response to any action with response.entities.
-function entities(state = { users: {}, repos: {} }, action) {
+function entities(state = {
+  users: {},
+  repos: {}
+}, action) {
   if (action.response && action.response.entities) {
     return merge({}, state, action.response.entities);
   }
@@ -25,7 +34,10 @@ function entities(state = { users: {}, repos: {} }, action) {
 
 // Updates error message to notify about the failed fetches.
 function errorMessage(state = null, action) {
-  const { type, error } = action;
+  const {
+    type,
+    error
+  } = action;
 
   if (type === ActionTypes.RESET_ERROR_MESSAGE) {
     return null;
@@ -35,6 +47,7 @@ function errorMessage(state = null, action) {
 
   return state;
 }
+
 
 // Updates the pagination data for different actions.
 const pagination = combineReducers({
@@ -56,9 +69,14 @@ const pagination = combineReducers({
   })
 });
 
-function router(state = { pathname: '/' }, action) {
+function router(state = {
+  pathname: '/'
+}, action) {
   switch (action.type) {
     case ActionTypes.UPDATE_ROUTER_STATE:
+        // state.path name;
+        // state.params
+
       return action.state;
     default:
       return state;
@@ -70,15 +88,15 @@ const rootReducer = combineReducers({
   pagination,
   errorMessage,
   recordReducer,
-  authPage: authPageReducer,
-  categoriesTree: categoriesTreeReducer,
-  adminCategories: adminCategoriesReducer,
-  adminSearch: adminSearch,
   mainSearch: mainSearchReducer,
-  router,
-  form,
+  adminSearch: adminSearchReducer,
+  adminCategories: adminCategoriesReducer,
+  authPage: authPageReducer,
   search: searchReducer,
+  adminSearchBar: adminSearchBarReducer,
+  categoriesTree: categoriesTreeReducer,
   results: resultsPageReducer,
+  form,
   router
 });
 
