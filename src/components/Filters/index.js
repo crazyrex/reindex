@@ -10,10 +10,23 @@ import IconsStyle from 'utils/iconsStyle';
 import config from 'ReindexConfig';
 import { updateSearchLocation } from 'utils/functions';
 import { loadSubCategories, updateSearchObj, reduceFilters, loadHierarchyFilterData } from 'components/SearchBar/actions';
-import translate from 'globalTranslate.json';
 
-const styles = require('./Filters.scss');
 
+let translate;
+let styles;
+let country;
+if (config.lang == "he") {
+  styles = require('./Filters.rtl.scss');
+  translate = require('globalTranslateHE.json');
+  country = "ישראל";
+}
+else {
+  translate = require('globalTranslate.json');
+  styles = require('./Filters.scss');
+  country = "New york";//dinamic country
+}
+
+console.log('countrycountry :', country)
 const hierarchyFilters = config.hierarchyFilters;
 
 class Filters extends React.PureComponent {
@@ -56,7 +69,7 @@ class Filters extends React.PureComponent {
   }
 
   handleChange(searchText) {
-    let lat =null ,lon =null;
+    let lat = null, lon = null;
     if (this.props.location && this.props.location.query && this.props.location.query.lat && this.props.location.query.lon) {
       lat = this.props.location.query.lat;
       lon = this.props.location.query.lon;
@@ -80,7 +93,7 @@ class Filters extends React.PureComponent {
   }
 
   onNewRequest(loc, chosenRequest) {
-     if (typeof chosenRequest !== 'object')
+    if (typeof chosenRequest !== 'object')
       return;
     this.setState({ searchText: chosenRequest.text }, function () {
       this.props.onNewRequest('location', chosenRequest, null, true)
@@ -117,7 +130,7 @@ class Filters extends React.PureComponent {
           : <div></div>}
         {this.props.filters.cities ?
           <div className={styles["wrapper-auto-complete"]}>
-            <div className={styles["filters-header"]}>New york</div>
+            <div className={styles["filters-header"]}>{country}</div>
             <AutoComplete
               fullWidth
               searchText={this.state.searchText}

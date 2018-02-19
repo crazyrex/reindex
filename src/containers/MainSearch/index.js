@@ -20,8 +20,11 @@ import { loadResults, changeState, updateRecord, displayIcons, closeUpdateRecord
 // const seoImage = require('assets/img/hp.png');
 // import IconButton from 'material-ui/IconButton';
 // import PlaceIcon from 'material-ui/svg-icons/navigation/cancel';
-
-const styles = require('./MainSearch.scss');
+let styles;
+if (config.lang == "he")
+  styles = require('./MainSearch.rtl.scss');
+else
+  styles = require('./MainSearch.scss');
 let ifApp = true;
 
 export class MainSearch extends React.PureComponent {
@@ -124,7 +127,7 @@ export class MainSearch extends React.PureComponent {
         </div>
 
 
-      {/*  {!this.state.detectmob ?
+        {/*  {!this.state.detectmob ?
           <div className="wrapper-filters">
             <Filters onNewRequest={this.props.handleNewRequest} pageState={this.props.state} />
           </div> : ''}

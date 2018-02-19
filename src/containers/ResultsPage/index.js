@@ -19,9 +19,14 @@ import { updateSearchObj } from 'components/SearchBar/actions';
 import FlatButton from 'material-ui/FlatButton';
 import Slider from 'material-ui/Slider';
 import Drawer from 'material-ui/Drawer';
-import translate from 'globalTranslate.json';
 import { updateRecord, closeUpdateRecordModal } from './actions';
 import CreateForm from 'components/CreateForm';
+
+let translate;
+if (config.lang == "he")
+  translate = require('globalTranslateHE.json');
+else
+  translate = require('globalTranslate.json');
 
 export class ResultsPage extends React.PureComponent {
   constructor(props) {
