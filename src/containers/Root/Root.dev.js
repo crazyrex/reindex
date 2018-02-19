@@ -2,7 +2,6 @@ import has from 'lodash/has';
 import React, { Component, PropTypes } from 'react';
 import { Provider } from 'react-redux';
 import { Router, RouterContext } from 'react-router';
-import DevTools from '../DevTools/DevTools';
 import GoogleAnalytics from 'react-ga';
 
 require('../../assets/css/global-styles.scss');
