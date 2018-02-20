@@ -17,7 +17,6 @@ import {
   AuthPage,
   ResultsPage,
   ContactUs,
-  Terms,
   CampaignPage,
   CampaignVideoPage,
   LotteryPage,
@@ -32,7 +31,6 @@ export default () => {
       <Route path="/campaign/:num" component={CampaignPage} />
       <Route path="/campvideo/:num" component={CampaignVideoPage} />
       <Route path="/contact-us" component={ContactUs} />
-      <Route path="/terms" component={Terms} />
       <Route path="/thanks" component={ThanksPage} />
       <Route path="/thank" component={Thank} />
       <Route path="/newUpdateMain" component={Thank} />

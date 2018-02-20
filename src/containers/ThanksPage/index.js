@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import { detectmob } from 'utils/functions';
 import Helmet from 'react-helmet';
 
-import thanksImgDesk from '../../assets/img/thanks-desktop.jpg';
-import thanksImgMob from '../../assets/img/thanks-mobile.jpg';
 
 import './ThanksPage.scss';
 
@@ -51,13 +49,11 @@ class ThanksPage extends React.PureComponent {
           <Helmet
             title="Thanks Page"
             meta={[
-              { name: 'description', content: 'Thanks page of 402' },
+              { name: 'description', content: 'Thanks page of reindex' },
             ]}
           />
           <div className="wrapper-img">
-          {this.detectmob ?
-          <div className="img-mob" style={{backgroundImage: `url(${thanksImgMob})`}}></div>:
-          <div className="img-desk" style={{backgroundImage: `url(${thanksImgDesk})`}}></div>}
+      
           </div>
       </div>
     );  
