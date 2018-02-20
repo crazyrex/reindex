@@ -4,12 +4,18 @@ import SearchIcon from 'material-ui/svg-icons/action/search';
 import AutoComplete from 'material-ui/AutoComplete';
 import { updateSearchLocation } from 'utils/functions';
 import config from 'ReindexConfig';
-import translate from 'globalTranslate.json';
 import arrow from 'assets/img/icon-arrow-down.svg';
 import './SearchBar.scss';
 import { loadFilterData, loadSubCategories, setActiveTab, loadCategoriesFilterData, updateSearchObj, emptySubCategories, loadHierarchyFilterData } from './actions';
 import search from 'material-ui/svg-icons/action/search';
 const hierarchyFilters = config.hierarchyFilters;
+
+let translate;
+if (config.lang == "he")
+  translate = require('globalTranslateHE.json');
+else
+  translate = require('globalTranslate.json');
+
 
 class SearchBar extends React.PureComponent {
   constructor(props) {
