@@ -82,12 +82,15 @@
     }
   }
   .more-details {
-    display: flex;
-    margin-top: 23px;
-    &>div:first-child {
-      width: 70%;
-      padding-left: 90px;
-    }
+    width:100%;
+    align-items: flex-end;		   
+       display: flex;
+    // display: flex;
+    // margin-top: 23px;
+    // &>div:first-child {
+    //   width: 70%;
+    //   padding-left: 90px;
+    // }
     .updated {
       font-family: 'Heebo-Light';
       color: $gray;
@@ -107,6 +110,13 @@
       button {
         vertical-align: middle;
       }
+    }
+    #details{
+      width: 32%;
+    }
+    #Mapbox{
+      width: 68%;
+      
     }
   }
 }

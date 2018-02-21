@@ -46,9 +46,10 @@ class Admin extends React.PureComponent {
         />
         <HeaderSite logoClicked={this.goToHomePage} />
         <Drawer className="drawer" open={this.state.open}>
-          <MenuItem><Link to="/admin/search">search</Link></MenuItem>
-          <MenuItem><Link to="/admin/history">history</Link></MenuItem>
-          <MenuItem><Link to="/admin/categories">categories</Link></MenuItem>
+          <MenuItem><Link to="/admin/search">Search</Link></MenuItem>
+          <MenuItem><Link to="/admin/history">History</Link></MenuItem>
+          <MenuItem><Link to="/admin/categories">Categories</Link></MenuItem>
+          <MenuItem><Link to="/admin/settings">Settings</Link></MenuItem>
         </Drawer>
         {this.state.open ?
           <FlatButton className="show-menu" onClick={() => this.setState({ open: false })}>הסתר תפריט</FlatButton>

@@ -1,0 +1,14 @@
+.sec{
+    background-color: red;
+
+    .mapboxgl-map{
+        overflow: visible !important;
+      }
+      canvas.mapboxgl-canvas{
+        width: 435px !important;
+      }
+      a.mapbox-improve-map:after{
+        display: none!important;
+      }
+
+}

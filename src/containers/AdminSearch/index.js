@@ -18,7 +18,6 @@ import Snackbar from 'material-ui/Snackbar';
 import { loadResults, setSelectedRows, loadCategoriesTree, changeTreeDate, relateToCategory, closeConnect2CategoryAlert, loadScoreData, updateRecord } from './actions';
 
 import './AdminSearch.scss';
-
 export class AdminSearch extends React.PureComponent {
   constructor(props) {
     super(props);
