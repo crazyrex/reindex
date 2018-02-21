@@ -5,6 +5,7 @@ import {
   UPDATE_RECORD_SUCCESS,
   CLOSE_UPDATE_RECORD_MODAL,
   DISPLAY_ICONS,
+  ISDATA_RESULT
 } from './constants';
 
 // The initial state of the App
@@ -42,6 +43,11 @@ function mainSearchReducer(state = initialState, action) {
     case LOAD_RESULTS:
       return Object.assign({}, state, {
         offsetResults: action.data.page,
+      });
+    case ISDATA_RESULT:
+    console.log('111111',action)
+      return Object.assign({}, state, {
+        isData: action.result,
       });
     case RESULTS_SUCCESS:
       return Object.assign({}, state, {

@@ -6,5 +6,5 @@ export const UPDATE_RECORD = 'boilerplate/MainSearch/UPDATE_RECORD';
 export const UPDATE_RECORD_SUCCESS = 'boilerplate/MainSearch/UPDATE_RECORD_SUCCESS';
 export const CLOSE_UPDATE_RECORD_MODAL = 'boilerplate/MainSearch/CLOSE_UPDATE_RECORD_MODAL';
 export const DISPLAY_ICONS = 'boilerplate/MainSearch/DISPLAY_ICONS';
-
-
+export const CHECK_DATA = 'boilerplate/MainSearch/CHECK_DATA';
+export const ISDATA_RESULT = 'boilerplate/MainSearch/ISDATA_RESULT';

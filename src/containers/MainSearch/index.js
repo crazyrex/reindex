@@ -15,7 +15,7 @@ import DrawerFilter from 'components/DrawerFilter';
 import { detectmob } from '../../utils/functions';
 import config from '../../ReindexConfig';
 // import Tabs from 'components/Tabs';
-import { loadResults, changeState, updateRecord, displayIcons, closeUpdateRecordModal } from './actions';
+import { loadResults, changeState, updateRecord, displayIcons, closeUpdateRecordModal, checkData } from './actions';
 // import { spacing } from 'material-ui/styles';
 // const seoImage = require('assets/img/hp.png');
 // import IconButton from 'material-ui/IconButton';
@@ -40,7 +40,8 @@ export class MainSearch extends React.PureComponent {
       initial_screen_size: '',
       displayIcons: true,
       goToApp: true,
-      ifApp: true
+      ifApp: true,
+      isData: false
     };
 
     this.handleModalClose = this.handleModalClose.bind(this);
@@ -48,7 +49,9 @@ export class MainSearch extends React.PureComponent {
     this.toggleIcons = this.toggleIcons.bind(this);
     this.onResize = this.onResize.bind(this);
     this.handleClose = this.handleClose.bind(this);
-  }
+    this.props.checkData();
+
+    }
   componentDidMount() {
     // this.domain = window.location.origin;
     const that = this;
@@ -78,7 +81,11 @@ export class MainSearch extends React.PureComponent {
     that.toggleIcons();
   }
 
+  componentWillMount(){
+  }
+
   componentWillUnmount() {
+
     // you need to unbind the same listener that was binded.
     window.removeEventListener('resize', this.onResize, false);
 
@@ -125,6 +132,9 @@ export class MainSearch extends React.PureComponent {
             data={this.props.searchBarData}
           />
         </div>
+        {!this.props.isData?
+           <div className="init">explain.........</div>
+        :'' }
 
 
         {/*  {!this.state.detectmob ?
@@ -185,6 +195,7 @@ export function mapStateToProps(state) {
     searchBarData: state.mainSearch.searchBarData,
     search: state.search.search,
     isDisplayIcons: state.mainSearch.displayIcons,
+    isData :state.mainSearch.isData
   };
 }
 
@@ -192,6 +203,9 @@ export function mapDispatchToProps(dispatch) {
   return {
     changeState: () => {
       dispatch(changeState());
+    },
+    checkData: () => {
+      dispatch(checkData());
     },
     updateRecord: (values, categories) => {
       values.categories = categories;

@@ -6,6 +6,11 @@ children-data
 
 .main-search {
   // padding: 1.5em 1.5em 0 1.5em;
+  .init {
+    position: absolute;
+    bottom: 0;
+    background: red;
+  }
   &.main {
     .wrapper-no-results {
       display: none;

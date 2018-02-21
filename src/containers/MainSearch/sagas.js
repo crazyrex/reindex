@@ -2,8 +2,8 @@ import { take, put, call, cancel, select, takeLatest } from 'redux-saga/effects'
 import { LOCATION_CHANGE } from 'react-router-redux';
 import request, { requestNoParse } from 'utils/request';
 import config from '../../ReindexConfig';
-import { LOAD_RESULTS, UPDATE_RECORD } from './constants';
-import { resultsLoaded, recordUpdated } from './actions';
+import { LOAD_RESULTS, UPDATE_RECORD, CHECK_DATA } from './constants';
+import { resultsLoaded, recordUpdated , isDataResult} from './actions';
 
 export function* loadResults(data) {
   const state = yield select();
@@ -52,6 +52,22 @@ export function* updateRecord(data) {
   }
 }
 
+export function* checkData(){
+  const requestURL = `${config.apiRoot}checkData`;
+  try {
+    const options = {
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    };
+    const response = yield call(request, requestURL, options);
+    yield put(isDataResult(response));
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 
 /**
  * Root saga manages watcher lifecycle
@@ -69,5 +85,6 @@ export function* updateRecord(data) {
 // Bootstrap sagas
 export default [
   takeLatest(LOAD_RESULTS, loadResults),
+  takeLatest(CHECK_DATA, checkData),
   takeLatest(UPDATE_RECORD, updateRecord)
 ];

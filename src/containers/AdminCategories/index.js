@@ -8,7 +8,7 @@ import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import Snackbar from 'material-ui/Snackbar';
 import CategoriesTree from 'components/CategoriesTree';
-// import Upload from 'components/Upload';
+import Upload from 'components/Upload';
 // import Download from 'components/Download';
 import { closeActionResponseAlert } from './actions';
 
@@ -31,10 +31,10 @@ export class AdminCategories extends React.PureComponent {
   render() {
     return (
       <div className="admin-categories full-height-container">
-        {/* <div className='wrap-upload'>
-          <Download />
+        <div className='wrap-upload'>
+          {/* <Download /> */}
           <Upload />
-        </div> */}
+        </div>
         <CategoriesTree src="admin" onUpdate={this.updateSelectedCategories} />
         <Snackbar
           open={this.props.actionResponseAlert.open}

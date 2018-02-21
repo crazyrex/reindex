@@ -6,7 +6,22 @@ import {
   UPDATE_RECORD_SUCCESS,
   CLOSE_UPDATE_RECORD_MODAL,
   DISPLAY_ICONS,
+  ISDATA_RESULT,
+  CHECK_DATA
 } from './constants';
+
+export function isDataResult(result) {
+  return {
+    type: ISDATA_RESULT,
+    result
+  }
+}
+
+export function checkData(result) {
+  return {
+    type: CHECK_DATA
+  }
+}
 
 export function resultsLoaded(response) {
   return {
