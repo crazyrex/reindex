@@ -119,6 +119,7 @@ export class MainSearch extends React.PureComponent {
           <div className="header">
             <img src={logo} role="presentation" />
           </div>
+          <div id="mapTab"></div>
           <SearchBar
             onNewRequest={this.props.handleNewRequest}
             handleSearchBtn={this.props.handleSearchBtn}

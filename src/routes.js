@@ -5,6 +5,7 @@ import {
   NotFound,
   Admin,
   AdminSearch,
+  AdminSettings,
   MainSearch,
   AuthPage,
   AdminCategories,
@@ -23,6 +24,7 @@ export default () => {
       <Route path="/admin" component={Admin}>
         <Route path="/admin/categories" component={AdminCategories} />
         <Route path="/admin/search" component={AdminSearch} />
+        <Route path="/admin/settings" component={AdminSettings} />
         {/*   <Route path="/admin/requests" component={AdminRequests} />
         <Route path="/admin/history" component={AdminSearchHistory} />
         <Route path="/admin/archivesrequests" component={ArchivesRequests} />
