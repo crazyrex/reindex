@@ -220,23 +220,23 @@ class CategoriesTree extends React.PureComponent {
             />)
       }
     const actions = [
-      <div onClick={() => this.handleDialogClose('cancel')}> <FlatButton
-        label="cancel"
-        primary={true}
-      />
-      </div>,
-      <div onClick={() => this.handleDialogClose('submit')}>
       <FlatButton
-        label="ok"
+        label="ביטול"
+        primary={true}
+        onTouchTap={() => this.handleDialogClose('cancel')}
+      />,
+      <FlatButton
+        label="אישור"
         primary={true}
         keyboardFocused={true}
-       /></div>,
+        onTouchTap={() => this.handleDialogClose('submit')}
+      />,
     ];
     return (
         <div className="categories-tree-component">
           <br/>
           <div>
-          {this.props.selectedCategories.length ? <span className="label">category</span> : ''}
+          {this.props.selectedCategories.length ? <span className="label">קטגוריה</span> : ''}
             <div className="wrapper-tags">{this.props.selectedCategories.map((tag, index) =>
               tag !== '' ?  <div className="chip" key={index}> 
               <span className="text">{tag}</span>
@@ -246,19 +246,19 @@ class CategoriesTree extends React.PureComponent {
           </div>
           </div>
           <div className="wrapper-search-and-tags">
-            <TextField className="search-category" floatingLabelText="Search Category" onChange={(event) => this.setState({ searchString: event.target.value })} />
+            <TextField className="search-category" floatingLabelText="חפש קטגוריה" onChange={(event) => this.setState({ searchString: event.target.value })} />
             <div className="wrapper-tree">
               {categoriestree}
             </div>
           </div>
            <Dialog
-            title="add Category"
+            title="הוספת קטגוריה"
             actions={actions}
             modal={false}
             open={this.state.openDialog}
             onRequestClose={this.handleDialogClose}
           >
-            <TextField floatingLabelText="category name" onBlur={(event) => this.setState({ newCategory: event.target.value })} />
+            <TextField floatingLabelText="תוכן הקטגוריה" onBlur={(event) => this.setState({ newCategory: event.target.value })} />
         </Dialog>
         </div>
     );

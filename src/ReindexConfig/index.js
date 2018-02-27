@@ -1,7 +1,7 @@
 import config from 'config';
 
 export default {
-  apiRoot: 'http://localhost:3005/api/v1/',
+apiRoot: 'http://localhost:3005/api/v1/',
   categoriesIndex: 'reindex-categories',
   lang: "en",
   tabs:{

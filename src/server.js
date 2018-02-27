@@ -23,8 +23,8 @@ const server = new http.Server(app);
 app.disable('x-powered-by');
 
 app.use(compression());
-app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
-app.use(Express.static(path.join(__dirname, '..', 'static')));
+// app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
+// app.use(Express.static(path.join(__dirname, '..', 'static')));
 
 // Proxy to API
 app.use('/api', proxy(config.apiBaseUrl, {

@@ -26,6 +26,7 @@ if (config.lang == "he")
 else
   styles = require('./MainSearch.scss');
 let ifApp = true;
+let listcategories;
 
 export class MainSearch extends React.PureComponent {
   constructor(props) {
@@ -54,6 +55,7 @@ export class MainSearch extends React.PureComponent {
     }
   componentDidMount() {
     // this.domain = window.location.origin;
+   
     const that = this;
     that.setState({ initial_screen_size: window.innerHeight });
     that.setState({ is_keyboard: (window.innerHeight < window.test) });
@@ -113,6 +115,7 @@ export class MainSearch extends React.PureComponent {
   }
 
   render() {
+   
     return (
       <div className={`main-search full-height-container main ${this.props.state === 'main' ? 'main' : 'search'} ${!this.state.ifApp ? 'gotoapp' : ''}`}>
         <Helmet
@@ -133,6 +136,7 @@ export class MainSearch extends React.PureComponent {
             data={this.props.searchBarData}
           />
         </div>
+    
         {!this.props.isData?
            <div className="init">explain.........</div>
         :'' }
@@ -186,6 +190,7 @@ MainSearch.propTypes = {
 };
 
 export function mapStateToProps(state) {
+  console.log('eeeeeeeeeeeeeeeeeeeeee', state.search)
   return {
     state: state.mainSearch.state,
     results: state.mainSearch.results,
@@ -195,6 +200,7 @@ export function mapStateToProps(state) {
     updateRecordAlert: state.mainSearch.updateRecordAlert,
     searchBarData: state.mainSearch.searchBarData,
     search: state.search.search,
+    categories: state.search.categories,
     isDisplayIcons: state.mainSearch.displayIcons,
     isData :state.mainSearch.isData
   };

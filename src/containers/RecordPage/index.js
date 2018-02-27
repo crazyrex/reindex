@@ -7,8 +7,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import HeaderSite from 'components/HeaderSite';
-import DetailsForm from 'components/DetailsForm';
-import Phone from 'components/Phone';
 import FlatButton from 'material-ui/FlatButton';
 import Snackbar from 'material-ui/Snackbar';
 import IconButton from 'material-ui/IconButton';
@@ -33,7 +31,6 @@ import { loadData } from './sagas';
 import { loadDataAction } from './actions';
 import config from 'ReindexConfig';
 
-import { cleanData } from 'components/DetailsForm/actions';
 
 let translate;
 if (config.lang == "he") {
@@ -199,8 +196,6 @@ class RecordPage extends React.Component {
                   {this.props.data.phone || this.props.data.phone_2 ?
                     <div className="wrapper-icon-content">
                       <IconButton className="icon-phone" ><PhoneIcon /></IconButton>
-                      {this.props.data._id ?
-                        <Phone data={this.props.data} cardName={this.props.data.business_name} recordId={this.props.data._id} isVirtual={this.props.data.listing_type_1 != '1' ? true : false} /> : ''}
                     </div>
                     : ''}
                   <div className="wrapper-icon-content">
@@ -261,9 +256,7 @@ class RecordPage extends React.Component {
                   translate.website
                           </a></span>
               </div> : ''}
-              {this.props.data._id ?
-                <Phone data={this.props.data} footer={true} recordId={this.props.data._id} isVirtual={this.props.data.listing_type_1 != '1' ? true : false} /> : ''}
-            </div>
+             </div>
             <Dialog
               title={<div><IconButton onClick={this.closePopUpPhone}><CloseIcon /></IconButton></div>}
               modal={false}

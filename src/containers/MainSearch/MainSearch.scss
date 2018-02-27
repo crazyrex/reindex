@@ -3,7 +3,9 @@
 /*-----------------------------------------------
 children-data
 -----------------------------------------------*/
-
+html {
+  direction: ltr;
+}
 .main-search {
   // padding: 1.5em 1.5em 0 1.5em;
   .init {
@@ -172,7 +174,7 @@ children-data
       display: inline-block;
       position: fixed;
       right: 14px;
-      top: 119px;
+      top: 178px;
       z-index: 99;
       button {
         border: 1px solid !important;

@@ -10,7 +10,7 @@ import AutoComplete from 'material-ui/AutoComplete';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import { detectmob, updateSearchLocation, str2spc, getLocationData } from 'utils/functions';
-import translate from 'globalTranslate.json';
+
 
 
 
@@ -67,7 +67,7 @@ class LocationChange extends React.Component {
   render() {
     return (
       <div className="loc">
-        <FlatButton label={translate.changeLocation} onClick={this.open} labelStyle={{ paddingRight: 11, paddingLeft: 11, fontSize: 18 }} />
+        <FlatButton label='שנה מיקום' onClick={this.open} labelStyle={{ paddingRight: 11, paddingLeft: 11, fontSize: 18 }} />
         <div className="location-change">
           <Drawer
             docked={false}
@@ -75,17 +75,18 @@ class LocationChange extends React.Component {
             overlayClassName="overlay"
             containerClassName="container"
             open={this.state.open}
+            openSecondary
             onRequestChange={(open) => this.setState({ open: false })}
           >
             <div className="wrapper-location">
-              <div className="title">change location</div>
+              <div className="title">שינוי מקום</div>
               <form name='myform'>
                 <div className="change">
                   <input type="radio" name='myradio' value="1" onClick={() => this.onChange('change')} />
-                  <label>{translate.changeLocation}</label>
+                  <label>שנה מיקום</label>
                   {this.state.change ? <AutoComplete
                     fullWidth
-                    hintText={translate.searchByArea}
+                    hintText="חפש לפי אזור/ישוב"
                     dataSource={this.props.filters.cities}
                     filter={AutoComplete.fuzzyFilter}
                     onNewRequest={(chosenRequest, index) => {this.updateCity(chosenRequest)}}
@@ -97,17 +98,17 @@ class LocationChange extends React.Component {
                 </div>
                 <div className="change">
                   <input type="radio" name='myradio' value="2" checked={this.state.current} onClick={() => this.onChange('current')} />
-                  <label>{translate.currentLocation}</label>
+                  <label>מיקומך הנוכחי</label>
                 </div>
                 <div className="change">
                   <input type="radio" name='myradio' value="3" onClick={() => this.onChange('all')} />
-                  <label>All</label>
+                  <label>כל הארץ</label>
                 </div>
 
               </form>
 
             </div>
-            <RaisedButton className="submitBtn" type="submit" label={'Update'} labelStyle={{ fontSize: 16 }} overlayStyle={{ backgroundColor: 'transparent' }} onClick={() => this.close()} />
+            <RaisedButton className="submitBtn" type="submit" label={'עדכן'} labelStyle={{ fontSize: 16 }} overlayStyle={{ backgroundColor: 'transparent' }} onClick={() => this.close()} />
 
           </Drawer>
         </div>

@@ -6,7 +6,6 @@ import FlatButton from 'material-ui/FlatButton';
 import Chip from 'material-ui/Chip';
 import _ from 'lodash';
 //import  GMap  from 'components/GMap';
-import Phone from 'components/Phone';
 import { Link } from 'react-router';
 import { detectmob } from 'utils/functions';
 // import DetailsForm from 'components/DetailsForm';
@@ -225,17 +224,7 @@ class Results extends React.Component {
                       <div className="desc">{res._source.business_description}</div>
                     </div>
                     <div>
-                      {res._source.phone || res._source.phone_2 ?
-                        <div className="wrapper-icon-content">
-                          <IconButton className="icon-phone" ><PhoneIcon /></IconButton>
-                          <Phone
-                            data={res._source}
-                            cardName={res._source.business_name}
-                            recordId={res._id}
-                            isVirtual={config.searchTabs[res._source.listing_type_1] === 'businesses'}
-                          />
-                        </div>
-                        : ''}
+                  
                       <div className="wrapper-icon-content">
                         <IconButton className="icon-home" ><HomeIcon /></IconButton>
                         <span className="house">{res._source.address_street_name}

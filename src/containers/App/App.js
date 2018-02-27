@@ -79,8 +79,8 @@ class App extends Component {
     const { children, inputValue, location } = this.props;
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
-        <div className={`${styles.app} ${(location.pathname.split('/')[1]) ? location.pathname.split('/')[1] : 'home'}`}>
-          <div className={styles.content}>
+        <div className={`app ${(location.pathname.split('/')[1]) ? location.pathname.split('/')[1] : 'home'}`}>
+          <div className="content">
             {children}
           </div>
         </div>

@@ -147,6 +147,7 @@ function searchReducer(state = initialState, action) {
       });
     case LOAD_CATEGORIES_FILTER_DATA_SUCCESS:
       return Object.assign({}, state, {
+        categories: action.response.data,
         filters: Object.assign({}, state.filters, {
           [action.response.category]: processFiltersData(action.response.data),
         }),

@@ -15,7 +15,7 @@ if (config.lang == "he")
   translate = require('globalTranslateHE.json');
 else
   translate = require('globalTranslate.json');
-
+let listcategories;
 
 class SearchBar extends React.PureComponent {
   constructor(props) {
@@ -23,7 +23,8 @@ class SearchBar extends React.PureComponent {
     this.handleCategoriesRequest = this.handleCategoriesRequest.bind(this);
     this.toggleSelect = this.toggleSelect.bind(this);
     this.closeSelect = this.closeSelect.bind(this);
-    this.props.loadCategoriesFilterData('cities');
+    this.props.loadCategoriesFilterData('reindex-cities');
+    this.props.loadCategoriesFilterData('reindex-categories');
     this.state = {
       selectActive: false,
       TABS_STATE: false
@@ -57,6 +58,11 @@ class SearchBar extends React.PureComponent {
     this.updateSearchLocation(key, searchText, tab);
   }
   render() {
+    listcategories = this.props.categories.map((cat) =>
+    <span key={cat._id} onClick={()=>this.props.handleInput(this.props.handleInput(cat._source.content, 'businesses', 'categories'))}>
+      {cat._source.content}
+    </span>
+    )
     return (
       <div>
         <div className="search-bar">
@@ -78,7 +84,11 @@ class SearchBar extends React.PureComponent {
               </a>
             </div>
           </div>
+          
         </div>
+        <div className="slider-categories">
+     {listcategories}
+       </div>
       </div >
     );
   }

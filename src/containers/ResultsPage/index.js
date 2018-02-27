@@ -8,26 +8,19 @@ import Results from 'components/Results';
 import config from 'ReindexConfig';
 import SearchBar from 'components/SearchBar';
 import Snackbar from 'material-ui/Snackbar';
-import DrawerFilter from 'components/DrawerFilter';
+ import DrawerFilter from 'components/DrawerFilter';
 import LocationChange from 'components/LocationChange';
 import { detectmob, updateSearchLocation, str2spc, getLocationData } from 'utils/functions';
 import { browserHistory } from 'react-router';
-//import { loadResults } from './sagas';
-import { loadResults } from './actions';
+import { loadResults } from './sagas';
+import { loadResults as loadResultsAction } from './actions';
 import { loadSubcategories } from 'components/SearchBar/saga';
 import { updateSearchObj } from 'components/SearchBar/actions';
 import FlatButton from 'material-ui/FlatButton';
 import Slider from 'material-ui/Slider';
 import Drawer from 'material-ui/Drawer';
+import translate from 'globalTranslate.json';
 import { updateRecord, closeUpdateRecordModal } from './actions';
-import CreateForm from 'components/CreateForm';
-
-let translate;
-if (config.lang == "he")
-  translate = require('globalTranslateHE.json');
-else
-  translate = require('globalTranslate.json');
-
 export class ResultsPage extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -78,42 +71,6 @@ export class ResultsPage extends React.PureComponent {
     const city = (locationData.search.location) ? str2spc(locationData.search.location) : null;
     const q = (locationData.search.q) ? str2spc(locationData.search.q) : null;
     const s = (locationData.search.s) ? str2spc(locationData.search.s) : null;
-
-    if (locationData.pathname.indexOf(config.searchTabs.businesses.route) > -1) {
-      if (q) {
-        if (city) {
-          this.strTitle = 'Reindex - search ' + q + 'in ' + city;
-          this.description = 'Reindex | ' + q + ' from' + city;
-        }
-        else {
-          this.strTitle = 'Reindex -' + q;
-          this.description = 'Reindex | ' + q;
-        }
-      }
-      else {
-        const title = 'Reindex - business Index';
-        if (city) {
-          this.strTitle = 'Reindex business Index - ' + city + 'in ' + catName;
-          this.description = 'Reindex - list business in ' + city + catName;
-        }
-        else {
-          this.strTitle = catName + title;
-          this.description = 'Reindex ' + catName;
-        }
-      }
-    }
-
-    else if (this.props.location.pathname.indexOf(config.searchTabs.people.route) > -1) {
-      const title = 'Serch business in Reindex';
-      if (city) {
-        this.strTitle = 'Reindex search people in ' + city + ' ' + s;
-        this.description = 'Reindex |  serch results in ' + city + 'from ' + s + ' מ' + '' + locationData.search.location;
-      }
-      else {
-        this.strTitle = s + title;
-        this.description = 'Search results ' + s + '.';
-      }
-    }
 
     this.updateSearchObject(locationData);
   }
@@ -205,12 +162,12 @@ export class ResultsPage extends React.PureComponent {
   render() {
     return (
       <div className="main-search full-height-container search">
-        <Helmet
+        {/* <Helmet
           title={`${this.strTitle}`}
           meta={[
             { name: 'description', content: `${this.description}`, }
           ]}
-        />
+        /> */}
         <HeaderSite />
         <div className="wrapper-autocomplete">
           <SearchBar
@@ -225,7 +182,7 @@ export class ResultsPage extends React.PureComponent {
           <div className="results-count"> {this.props.totalResults} {translate.resultsFound} </div>
           {(this.state.detectmob && !this.state.changeLocation && this.props.location.pathname.indexOf(config.searchTabs.businesses.route) > -1) ?
             <div onClick={this.showSideBarNearMe} className='wrapper-nearme' >
-              <FlatButton label={translate.businessesNearby} labelStyle={{ paddingRight: 11, paddingLeft: 11, fontSize: 18, textTransform: 'lowercase' }} />
+              <FlatButton label={translate.businessesNearby} labelStyle={{ paddingRight: 11, paddingLeft: 11, fontSize: 18,textTransform:'lowercase' }} />
             </div> : ''}
           {this.state.detectmob && this.state.changeLocation ?
             <div onClick={this.openChangeLocation} className='change-loc' >

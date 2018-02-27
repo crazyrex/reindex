@@ -62,7 +62,12 @@ export function* loadHierarchyFilterData(data) {
 
 export function* loadCategoriesFilterData(data) {
   if (!data.category) return;
-  const requestURL = `${config.apiRoot}categories?type=${data.category}`;
+  let index;
+  if(data.category == 'reindex-cities')
+    index = 'cities';
+  if(data.category == 'reindex-categories')
+    index = 'A';
+  const requestURL = `${config.apiRoot}categories?type=${index}&index=${data.category}`;
   try {
     const options = {
       method: 'get',
@@ -71,6 +76,7 @@ export function* loadCategoriesFilterData(data) {
       },
     };
     const categories = yield call(request, requestURL, options);
+    console.log('222222222',categories)
     yield put(categoriesFilterDataLoaded({ category: data.category, data: categories }));
   } catch (err) {
     console.log(err);

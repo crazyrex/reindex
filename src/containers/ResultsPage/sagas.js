@@ -11,7 +11,6 @@ import { updateSearchObj } from 'components/SearchBar/actions';
 const filtersInValue = ['q', 's'];
 
 export function* loadResults(data) {
-  console.log('in saga resultttttttttttttts')
   const locationData = getLocationData(data.data.location);
   const tabType =  config.searchTabs[locationData.tab].type;
   let value = [];
