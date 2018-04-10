@@ -1,14 +1,22 @@
 .sec{
-    background-color: red;
-
+    width: 100%;
+    height: 100vh;
+    .mapboxgl-canvas {
+      left: 0;
+    }
     .mapboxgl-map{
         overflow: visible !important;
-      }
-      canvas.mapboxgl-canvas{
-        width: 435px !important;
-      }
-      a.mapbox-improve-map:after{
-        display: none!important;
-      }
+     }
+    canvas.mapboxgl-canvas{
+       width: 100% !important;
+       height: 100vh !important;
+        // right: 120px;
+    }
+    a.mapbox-improve-map:after{
+      display: none!important;
+    }
+    .mapboxgl-popup-content h5{
+      margin: 0;
+    }
 
 }

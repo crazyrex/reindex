@@ -6,6 +6,7 @@ import {
   Admin,
   AdminSearch,
   AdminRequests,
+  AdminSettings,
   ArchivesRequests,
   ArchivesRecords,
   AdminSearchHistory,
@@ -43,6 +44,7 @@ export default () => {
         <Route path="/admin/requests" component={AdminRequests} />
         <Route path="/admin/history" component={AdminSearchHistory} />
         <Route path="/admin/categories" component={AdminCategories} />
+        <Route path="/admin/settings" component={AdminSettings} />
         <Route path="/admin/categories" component={AdminCategories} />
         <Route path="/admin/archivesrequests" component={ArchivesRequests} />
         <Route path="/admin/ArchivesRecords" component={ArchivesRecords} />

@@ -130,11 +130,11 @@ class Results extends React.Component {
     return deg * (Math.PI / 180)
   }
 
-  getDistanceFromLatLonInKm(pos, unit) {
+  getDistanceFromLatLonInKm(pos1, pos2, unit) {
     let lat1 = this.props.lat;
     let lon1 = this.props.lon;
-    let lat2 = pos[1];
-    let lon2 = pos[0];
+    let lat2 = pos1;
+    let lon2 = pos2;
     let R = 6371; // Radius of the earth in km
     let dLat = this.deg2rad(lat2 - lat1);  // deg2rad below
     let dLon = this.deg2rad(lon2 - lon1);
@@ -210,11 +210,11 @@ class Results extends React.Component {
                 <div className="wrapper-details">
                   <div className={`${this.state.results[index] ? '' : ''}`}>
                     <div>
-                      {this.props.lat && this.props.lon && res._source.location && res._source.location.length > 0 ?
+                      {this.props.lat && this.props.lon && res._source.location && res._source.location[0] && res._source.location[1] ?
                         <div className="km" >
                           <IconButton ><PlaceIcon /></IconButton>
                           {/*if send "K" get distance in  kilometers*/}
-                          <span >{this.getDistanceFromLatLonInKm(res._source.location)} mi</span>
+                          <span >{this.getDistanceFromLatLonInKm(res._source.location[1], res._source.location[0])} km</span>
                         </div>
                         : ''}
                       <span className="name">
@@ -234,12 +234,11 @@ class Results extends React.Component {
                           &nbsp;{res._source.address_city}
                         </span>
                       </div>
-                      {this.state.detectmob
-                        && config.searchTabs[res._source.listing_type_1] === 'businesses' ?
+                      {this.state.detectmob ?
                         <div className="wrapper-icon-content">
                           <IconButton className="icon-businesspage" ><BusinessIcon /></IconButton>
                           <span className="businesspage">
-                            <Link to={res._source.link}>translate.businessesPage</Link>
+                            <Link to={res._source.link}>{translate.businessesPage}</Link>
                           </span>
                         </div> : ''}
 

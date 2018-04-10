@@ -67,7 +67,7 @@ class LocationChange extends React.Component {
   render() {
     return (
       <div className="loc">
-        <FlatButton label='שנה מיקום' onClick={this.open} labelStyle={{ paddingRight: 11, paddingLeft: 11, fontSize: 18 }} />
+        {/* <FlatButton label='שנה מיקום' onClick={this.open} labelStyle={{ paddingRight: 11, paddingLeft: 11, fontSize: 18 }} /> */}
         <div className="location-change">
           <Drawer
             docked={false}

@@ -3,6 +3,7 @@ export App from './App/App';
 export Admin from './Admin';
 export AdminSearch from './AdminSearch';
 export AdminCategories from './AdminCategories';
+export AdminSettings from './AdminSettings';
 export AuthPage from './AuthPage';
 export UserPage from './UserPage/UserPage';
 export RepoPage from './RepoPage/RepoPage';

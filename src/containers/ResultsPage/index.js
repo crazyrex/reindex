@@ -8,7 +8,8 @@ import Results from 'components/Results';
 import config from 'ReindexConfig';
 import SearchBar from 'components/SearchBar';
 import Snackbar from 'material-ui/Snackbar';
- import DrawerFilter from 'components/DrawerFilter';
+import DrawerFilter from 'components/DrawerFilter';
+import {Tabs, Tab} from 'material-ui/Tabs';
 import LocationChange from 'components/LocationChange';
 import { detectmob, updateSearchLocation, str2spc, getLocationData } from 'utils/functions';
 import { browserHistory } from 'react-router';
@@ -21,6 +22,7 @@ import Slider from 'material-ui/Slider';
 import Drawer from 'material-ui/Drawer';
 import translate from 'globalTranslate.json';
 import { updateRecord, closeUpdateRecordModal } from './actions';
+import MapBox from 'components/Mapbox';
 export class ResultsPage extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -73,7 +75,18 @@ export class ResultsPage extends React.PureComponent {
     const s = (locationData.search.s) ? str2spc(locationData.search.s) : null;
 
     this.updateSearchObject(locationData);
+    
   }
+//   componentDidMount() {
+
+//   var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
+//     mapboxgl.accessToken = 'pk.eyJ1IjoieWVodWRpdGciLCJhIjoiY2pkc3Eza2k1MHBneDMzcDcxbm9wY3h5cSJ9.QqvDmAmAvsRZdx3VUzb-eg';
+//     var map = new mapboxgl.Map({
+//       container: 'mapboxres',
+//       style: 'mapbox://styles/mapbox/streets-v10',
+//       zoom: 15,
+//  });
+// }
 
   componentWillReceiveProps(nextProps) {
     if (!nextProps.location.query.lat) {
@@ -136,11 +149,11 @@ export class ResultsPage extends React.PureComponent {
       this.props.handleGetNearMe();
     }).catch((error) => {
       console.log('err', error)
-      alert('geo location error');
-      this.setState({
-        showSideBarNearMe: false,
-        changeLocation: false
-      });
+      // alert('geo location error');
+      // this.setState({
+      //   showSideBarNearMe: false,
+      //   changeLocation: false
+      // });
     });
   }
 
@@ -176,7 +189,10 @@ export class ResultsPage extends React.PureComponent {
             data={this.props.searchBarData}
           />
         </div>
-        {this.state.detectmob && this.props.results.length > 0 ?
+        <div className="wrapper-tabs">
+        <Tabs>
+          <Tab label="List View" >
+             {this.state.detectmob && this.props.results.length > 0 ?
           <DrawerFilter onNewRequest={this.updateSearchLocation} pageState={this.props.state} location={this.props.location} /> : ''}
         {this.props.results.length > 0 ? <div className={`wrapper-results ${this.state.showSideBarNearMe ? 'geo' : ''}`}>
           <div className="results-count"> {this.props.totalResults} {translate.resultsFound} </div>
@@ -187,8 +203,9 @@ export class ResultsPage extends React.PureComponent {
           {this.state.detectmob && this.state.changeLocation ?
             <div onClick={this.openChangeLocation} className='change-loc' >
               <LocationChange open={true} handleClose={this.updateLocation} />
-            </div> : ''}
-          <Results
+            </div> : ''} 
+           
+           <Results
             data={this.props.results}
             total={this.props.totalResults}
             limit={this.props.limitResults}
@@ -197,8 +214,20 @@ export class ResultsPage extends React.PureComponent {
             handlePageClick={this.props.handleResultsPageClick}
             lat={this.lat}
             lon={this.lon}
-          /></div> : ''}
-        {this.state.detectmob && this.state.showSideBarNearMe ?
+          />
+
+          </div> : ''} 
+          </Tab>
+          <Tab label="Map View" >
+             {/* <div id="mapboxres" ></div>  */}
+            <MapBox data={this.props.results}/> 
+          </Tab>
+   
+  </Tabs>
+          </div>
+ 
+      
+        {/* {this.state.detectmob && this.state.showSideBarNearMe ?
           <div className="wrapper-slider">
             <span>{translate.closer}</span>
             <Slider
@@ -209,11 +238,11 @@ export class ResultsPage extends React.PureComponent {
               onChange={this.handleSlider}
             />
             <span>{translate.further}</span>
-          </div> : ''}
-        {!this.state.detectmob ?
+          </div> : ''} */}
+        {/* {!this.state.detectmob ?
           <div className={`wrapper-filters`}>
             <Filters onNewRequest={this.updateSearchLocation} pageState={this.props.state} location={this.props.location} />
-          </div> : ''}
+          </div> : ''} */}
         {/* {!this.props.loading ? 
            <NoResults data={{ query: this.props.query }} />
            : <span>Loading...</span>} */}

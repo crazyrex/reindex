@@ -76,7 +76,6 @@ export function* loadCategoriesFilterData(data) {
       },
     };
     const categories = yield call(request, requestURL, options);
-    console.log('222222222',categories)
     yield put(categoriesFilterDataLoaded({ category: data.category, data: categories }));
   } catch (err) {
     console.log(err);

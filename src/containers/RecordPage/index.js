@@ -11,6 +11,7 @@ import FlatButton from 'material-ui/FlatButton';
 import Snackbar from 'material-ui/Snackbar';
 import IconButton from 'material-ui/IconButton';
 import Mapbox from 'components/Mapbox';
+import MapGov from 'components/MapGov';
 import { browserHistory } from 'react-router';
 import Chip from 'material-ui/Chip';
 import _ from 'lodash';
@@ -219,7 +220,8 @@ class RecordPage extends React.Component {
               </div>
               <div className="more-details">
                 <div id="Mapbox">
-                  <Mapbox location={this.props.data} />
+                {1 !== 1? <MapGov location={this.props.data} /> :<Mapbox location={this.props.data} /> }
+                 
                 </div>
                 <div id="details">
                   {!this.state.detectmob ? <SocialBtns data={this.props.data} /> : ''}

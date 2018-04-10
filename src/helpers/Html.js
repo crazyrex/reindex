@@ -37,8 +37,10 @@ class Html extends Component {
           {Object.keys(assets.styles).map((style, key) =>
             <link href={assets.styles[style]} key={key} media="screen, projection" rel="stylesheet" type="text/css" charSet="UTF-8" />
           )}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://new.govmap.gov.il/govmap/api/govmap.api.js"></script>  
 
-          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhTI0krUB7cDYMDYDxuXV1aSAFQ25w7Lw" async defer></script>
+          {/* <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhTI0krUB7cDYMDYDxuXV1aSAFQ25w7Lw" async defer></script> */}
           {/* <script id='pixel-script-poptin' src='https://cdn.popt.in/pixel.js?id=f90ba10596814' async='true'></script> */}
 
         </head>

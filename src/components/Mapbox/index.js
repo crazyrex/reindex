@@ -11,27 +11,73 @@ class Mapbox extends React.PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.renderMap(nextProps.location);
+    if (nextProps.location && nextProps.location.location)
+      this.renderMap(nextProps.location.location);
+      else if (nextProps.data.length){
+          var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
+            mapboxgl.accessToken = 'pk.eyJ1IjoieWVodWRpdGciLCJhIjoiY2pkc3Eza2k1MHBneDMzcDcxbm9wY3h5cSJ9.QqvDmAmAvsRZdx3VUzb-eg';
+            var map = new mapboxgl.Map({
+              container: 'mapbox',
+              style: 'mapbox://styles/mapbox/streets-v10',
+              // center:[-73.9688684937,40.6395247248],
+              center:[34.8485193, 32.0331037],
+              zoom: 9,
+        });
+        let data = nextProps.data;
+        for(let i = 0; i< data.length; i++) {
+          var marker = new mapboxgl.Marker()
+          .setLngLat([data[i]._source.location[0], data[i]._source.location[1]])
+          .addTo(map);
+          var markerHeight = 50, markerRadius = 10, linearOffset = 25;
+          var popupOffsets = {
+          'top': [0, 0],
+          'top-left': [0,0],
+          'top-right': [0,0],
+          'bottom': [0, -markerHeight],
+          'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+          'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+          'left': [markerRadius, (markerHeight - markerRadius) * -1],
+          'right': [-markerRadius, (markerHeight - markerRadius) * -1]
+          };
+        var popup = new mapboxgl.Popup()
+        .setLngLat([data[i]._source.location[0], data[i]._source.location[1]])
+        .setHTML("<h5>"+data[i]._source.business_name+"</h5>")
+          .addTo(map);
+        }
+          
+          }
   }
 
-  renderMap(address) {
+  renderMap(pos) {
     var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
     mapboxgl.accessToken = 'pk.eyJ1IjoieWVodWRpdGciLCJhIjoiY2pkc3Eza2k1MHBneDMzcDcxbm9wY3h5cSJ9.QqvDmAmAvsRZdx3VUzb-eg';
     var map = new mapboxgl.Map({
       container: 'mapbox',
       style: 'mapbox://styles/mapbox/streets-v10',
-      center: [address.location[0], address.location[1]],
+      center: [pos[0], pos[1]],
       zoom: 15,
-          
-
-    });
+   });
+   var marker = new mapboxgl.Marker()
+   .setLngLat([pos[0], pos[1]])
+   .addTo(map);
   }
   render() {
 
     return (
       <section className="sec">
-        <div id="mapbox"></div>
-      </section>
+      {this.props.location?
+        <div id="mapbox"></div>:
+        <div
+          id="mapbox"
+          style={{
+          position: 'absolute',
+          top: 0,
+          bottom: 0,
+          width: '100%',
+          height: '100%',
+          }}
+      />  }
+    </section>
     );
   }
 }

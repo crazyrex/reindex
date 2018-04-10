@@ -59,7 +59,7 @@ class SearchBar extends React.PureComponent {
   }
   render() {
     listcategories = this.props.categories.map((cat) =>
-    <span key={cat._id} onClick={()=>this.props.handleInput(this.props.handleInput(cat._source.content, 'businesses', 'categories'))}>
+    <span key={cat._id} onClick={()=>this.props.handleInput(cat._source.content, 'businesses', 'categories')}>
       {cat._source.content}
     </span>
     )
@@ -86,9 +86,9 @@ class SearchBar extends React.PureComponent {
           </div>
           
         </div>
-        <div className="slider-categories">
+        {/* <div className="slider-categories">
      {listcategories}
-       </div>
+       </div> */}
       </div >
     );
   }

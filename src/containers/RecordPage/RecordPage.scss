@@ -114,8 +114,8 @@
     #details{
       width: 32%;
     }
-    #Mapbox{
-      width: 68%;
+    #mapbox{
+      width: 100%;
       
     }
   }
@@ -151,7 +151,7 @@
         position: absolute;
         bottom: 0;
         padding: 20px;
-        color: white;
+        color: black;
         >div:first-child {
           font-family: 'Heebo-Bold';
           font-size: 40px;
