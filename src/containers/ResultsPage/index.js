@@ -23,6 +23,7 @@ import Drawer from 'material-ui/Drawer';
 import translate from 'globalTranslate.json';
 import { updateRecord, closeUpdateRecordModal } from './actions';
 import MapBox from 'components/Mapbox';
+import GovMap from 'components/MapGov';
 export class ResultsPage extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -192,6 +193,8 @@ export class ResultsPage extends React.PureComponent {
         <div className="wrapper-tabs">
         <Tabs>
           <Tab label="List View" >
+          <image width="17" height="17" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAARCAYAAAA7bUf6AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAEoSURBVHgBrZPRTcMwEIb/c9MQwkOTDZINygblDaXsABvQTgDdoJvAA6p4IxvQEbxB0gpoIc0dCVGlRMJRU/V/sWX//ny+85EbrR5B9IAjlf3kl6rdIqmI6DZH7wyeESKEZ/uTw81iEHKehwIzzAzZ5dM09tNyvn31tQjNOkOcLdLGApPuDPm+sBrJJkvuTV7LtEGQyXm0DhSRZsiQBCN0jaTIypIIaZFQD9WocXAkJDP7g+f7pNbVj5Jhn9SkMN0aIcVt083LYP6F/5Ut/GUG3LnjFeqgxnNE7CccIBaKjZEoyrQ7XqOrFE4gxYpjHC1JsYOmcurcJCMwgv0WkfIIf53t1Q5oFm5+fUZctgSZ7qjK2XurQAUg56vyALqqBBXlfHeuk6DN9wtwSXge+v647AAAAABJRU5ErkJggg=="/>
+
              {this.state.detectmob && this.props.results.length > 0 ?
           <DrawerFilter onNewRequest={this.updateSearchLocation} pageState={this.props.state} location={this.props.location} /> : ''}
         {this.props.results.length > 0 ? <div className={`wrapper-results ${this.state.showSideBarNearMe ? 'geo' : ''}`}>
@@ -204,7 +207,6 @@ export class ResultsPage extends React.PureComponent {
             <div onClick={this.openChangeLocation} className='change-loc' >
               <LocationChange open={true} handleClose={this.updateLocation} />
             </div> : ''} 
-           
            <Results
             data={this.props.results}
             total={this.props.totalResults}
@@ -215,15 +217,13 @@ export class ResultsPage extends React.PureComponent {
             lat={this.lat}
             lon={this.lon}
           />
-
           </div> : ''} 
           </Tab>
           <Tab label="Map View" >
-             {/* <div id="mapboxres" ></div>  */}
             <MapBox data={this.props.results}/> 
+            {/* <GovMap data={this.props.results}/> */}
           </Tab>
-   
-  </Tabs>
+   </Tabs>
           </div>
  
       

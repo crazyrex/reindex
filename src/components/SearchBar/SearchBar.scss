@@ -177,7 +177,7 @@
     }
 }
 .wrapper-tabs {
-    margin-top: 22%; 
+    margin-top: 22%;   
 }
 .main-search.search .search-bar {
     & > div {
@@ -190,6 +190,7 @@
         }
         &:last-child {
             .search-icon-wrapper a {
+                display: none;
                 width: 36px;
                 height: 36px;
             }

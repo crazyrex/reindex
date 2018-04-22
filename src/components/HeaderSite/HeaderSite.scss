@@ -1,5 +1,11 @@
 @import "../../assets/css/variables";
 .header-site {
+  height: 55px;
+    color: white;
+    font-size: 26px;
+    padding-top: 12px !important;
+    padding-left: 13px !important;
+    font-weight: bold;
   background-color: $yellow;
   position: fixed;
   top: 0;
@@ -53,7 +59,7 @@
 
 @media screen and (max-width: 767px) {
   .main-search.search .header-site {
-    height: 55px;
+    height: 56px;
   }
   .header-site {
       padding: 0;

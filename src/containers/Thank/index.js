@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { detectmob } from 'utils/functions';
 import Helmet from 'react-helmet';
-import shcoach from '../../assets/img/shcoach.png';
-import hand from '../../assets/img/hand.png';
-import thank from '../../assets/img/thank.png';
+// import shcoach from '../../assets/img/shcoach.png';
+// import hand from '../../assets/img/hand.png';
+// import thank from '../../assets/img/thank.png';
 import thankTxt from '../../assets/img/thank-txt.png';
 import SearchBar from 'components/SearchBar';
 
@@ -29,9 +29,9 @@ class ThanksPage extends React.PureComponent {
               { name: 'description', content: 'Thank page of reindex' },
             ]}
           />
-         <div className="shcoach" style={{backgroundImage: `url(${shcoach})`}}></div>
-         <div className="hand" style={{backgroundImage: `url(${hand})`}}></div>
-         <div className="thank" style={{backgroundImage: `url(${thank})`}}></div>       
+         {/* <div className="shcoach" style={{backgroundImage: `url(${shcoach})`}}></div> */}
+         {/* <div className="hand" style={{backgroundImage: `url(${hand})`}}></div> */}
+         {/* <div className="thank" style={{backgroundImage: `url(${thank})`}}></div>        */}
         <SearchBar
             onNewRequest={this.props.handleNewRequest}
             handleSearchBtn={this.props.handleSearchBtn}

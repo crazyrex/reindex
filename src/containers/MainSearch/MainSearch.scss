@@ -267,11 +267,10 @@ html {
                     
                     .main-search.search .wrapper-autocomplete {
                       position: fixed;
-                      top: 54px;
+                      top: 56px;
                       width: 100%;
                       padding: 0 5%;
-                      background-color: $yellow;
-                      padding-bottom: 7px;
+                      background-color: #F2F2F2;
                       z-index: 99;
                     }
                     .main-search .wrapper-results .results-count {
