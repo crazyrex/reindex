@@ -4,6 +4,7 @@ export Admin from './Admin';
 export AdminSearch from './AdminSearch';
 export AdminCategories from './AdminCategories';
 export AdminSettings from './AdminSettings';
+export AdminUsers from './AdminUsers';
 export AuthPage from './AuthPage';
 export UserPage from './UserPage/UserPage';
 export RepoPage from './RepoPage/RepoPage';

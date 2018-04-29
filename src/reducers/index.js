@@ -10,6 +10,8 @@ import mainSearchReducer from '../containers/MainSearch/reducer';
 import authPageReducer from '../containers/AuthPage/reducer';
 import adminSearchReducer from '../containers/AdminSearch/reducer';
 import adminCategoriesReducer from '../containers/AdminCategories/reducer';
+import adminUsersReducer from '../containers/AdminUsers/reducer';
+
 import recordSettingsReducer from '../components/RecordSettings/reducer';
 
 import adminSearchBarReducer from '../components/AdminSearchBar/reducer';
@@ -91,6 +93,7 @@ const rootReducer = combineReducers({
   mainSearch: mainSearchReducer,
   adminSearch: adminSearchReducer,
   adminCategories: adminCategoriesReducer,
+  adminUsers: adminUsersReducer,
   authPage: authPageReducer,
   search: searchReducer,
   adminSearchBar: adminSearchBarReducer,

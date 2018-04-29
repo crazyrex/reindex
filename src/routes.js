@@ -7,6 +7,7 @@ import {
   AdminSearch,
   AdminRequests,
   AdminSettings,
+  AdminUsers,
   ArchivesRequests,
   ArchivesRecords,
   AdminSearchHistory,
@@ -48,6 +49,7 @@ export default () => {
         <Route path="/admin/categories" component={AdminCategories} />
         <Route path="/admin/archivesrequests" component={ArchivesRequests} />
         <Route path="/admin/ArchivesRecords" component={ArchivesRecords} />
+        <Route path="/admin/users" component={AdminUsers}/>
       </Route>
       <Route path="/cat(/:catName)" component={ResultsPage} />
       <Route path="/ppls" component={ResultsPage} />

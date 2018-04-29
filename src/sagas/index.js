@@ -99,6 +99,7 @@ import MainSearchSaga from '../containers/MainSearch/sagas';
 import ResultsSaga from '../containers/ResultsPage/sagas';
 import AdminSearch from '../containers/AdminSearch/sagas';
 import AuthPage from '../containers/AuthPage/sagas';
+import AdminUsers from '../containers/AdminUsers/sagas';
 
 export default function* root() {
   yield [
@@ -111,5 +112,6 @@ export default function* root() {
     ...ResultsSaga,
     ...AdminSearch,
     ...AuthPage,
+    ...AdminUsers
   ];
 }

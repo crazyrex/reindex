@@ -50,6 +50,7 @@ class Admin extends React.PureComponent {
           <MenuItem><Link to="/admin/history">History</Link></MenuItem>
           <MenuItem><Link to="/admin/categories">Categories</Link></MenuItem>
           <MenuItem><Link to="/admin/settings">Settings</Link></MenuItem>
+          <MenuItem><Link to="/admin/users">Users</Link></MenuItem>
         </Drawer>
         {this.state.open ?
           <FlatButton className="show-menu" onClick={() => this.setState({ open: false })}>הסתר תפריט</FlatButton>
