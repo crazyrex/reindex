@@ -2,12 +2,12 @@
 .search-bar {
     display: flex;
     width: 100%;
-    // border:  solid 1px;
+    border:  solid 1px;
     .full-width{
         width: 100%;
     }
     & > div {
-        // background-color: white;
+        background-color: white;
         height: 62px;
         &.select.active {
             width: 20%;

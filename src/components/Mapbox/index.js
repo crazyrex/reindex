@@ -1,4 +1,7 @@
 import React from 'react';
+import { AutoRotatingCarousel, Slide } from 'material-auto-rotating-carousel'
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+ 
 require('./Mapbox.scss');
 
 class Mapbox extends React.PureComponent {
@@ -6,8 +9,10 @@ class Mapbox extends React.PureComponent {
     super(props);
     this.state = {
       location: {},
+      currentIndex:  0
     };
     this.renderMap = this.renderMap.bind(this);
+    this.changeMarkerColor = this.changeMarkerColor.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -25,27 +30,41 @@ class Mapbox extends React.PureComponent {
             });
         let data = nextProps.data;
         for(let i = 0; i< data.length; i++) {
-          var marker = new mapboxgl.Marker()
+          if (data[i]._source.location[0] && data[i]._source.location[1]) {
+            var el = document.createElement('div');
+            el.className = 'marker'
+            var marker = new mapboxgl.Marker(el)
+            .setLngLat([data[i]._source.location[0], data[i]._source.location[1]])
+            .addTo(map);
+            var markerHeight = 30, markerRadius = 10, linearOffset = 25;
+            var popupOffsets = {
+            'top': [0, 0],
+            'top-left': [0,0],
+            'top-right': [0,0],
+            'bottom': [0, -markerHeight],
+            'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+            'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+            'left': [markerRadius, (markerHeight - markerRadius) * -1],
+            'right': [-markerRadius, (markerHeight - markerRadius) * -1]
+            };
+          var popup = new mapboxgl.Popup({offset:popupOffsets})
           .setLngLat([data[i]._source.location[0], data[i]._source.location[1]])
-          .addTo(map);
-          var markerHeight = 30, markerRadius = 10, linearOffset = 25;
-          var popupOffsets = {
-          'top': [0, 0],
-          'top-left': [0,0],
-          'top-right': [0,0],
-          'bottom': [0, -markerHeight],
-          'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
-          'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
-          'left': [markerRadius, (markerHeight - markerRadius) * -1],
-          'right': [-markerRadius, (markerHeight - markerRadius) * -1]
-          };
-        var popup = new mapboxgl.Popup({offset:popupOffsets})
-        .setLngLat([data[i]._source.location[0], data[i]._source.location[1]])
-        .setHTML("<h5>"+data[i]._source.business_name+"</h5>")
-          .addTo(map);
+          .setHTML("<h5>"+data[i]._source.business_name+"</h5>")
+            .addTo(map);
+          }
+      
         }
           
      }
+  }
+
+  changeMarkerColor(index){
+    this.setState({currentIndex : index});
+    for(let i = 0; i< this.props.data.length-1; i++) {
+      console.log('iiiiiiiii',i)
+      document.getElementsByClassName('marker')[i].style.backgroundColor = 'black';
+    }
+    document.getElementsByClassName('marker')[index].style.backgroundColor = 'red';
   }
 
   renderMap(pos) {
@@ -61,8 +80,8 @@ class Mapbox extends React.PureComponent {
    .setLngLat([pos[0], pos[1]])
    .addTo(map);
   }
-  render() {
 
+  render() {
     return (
       <section className="sec">
       {this.props.location?
@@ -77,6 +96,23 @@ class Mapbox extends React.PureComponent {
           height: '100%',
           }}
       />  }
+
+ <AutoRotatingCarousel
+  open autoplay={false}
+  style = {{ 'bottom': '0', 'top':'none', 'height':' 30%' }}
+  onChange = {(index)=>{console.log('ooooooooooo',index);this.changeMarkerColor(index)}}
+>
+{this.props.data.map((record, key) =>
+  <Slide
+  media={ <div></div>}
+  title={record._source.business_name}
+  subtitle=""
+  
+/>
+        )}
+
+
+</AutoRotatingCarousel> 
     </section>
     );
   }
