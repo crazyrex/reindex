@@ -170,12 +170,9 @@ html {
     }
     
     .wrapper-nearme {
-      text-align: right;
-      display: inline-block;
-      position: fixed;
-      left: 14px;
-      top: 28%;
-      // z-index: 99;
+     position: fixed;
+     right: 11px;
+      z-index: 999;
       button {
         border: 1px solid !important;
         border-radius: 24px !important;
@@ -183,9 +180,7 @@ html {
         background: white !important;
       }
     }
-    // .change-loc {
-    //   top: 188px !important;
-    // }
+  
     
     .main-search .bottom-icons {
       position: fixed;
@@ -236,34 +231,6 @@ html {
     .gotoapp.main-search .header-site {
       margin-top: 61px !important;
     }
-    // .main-search.main {
-      //   .wrapper-autocomplete {
-        //     top: 10px;
-        //     transform: translate(-50%, 0%);
-        //   }
-        //   .header-site {
-          //     width: 0;
-          //     padding: 0;
-          //     & > div {
-            //       display: none;
-            //     }
-            //     .navigationIcon {
-              //       display: block;
-              //     }
-              //   }
-              //   .header {
-                //     margin-bottom: 10px;
-                //     margin-right: 20px;
-                //     img {
-                  //       width: 90px;
-                  //       &:first-child {
-                    //         width: 190px;
-                    //       }
-                    //   }
-                    
-                    //   }
-                    
-                    // }
                     
                     .main-search.search .wrapper-autocomplete {
                       position: fixed;

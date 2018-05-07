@@ -28,6 +28,7 @@
   ],
   "main": "bin/server.js",
   "scripts": {
+    "rtlcss": "rtlcss src/components/DrawerFilter/DrawerFilter.scss && rtlcss src/components/DetailsForm/DetailsForm.scss && rtlcss src/components/Mapbox/Mapbox.scss && rtlcss src/components/Mapbox/Mapbox.scss && rtlcss src/components/ResultsTable/ResultsTable.scss && rtlcss src/containers/AuthPage/AuthPage.scss && rtlcss src/containers/AuthPage/AuthPage.scss && rtlcss src/containers/MainSearch/MainSearch.scss && rtlcss src/containers/RepoPage/RepoPage.scss && rtlcss src/containers/RepoPage/RepoPage.scss",
     "start": "better-npm-run start-prod",
     "build": "better-npm-run build",
     "postinstall": "npm run build",

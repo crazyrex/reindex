@@ -1,9 +1,9 @@
 import config from 'config';
 
-export default {
+export default {  
 apiRoot: 'http://localhost:3005/api/v1/',
   categoriesIndex: 'reindex-categories',
-  lang: "he",
+  lang: "en",
   tabs:{
     activeSearchTab: true,
     activeMapTab: true

@@ -220,7 +220,7 @@ export class ResultsPage extends React.PureComponent {
           </div> : ''} 
           </Tab>
           <Tab label="Map View" >
-            <MapBox data={this.props.results}/> 
+            {/*<MapBox data={this.props.results}/> */}
             {/* <GovMap data={this.props.results}/> */}
           </Tab>
    </Tabs>
