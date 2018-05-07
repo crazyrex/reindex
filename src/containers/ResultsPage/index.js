@@ -33,6 +33,7 @@ export class ResultsPage extends React.PureComponent {
       changeLocation: false,
       slider: 10,
       openLocation: false,
+      index: 0
     };
     this.updateSearchLocation = updateSearchLocation;
     this.updateSearchObject = this.updateSearchObject.bind(this);
@@ -191,15 +192,13 @@ export class ResultsPage extends React.PureComponent {
           />
         </div>
         <div className="wrapper-tabs">
-        <Tabs>
-          <Tab label="List View" >
-          <image width="17" height="17" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAARCAYAAAA7bUf6AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAEoSURBVHgBrZPRTcMwEIb/c9MQwkOTDZINygblDaXsABvQTgDdoJvAA6p4IxvQEbxB0gpoIc0dCVGlRMJRU/V/sWX//ny+85EbrR5B9IAjlf3kl6rdIqmI6DZH7wyeESKEZ/uTw81iEHKehwIzzAzZ5dM09tNyvn31tQjNOkOcLdLGApPuDPm+sBrJJkvuTV7LtEGQyXm0DhSRZsiQBCN0jaTIypIIaZFQD9WocXAkJDP7g+f7pNbVj5Jhn9SkMN0aIcVt083LYP6F/5Ut/GUG3LnjFeqgxnNE7CccIBaKjZEoyrQ7XqOrFE4gxYpjHC1JsYOmcurcJCMwgv0WkfIIf53t1Q5oFm5+fUZctgSZ7qjK2XurQAUg56vyALqqBBXlfHeuk6DN9wtwSXge+v647AAAAABJRU5ErkJggg=="/>
-
+        <Tabs >
+          <Tab label="List View" onActive={(i)=>this.setState({index: tab.props.index})}>
              {this.state.detectmob && this.props.results.length > 0 ?
           <DrawerFilter onNewRequest={this.updateSearchLocation} pageState={this.props.state} location={this.props.location} /> : ''}
         {this.props.results.length > 0 ? <div className={`wrapper-results ${this.state.showSideBarNearMe ? 'geo' : ''}`}>
           <div className="results-count"> {this.props.totalResults} {translate.resultsFound} </div>
-          {(this.state.detectmob && !this.state.changeLocation && this.props.location.pathname.indexOf(config.searchTabs.businesses.route) > -1) ?
+          {(this.state.detectmob && !this.state.changeLocation && this.props.location.pathname.indexOf(config.searchTabs.businesses.route) > -1) && this.state.index == 0?
             <div onClick={this.showSideBarNearMe} className='wrapper-nearme' >
               <FlatButton label={translate.businessesNearby} labelStyle={{ paddingRight: 11, paddingLeft: 11, fontSize: 18,textTransform:'lowercase' }} />
             </div> : ''}
@@ -219,8 +218,9 @@ export class ResultsPage extends React.PureComponent {
           />
           </div> : ''} 
           </Tab>
-          <Tab label="Map View" >
-            <MapBox data={this.props.results}/> 
+          <Tab label="Map View" onActive={(tab)=>{this.setState({index: tab.props.index})}}>
+          {this.state.index !== 0? 
+          <MapBox data={this.props.results}/>:''}
             {/* <GovMap data={this.props.results}/> */}
           </Tab>
    </Tabs>

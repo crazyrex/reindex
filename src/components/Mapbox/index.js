@@ -15,10 +15,10 @@ class Mapbox extends React.PureComponent {
     this.changeMarkerColor = this.changeMarkerColor.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.location && nextProps.location.location)
-      this.renderMap(nextProps.location.location);
-      else if (nextProps.data.length){
+  componentDidMount(nextProps) {
+    if (this.props.location && this.props.location.location)
+      this.renderMap(this.props.location.location);
+      else if (this.props.data.length){
           var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
             mapboxgl.accessToken = 'pk.eyJ1IjoibGlubm92YXRlIiwiYSI6ImNqZnM4MGd2ZTJjYTEzM3BlangxeWhhYjMifQ.ddurPpVQ9EQ-QnBptCn8zA';
             var map = new mapboxgl.Map({
@@ -28,7 +28,7 @@ class Mapbox extends React.PureComponent {
               center:[34.8485193, 32.0331037],
               zoom: 9,
             });
-        let data = nextProps.data;
+        let data = this.props.data;
         for(let i = 0; i< data.length; i++) {
           if (data[i]._source.location[0] && data[i]._source.location[1]) {
             var el = document.createElement('div');
@@ -59,9 +59,10 @@ class Mapbox extends React.PureComponent {
   }
 
   changeMarkerColor(index){
+    if (index == this.props.data.length -1)
+      index = 0;
     this.setState({currentIndex : index});
     for(let i = 0; i< this.props.data.length-1; i++) {
-      console.log('iiiiiiiii',i)
       document.getElementsByClassName('marker')[i].style.backgroundColor = 'black';
     }
     document.getElementsByClassName('marker')[index].style.backgroundColor = 'red';
@@ -99,19 +100,24 @@ class Mapbox extends React.PureComponent {
 
  <AutoRotatingCarousel
   open autoplay={false}
-  style = {{ 'bottom': '0', 'top':'none', 'height':' 30%' }}
+  style = {{ 'bottom': '-50px', 'top':'none', 'height':' 30%' ,'backgroundColor':'transparent'}}
   onChange = {(index)=>{console.log('ooooooooooo',index);this.changeMarkerColor(index)}}
+  dotsStyle = {{ 'display':'none' }}
+  arrowRightStyle = {{ 'left':'0px','boxShadow':'none' ,'width':'30px','height':'30px'}}
 >
 {this.props.data.map((record, key) =>
   <Slide
+  key = {key}
   media={ <div></div>}
   title={record._source.business_name}
-  subtitle=""
-  
-/>
-        )}
-
-
+  contentStyle={{ backgroundColor: 'white' }}
+  subtitle={record._source.address_street_name
+    +' '+record._source.address_street_number
+    +' '+record._source.address_street_entrance
+    +' '+record._source.address_neighborhood
+    +' '+record._source.address_city}
+  />
+ )}
 </AutoRotatingCarousel> 
     </section>
     );

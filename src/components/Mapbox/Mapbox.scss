@@ -5,7 +5,7 @@
       left: 0;
     }
     .mapboxgl-map{
-        overflow: visible !important;
+      //  overflow: visible !important;
      }
     canvas.mapboxgl-canvas{
        width: 100% !important;
@@ -25,6 +25,16 @@
       height: 50px;
       border-radius: 50%;
       cursor: pointer;
+    }
+    .react-swipeable-view-container {
+      div {
+        color: black !important;
+        padding: 0px !important;
+        font-family: 'Heebo-Light' !important;
+      }
+    }
+    button {
+      width: 15px !important;
     }
 
 }
