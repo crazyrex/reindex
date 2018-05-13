@@ -195,7 +195,7 @@ class CategoriesTree extends React.PureComponent {
         const TreeFuncs = require('./TreeFuncsVars');
         const SortableTree = TreeFuncs.default;
         categoriestree = (<SortableTree 
-        canDrag={this.isAdmin}
+                canDrag={this.isAdmin}
                 rowHeight={30}
                 scaffoldBlockPxWidth={25}
                 treeData={this.state.treeData || this.props.categories}
@@ -221,12 +221,12 @@ class CategoriesTree extends React.PureComponent {
       }
     const actions = [
       <FlatButton
-        label="ביטול"
+        label="cancel"
         primary={true}
         onTouchTap={() => this.handleDialogClose('cancel')}
       />,
       <FlatButton
-        label="אישור"
+        label="ok"
         primary={true}
         keyboardFocused={true}
         onTouchTap={() => this.handleDialogClose('submit')}
@@ -246,19 +246,19 @@ class CategoriesTree extends React.PureComponent {
           </div>
           </div>
           <div className="wrapper-search-and-tags">
-            <TextField className="search-category" floatingLabelText="חפש קטגוריה" onChange={(event) => this.setState({ searchString: event.target.value })} />
+            <TextField className="search-category" floatingLabelText="search category" onChange={(event) => this.setState({ searchString: event.target.value })} />
             <div className="wrapper-tree">
               {categoriestree}
             </div>
           </div>
            <Dialog
-            title="הוספת קטגוריה"
+            title="Add category"
             actions={actions}
             modal={false}
             open={this.state.openDialog}
             onRequestClose={this.handleDialogClose}
           >
-            <TextField floatingLabelText="תוכן הקטגוריה" onBlur={(event) => this.setState({ newCategory: event.target.value })} />
+            <TextField floatingLabelText="Category content" onBlur={(event) => this.setState({ newCategory: event.target.value })} />
         </Dialog>
         </div>
     );
