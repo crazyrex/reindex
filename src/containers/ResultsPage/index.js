@@ -33,7 +33,17 @@ export class ResultsPage extends React.PureComponent {
       changeLocation: false,
       slider: 10,
       openLocation: false,
-      index: 0
+      index: 0,
+      activeIndex: 0,
+      tabStyle: {
+        active_tab: {
+          color: "#0A4BF2"
+        },
+        default_tab: {
+          color: "#6E6E6E"
+        }
+
+      }
     };
     this.updateSearchLocation = updateSearchLocation;
     this.updateSearchObject = this.updateSearchObject.bind(this);
@@ -107,6 +117,16 @@ export class ResultsPage extends React.PureComponent {
     }
   }
 
+  handleTabChange = (index) => {
+    console.log('handleTabChang e', index);
+    this.setState({
+      activeIndex: index
+    });
+  }
+  getStyle(isActive) {
+    console.log('getStyle isActive ', isActive);
+    return isActive ? this.state.tabStyle.active_tab : this.state.tabStyle.default_tab
+  }
   openChangeLocation() {
     this.setState({
       openLocation: true
@@ -192,8 +212,9 @@ export class ResultsPage extends React.PureComponent {
           />
         </div>
         <div className="wrapper-tabs">
-          <Tabs >
-            <Tab label="List View" onActive={(i) => this.setState({ index: tab.props.index })}>
+          <Tabs onChange={this.handleTabChange} >
+            {/*<Tab label="List View" onActive={(i) => this.setState({ index: tab.props.index })}>*/}
+            <Tab label="List View" onActive={(tab) => this.setState({ index: tab.props.index })} style={this.getStyle(this.state.activeIndex === 1)} >
               {this.state.detectmob && this.props.results.length > 0 ?
                 <DrawerFilter onNewRequest={this.updateSearchLocation} pageState={this.props.state} location={this.props.location} /> : ''}
               {this.props.results.length > 0 ? <div className={`wrapper-results ${this.state.showSideBarNearMe ? 'geo' : ''}`}>
@@ -218,7 +239,7 @@ export class ResultsPage extends React.PureComponent {
                 />
               </div> : ''}
             </Tab>
-            <Tab label="Map View" onActive={(tab) => { this.setState({ index: tab.props.index }) }}>
+            <Tab label="Map View" onActive={(tab) => { this.setState({ index: tab.props.index }) }} style={this.getStyle(this.state.activeIndex === 2)}>
               {this.state.index !== 0 ?
                 <MapBox data={this.props.results} /> : ''}
               {/* <GovMap data={this.props.results}/> */}
@@ -252,7 +273,7 @@ export class ResultsPage extends React.PureComponent {
             autoHideDuration={4000}
             onRequestClose={this.props.closeUpdateRecordModal}
         />*/}
-      </div>
+      </div >
     );
   }
 }
