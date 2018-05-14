@@ -221,12 +221,12 @@ class CategoriesTree extends React.PureComponent {
       }
     const actions = [
       <FlatButton
-        label="ביטול"
+        label="Cancel"
         primary={true}
         onTouchTap={() => this.handleDialogClose('cancel')}
       />,
       <FlatButton
-        label="אישור"
+        label="OK"
         primary={true}
         keyboardFocused={true}
         onTouchTap={() => this.handleDialogClose('submit')}
@@ -236,7 +236,7 @@ class CategoriesTree extends React.PureComponent {
         <div className="categories-tree-component">
           <br/>
           <div>
-          {this.props.selectedCategories.length ? <span className="label">קטגוריה</span> : ''}
+          {this.props.selectedCategories.length ? <span className="label">category</span> : ''}
             <div className="wrapper-tags">{this.props.selectedCategories.map((tag, index) =>
               tag !== '' ?  <div className="chip" key={index}> 
               <span className="text">{tag}</span>
@@ -246,19 +246,19 @@ class CategoriesTree extends React.PureComponent {
           </div>
           </div>
           <div className="wrapper-search-and-tags">
-            <TextField className="search-category" floatingLabelText="חפש קטגוריה" onChange={(event) => this.setState({ searchString: event.target.value })} />
+            <TextField className="search-category" floatingLabelText="Search for a category" onChange={(event) => this.setState({ searchString: event.target.value })} />
             <div className="wrapper-tree">
               {categoriestree}
             </div>
           </div>
            <Dialog
-            title="הוספת קטגוריה"
+            title="Add Category"
             actions={actions}
             modal={false}
             open={this.state.openDialog}
             onRequestClose={this.handleDialogClose}
           >
-            <TextField floatingLabelText="תוכן הקטגוריה" onBlur={(event) => this.setState({ newCategory: event.target.value })} />
+            <TextField floatingLabelText="Category content" onBlur={(event) => this.setState({ newCategory: event.target.value })} />
         </Dialog>
         </div>
     );
@@ -308,8 +308,9 @@ export function mapDispatchToProps(dispatch) {
       dispatch(initCategories(categories));
     },
     updateTree: (data) => {
-      const confirmText = (data.action === 'changeLocation') ? `האם אתה בטוח שאתה רוצה להעביר ${data.node.label} מתחת ל ${data.parent.node.label} ?`
-        : (data.action === 'delete') ? `האם אתה בטוח שאתה רוצה למחוק ${data.node.label} ?` : `האם אתה בטוח שאתה רוצה להוסיף ${data.node.label} ?`
+      const confirmText = (data.action === 'changeLocation') ? `Are you sure you want to move
+      ${data.node.label} below ${data.parent.node.label} ?`
+        : (data.action === 'delete') ? `Are you sure you want to delete ${data.node.label} ?` : `Are you sure you want to add ${data.node.label} ?`
       const update = confirm(confirmText);
       if (update) dispatch(updateTree(data));
     },

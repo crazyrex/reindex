@@ -76,9 +76,9 @@ class Upload extends Component {
   render() {
     return (
       <div>
-        <input type="text" value={this.state.input1} placeholder="סוג" name="input1" onChange={this.change1} />
-        <input type="text" value={this.state.input2} placeholder="קטגוריה" name="input2" onChange={this.change2} />
-        <input type="text" value={this.state.input2} placeholder="עיר" name="input3" onChange={this.change3} />
+        <input type="text" value={this.state.input1} placeholder="type" name="input1" onChange={this.change1} />
+        <input type="text" value={this.state.input2} placeholder="category" name="input2" onChange={this.change2} />
+        <input type="text" value={this.state.input2} placeholder="city" name="input3" onChange={this.change3} />
 
         <UploadFile {...this.state.uploaderProps} >
           <a>

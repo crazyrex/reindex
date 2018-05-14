@@ -2,7 +2,7 @@
 .drawer-filter {
   position: fixed;
   top: 9px;
-  left: 11px;
+  right: 11px;
   z-index: 999;
   &.active {
     right: 20px;
