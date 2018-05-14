@@ -2,18 +2,14 @@
 .search-bar {
     display: flex;
     width: 100%;
-    border:  solid 1px;
-    .full-width{
-        width: 100%;
-    }
     & > div {
-        background-color: white;
+        // background-color: white;
         height: 62px;
         &.select.active {
             width: 20%;
-            border-left: 1px solid #dbdbdb;
-            border-top-right-radius: 31px;
-            border-bottom-right-radius: 31px;
+            border-right: 1px solid #dbdbdb;
+            border-top-left-radius: 31px;
+            border-bottom-left-radius: 31px;
             display: flex;
             justify-content: center;
             .selectBtn {
@@ -30,6 +26,7 @@
                     height: 9px;
                 }
             }
+
             .selectList {
                 display: none;
                 position: absolute;
@@ -37,7 +34,7 @@
                 background-color: white;
                 border-radius: 10px;
                 width: 20%;
-                padding-right: 0;
+                padding-left: 0;
                 z-index: 1;
                 @media screen and (max-width: 767px) {
                     width: 35%;
@@ -52,6 +49,7 @@
                     font-size: 18px;
                     transition: 300ms;
                 }
+
                 & > li:hover {
                     background: black;
                     color: white;
@@ -60,16 +58,17 @@
                     content: '';
                     position: absolute;
                     top: -7%;
-                    left: 0;
                     right: 0;
+                    left: 0;
                     margin: 0 auto;
                     width: 0;
                     height: 0;
                     border-bottom: solid 8px white;
-                    border-left: solid 8px transparent;
                     border-right: solid 8px transparent;
+                    border-left: solid 8px transparent;
                 }
             }
+
             select {
                 font-family: 'Heebo';
                 font-size: 22px;
@@ -78,8 +77,8 @@
                 color: #3d3d3d;
                 -moz-appearance:none; /* Firefox */
                 -webkit-appearance:none;
-                background-position: 100%;
-                background-position-x: 7%;
+                background-position: 0%;
+                background-position-x: 93%;
             }
             select:focus {
                 outline: none !important;
@@ -88,10 +87,11 @@
             }
         }
         &:last-child {
-            margin: 0 auto;
-            width: 100%;
+            width: 80%;
             display: flex;
             justify-content: space-between;
+            border-top-right-radius: 31px;
+            border-bottom-right-radius: 31px;
             align-items: center;
             padding: 0 10px;
             .searchIcon {
@@ -100,7 +100,7 @@
             }
         }
     }
-    .autoComplete {
+    .autocomplete {
         font-size: 22px !important;
         hr {
             display: none !important;
@@ -128,7 +128,7 @@
                 i svg{
                     width: 100% !important;
                     height: 100% !important;
-                    right: 0;
+                    left: 0;
                     padding-top: 0;
                     color: black !important;          
                 }
@@ -143,8 +143,8 @@
                 display: block;
                 top: 0;
                 border-radius: inherit;
-                right: 0;
-                background: $yellow;
+                left: 0;
+                background: #fad700;
                 width: 100%;
                 opacity: 0;
                 transform: scale3d(0, 0, 0);
@@ -153,7 +153,7 @@
             i svg{
                 position: absolute;
                 top: 0;
-                right: 1px;
+                left: 1px;
                 padding-top: 9px;
                 width: 85% !important;
                 height: 85% !important;
@@ -165,26 +165,9 @@
         }
     }
 }
-.slider-categories {
-    margin: 0 -21px;
-    padding: 0;
-    background: white;
-    height: 20px;
-    overflow-x: scroll;
-    white-space: nowrap;
-    span {
-        margin-right: 12px;
-    }
+.main-search.search {
+    position: relative;
 }
-.wrapper-tabs {
-    margin-top: 88px;  
-    div{
-        div{
-            background-color: white;    
-        }
-    }
-}
-
 .main-search.search .search-bar {
     & > div {
         height: 48px;
@@ -196,7 +179,6 @@
         }
         &:last-child {
             .search-icon-wrapper a {
-                display: none;
                 width: 36px;
                 height: 36px;
             }
@@ -206,6 +188,13 @@
         font-size: 17px !important;
     }
 }
+.admin .footer {
+    // position: fixed;
+    // bottom: 0;
+    display: none;
+}
+
+
 @media screen and (max-width: 767px) {
     .search-bar .autocomplete {
             width: 100% !important;
@@ -239,11 +228,11 @@
             width: 35%;
         }
         &:last-child{
-            width: 100%;
+            width: 65%;
         }
     }
     .search-bar > div:last-child > div:first-child {
-        width: 100%;
+        width: 80%;
         & > div {
             width: 100% !important;
         }
@@ -255,6 +244,8 @@
         }
     }
 }
+
+
 .main-search.main {
     @media screen and (min-width: 767px){
     .search-bar.tabs-state {
@@ -263,7 +254,7 @@
             width: 100%;
             background-color: transparent;
             justify-content: flex-start;
-            border-left: none;
+            border-right: none;
             .tab {
                 width: 185px;
                 height: 48px;
@@ -280,16 +271,17 @@
         }
         & > div:last-child {
             width: 100%;
-            padding-right: 20px;
+            padding-left: 20px;
             border-radius: 31px;
         }
     }
 }
+
 }
 .search-bar.tabs-state {
     & > div.select.active {
-        padding-right: 10px;
         padding-left: 10px;
+        padding-right: 10px;
         width: 30%;
         align-items: center;
         @media screen and (max-width: 767px){

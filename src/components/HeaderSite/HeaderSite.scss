@@ -1,12 +1,14 @@
 @import "../../assets/css/variables";
 .header-site {
+  
   height: 55px;
     color: white;
     font-size: 26px;
     padding-top: 12px !important;
     padding-left: 13px !important;
     font-weight: bold;
-  background-color: $yellow;
+    background: linear-gradient(to right, #7520C9 , #0A4BF2);
+  // background-color: $yellow;
   position: fixed;
   top: 0;
   width: 100%;

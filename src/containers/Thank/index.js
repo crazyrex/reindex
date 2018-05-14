@@ -5,7 +5,7 @@ import Helmet from 'react-helmet';
 // import shcoach from '../../assets/img/shcoach.png';
 // import hand from '../../assets/img/hand.png';
 // import thank from '../../assets/img/thank.png';
-import thankTxt from '../../assets/img/thank-txt.png';
+
 import SearchBar from 'components/SearchBar';
 
 
@@ -36,9 +36,8 @@ class ThanksPage extends React.PureComponent {
             onNewRequest={this.props.handleNewRequest}
             handleSearchBtn={this.props.handleSearchBtn}
             data={this.props.searchBarData}
-            txt='מי אתה מחפש'
+            txt='Who are you looking for?'
           />
-       <div className="thankTxt" style={{backgroundImage: `url(${thankTxt})`}}></div>      
 
       </div>
     );  

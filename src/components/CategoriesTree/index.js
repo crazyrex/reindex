@@ -195,7 +195,7 @@ class CategoriesTree extends React.PureComponent {
         const TreeFuncs = require('./TreeFuncsVars');
         const SortableTree = TreeFuncs.default;
         categoriestree = (<SortableTree 
-        canDrag={this.isAdmin}
+                canDrag={this.isAdmin}
                 rowHeight={30}
                 scaffoldBlockPxWidth={25}
                 treeData={this.state.treeData || this.props.categories}
@@ -221,12 +221,20 @@ class CategoriesTree extends React.PureComponent {
       }
     const actions = [
       <FlatButton
+<<<<<<< HEAD
         label="Cancel"
+=======
+        label="cancel"
+>>>>>>> a51e95b0694017d963d92c219c0ecb8df96a562d
         primary={true}
         onTouchTap={() => this.handleDialogClose('cancel')}
       />,
       <FlatButton
+<<<<<<< HEAD
         label="OK"
+=======
+        label="ok"
+>>>>>>> a51e95b0694017d963d92c219c0ecb8df96a562d
         primary={true}
         keyboardFocused={true}
         onTouchTap={() => this.handleDialogClose('submit')}
@@ -246,13 +254,21 @@ class CategoriesTree extends React.PureComponent {
           </div>
           </div>
           <div className="wrapper-search-and-tags">
+<<<<<<< HEAD
             <TextField className="search-category" floatingLabelText="Search for a category" onChange={(event) => this.setState({ searchString: event.target.value })} />
+=======
+            <TextField className="search-category" floatingLabelText="search category" onChange={(event) => this.setState({ searchString: event.target.value })} />
+>>>>>>> a51e95b0694017d963d92c219c0ecb8df96a562d
             <div className="wrapper-tree">
               {categoriestree}
             </div>
           </div>
            <Dialog
+<<<<<<< HEAD
             title="Add Category"
+=======
+            title="Add category"
+>>>>>>> a51e95b0694017d963d92c219c0ecb8df96a562d
             actions={actions}
             modal={false}
             open={this.state.openDialog}
