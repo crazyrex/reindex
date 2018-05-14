@@ -2,20 +2,15 @@ version: "2"
 
 services:
    db:
-     image: mongo:3.0.14
      container_name: "${PROJECT_NAME}-mongodb"
+     image: mongo:3.0.14
+#     volumes: 
+#       - "${MONGODB_DATA_PATH}:/data/db"
      ports:
        - "27017:27017"
-#    environment:
-   #   - "MONGO_DATA_DIR:/data/db"
-#      MONGODB_ADMIN_USER: "${MONGODB_ADMIN_USER}"
-#      MONGODB_ADMIN_PASS: "${MONGODB_ADMIN_PASS}"
-#    volumes:
-#      - "${HOST_DB_PATH}:/data/db"
      restart: always
 
 ##################################################################################
-
 
    rabbit:
      image: rabbitmq:3.6.14
@@ -24,19 +19,19 @@ services:
       - "15672:15672"
      restart: always
 
-
 #######################################
 
    app-api:
      container_name: "${PROJECT_NAME}-api"
      build: ../reindex-api
-#     volumes:
- #     - "./home/rivka/reindex-api:/usr/src/app"
+     volumes: 
+       - "../reindex-api:/usr/src/app"
+
      ports:
       - "${API_HTTP_PORT}:3005"
      restart: always
 
-     ##################################################################################
+##################################################################################
 
 
    elasticsearch:
@@ -47,16 +42,14 @@ services:
 #    volumes:
 #      - "./elasticsearch/logging.yml:/etc/elasticsearch/logging.yml"
      restart: always
-
-#################################################################################
  
 #################################################################################
 
    app:
      container_name: "${PROJECT_NAME}-app"
      build: .
-#     volumes:
-#     - "${CODE_PATH}:/usr/src/app"
+#     volumes: 
+#      - ".:/usr/src/app"
      ports:
       - "${APP_HTTP_PORT}:3000"
       - "3001:3001"
