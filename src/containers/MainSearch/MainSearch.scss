@@ -170,9 +170,16 @@ html {
     }
     
     .wrapper-nearme {
-     position: fixed;
-     right: 11px;
-      z-index: 999;
+      text-align: right;
+      display: inline-block;
+      position: fixed;
+      left: 14px;
+      top: 28%;
+      // z-index: 99;
+
+    //  position: fixed;
+    //  right: 11px;
+    //   z-index: 999;
       button {
         border: 1px solid !important;
         border-radius: 24px !important;
@@ -229,7 +236,7 @@ html {
       }
     }
     .gotoapp.main-search .header-site {
-      margin-top: 61px !important;
+      margin-top: 57px !important;
     }
                     
                     .main-search.search .wrapper-autocomplete {

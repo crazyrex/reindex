@@ -76,10 +76,9 @@ class Upload extends Component {
   render() {
     return (
       <div>
-        <input type="text" value={this.state.input1} placeholder="Type" name="input1" onChange={this.change1} />
-        <input type="text" value={this.state.input2} placeholder="Category" name="input2" onChange={this.change2} />
-        <input type="text" value={this.state.input2} placeholder="City" name="input3" onChange={this.change3} />
-
+        <input type="text" value={this.state.input1} placeholder="type" name="input1" onChange={this.change1} />
+        <input type="text" value={this.state.input2} placeholder="category" name="input2" onChange={this.change2} />
+        <input type="text" value={this.state.input2} placeholder="city" name="input3" onChange={this.change3} />
         <UploadFile {...this.state.uploaderProps} >
           <a>
             <FlatButton label='Upload CSV File' />
@@ -94,3 +93,4 @@ class Upload extends Component {
 export default Upload;
 
 
+  

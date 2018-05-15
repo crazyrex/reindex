@@ -221,12 +221,12 @@ class CategoriesTree extends React.PureComponent {
       }
     const actions = [
       <FlatButton
-        label="cancel"
+        label="Cancel"
         primary={true}
         onTouchTap={() => this.handleDialogClose('cancel')}
       />,
       <FlatButton
-        label="ok"
+        label="OK"
         primary={true}
         keyboardFocused={true}
         onTouchTap={() => this.handleDialogClose('submit')}
@@ -246,13 +246,13 @@ class CategoriesTree extends React.PureComponent {
           </div>
           </div>
           <div className="wrapper-search-and-tags">
-            <TextField className="search-category" floatingLabelText="search category" onChange={(event) => this.setState({ searchString: event.target.value })} />
+            <TextField className="search-category" floatingLabelText="Search for a category" onChange={(event) => this.setState({ searchString: event.target.value })} />
             <div className="wrapper-tree">
               {categoriestree}
             </div>
           </div>
            <Dialog
-            title="Add category"
+            title="Add Category"
             actions={actions}
             modal={false}
             open={this.state.openDialog}
