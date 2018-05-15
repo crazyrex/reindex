@@ -126,9 +126,9 @@ export class MainSearch extends React.PureComponent {
         />
         <HeaderSite logoClicked={this.changeState} />
         <div className={'wrapper-autocomplete'}>
-          <div className="header">
+          {/*<div className="header">
             <img src={logo} role="presentation" />
-          </div>
+          </div>*/}
           <div id="mapTab"></div>
           <SearchBar
             onNewRequest={this.props.handleNewRequest}
@@ -137,9 +137,9 @@ export class MainSearch extends React.PureComponent {
           />
         </div>
     
-        {!this.props.isData?
+        {/*{!this.props.isData?
            <div className="init">explain.........</div>
-        :'' }
+        :'' }*/}
 
 
         {/*  {!this.state.detectmob ?

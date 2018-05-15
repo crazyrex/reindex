@@ -53,24 +53,21 @@
   }
 }
 
-@media screen and (min-width: 767px) {
-  .main .logo-wrapper {
-    display: none;
-  }
-}
+// @media screen and (min-width: 767px) {
+//   .main .logo-wrapper {
+//     display: none;
+//   }
+// }
 
-@media screen and (max-width: 767px) {
+// @media screen and (max-width: 767px) {
   .main-search.search .header-site {
     height: 56px;
   }
   .header-site {
       padding: 0;
       .header-content {
-        display: flex;
         align-items: center;
         justify-content: space-around;
-        padding: 0 5%;
-        margin-top: 10px;
         .navigationIcon {
           display: block;
           svg {
@@ -128,4 +125,4 @@
   //     }
   //   }
   // }
-}
+// }
