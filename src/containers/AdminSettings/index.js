@@ -1,5 +1,6 @@
 import React from 'react';
 import { Checkbox, RadioButton, RadioButtonGroup } from 'material-ui';
+import { browserHistory } from 'react-router';
 
 import './AdminSettings.scss';
 class AdminSettings extends React.Component {
@@ -12,6 +13,12 @@ class AdminSettings extends React.Component {
         };
 
     }
+    componentDidMount() {
+        if (!localStorage.getItem('token')) {
+          browserHistory.push('/auth/login');
+        }
+      }
+      
     render() {
         let { activeSearchTab, activeMapTab } = this.state;
         return (

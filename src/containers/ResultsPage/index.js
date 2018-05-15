@@ -213,7 +213,6 @@ export class ResultsPage extends React.PureComponent {
         </div>
         <div className="wrapper-tabs">
           <Tabs onChange={this.handleTabChange} >
-            {/* <Tab label="List View" onActive={(i) => this.setState({ index: tab.props.index })}> */}
             <Tab label="List View" onActive={(tab) => this.setState({ index: tab.props.index })} style={this.getStyle(this.state.activeIndex === 1)} >
               {this.state.detectmob && this.props.results.length > 0 ?
                 <DrawerFilter onNewRequest={this.updateSearchLocation} pageState={this.props.state} location={this.props.location} /> : ''}

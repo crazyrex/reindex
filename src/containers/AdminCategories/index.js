@@ -5,6 +5,7 @@
  */
 import React from 'react';
 import Helmet from 'react-helmet';
+import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import Snackbar from 'material-ui/Snackbar';
 import CategoriesTree from 'components/CategoriesTree';
@@ -21,6 +22,12 @@ export class AdminCategories extends React.PureComponent {
     };
 
     this.updateSelectedCategories = this.updateSelectedCategories.bind(this);
+  }
+
+  componentDidMount() {
+    if (!localStorage.getItem('token')) {
+      browserHistory.push('/auth/login');
+    }
   }
 
 

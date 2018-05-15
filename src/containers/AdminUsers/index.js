@@ -1,5 +1,6 @@
 import React from 'react';
 import { Checkbox, RadioButton, RadioButtonGroup } from 'material-ui';
+import { browserHistory } from 'react-router';
 import { loadUsers, updateUser } from './actions';
 import { connect } from 'react-redux';
 import FlatButton from 'material-ui/FlatButton';
@@ -20,6 +21,12 @@ class AdminUsers extends React.Component {
         // };
         this.props.loadUsers();
     }
+    componentDidMount() {
+        if (!localStorage.getItem('token')) {
+          browserHistory.push('/auth/login');
+        }
+      }
+
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.isUpdated === true) {
