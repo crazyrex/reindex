@@ -37,9 +37,15 @@ export class ResultsPage extends React.PureComponent {
       activeIndex: 0,
       tabStyle: {
         active_tab: {
+          backgroundColor: "#F2F2F2",
+          fontSize: "14px",
+          fontFamily: "Roboto",
           color: "#0A4BF2"
         },
         default_tab: {
+          backgroundColor: "#F2F2F2",
+          fontSize: "14px",
+          fontFamily: "Roboto",
           color: "#6E6E6E"
         }
 
@@ -117,15 +123,9 @@ export class ResultsPage extends React.PureComponent {
     }
   }
 
-  handleTabChange = (index) => {
-    console.log('handleTabChang e', index);
-    this.setState({
-      activeIndex: index
-    });
-  }
   getStyle(isActive) {
     console.log('getStyle isActive ', isActive);
-    return isActive ? this.state.tabStyle.active_tab : this.state.tabStyle.default_tab
+    return isActive ? this.state.tabStyle.active_tab : this.state.tabStyle.default_tab;
   }
   openChangeLocation() {
     this.setState({
@@ -212,8 +212,8 @@ export class ResultsPage extends React.PureComponent {
           />
         </div>
         <div className="wrapper-tabs">
-          <Tabs onChange={this.handleTabChange} >
-            <Tab label="List View" onActive={(tab) => this.setState({ index: tab.props.index })} style={this.getStyle(this.state.activeIndex === 1)} >
+          <Tabs inkBarStyle={{background: '#0A4BF2'}}>
+            <Tab label="List View" onActive={(tab) => { this.setState({ index: tab.props.index }) }} style={this.getStyle(this.state.index === 0)}>
               {this.state.detectmob && this.props.results.length > 0 ?
                 <DrawerFilter onNewRequest={this.updateSearchLocation} pageState={this.props.state} location={this.props.location} /> : ''}
               {this.props.results.length > 0 ? <div className={`wrapper-results ${this.state.showSideBarNearMe ? 'geo' : ''}`}>
@@ -238,8 +238,8 @@ export class ResultsPage extends React.PureComponent {
                 />
               </div> : ''}
             </Tab>
-            <Tab label="Map View" onActive={(tab) => { this.setState({ index: tab.props.index }) }} style={this.getStyle(this.state.activeIndex === 2)}>
-              {this.state.index !== 0 ?
+            <Tab label="Map View" onActive={(tab) => { this.setState({ index: tab.props.index }) }} style={this.getStyle(this.state.index === 1)}>
+              {false ?
                 <MapBox data={this.props.results} /> : ''}
               {/* <GovMap data={this.props.results}/> */}
             </Tab>

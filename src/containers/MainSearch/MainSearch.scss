@@ -17,7 +17,7 @@ html {
     .wrapper-no-results {
       display: none;
     }
-    background-color: $yellow;
+    background: $yellow;
     .tabs {
       display: none;
     }
@@ -236,12 +236,12 @@ html {
       }
     }
     .gotoapp.main-search .header-site {
-      margin-top: 57px !important;
+      margin-top: 61px !important;
     }
                     
                     .main-search.search .wrapper-autocomplete {
                       position: fixed;
-                      top: 56px;
+                      top: 66px;
                       width: 100%;
                       padding: 0 5%;
                       background-color: #F2F2F2;
