@@ -51,10 +51,11 @@ class Admin extends React.PureComponent {
           <MenuItem><Link to="/admin/categories">Categories</Link></MenuItem>
           <MenuItem><Link to="/admin/settings">Settings</Link></MenuItem>
           <MenuItem><Link to="/admin/users">Users</Link></MenuItem>
+          <MenuItem><Link to="/admin/edit">Edit</Link></MenuItem>
         </Drawer>
         {this.state.open ?
-          <FlatButton className="show-menu" onClick={() => this.setState({ open: false })}>הסתר תפריט</FlatButton>
-          : <FlatButton className="hide-menu" onClick={() => this.setState({ open: true })}>הצג תפריט</FlatButton>
+          <FlatButton className="show-menu" onClick={() => this.setState({ open: false })}>Show menu</FlatButton>
+          : <FlatButton className="hide-menu" onClick={() => this.setState({ open: true })}>Hide menu</FlatButton>
         }
         <div className={`children ${!this.state.open ? `close` : ""}`}>{this.props.children}</div>
       </div>

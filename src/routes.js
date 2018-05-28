@@ -22,8 +22,11 @@ import {
   CampaignPage,
   CampaignVideoPage,
   LotteryPage,
+  EditComponent,
   Thank
 } from 'containers';
+
+console.log('EditComponent',EditComponent);
 
 export default () => {
   const routes = (
@@ -50,6 +53,9 @@ export default () => {
         <Route path="/admin/archivesrequests" component={ArchivesRequests} />
         <Route path="/admin/ArchivesRecords" component={ArchivesRecords} />
         <Route path="/admin/users" component={AdminUsers}/>
+          <Route path="/admin/edit" component={EditComponent}/>
+
+        
       </Route>
       <Route path="/cat(/:catName)" component={ResultsPage} />
       <Route path="/ppls" component={ResultsPage} />

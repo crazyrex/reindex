@@ -49,6 +49,7 @@ services:
      build: .
      volumes: 
       - "./src:/usr/src/app/src"
+      - "./node_modules:/usr/src/app/node_modules"
      ports:
       - "${APP_HTTP_PORT}:3000"
       - "3001:3001"
