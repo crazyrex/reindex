@@ -50,7 +50,8 @@ OnLoadGetRecords(){
 		<nav id="nav" className="clearfix">
 			<ul>
 				<li id="save"><a href="#">save</a></li>
-				<li id="load"><a href="#" onClick={this.OnLoadGetRecords}>load</a></li>
+				{/* <li id="load"><a href="#" onClick={this.OnLoadGetRecords}>load</a></li> */}
+				<li id="load"><a href="#">load</a></li>
 				<li id="from_html"><a href="#">from html</a></li>
 				<li id="rect"><a href="#">rectangle</a></li>
 				<li id="circle"><a href="#">circle</a></li>
