@@ -10,6 +10,7 @@ import HeaderSite from 'components/HeaderSite';
 // import NoResults from 'components/NoResults';
 // import Results from 'components/Results';
 import SearchBar from 'components/SearchBar';
+import Landspace from 'containers/Landspace';
 // import Snackbar from 'material-ui/Snackbar';
 import DrawerFilter from 'components/DrawerFilter';
 import { detectmob } from '../../utils/functions';
@@ -49,7 +50,7 @@ export class MainSearch extends React.PureComponent {
     this.changeState = this.changeState.bind(this);
     this.toggleIcons = this.toggleIcons.bind(this);
     this.onResize = this.onResize.bind(this);
-    this.handleClose = this.handleClose.bind(this);
+    this.handleClose = this.handleClose.bind(this);   
     this.props.checkData();
 
     }
@@ -83,11 +84,11 @@ export class MainSearch extends React.PureComponent {
     that.toggleIcons();
   }
 
-  componentWillMount(){
+   componentWillMount(){
   }
 
   componentWillUnmount() {
-
+   
     // you need to unbind the same listener that was binded.
     window.removeEventListener('resize', this.onResize, false);
 
@@ -115,7 +116,6 @@ export class MainSearch extends React.PureComponent {
   }
 
   render() {
-   
     return (
       <div className={`main-search full-height-container main ${this.props.state === 'main' ? 'main' : 'search'} ${!this.state.ifApp ? 'gotoapp' : ''}`}>
         <Helmet
@@ -130,6 +130,7 @@ export class MainSearch extends React.PureComponent {
             <img src={logo} role="presentation" />
           </div>*/}
           <div id="mapTab"></div>
+          {/*<Landspace />*/}
           <SearchBar
             onNewRequest={this.props.handleNewRequest}
             handleSearchBtn={this.props.handleSearchBtn}
@@ -190,7 +191,6 @@ MainSearch.propTypes = {
 };
 
 export function mapStateToProps(state) {
-  console.log('eeeeeeeeeeeeeeeeeeeeee', state.search)
   return {
     state: state.mainSearch.state,
     results: state.mainSearch.results,

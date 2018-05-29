@@ -17,6 +17,7 @@ import recordSettingsReducer from '../components/RecordSettings/reducer';
 import adminSearchBarReducer from '../components/AdminSearchBar/reducer';
 import searchReducer from '../components/SearchBar/reducer';
 import categoriesTreeReducer from '../components/CategoriesTree/reducer';
+import LandspaceReducer from '../containers/Landspace/reducer';
 
 import resultsPageReducer from '../containers/ResultsPage/reducer';
 import { reducer as form } from 'redux-form';
@@ -99,6 +100,7 @@ const rootReducer = combineReducers({
   adminSearchBar: adminSearchBarReducer,
   categoriesTree: categoriesTreeReducer,
   results: resultsPageReducer,
+  landspaces: LandspaceReducer,
   form,
   router
 });

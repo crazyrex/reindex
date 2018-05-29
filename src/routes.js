@@ -8,6 +8,7 @@ import {
   AdminRequests,
   AdminSettings,
   AdminUsers,
+  AdminFabric,
   ArchivesRequests,
   ArchivesRecords,
   AdminSearchHistory,
@@ -47,15 +48,12 @@ export default () => {
         <Route path="/admin/search" component={AdminSearch} />
         <Route path="/admin/requests" component={AdminRequests} />
         <Route path="/admin/history" component={AdminSearchHistory} />
-        <Route path="/admin/categories" component={AdminCategories} />
         <Route path="/admin/settings" component={AdminSettings} />
         <Route path="/admin/categories" component={AdminCategories} />
         <Route path="/admin/archivesrequests" component={ArchivesRequests} />
         <Route path="/admin/ArchivesRecords" component={ArchivesRecords} />
         <Route path="/admin/users" component={AdminUsers}/>
-          <Route path="/admin/edit" component={EditComponent}/>
-
-        
+        <Route path="/admin/edit" component={EditComponent}/>
       </Route>
       <Route path="/cat(/:catName)" component={ResultsPage} />
       <Route path="/ppls" component={ResultsPage} />
