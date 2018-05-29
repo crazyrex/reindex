@@ -18,6 +18,7 @@ import adminSearchBarReducer from '../components/AdminSearchBar/reducer';
 import searchReducer from '../components/SearchBar/reducer';
 import categoriesTreeReducer from '../components/CategoriesTree/reducer';
 import LandspaceReducer from '../containers/Landspace/reducer';
+import RecordsReducer from '../containers/EditComponent/reducer';
 
 import resultsPageReducer from '../containers/ResultsPage/reducer';
 import { reducer as form } from 'redux-form';
@@ -102,7 +103,8 @@ const rootReducer = combineReducers({
   results: resultsPageReducer,
   landspaces: LandspaceReducer,
   form,
-  router
+  router,
+  records:RecordsReducer
 });
 
 export default rootReducer;

@@ -1,35 +1,30 @@
-/*
- * ChildrenData
- *
- * List all the features
- */
-
-
 import React from 'react';
+import {loadRecords, recordsLoaded} from './actions';
 import PropTypes from 'prop-types';
 import keycode from 'keycode';
-// import Downshift from 'downshift';
-// import { withStyles } from '@material-ui/core/styles';
-// import TextField from '@material-ui/core/TextField';
-// import Paper from '@material-ui/core/Paper';
-// import MenuItem from '@material-ui/core/MenuItem';
-// import Chip from '@material-ui/core/Chip';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
-import './style.css';
+import Autocomplete from 'components/Autocomplete';
 
 
 export class EditComponent extends React.PureComponent {
+	
   constructor(props) {
-    super(props);
-    this.state = { objects: [
-      {type: "text", x: 10, y: 20, text: "Hello!", fill: "red"},
-      {type: "rect", x: 50, y: 70, fill: "red"}
-    ]
+	super(props);
+	this.handleCategoriesRequest = this.handleCategoriesRequest.bind(this);
+	this.handleChange = this.handleChange.bind(this);
+    this.state = { 
+			objects: [
+		{type: "text", x: 10, y: 20, text: "Hello!", fill: "red"},
+		{type: "rect", x: 50, y: 70, fill: "red"}
+		],
+		records:["fafdafa","fadsfa"]
   };
-    this.handleChange = this.handleChange.bind(this);
+  this.props.loadRecords();   
+console.log('this.props.records',this.props.records);
   }
   componentDidMount(){
+	require('./style.css');
     require ('./image.js');
     require ('./request.js');
   }
@@ -41,11 +36,16 @@ OnLoadGetRecords(){
 	console.log('OnLoadGetRecords');
 	//let recordsList= getRecords();
 }
+handleCategoriesRequest(searchText, index, tabType) {
+    if (index !== -1) this.props.loadSubCategories(searchText, tabType, false);
+    this.props.onNewRequest();
+  }
 
   render() {
+	  console.log('this.props.data.records',this.props.data.records);
     return (
       <div>
-<div id="wrapper">
+<div id="wrapper" className="editLandscape">
 	<header id="header">
 		<nav id="nav" className="clearfix">
 			<ul>
@@ -91,7 +91,17 @@ OnLoadGetRecords(){
 		<label htmlFor="alt_attr">alt</label>
 		<input type="text" id="alt_attr" />
 	</p> */}
-	<p>
+	 
+	 <label htmlFor="startup_name_attr">Name</label>
+
+	<Autocomplete 
+                  text="Type startup name"
+                  hintText="Startup name"
+                  dataSource={this.props.data.records || []}
+                //   handleUpdateInput={(searchText) => this.props.handleInput(searchText, 'startupname')}
+                  onNewRequest={(chosenRequest, index) => { this.props.emptySubCategories(index); this.handleCategoriesRequest(chosenRequest, index, 'businesses')}}
+                /> 
+	{/* <p>
 		<label htmlFor="startup_name_attr">Name</label>
 		<select id="startup_name_attr" form="edit_details">
 		<option value="volvo">Volvo</option>
@@ -99,7 +109,7 @@ OnLoadGetRecords(){
 		<option value="opel">Opel</option>
 		<option value="audi">Audi</option>
 		</select>
-	</p>
+	</p> */}
 	<button id="save_details">Save</button>
 </form>
 
@@ -163,22 +173,43 @@ OnLoadGetRecords(){
 			<p><span className="key">&rarr;</span> &mdash; move a selected area to the right</p>
 		</section>
 	</div>
-	<footer>
-		<a href="http://github.com/summerstyle/summer">Summer html image map creator 0.5</a><br />
-		&copy; 2014 Vera Lobatcheva<br />
-		GPL3 License
-	</footer>
 </div>
 </div>
     );
   }
+  
 }
+export function mapStateToProps(state){
+	console.log('mapStateToProps state: ',state);
+	return {
+		data:state.records,
+	}
+}
+export function mapDispatchToProps(dispatch) {
+	return {
+		loadRecords:() => {
+			dispatch(loadRecords());
+		},
+	  handleInput: (searchText, tabType, filterType) => {
+		dispatch(loadFilterData({ searchText, tabType, filterType }));
+	  },
+	};
+  }
 
 
 EditComponent.propTypes = {
+	handleInput: React.PropTypes.func,
+	records: React.PropTypes.array,
+	loadRecords: React.PropTypes.func,
+	onNewRequest: React.PropTypes.func,
+	search: React.PropTypes.object,
+	handleSearchBtn: React.PropTypes.func,
+	loadSubCategories: React.PropTypes.func,
+	setActiveTab: React.PropTypes.func,
+	updateSearchObj: React.PropTypes.func,
+	loadCategoriesFilterData: React.PropTypes.func,
 };
 
 
-
-export default EditComponent;
+export default connect(mapStateToProps, mapDispatchToProps)(EditComponent);
 

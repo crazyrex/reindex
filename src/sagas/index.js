@@ -101,6 +101,7 @@ import AdminSearch from '../containers/AdminSearch/sagas';
 import AuthPage from '../containers/AuthPage/sagas';
 import AdminUsers from '../containers/AdminUsers/sagas';
 import LandspaceSaga from '../containers/Landspace/saga';
+import RecordsSaga from '../containers/EditComponent/saga';
 
 export default function* root() {
   yield [
@@ -114,6 +115,7 @@ export default function* root() {
     ...AdminSearch,
     ...AuthPage,
     ...AdminUsers,
-    ...LandspaceSaga
+    ...LandspaceSaga,
+    ...RecordsSaga
   ];
 }

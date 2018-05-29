@@ -722,7 +722,7 @@ function SummerHtmlImageMapCreator() {
 			header = form.querySelector('h5'),
 			href_attr = utils.id('href_attr'),
 			// alt_attr = utils.id('alt_attr'),
-			startup_name_attr = utils.id('startup_name_attr'),
+			// startup_name_attr = utils.id('startup_name_attr'),
 			save_button = utils.id('save_details'),
 			close_button = form.querySelector('.close_button'),
 			sections = form.querySelectorAll('p'),
@@ -742,7 +742,7 @@ function SummerHtmlImageMapCreator() {
 		function save(e) {
 			obj.href = href_attr.value;
 			// obj.alt = alt_attr.value;
-			obj.title = startup_name_attr.value;
+			// obj.title = startup_name_attr.value;
 			
 			obj.href ? obj.with_href() : obj.without_href();
 			
@@ -783,11 +783,11 @@ function SummerHtmlImageMapCreator() {
 		
 		href_attr.addEventListener('keydown', function(e) { e.stopPropagation(); }, false);
 		// alt_attr.addEventListener('keydown', function(e) { e.stopPropagation(); }, false);
-		startup_name_attr.addEventListener('keydown', function(e) { e.stopPropagation(); }, false);
+		// startup_name_attr.addEventListener('keydown', function(e) { e.stopPropagation(); }, false);
 		
 		href_attr.addEventListener('change', change, false);
 		// alt_attr.addEventListener('change', change, false);
-		startup_name_attr.addEventListener('change', change, false);
+		// startup_name_attr.addEventListener('change', change, false);
 		
 		close_button.addEventListener('click', unload, false);
 		
@@ -807,7 +807,7 @@ function SummerHtmlImageMapCreator() {
 				obj = object;
 				href_attr.value = object.href ? object.href : '';
 				// alt_attr.value = object.alt ? object.alt : '';
-				startup_name_attr.value = object.title ? object.title : '';
+				// startup_name_attr.value = object.title ? object.title : '';
 				utils.show(form);
 				if (new_x && new_y) {
 					x = new_x;
