@@ -16,6 +16,7 @@ import keycode from 'keycode';
 // import Chip from '@material-ui/core/Chip';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
+import UploadImage from 'components/UploadImage'
 import './style.css';
 
 
@@ -25,7 +26,7 @@ export class EditComponent extends React.PureComponent {
     this.state = { objects: [
       {type: "text", x: 10, y: 20, text: "Hello!", fill: "red"},
       {type: "rect", x: 50, y: 70, fill: "red"}
-    ]
+	]
   };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -119,6 +120,7 @@ OnLoadGetRecords(){
 	<div id="get_image">
 		<div id="loading">Loading</div>
 		<div id="file_reader_support">
+			<UploadImage url="uploadImage"/> 
 			<label>Drag an image</label>
 			<div id="dropzone">
 				<span className="clear_button" title="clear">x</span> 
