@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import keycode from 'keycode';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
+import RaisedButton from 'material-ui/RaisedButton';
 import Autocomplete from 'components/Autocomplete';
 import UploadImage from 'components/UploadImage'
 import './style.css';
@@ -28,7 +29,6 @@ console.log('this.props.records',this.props.records);
   componentDidMount(){
 	require('./style.css');
     require ('./image.js');
-    require ('./request.js');
   }
   handleChange(selectorFiles)
   {
@@ -41,6 +41,9 @@ OnLoadGetRecords(){
 handleCategoriesRequest(searchText, index, tabType) {
     if (index !== -1) this.props.loadSubCategories(searchText, tabType, false);
     this.props.onNewRequest();
+  }
+  handleInput(searchText, records){
+	  console.log('handleInputhandleInput',searchText,records);
   }
 
   render() {
@@ -82,26 +85,25 @@ handleCategoriesRequest(searchText, index, tabType) {
 	<div id="code_content"></div>
 </div>
 
-<form id="edit_details">
+<form id="edit_details" wid>
 	<h5>Startup info</h5>
 	<span className="close_button" title="close"></span>
-	<p>
+	{/* <p>
 		<label htmlFor="href_attr">href</label>
 		<input type="text" id="href_attr" />
-	</p>
+	</p> */}
 	{/* <p>
 		<label htmlFor="alt_attr">alt</label>
 		<input type="text" id="alt_attr" />
 	</p> */}
 	 
-	 <label htmlFor="startup_name_attr">Name</label>
-
-	<Autocomplete 
+	 {/* <label htmlFor="startup_name_attr">Name</label> */}
+			<Autocomplete 
                   text="Type startup name"
                   hintText="Startup name"
                   dataSource={this.props.data.records || []}
-                //   handleUpdateInput={(searchText) => this.props.handleInput(searchText, 'startupname')}
-                  onNewRequest={(chosenRequest, index) => { this.props.emptySubCategories(index); this.handleCategoriesRequest(chosenRequest, index, 'businesses')}}
+                  handleUpdateInput={(searchText) => this.props.handleInput(searchText,this.props.data.records)}
+                //   onNewRequest={(chosenRequest, index) => { this.props.emptySubCategories(index); this.handleCategoriesRequest(chosenRequest, index, 'businesses')}}
                 /> 
 	{/* <p>
 		<label htmlFor="startup_name_attr">Name</label>
@@ -112,6 +114,10 @@ handleCategoriesRequest(searchText, index, tabType) {
 		<option value="audi">Audi</option>
 		</select>
 	</p> */}
+	  {/* <Button variant="outlined" color="primary">
+	  Save
+      </Button> */}
+
 	<button id="save_details">Save</button>
 </form>
 
@@ -193,9 +199,10 @@ export function mapDispatchToProps(dispatch) {
 		loadRecords:() => {
 			dispatch(loadRecords());
 		},
-	  handleInput: (searchText, tabType, filterType) => {
-		dispatch(loadFilterData({ searchText, tabType, filterType }));
-	  },
+	//   handleInput: (searchText, tabType, filterType) => {
+	// 	  console.log('')
+	// 	dispatch(loadFilterData({ searchText, tabType, filterType }));
+	//   },
 	};
   }
 

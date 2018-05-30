@@ -720,7 +720,7 @@ function SummerHtmlImageMapCreator() {
 	var info = (function() {
 		var form = utils.id('edit_details'),
 			header = form.querySelector('h5'),
-			href_attr = utils.id('href_attr'),
+			// href_attr = utils.id('href_attr'),
 			// alt_attr = utils.id('alt_attr'),
 			// startup_name_attr = utils.id('startup_name_attr'),
 			save_button = utils.id('save_details'),
@@ -740,7 +740,7 @@ function SummerHtmlImageMapCreator() {
 		}
 		
 		function save(e) {
-			obj.href = href_attr.value;
+			// obj.href = href_attr.value;
 			// obj.alt = alt_attr.value;
 			// obj.title = startup_name_attr.value;
 			
@@ -781,11 +781,11 @@ function SummerHtmlImageMapCreator() {
 		
 		save_button.addEventListener('click', save, false);
 		
-		href_attr.addEventListener('keydown', function(e) { e.stopPropagation(); }, false);
+		// href_attr.addEventListener('keydown', function(e) { e.stopPropagation(); }, false);
 		// alt_attr.addEventListener('keydown', function(e) { e.stopPropagation(); }, false);
 		// startup_name_attr.addEventListener('keydown', function(e) { e.stopPropagation(); }, false);
 		
-		href_attr.addEventListener('change', change, false);
+		// href_attr.addEventListener('change', change, false);
 		// alt_attr.addEventListener('change', change, false);
 		// startup_name_attr.addEventListener('change', change, false);
 		
@@ -805,7 +805,7 @@ function SummerHtmlImageMapCreator() {
 			load : function(object, new_x, new_y) {
 				console.log('llloaddd',object);
 				obj = object;
-				href_attr.value = object.href ? object.href : '';
+				// href_attr.value = object.href ? object.href : '';
 				// alt_attr.value = object.alt ? object.alt : '';
 				// startup_name_attr.value = object.title ? object.title : '';
 				utils.show(form);
