@@ -1,5 +1,6 @@
 import React from 'react';
 import {loadRecords, recordsLoaded} from './actions';
+import {loadTooltips,tooltipsLoaded,updateTooltips,setTooltips} from './EditTooltips/actions';
 import PropTypes from 'prop-types';
 import keycode from 'keycode';
 import Helmet from 'react-helmet';
@@ -15,6 +16,7 @@ export class EditComponent extends React.PureComponent {
   constructor(props) {
 	super(props);
 	this.handleCategoriesRequest = this.handleCategoriesRequest.bind(this);
+	this.handleNewRequest = this.handleNewRequest.bind(this);
     this.state = { 
 			objects: [
 		{type: "text", x: 10, y: 20, text: "Hello!", fill: "red"},
@@ -43,7 +45,10 @@ handleCategoriesRequest(searchText, index, tabType) {
   handleNewRequest(chosenRequest, index){
 	console.log('chosenRequest',chosenRequest,'index',index);
 	this.setState({selectedValue:chosenRequest });
-
+  }
+  OnSaveTooltip(){
+	  //save tooltip on db  with ID!
+	  console.log('chosenRequest',chosenRequest,'index',index);
   }
   render() {
     return (
@@ -119,7 +124,7 @@ handleCategoriesRequest(searchText, index, tabType) {
 	  Save
       </Button> */}
 
-	<button id="save_details">Save</button>
+	<button id="save_details" onClick={this.OnSaveTooltip}>Save</button>
 </form>
 
 <div id="from_html_wrapper">
@@ -199,6 +204,9 @@ export function mapDispatchToProps(dispatch) {
 		loadRecords:() => {
 			dispatch(loadRecords());
 		},
+		// loadTooltips:() => {
+		// 	dispatch(loadTooltips());
+		// },
 	};
   }
 
