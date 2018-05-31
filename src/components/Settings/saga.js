@@ -1,8 +1,8 @@
 import { take, put, call, cancel, takeLatest } from 'redux-saga/effects';
-import { requestNoParse } from 'utils/request';
+import request, { requestNoParse } from 'utils/request';
 import config from 'config';
 import { CREATE_SETTING ,GET_SETTING } from './constants';
-import { settingCreated, settingsFailed } from './actions';
+import { settingCreated, settingsFailed, settingLoaded } from './actions';
 
 
 export function* createSetting(data) {
@@ -12,8 +12,9 @@ export function* createSetting(data) {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('token'),
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(data.setting),
     };
     const response = yield call(requestNoParse, requestURL, options);
     yield put(settingCreated(response));
@@ -23,8 +24,20 @@ export function* createSetting(data) {
   }
 }
 
+export function* loadSetting(data) {
+  console.log('**********************')
+  const requestURL = `${config.apiRoot}settings/${data.key}`;
+  try {
+    const options = {
+      method: 'get'
+    };
+    const response = yield call(request, requestURL, options);
+    yield put(settingLoaded(response));
+  } catch (err) {
+  }
+}
+
 export default [
   takeLatest(CREATE_SETTING, createSetting),
+  takeLatest(GET_SETTING, loadSetting),
 ];
-
-  // takeLatest(GET_SETTING, getSetting)

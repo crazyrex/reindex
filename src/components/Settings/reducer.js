@@ -1,43 +1,26 @@
 import {
-  CREATE_RECORD_SUCCESS,
-  CLOSE_CREATE_RECORD_MODAL,
-  CREATE_RECORD_FAILED,
+  LOAD_SETTING_SUCCESS,  
+  CREATE_SETTING_SUCCESS,
+  CREATE_SETTING_FAILED,
 } from './constants';
 
 
 // The initial state of the App
 const initialState = {
-  goToTnxPage: false,
-  createRecordAlert: {
-    text: '',
-    open: false,
-  },
+  setting: {}
 };
 
 function createFormReducer(state = initialState, action) {
   switch (action.type) {
-     case CREATE_RECORD_FAILED:
+     case CREATE_SETTING_FAILED:
+      return state;
+    case CREATE_SETTING_SUCCESS:
+      return state;
+    case LOAD_SETTING_SUCCESS:
+      let obj = {};
+      obj[action.response.setting.key] = action.response.setting.value;
       return Object.assign({}, state, {
-        createRecordAlert: Object.assign({}, state.createRecordAlert, {
-          open: true,
-          text: 'הבקשה נכשלה',
-        })
-      });
-    case CREATE_RECORD_SUCCESS:
-      return Object.assign({}, state, {
-        createRecordAlert: Object.assign({}, state.createRecordAlert, {
-          open: true,
-          text: action.response,
-        }),
-        goToTnxPage: true,
-      });
-    case CLOSE_CREATE_RECORD_MODAL:
-      return Object.assign({}, state, {
-        createRecordAlert: Object.assign({}, state.createRecordAlert, {
-          open: false,
-          text: '',
-        }),
-        goToTnxPage: false,
+        setting: Object.assign({}, state.settings, obj)
       });
     default:
       return state;

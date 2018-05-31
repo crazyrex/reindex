@@ -1,16 +1,23 @@
-import { CREATE_SETTING, CREATE_SETTING_SUCCESS, CREATE_SETTING_FAILED, GET_SETTING} from './constants';
+import { CREATE_SETTING, CREATE_SETTING_SUCCESS, CREATE_SETTING_FAILED, GET_SETTING, LOAD_SETTING_SUCCESS} from './constants';
 
-export function createSetting(record) {
+export function createSetting(setting) {
   return {
     type: CREATE_SETTING,
-    record,
+    setting,
   };
 }
 
-export function getSetting(response) {
+export function getSetting(key) {
   return {
     type: GET_SETTING,
-    response,
+    key,
+  };
+}
+
+export function settingLoaded(response) {
+  return {
+      type: LOAD_SETTING_SUCCESS,
+      response
   };
 }
 
