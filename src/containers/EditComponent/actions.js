@@ -4,7 +4,6 @@ import {
   } from './constants';
   
   export function loadRecords(data) {
-      console.log('action');
     return {
       type: LOAD_RECORDS,
       data
@@ -12,7 +11,6 @@ import {
   }
 
   export function recordsLoaded(response) {
-    console.log('rrrecordsLoaded');
     return {
         type:LOAD_RECORDS_SUCCESS,
         response

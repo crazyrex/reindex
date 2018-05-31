@@ -1,5 +1,6 @@
 import React from 'react';
 import {loadRecords, recordsLoaded} from './actions';
+import {createSetting} from './../../components/Settings/actions';
 import PropTypes from 'prop-types';
 import keycode from 'keycode';
 import Helmet from 'react-helmet';
@@ -16,6 +17,7 @@ export class EditComponent extends React.PureComponent {
 	super(props);
 	this.handleCategoriesRequest = this.handleCategoriesRequest.bind(this);
 	this.handleChange = this.handleChange.bind(this);
+	this.saveImage = this.saveImage.bind(this);
     this.state = { 
 			objects: [
 		{type: "text", x: 10, y: 20, text: "Hello!", fill: "red"},
@@ -46,6 +48,10 @@ handleCategoriesRequest(searchText, index, tabType) {
 	  console.log('handleInputhandleInput',searchText,records);
   }
 
+  saveImage(file){
+	this.props.createSetting({key: 'landscapeImage', value: file});
+  }
+
   render() {
 	  console.log('this.props.data.records',this.props.data.records);
     return (
@@ -74,7 +80,7 @@ handleCategoriesRequest(searchText, index, tabType) {
 	</header>	
 	<div id="image_wrapper">
 		<div id="image">
-			<img src="" alt="#" id="img" />
+			<img src={""} alt="#" id="img" />
 			<svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" id="svg"></svg>
 		</div>
 	</div>
@@ -137,7 +143,7 @@ handleCategoriesRequest(searchText, index, tabType) {
 	<div id="get_image">
 		<div id="loading">Loading</div>
 		<div id="file_reader_support">
-			<UploadImage url="uploadImage"/> 
+			<UploadImage url="uploadImage" onSuccess={this.saveImage.bind(this)}/> 
 			<label>Drag an image</label>
 			<div id="dropzone">
 				<span className="clear_button" title="clear">x</span> 
@@ -199,6 +205,9 @@ export function mapDispatchToProps(dispatch) {
 		loadRecords:() => {
 			dispatch(loadRecords());
 		},
+		createSetting:(data) => {
+			dispatch(createSetting(data));
+		},
 	//   handleInput: (searchText, tabType, filterType) => {
 	// 	  console.log('')
 	// 	dispatch(loadFilterData({ searchText, tabType, filterType }));
@@ -218,6 +227,7 @@ EditComponent.propTypes = {
 	setActiveTab: React.PropTypes.func,
 	updateSearchObj: React.PropTypes.func,
 	loadCategoriesFilterData: React.PropTypes.func,
+	createSetting: React.PropTypes.func,
 };
 
 

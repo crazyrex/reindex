@@ -1,17 +1,17 @@
 import { take, put, call, cancel, select, takeLatest } from 'redux-saga/effects';
 import request, { requestNoParse } from 'utils/request';
 import config from '../../ReindexConfig';
-import { LOAD_LANDSPACES } from './constants';
-import { landspacesLoaded} from './actions';
+import { LOAD_LANDSCAPES } from './constants';
+import { landscapesLoaded} from './actions';
 
-export function* loadLandspaces(data) {
+export function* loadLandscapes(data) {
     const requestURL = `${config.apiRoot}landscape`;
     try {
       const options = {
         method: 'get'
       };
       const response = yield call(request, requestURL, options);
-      yield put(landspacesLoaded(response));
+      yield put(landscapesLoaded(response));
     } catch (err) {
       console.log(err);
     }
@@ -19,5 +19,5 @@ export function* loadLandspaces(data) {
 
 // Bootstrap sagas
 export default [
-  takeLatest(LOAD_LANDSPACES, loadLandspaces)
+  takeLatest(LOAD_LANDSCAPES, loadLandscapes)
 ];
