@@ -20,7 +20,7 @@ export function* loadtooltips(data) {
   }
 
   export function* setTooltip(data) {
-    const requestURL = `${config.apiRoot}tooltip/${data.data._id}`;
+    const requestURL = `${config.apiRoot}landscape/tooltip/${data.data._id}`;
     try {
       const options = {
         method: 'post',

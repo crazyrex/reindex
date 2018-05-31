@@ -8,7 +8,10 @@
  * Thu May 15 2013 15:15:27 GMT+0400
  */
 
-
+exports.save1 = function() {
+	save('l');
+	console.log('ddd')
+}
 function SummerHtmlImageMapCreator() {
 	
 	/* Utilities */
@@ -740,6 +743,7 @@ function SummerHtmlImageMapCreator() {
 		}
 		
 		function save(e) {
+			console.log('111')
 			// obj.href = href_attr.value;
 			// obj.alt = alt_attr.value;
 			// obj.title = startup_name_attr.value;

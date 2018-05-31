@@ -304,6 +304,9 @@ a:link, a:visited {
     border: 2px solid #F00;
 }
 #edit_details {
+    width: 46px;
+    color: white;
+    height:130px;
     width: 20%;
     position: absolute;
     top: 100px;
@@ -314,7 +317,6 @@ a:link, a:visited {
     box-shadow: rgba(0,0,0,0.2) 0 0 2px 1px;
     display: none;
     z-index: 1000;
-    color: #FFF;
     font-size: 0px;
 }
 #edit_details h5 {
