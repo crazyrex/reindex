@@ -35,7 +35,7 @@ class UploadImage extends Component {
         onSuccess(file) {
           console.log('onSuccess', file);
           if(self.props.onSuccess) {
-            self.props.onSuccess(file);          
+            self.props.onSuccess(`${config.apiUrl}${file}`);
           }
         },
         onProgress(step, file) {
