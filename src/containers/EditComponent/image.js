@@ -377,8 +377,8 @@ function SummerHtmlImageMapCreator() {
 					
 					break;
 				
-				case KEYS.S: /* s (save) key */
-					app.saveInLocalStorage();
+				// case KEYS.S: /* s (save) key */
+				// 	app.saveInLocalStorage();
 	
 					break;
 				

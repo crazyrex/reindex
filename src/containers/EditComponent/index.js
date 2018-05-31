@@ -1,12 +1,13 @@
 import React from 'react';
 import {loadRecords, recordsLoaded} from './actions';
 import {createSetting} from './../../components/Settings/actions';
+import {loadTooltips,tooltipsLoaded,updateTooltips,setTooltips} from './EditTooltips/actions';
 import PropTypes from 'prop-types';
 import keycode from 'keycode';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import RaisedButton from 'material-ui/RaisedButton';
-import Autocomplete from 'components/Autocomplete';
+import AutoComplete from 'material-ui/AutoComplete';
 import UploadImage from 'components/UploadImage'
 import './style.css';
 
@@ -18,24 +19,24 @@ export class EditComponent extends React.PureComponent {
 	this.handleCategoriesRequest = this.handleCategoriesRequest.bind(this);
 	this.handleChange = this.handleChange.bind(this);
 	this.saveImage = this.saveImage.bind(this);
+	this.handleNewRequest = this.handleNewRequest.bind(this);
     this.state = { 
 			objects: [
 		{type: "text", x: 10, y: 20, text: "Hello!", fill: "red"},
 		{type: "rect", x: 50, y: 70, fill: "red"}
 		],
+		selectedValue:{},
+		searchText:'',
+		dataSource:[],
 		records:["fafdafa","fadsfa"]
   };
   this.props.loadRecords();   
-console.log('this.props.records',this.props.records);
   }
   componentDidMount(){
 	require('./style.css');
     require ('./image.js');
   }
-  handleChange(selectorFiles)
-  {
-      console.log('selectorFilesss ',selectorFiles);
-  }
+
 OnLoadGetRecords(){
 	console.log('OnLoadGetRecords');
 	//let recordsList= getRecords();
@@ -44,8 +45,13 @@ handleCategoriesRequest(searchText, index, tabType) {
     if (index !== -1) this.props.loadSubCategories(searchText, tabType, false);
     this.props.onNewRequest();
   }
-  handleInput(searchText, records){
-	  console.log('handleInputhandleInput',searchText,records);
+  handleNewRequest(chosenRequest, index){
+	console.log('chosenRequest',chosenRequest,'index',index);
+	this.setState({selectedValue:chosenRequest });
+  }
+  OnSaveTooltip(){
+	  //save tooltip on db  with ID!
+	  console.log('chosenRequest',chosenRequest,'index',index);
   }
 
   saveImage(file){
@@ -53,7 +59,6 @@ handleCategoriesRequest(searchText, index, tabType) {
   }
 
   render() {
-	  console.log('this.props.data.records',this.props.data.records);
     return (
       <div>
 <div id="wrapper" className="editLandscape">
@@ -103,14 +108,17 @@ handleCategoriesRequest(searchText, index, tabType) {
 		<input type="text" id="alt_attr" />
 	</p> */}
 	 
-	 {/* <label htmlFor="startup_name_attr">Name</label> */}
-			<Autocomplete 
-                  text="Type startup name"
-                  hintText="Startup name"
-                  dataSource={this.props.data.records || []}
-                  handleUpdateInput={(searchText) => this.props.handleInput(searchText,this.props.data.records)}
-                //   onNewRequest={(chosenRequest, index) => { this.props.emptySubCategories(index); this.handleCategoriesRequest(chosenRequest, index, 'businesses')}}
-                /> 
+	   <label htmlFor="startup_name_attr">Name</label>
+  	<AutoComplete
+		hintText="Startup name"
+        filter={AutoComplete.caseInsensitiveFilter}
+        dataSource={this.props.data.records || []}
+		dataSourceConfig={{text: 'business_name', value: '_id'}}
+		onNewRequest={this.handleNewRequest}
+        className="autocomplete"
+        ref="autocomplete"
+		fullWidth={true}
+		/>
 	{/* <p>
 		<label htmlFor="startup_name_attr">Name</label>
 		<select id="startup_name_attr" form="edit_details">
@@ -124,7 +132,7 @@ handleCategoriesRequest(searchText, index, tabType) {
 	  Save
       </Button> */}
 
-	<button id="save_details">Save</button>
+	<button id="save_details" onClick={this.OnSaveTooltip}>Save</button>
 </form>
 
 <div id="from_html_wrapper">
@@ -195,7 +203,6 @@ handleCategoriesRequest(searchText, index, tabType) {
   
 }
 export function mapStateToProps(state){
-	console.log('mapStateToProps state: ',state);
 	return {
 		data:state.records,
 	}
@@ -212,6 +219,9 @@ export function mapDispatchToProps(dispatch) {
 	// 	  console.log('')
 	// 	dispatch(loadFilterData({ searchText, tabType, filterType }));
 	//   },
+		// loadTooltips:() => {
+		// 	dispatch(loadTooltips());
+		// },
 	};
   }
 
