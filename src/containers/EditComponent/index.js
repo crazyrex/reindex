@@ -1348,14 +1348,14 @@ function SummerHtmlImageMapCreator() {
 			e.preventDefault();
 		}
 		
-		save.addEventListener('click', onSaveButtonClick, false);
+		// save.addEventListener('click', onSaveButtonClick, false);
 		load.addEventListener('click', onLoadButtonClick, false);
 		rectangle.addEventListener('click', onShapeButtonClick, false);
-		circle.addEventListener('click', onShapeButtonClick, false);
-		polygon.addEventListener('click', onShapeButtonClick, false);
+		// circle.addEventListener('click', onShapeButtonClick, false);
+		// polygon.addEventListener('click', onShapeButtonClick, false);
 		clear.addEventListener('click', onClearButtonClick, false);
-		from_html.addEventListener('click', onFromHtmlButtonClick, false);
-		to_html.addEventListener('click', onToHtmlButtonClick, false);
+		// from_html.addEventListener('click', onFromHtmlButtonClick, false);
+		// to_html.addEventListener('click', onToHtmlButtonClick, false);
 		preview.addEventListener('click', onPreviewButtonClick, false);
 		edit.addEventListener('click', onEditButtonClick, false);
 		new_image.addEventListener('click', onNewImageButtonClick, false);
@@ -2363,15 +2363,15 @@ handleCategoriesRequest(searchText, index, tabType) {
 	<header id="header">
 		<nav id="nav" className="clearfix">
 			<ul>
-				<li id="save"><a href="#">save</a></li>
+				{/* <li id="save"><a href="#">save</a></li> */}
 				{/* <li id="load"><a href="#" onClick={this.OnLoadGetRecords}>load</a></li> */}
 				<li id="load"><a href="#">load</a></li>
-				<li id="from_html"><a href="#">from html</a></li>
+				{/* <li id="from_html"><a href="#">from html</a></li> */}
 				<li id="rect"><a href="#">rectangle</a></li>
-				<li id="circle"><a href="#">circle</a></li>
-				<li id="polygon"><a href="#">polygon</a></li>
+				{/* <li id="circle"><a href="#">circle</a></li> */}
+				{/* <li id="polygon"><a href="#">polygon</a></li> */}
 				<li id="edit"><a href="#">edit</a></li>
-				<li id="to_html"><a href="#">to html</a></li>
+				{/* <li id="to_html"><a href="#">to html</a></li> */}
 				<li id="preview"><a href="#">preview</a></li>
 				<li id="clear"><a href="#">clear</a></li>
 				<li id="new_image"><a href="#">new image</a></li>

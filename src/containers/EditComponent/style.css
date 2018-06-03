@@ -519,6 +519,11 @@ a:link, a:visited {
 #svg rect.helper:hover {
     fill: #F00; 
 }
+#save_details{
+    width: 50px!important;
+    height: 18px!important;
+    color:white!important;
+}
 .edit > #svg rect, .edit > #svg circle, .edit > #svg polygon {
     cursor: move;
 }

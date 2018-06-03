@@ -5,7 +5,7 @@ import { LOAD_LANDSCAPES } from './constants';
 import { landscapesLoaded} from './actions';
 
 export function* loadLandscapes(data) {
-    const requestURL = `${config.apiRoot}landscape`;
+    const requestURL = `${config.apiRoot}landscape/tooltip`;
     try {
       const options = {
         method: 'get'
