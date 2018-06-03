@@ -27,7 +27,7 @@ import {
         console.log('LOAD_TOOLTIPS_SUCCESSsss', action.response);
         //  return action.response;
         return Object.assign({}, state, {
-          tooltips: action.response
+          tooltips: action.response.tooltips
         });
       }
     // case SET_TOOLTIP:

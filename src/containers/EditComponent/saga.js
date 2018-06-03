@@ -2,7 +2,7 @@ import { take, put, call, cancel, select, takeLatest } from 'redux-saga/effects'
 import request, { requestNoParse } from 'utils/request';
 import config from '../../ReindexConfig';
 import { LOAD_RECORDS,LOAD_TOOLTIPS,SET_TOOLTIP,UPDATE_TOOLTIP,LOAD_TOOLTIPS_SUCCESS } from './constants';
-import { recordsLoaded } from './actions';
+import { recordsLoaded,tooltipsLoaded } from './actions';
 
 export function* loadRecords(data) {
   
@@ -20,8 +20,7 @@ export function* loadRecords(data) {
 
 ///TOOLTIPS
 export function* loadtooltips(data) {
-  
-  const requestURL = `${config.apiRoot}tooltips`;
+  const requestURL = `${config.apiRoot}landscape/tooltip`;
   try {
     const options = {
       method: 'get'
@@ -35,7 +34,6 @@ export function* loadtooltips(data) {
 }
 
 export function* setTooltip(data) {
-  debugger;
   console.log('SAGA function* setTooltip ',data)
   const requestURL = `${config.apiRoot}landscape/tooltip`;
   try {

@@ -31,6 +31,8 @@ export class EditComponent extends React.PureComponent {
 		records:["fafdafa","fadsfa"]
   };
   this.props.loadRecords();   
+  this.props.loadTooltips();   
+
   }
   componentDidMount(){
 	  const self =this;
@@ -471,20 +473,22 @@ function SummerHtmlImageMapCreator() {
 				return this;
 			},
 			loadFromLocalStorage : function() {
-				var str = window.localStorage.getItem('SummerHTMLImageMapCreator'),
-					obj = JSON.parse(str),
-					areas = obj.areas;
+				console.log('loaddddd ',self.props.data.tooltips);
+				// var str = window.localStorage.getItettooooltipssm('SummerHTMLImageMapCreator'),
+				// 	obj = JSON.parse(str);
+					// areas = obj.areas;
+			const areas = self.props.data.tooltips;
+				console.log('areassss',areas);
 				
-				this.loadImage(obj.img);
-				
+				// this.loadImage(obj.img);
 				utils.foreach(areas, function(x) {
-					switch (x.type) {
+					switch (x.shape) {
 						case 'rect':
 							if (x.coords.length === 4) {
 								Rect.createFromSaved({
 									coords : x.coords,
 									// title  : x.title,
-									recordId : x.recordId
+									record : x.record
 								});
 							}
 							break;
@@ -778,7 +782,7 @@ function SummerHtmlImageMapCreator() {
 		
 		function save(e) {
 			// obj.title = startup_name_attr.value;
-			obj.recordId = selectedValueRecord._id;
+			obj.record = selectedValueRecord._id;
 			// obj.href ? obj.with_href() : obj.without_href();
 			
 			changedReset();
@@ -921,7 +925,7 @@ function SummerHtmlImageMapCreator() {
 								Rect.createFromSaved({
 									coords : coords,
 									// title  : title,
-									recordId: recordId
+									record: record
 								});
 							}
 							break;
@@ -1421,7 +1425,7 @@ function SummerHtmlImageMapCreator() {
 		};
 		
 		// this.title = ''; //title attribute - not required
-		this.recordId=''
+		this.record=''
 		this.g = document.createElementNS('http://www.w3.org/2000/svg', 'g'); //container
 		this.rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect'); //rectangle
 		app.addNodeToSvg(this.g);
@@ -1752,7 +1756,7 @@ function SummerHtmlImageMapCreator() {
 	Rect.createFromSaved = function(params) {
 		var coords = params.coords,
 			// title = params.title,
-			recordId= params.recordId,
+			record= params.record,
 			area = new Rect(coords[0], coords[1]);
 		
 		area.setParams(area.dynamicDraw(coords[2], coords[3])).deselect();
@@ -1760,9 +1764,9 @@ function SummerHtmlImageMapCreator() {
 		app.setIsDraw(false)
 		   .resetNewArea();
 		
-		if(recordId){
-			area.recordId=recordId;
-		}
+		if(record){
+			area.record=record;
+		}//yehudit
 		// if (title) {
 		// 	area.title = title;
 		// }
@@ -1778,7 +1782,7 @@ function SummerHtmlImageMapCreator() {
 				this.params.y + this.params.height
 			],
 			// title  : this.title,
-			recordId:this.recordId
+			record:this.record
 		}
 	};
 
@@ -1794,7 +1798,7 @@ function SummerHtmlImageMapCreator() {
 		};
 		
 		// this.title = ''; //title attribute - not required
-		this.recordId='';
+		this.record='';
 		this.g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
 		this.circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
 		app.addNodeToSvg(this.g);
@@ -1999,7 +2003,7 @@ function SummerHtmlImageMapCreator() {
 	Circle.createFromSaved = function(params) {
 		var coords = params.coords,
 			// title = params.title,
-			recordId=params.recordId,
+			record=params.record,
 			area = new Circle(coords[0], coords[1]);
 		
 		area.setParams(area.dynamicDraw(coords[0], coords[1] + coords[2])).deselect();
@@ -2009,8 +2013,8 @@ function SummerHtmlImageMapCreator() {
 		// if (title) {
 		// 	area.title = title;
 		// }
-		if(recordId){
-			area.recordId=recordId;
+		if(record){
+			area.record=record;
 		}
 	};
 	
@@ -2496,15 +2500,19 @@ handleCategoriesRequest(searchText, index, tabType) {
   }
   
 }
-export function mapStateToProps(state){
+export function mapStateToProps(state){//yehudit
 	return {
 		data:state.records,
+		tooltips:state.tooltips,
 	}
 }
 export function mapDispatchToProps(dispatch) {
 	return {
 		loadRecords:() => {
 			dispatch(loadRecords());
+		},
+		loadTooltips:() => {
+			dispatch(loadTooltips());
 		},
 		createSetting:(data) => {
 			dispatch(createSetting(data));
@@ -2513,9 +2521,6 @@ export function mapDispatchToProps(dispatch) {
 	// 	  console.log('')
 	// 	dispatch(loadFilterData({ searchText, tabType, filterType }));
 	//   },
-		// loadTooltips:() => {
-		// 	dispatch(loadTooltips());
-		// },
 		setTooltip:(data) => {
 			dispatch(setTooltip(data));
 		},
@@ -2529,6 +2534,7 @@ export function mapDispatchToProps(dispatch) {
 EditComponent.propTypes = {
 	handleInput: React.PropTypes.func,
 	records: React.PropTypes.array,
+	tooltips:React.PropTypes.array,
 	loadRecords: React.PropTypes.func,
 	onNewRequest: React.PropTypes.func,
 	search: React.PropTypes.object,

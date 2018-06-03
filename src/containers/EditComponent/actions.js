@@ -36,12 +36,12 @@ import {
     };
   }
 
-  export function updateTooltips(data) {
-    return {
-      type: LOAD_TOOLTIPS,
-      data
-    };
-  }
+  // export function updateTooltips(data) {
+  //   return {
+  //     type: LOAD_TOOLTIPS,
+  //     data
+  //   };
+  // }
   export function setTooltip(data) {
     return {
       type: SET_TOOLTIP,
