@@ -554,3 +554,14 @@ a:link, a:visited {
 .edit > #svg .w-resize {
     cursor: w-resize;
 }
+
+
+#wrapper.editLandscape {
+    display: block;
+}
+#wrapper.editLandscape.disabled {
+    display: none;
+}
+#get_image_wrapper.disabled {
+    display: none;
+}

@@ -7,7 +7,8 @@ import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import RaisedButton from 'material-ui/RaisedButton';
 import AutoComplete from 'material-ui/AutoComplete';
-import UploadImage from 'components/UploadImage'
+import UploadImage from 'components/UploadImage';
+import { getSetting } from './../../components/Settings/actions';
 import './style.css';
 let selectedValueRecord={}
 
@@ -29,14 +30,18 @@ export class EditComponent extends React.PureComponent {
 		searchText:'',
 		dataSource:[],
 		records:["fafdafa","fadsfa"]
-  };
-  this.props.loadRecords();   
-  this.props.loadTooltips();   
-
+  	};
+  
   }
-  componentDidMount(){
-	  const self =this;
-	require('./style.css');
+
+  componentDidMount() {
+	this.props.loadImage();	
+	this.props.loadRecords();
+	this.props.loadTooltips();  
+	const self =this;
+	require('./style.css'); 
+  
+
 	// import image from './image.js';
 	// const image =require('./image.js');
 	/*
@@ -2350,6 +2355,7 @@ handleCategoriesRequest(searchText, index, tabType) {
 
   saveImage(file){
 	this.props.createSetting({key: 'landscapeImage', value: file});
+	this.props.loadImage();
   }
 
   OnSaveTooltipInfo(tooltipInfo){
@@ -2359,7 +2365,16 @@ handleCategoriesRequest(searchText, index, tabType) {
   render() {
     return (
       <div>
-<div id="wrapper" className="editLandscape">
+		<div id="get_image_wrapper" className={""+(this.props.settings.landscapeImage ? ' disabled' : '')}>
+			<div id="get_image">
+				<div id="loading">Loading</div>
+				<div id="file_reader_support">
+					<UploadImage url="uploadImage" onSuccess={this.saveImage.bind(this)}/> 
+				</div>
+			</div>
+		</div>
+
+<div id="wrapper" className={"editLandscape"+(this.props.settings.landscapeImage ? '' : ' disabled')}>
 	<header id="header">
 		<nav id="nav" className="clearfix">
 			<ul>
@@ -2383,7 +2398,7 @@ handleCategoriesRequest(searchText, index, tabType) {
 	</header>	
 	<div id="image_wrapper">
 		<div id="image">
-			<img src={""} alt="#" id="img" />
+			<img src={this.props.settings.landscapeImage} alt="#" id="img" />
 			<svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" id="svg"></svg>
 		</div>
 	</div>
@@ -2444,27 +2459,6 @@ handleCategoriesRequest(searchText, index, tabType) {
 		<button id="load_code_button">Load</button>
 	</form>
 </div>
-  
-<div id="get_image_wrapper">
-	<div id="get_image">
-		<div id="loading">Loading</div>
-		<div id="file_reader_support">
-			<UploadImage url="uploadImage" onSuccess={this.saveImage.bind(this)}/> 
-			<label>Drag an image</label>
-			<div id="dropzone">
-				<span className="clear_button" title="clear">x</span> 
-				<img src="" alt="preview" id="sm_img" />
-			</div>
-			<b>or</b>
-		</div>
-		<label htmlFor="url">type a url</label>
-		<span id="url_wrapper">
-			<span className="clear_button" title="clear">x</span>
-			<input type="text" id="url" />
-		</span>
-		<button id="button">OK</button>
-	</div>
-</div>
 
 <div id="overlay"></div>
 <div id="help">
@@ -2503,6 +2497,7 @@ handleCategoriesRequest(searchText, index, tabType) {
 export function mapStateToProps(state){//yehudit
 	return {
 		data:state.records,
+        settings: state.settings.setting,
 		tooltips:state.tooltips,
 	}
 }
@@ -2517,6 +2512,9 @@ export function mapDispatchToProps(dispatch) {
 		createSetting:(data) => {
 			dispatch(createSetting(data));
 		},
+        loadImage: () => {
+            dispatch(getSetting('landscapeImage'));
+        },
 	//   handleInput: (searchText, tabType, filterType) => {
 	// 	  console.log('')
 	// 	dispatch(loadFilterData({ searchText, tabType, filterType }));
@@ -2544,6 +2542,7 @@ EditComponent.propTypes = {
 	updateSearchObj: React.PropTypes.func,
 	loadCategoriesFilterData: React.PropTypes.func,
 	createSetting: React.PropTypes.func,
+    loadImage: React.PropTypes.func,
 	loadTooltips:  React.PropTypes.func,
 };
 
