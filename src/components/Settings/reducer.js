@@ -18,7 +18,7 @@ function createFormReducer(state = initialState, action) {
       return state;
     case LOAD_SETTING_SUCCESS:
       let obj = {};
-      obj[action.response.setting.key] = action.response.setting.value;
+      obj[action.dataKey] = action.response.setting ? action.response.setting.value : null;
       return Object.assign({}, state, {
         setting: Object.assign({}, state.settings, obj)
       });
