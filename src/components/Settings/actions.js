@@ -14,9 +14,10 @@ export function getSetting(key) {
   };
 }
 
-export function settingLoaded(response) {
+export function settingLoaded(dataKey, response) {
   return {
       type: LOAD_SETTING_SUCCESS,
+      dataKey,
       response
   };
 }
