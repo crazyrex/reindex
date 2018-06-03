@@ -1,6 +1,6 @@
 import React from 'react';
-import {loadRecords, recordsLoaded} from './actions';
-import {loadTooltips,tooltipsLoaded,updateTooltips,setTooltips} from './EditTooltips/actions';
+import {loadRecords, recordsLoaded,loadTooltips,tooltipsLoaded,updateTooltips,setTooltip} from './actions';
+import {createSetting} from './../../components/Settings/actions';
 import PropTypes from 'prop-types';
 import keycode from 'keycode';
 import Helmet from 'react-helmet';
@@ -15,7 +15,9 @@ export class EditComponent extends React.PureComponent {
 	
   constructor(props) {
 	super(props);
-	this.handleCategoriesReq9uest = this.handleCategoriesRequest.bind(this);
+
+	this.handleCategoriesRequest = this.handleCategoriesRequest.bind(this);
+	this.saveImage = this.saveImage.bind(this);
 	this.handleNewRequest = this.handleNewRequest.bind(this);
 	// this.save = this.save.bind(this);
     this.state = { 
@@ -31,6 +33,7 @@ export class EditComponent extends React.PureComponent {
   this.props.loadRecords();   
   }
   componentDidMount(){
+	  const self =this;
 	require('./style.css');
 	// import image from './image.js';
 	// const image =require('./image.js');
@@ -74,7 +77,6 @@ function SummerHtmlImageMapCreator() {
 			return document.getElementById(str);
 		},
 		hide : function(node) {
-            console.log('loading hiddde',node);
 			node.style.display = 'none';
 			
 			return this;
@@ -325,7 +327,6 @@ function SummerHtmlImageMapCreator() {
 		
 		/* Add dblclick event for svg */
 		function onAreaDblClick(e) {
-			console.log('onAreaDblClick',e);
 			if (mode === 'editing') {
 				if (e.target.tagName === 'rect' || e.target.tagName === 'circle' || e.target.tagName === 'polygon') {
 					selected_area = e.target.parentNode.obj;
@@ -460,13 +461,11 @@ function SummerHtmlImageMapCreator() {
 				};
 
 				utils.foreach(objects, function(x) {
-					debugger;
-					console.log('xxxxx',x.toJSON());//yehudit
-
-					obj.areas.push(x.toJSON());
+					const tooltipInfo = x.toJSON();
+					self.OnSaveTooltipInfo(tooltipInfo);
+					obj.areas.push(tooltipInfo);
 				});
-				console.log('JSON: ',JSON.stringify(obj));
-				window.localStorage.setItem('SummerHTMLImageMapCreator', JSON.stringify(obj));
+				//window.localStorage.setItem('SummerHTMLImageMapCreator', JSON.stringify(obj));
 			
 				console.log('Saved');
 				return this;
@@ -780,7 +779,6 @@ function SummerHtmlImageMapCreator() {
 		function save(e) {
 			// obj.title = startup_name_attr.value;
 			obj.recordId = selectedValueRecord._id;
-			console.log('obj on ssssave: ',obj);//yehudit
 			// obj.href ? obj.with_href() : obj.without_href();
 			
 			changedReset();
@@ -841,7 +839,6 @@ function SummerHtmlImageMapCreator() {
 		
 		return {
 			load : function(object, new_x, new_y) {
-				console.log('llloaddd',object);
 				obj = object;
 				// href_attr.value = object.href ? object.href : '';
 				// alt_attr.value = object.alt ? object.alt : '';
@@ -1495,7 +1492,6 @@ function SummerHtmlImageMapCreator() {
 	};
 	
 	Rect.prototype.dynamicDraw = function(x1,y1,square){
-		console.log('dynamicDraw');
 		var x0 = this.params.x,
 			y0 = this.params.y,
 			new_x,
@@ -1548,8 +1544,6 @@ function SummerHtmlImageMapCreator() {
 	};
 	
 	Rect.prototype.onDraw = function(e) {
-		console.log('onDraw');
-
 		var _n_f = app.getNewArea(),
 		    square = e.shiftKey ? true : false;
 			
@@ -1570,7 +1564,6 @@ function SummerHtmlImageMapCreator() {
 
 	////////yehudit 23.5 Open info menu onDrawStop ////
 	var selected_area = app.getSelectedArea();
-	console.log('onDrawStop eeee',e);
 			if (e.target.tagName === 'rect' || e.target.tagName === 'circle' || e.target.tagName === 'polygon') {
 				selected_area = e.target.parentNode.obj;
 				info.load(selected_area, e.pageX, e.pageY);	
@@ -2335,7 +2328,6 @@ document.addEventListener("DOMContentLoaded", SummerHtmlImageMapCreator, false);
   }
 
 OnLoadGetRecords(){
-	console.log('OnLoadGetRecords');
 	//let recordsList= getRecords();
 }
 handleCategoriesRequest(searchText, index, tabType) {
@@ -2343,7 +2335,6 @@ handleCategoriesRequest(searchText, index, tabType) {
     this.props.onNewRequest();
   }
   handleNewRequest(chosenRequest, index){
-	console.log('chosenRequest',chosenRequest,'index',index);
  selectedValueRecord=chosenRequest;
 	
 	this.setState({selectedValue:chosenRequest });
@@ -2351,8 +2342,16 @@ handleCategoriesRequest(searchText, index, tabType) {
   OnSaveTooltip(){
 	  save();
 	  //save tooltip on db  with ID!
-	  console.log('chosenRequest',chosenRequest,'index',index);
   }
+
+  saveImage(file){
+	this.props.createSetting({key: 'landscapeImage', value: file});
+  }
+
+  OnSaveTooltipInfo(tooltipInfo){
+	this.props.setTooltip(tooltipInfo);
+  }
+
   render() {
     return (
       <div>
@@ -2380,7 +2379,7 @@ handleCategoriesRequest(searchText, index, tabType) {
 	</header>	
 	<div id="image_wrapper">
 		<div id="image">
-			<img src="" alt="#" id="img" />
+			<img src={""} alt="#" id="img" />
 			<svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" id="svg"></svg>
 		</div>
 	</div>
@@ -2391,7 +2390,7 @@ handleCategoriesRequest(searchText, index, tabType) {
 	<div id="code_content"></div>
 </div>
 
-<form id="edit_details" wid>
+<form id="edit_details">
 	<h5>Startup info</h5>
 	<span className="close_button" title="close"></span>
 	{/* <p>
@@ -2446,7 +2445,7 @@ handleCategoriesRequest(searchText, index, tabType) {
 	<div id="get_image">
 		<div id="loading">Loading</div>
 		<div id="file_reader_support">
-			<UploadImage url="uploadImage"/> 
+			<UploadImage url="uploadImage" onSuccess={this.saveImage.bind(this)}/> 
 			<label>Drag an image</label>
 			<div id="dropzone">
 				<span className="clear_button" title="clear">x</span> 
@@ -2507,8 +2506,21 @@ export function mapDispatchToProps(dispatch) {
 		loadRecords:() => {
 			dispatch(loadRecords());
 		},
+		createSetting:(data) => {
+			dispatch(createSetting(data));
+		},
+	//   handleInput: (searchText, tabType, filterType) => {
+	// 	  console.log('')
+	// 	dispatch(loadFilterData({ searchText, tabType, filterType }));
+	//   },
 		// loadTooltips:() => {
 		// 	dispatch(loadTooltips());
+		// },
+		setTooltip:(data) => {
+			dispatch(setTooltip(data));
+		},
+		// updatefTooltips:() => {
+		// 	dispatch(updatefTooltips());
 		// },
 	};
   }
@@ -2525,6 +2537,8 @@ EditComponent.propTypes = {
 	setActiveTab: React.PropTypes.func,
 	updateSearchObj: React.PropTypes.func,
 	loadCategoriesFilterData: React.PropTypes.func,
+	createSetting: React.PropTypes.func,
+	loadTooltips:  React.PropTypes.func,
 };
 
 

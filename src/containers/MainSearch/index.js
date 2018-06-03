@@ -10,7 +10,6 @@ import HeaderSite from 'components/HeaderSite';
 // import NoResults from 'components/NoResults';
 // import Results from 'components/Results';
 import SearchBar from 'components/SearchBar';
-import Landspace from 'containers/Landspace';
 // import Snackbar from 'material-ui/Snackbar';
 import DrawerFilter from 'components/DrawerFilter';
 import { detectmob } from '../../utils/functions';
@@ -130,7 +129,6 @@ export class MainSearch extends React.PureComponent {
             <img src={logo} role="presentation" />
           </div>*/}
           <div id="mapTab"></div>
-          {/*<Landspace />*/}
           <SearchBar
             onNewRequest={this.props.handleNewRequest}
             handleSearchBtn={this.props.handleSearchBtn}

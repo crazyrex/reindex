@@ -24,7 +24,8 @@ import {
   CampaignVideoPage,
   LotteryPage,
   EditComponent,
-  Thank
+  Thank,
+  LandscapePage
 } from 'containers';
 
 console.log('EditComponent',EditComponent);
@@ -56,6 +57,7 @@ export default () => {
         <Route path="/admin/edit" component={EditComponent}/>
       </Route>
       <Route path="/cat(/:catName)" component={ResultsPage} />
+      <Route path="/landscape" component={LandscapePage} />
       <Route path="/ppls" component={ResultsPage} />
       <Route path="/biz" component={RecordPage} />
       <Route path="/biz/:recordId/:recordName" component={RecordPage} />
