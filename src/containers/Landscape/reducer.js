@@ -13,7 +13,7 @@ import {
       case LANDSCAPES_SUCCESS:
         if (state.landscapes.length) return state;
         return Object.assign({}, state, {
-            landscapes: buildLandscapes(action.response.landscapes)
+            landscapes: buildLandscapes(action.response.tooltips)
         });
       default:
         return state;
@@ -24,7 +24,7 @@ import {
     return(landscapes.map(function(l){
       return({
         shape: l.shape,
-        coords: (l.coords || "544,544,597,568").split(','),
+        coords: l.coords,
         id: l._id,
         business_name: l.record.business_name,
         business_description: l.record.business_description,

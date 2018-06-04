@@ -28,13 +28,13 @@ export class EditComponent extends React.PureComponent {
 		selectedValue:{},
 		searchText:'',
 		dataSource:[],
-		records:["fafdafa","fadsfa"]
   };
-  this.props.loadRecords();   
-  this.props.loadTooltips();   
+     
 
   }
   componentDidMount(){
+	  this.props.loadRecords();   
+  		this.props.loadTooltips();
 	  const self =this;
 	require('./style.css');
 	// import image from './image.js';
@@ -1170,7 +1170,10 @@ function SummerHtmlImageMapCreator() {
 		
 		/* Selected image loading */
 		function onButtonClick(e) {
-			if (last_changed === url_input && url_input.test()) {
+			if(
+
+			)
+			else if (last_changed === url_input && url_input.test()) {
 				app.loadImage(url_input.getImage()).setFilename(filename);
 			} else if (last_changed === drag_n_drop && drag_n_drop.test()) {
 				app.loadImage(drag_n_drop.getImage()).setFilename(filename);
