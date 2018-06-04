@@ -14,23 +14,24 @@ export function getSetting(key) {
   };
 }
 
-export function settingLoaded(response) {
+export function settingLoaded(dataKey, response) {
   return {
       type: LOAD_SETTING_SUCCESS,
+      dataKey,
       response
   };
 }
 
 export function settingCreated(response) {
   return {
-    type: CREATE_RECORD_SUCCESS,
+    type: CREATE_SETTING_SUCCESS,
     response,
   };
 }
 
 export function settingsFailed(response) {
   return {
-    type: CREATE_RECORD_FAILED,
+    type: CREATE_SETTING_FAILED,
     response,
   };
 }

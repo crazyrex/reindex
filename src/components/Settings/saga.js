@@ -32,7 +32,7 @@ export function* loadSetting(data) {
       method: 'get'
     };
     const response = yield call(request, requestURL, options);
-    yield put(settingLoaded(response));
+    yield put(settingLoaded(data.key, response));
   } catch (err) {
   }
 }
