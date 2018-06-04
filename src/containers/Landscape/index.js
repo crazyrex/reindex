@@ -28,6 +28,7 @@ class Landscape extends React.PureComponent {
         this.setState({top: (parseInt(area.coords[1])-10)+'px',
          left: area.coords[0]+'px',
          display:'block',
+         business_name:area.business_name,
          description: area.business_description
         });
     }
@@ -43,12 +44,16 @@ class Landscape extends React.PureComponent {
     render() {
         return (
             <div>
-                <div className="tooltip" style={{display: this.state.display, top:this.state.top, left:this.state.left}}>{this.state.description}</div>
+                <div className="tooltip" style={{display: this.state.display, top:this.state.top, left:this.state.left}}>
+                <h1>{this.state.business_name}</h1>
+                {this.state.description}
+                </div>
                 {this.props.settings.landscapeImage ? 
-                    <ImageMapper src={this.props.settings.landscapeImage} onMouseEnter={this.onMouseEnter}
+                    <ImageMapper src={this.props.settings.landscapeImage}
+                        onMouseEnter={this.onMouseEnter}
                         onMouseLeave={this.onMouseLeave}
-                        onClick={this.onClick} map={{"name": "my-map",
-                        "areas": this.props.data.landscapes}}
+                        onClick={this.onClick}
+                        map={{"name": "my-map","areas": this.props.data.landscapes}}
                         width={this.state.width}/> :
                     <div>loading...</div> 
                 }
