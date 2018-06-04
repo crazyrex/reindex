@@ -17,7 +17,8 @@ export function* createSetting(data) {
       body: JSON.stringify(data.setting),
     };
     const response = yield call(requestNoParse, requestURL, options);
-    yield put(settingCreated(response));
+    // yield put(settingCreated(response));
+    yield put(settingLoaded(data.setting.key, {setting: data.setting}));
   } catch (err) {
     console.log(err);
     yield put(settingsFailed(err));
@@ -25,7 +26,6 @@ export function* createSetting(data) {
 }
 
 export function* loadSetting(data) {
-  console.log('**********************')
   const requestURL = `${config.apiRoot}settings/${data.key}`;
   try {
     const options = {
