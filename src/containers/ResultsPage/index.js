@@ -239,7 +239,7 @@ export class ResultsPage extends React.PureComponent {
               </div> : ''}
             </Tab>
             <Tab label="Map View" onActive={(tab) => { this.setState({ index: tab.props.index }) }} style={this.getStyle(this.state.index === 1)}>
-              {false ?
+              {/*false ?
                 <MapBox data={this.props.results} /> : ''}
               {/* <GovMap data={this.props.results}/> */}
             </Tab>

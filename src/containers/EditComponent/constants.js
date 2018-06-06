@@ -4,3 +4,4 @@ export const LOAD_TOOLTIPS_SUCCESS = 'boilerplate/Landscape/LOAD_TOOLTIPS_SUCCES
 export const LOAD_TOOLTIPS = 'boilerplate/Landscape/LOAD_TOOLTIPS';
 export const SET_TOOLTIP = 'boilerplate/Landscape/SET_TOOLTIP';
 export const UPDATE_TOOLTIP = 'boilerplate/Landscape/UPDATE_TOOLTIP';
+export const DELETE_TOOLTIP = 'boilerplate/Landscape/DELETE_TOOLTIP';

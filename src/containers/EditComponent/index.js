@@ -1,5 +1,5 @@
 import React from 'react';
-import {loadRecords, recordsLoaded,loadTooltips,tooltipsLoaded,updateTooltips,setTooltip} from './actions';
+import {loadRecords, recordsLoaded,loadTooltips,tooltipsLoaded,updateTooltips,setTooltip,deleteTooltip} from './actions';
 import {createSetting} from './../../components/Settings/actions';
 import PropTypes from 'prop-types';
 import keycode from 'keycode';
@@ -12,7 +12,7 @@ import './style.css';
 let selectedValueRecord={}
 
 export class EditComponent extends React.PureComponent {
-	
+
   constructor(props) {
 	super(props);
 
@@ -462,11 +462,11 @@ function SummerHtmlImageMapCreator() {
 					// img : img_src
 				};
 
-				utils.foreach(objects, function(x) {
+				/*utils.foreach(objects, function(x) {
 					const tooltipInfo = x.toJSON();
 					self.OnSaveTooltipInfo(tooltipInfo);
 					obj.areas.push(tooltipInfo);
-				});
+				});*/
 				//window.localStorage.setItem('SummerHTMLImageMapCreator', JSON.stringify(obj));
 			
 				console.log('Saved');
@@ -488,7 +488,8 @@ function SummerHtmlImageMapCreator() {
 								Rect.createFromSaved({
 									coords : x.coords,
 									// title  : x.title,
-									record : x.record
+									record : x.record,
+									_id: x._id
 								});
 							}
 							break;
@@ -516,7 +517,6 @@ function SummerHtmlImageMapCreator() {
 							break;
 					}
 				});
-					
 				return this;
 			},
 			hide : function() {
@@ -765,6 +765,7 @@ function SummerHtmlImageMapCreator() {
 			// alt_attr = utils.id('alt_attr'),
 			startup_name_attr = utils.id('startup_name_attr'),
 			save_button = utils.id('save_details'),
+			delete_button = utils.id('delete_details'),
 			close_button = form.querySelector('.close_button'),
 			sections = form.querySelectorAll('p'),
 			obj,
@@ -784,13 +785,21 @@ function SummerHtmlImageMapCreator() {
 			// obj.title = startup_name_attr.value;
 			obj.record = selectedValueRecord._id;
 			// obj.href ? obj.with_href() : obj.without_href();
-			
+			self.OnSaveTooltipInfo(obj);
+
 			changedReset();
-			app.saveInLocalStorage();
+			//app.saveInLocalStorage();
 
 			e.preventDefault();
 		};
-		
+
+		function onDeleteTooltip(e){
+			console.log('onDeleteTooltip objjjj',obj);
+			self.OnDeleteTooltipInfo(obj._id);///yehudit!!
+		//areas delete id in client side
+		console.log('areas',obj,'id: ',obj._id);
+			e.preventDefault();
+		};
 		function unload() {
 			obj = null;
 			changedReset();
@@ -820,7 +829,7 @@ function SummerHtmlImageMapCreator() {
 		}
 		
 		save_button.addEventListener('click', save, false);
-		
+		delete_button.addEventListener('click',onDeleteTooltip, false);
 		// href_attr.addEventListener('keydown', function(e) { e.stopPropagation(); }, false);
 		// alt_attr.addEventListener('keydown', function(e) { e.stopPropagation(); }, false);
 		startup_name_attr.addEventListener('keydown', function(e) { e.stopPropagation(); }, false);
@@ -926,6 +935,7 @@ function SummerHtmlImageMapCreator() {
 									coords : coords,
 									// title  : title,
 									record: record
+
 								});
 							}
 							break;
@@ -1754,9 +1764,10 @@ function SummerHtmlImageMapCreator() {
 	};
 	
 	Rect.createFromSaved = function(params) {
+		console.log('createFromSaved  paramsss',params);
 		var coords = params.coords,
-			// title = params.title,
-			record= params.record,
+			_id = params._id,//yehudit
+			record = params.record,
 			area = new Rect(coords[0], coords[1]);
 		
 		area.setParams(area.dynamicDraw(coords[2], coords[3])).deselect();
@@ -1765,11 +1776,9 @@ function SummerHtmlImageMapCreator() {
 		   .resetNewArea();
 		
 		if(record){
-			area.record=record;
-		}//yehudit
-		// if (title) {
-		// 	area.title = title;
-		// }
+			area.record = record;
+			area._id =_id;
+		}
 	};
 	
 	Rect.prototype.toJSON = function() {
@@ -2353,9 +2362,13 @@ handleCategoriesRequest(searchText, index, tabType) {
   }
 
   OnSaveTooltipInfo(tooltipInfo){
+	  console.log('OnSaveTooltipInfoooooo',tooltipInfo)
 	this.props.setTooltip(tooltipInfo);
   }
 
+  OnDeleteTooltipInfo(id){
+  this.props.deleteTooltip(id);
+  }
   render() {
     return (
       <div>
@@ -2430,7 +2443,8 @@ handleCategoriesRequest(searchText, index, tabType) {
 	  Save
       </Button> */}
 
-	<button id="save_details" >Save</button>
+	<button id="save_details">save</button>
+	<button id="delete_details"> delete </button>
 </form>
 
 <div id="from_html_wrapper">
@@ -2517,13 +2531,14 @@ export function mapDispatchToProps(dispatch) {
 		createSetting:(data) => {
 			dispatch(createSetting(data));
 		},
-	//   handleInput: (searchText, tabType, filterType) => {
-	// 	  console.log('')
-	// 	dispatch(loadFilterData({ searchText, tabType, filterType }));
-	//   },
 		setTooltip:(data) => {
 			dispatch(setTooltip(data));
 		},
+		deleteTooltip: (id) => {
+			console.log('deleteTooltip  id',id);
+			const approve = confirm('Are you sure you want to delete?');
+			if (approve) dispatch(deleteTooltip(id))
+		  }
 		// updatefTooltips:() => {
 		// 	dispatch(updatefTooltips());
 		// },

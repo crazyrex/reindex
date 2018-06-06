@@ -25,7 +25,7 @@ class Landscape extends React.PureComponent {
     }
 
     onMouseEnter(area, index, event) {
-        this.setState({top: (parseInt(area.coords[1])-10)+'px',
+        this.setState({top: (parseInt(area.coords[1])-30)+'px',
          left: area.coords[0]+'px',
          display:'block',
          business_name:area.business_name,

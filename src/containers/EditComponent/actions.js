@@ -4,6 +4,7 @@ import {
     LOAD_TOOLTIPS_SUCCESS,
     LOAD_TOOLTIPS,
     SET_TOOLTIP,
+    DELETE_TOOLTIP,
   } from './constants';
   
   export function loadRecords(data) {
@@ -35,7 +36,12 @@ import {
         response
     };
   }
-
+  export function deleteTooltip(data) {
+    return {
+      type: DELETE_TOOLTIP,
+      data,
+    };
+  }
   // export function updateTooltips(data) {
   //   return {
   //     type: LOAD_TOOLTIPS,

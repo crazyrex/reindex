@@ -28,7 +28,6 @@ import {
   LandscapePage
 } from 'containers';
 
-console.log('EditComponent',EditComponent);
 
 export default () => {
   const routes = (

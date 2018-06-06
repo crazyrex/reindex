@@ -194,6 +194,8 @@ class RecordPage extends React.Component {
                     <span>{this.props.data.business_description}</span>
                   </div> : ''}
                 <div>
+                <div className="wrapper-logo"><img src={this.props.data.Logo} width="90px" height="50px"></img></div>
+
                   {this.props.data.phone || this.props.data.phone_2 ?
                     <div className="wrapper-icon-content">
                       <IconButton className="icon-phone" ><PhoneIcon /></IconButton>
@@ -208,6 +210,7 @@ class RecordPage extends React.Component {
                       &nbsp;{this.props.data.address_city}
                     </span>
                   </div>
+                  
                   {this.props.data.business_website ? <div className="wrapper-icon-content">
                     <IconButton className="icon-laptop" ><LaptopIcon /></IconButton>
                     <span className="website">{this.props.data.business_website}</span>
@@ -219,10 +222,11 @@ class RecordPage extends React.Component {
                 {(this.props.data.tags || this.props.data.categories) && splitTags(this.props.data.tags, this.props.data.categories, this.state.detectmob)}
               </div>
               <div className="more-details">
-                <div id="Mapbox">
+               
+               {/* <div id="Mapbox">
                 {1 !== 1? <MapGov location={this.props.data} /> :<Mapbox location={this.props.data} /> }
                  
-                </div>
+                  </div>*/}
                 <div id="details">
                   {!this.state.detectmob ? <SocialBtns data={this.props.data} /> : ''}
                   <div className="wrapper-icon-content">

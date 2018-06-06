@@ -303,6 +303,7 @@ a:link, a:visited {
 .error#url {
     border: 2px solid #F00;
 }
+
 #edit_details {
     width: 46px;
     color: white;
@@ -523,6 +524,14 @@ a:link, a:visited {
     width: 50px!important;
     height: 18px!important;
     color:white!important;
+    font-size: small!important;
+}
+#delete_details{
+    margin-left: 10%;
+    width: 50px!important;
+    height: 18px!important;
+    color: red!important;
+    font-size: small!important;
 }
 .edit > #svg rect, .edit > #svg circle, .edit > #svg polygon {
     cursor: move;
