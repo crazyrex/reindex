@@ -2406,7 +2406,7 @@ handleCategoriesRequest(searchText, index, tabType) {
 	</header>	
 	<div id="image_wrapper">
 		<div id="image">
-			<img src={""} alt="#" id="img" />
+			<img src={""} alt="#" id="img" width="1407"  height="796" />
 			<svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" id="svg"></svg>
 		</div>
 	</div>
