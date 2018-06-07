@@ -17,6 +17,7 @@ services:
      container_name: "${PROJECT_NAME}-rabbit"
      ports:
       - "15672:15672"
+      - "5672:5672"
      restart: always
 
 #######################################
