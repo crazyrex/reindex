@@ -5,6 +5,7 @@ import {
     LOAD_TOOLTIPS,
     SET_TOOLTIP,
     DELETE_TOOLTIP,
+    DELETE_TOOLTIP_SUCCESS
   } from './constants';
   
   export function loadRecords(data) {
@@ -41,16 +42,29 @@ import {
       type: DELETE_TOOLTIP,
       data,
     };
+  } 
+  export function deleteTooltipSuccess(data,id) {
+    console.log('deleteTooltipSuccess action');
+
+    return {
+      type: DELETE_TOOLTIP_SUCCESS,
+      data,
+      id,
+    };
   }
-  // export function updateTooltips(data) {
-  //   return {
-  //     type: LOAD_TOOLTIPS,
-  //     data
-  //   };
-  // }
   export function setTooltip(data) {
     return {
       type: SET_TOOLTIP,
       data
     };
   }
+
+  export function setTooltipSuccess(response) {
+    console.log('setTooltipSuccess action');
+
+    return {
+        type:SET_TOOLTIP_SUCCESS,
+        response
+    };
+  }
+  

@@ -1,8 +1,8 @@
 import { take, put, call, cancel, select, takeLatest } from 'redux-saga/effects';
 import request, { requestNoParse } from 'utils/request';
 import config from '../../ReindexConfig';
-import { LOAD_RECORDS,LOAD_TOOLTIPS,SET_TOOLTIP,UPDATE_TOOLTIP,LOAD_TOOLTIPS_SUCCESS, DELETE_TOOLTIP } from './constants';
-import { recordsLoaded,tooltipsLoaded } from './actions';
+import { LOAD_RECORDS,LOAD_TOOLTIPS,SET_TOOLTIP,UPDATE_TOOLTIP,LOAD_TOOLTIPS_SUCCESS, DELETE_TOOLTIP, DELETE_TOOLTIP_SUCCESS, SET_TOOLTIP_SUCCESS } from './constants';
+import { recordsLoaded,tooltipsLoaded, setTooltipSuccess, deleteTooltipSuccess } from './actions';
 
 export function* loadRecords(data) {
   
@@ -45,8 +45,8 @@ export function* setTooltip(data) {
       body: JSON.stringify(data.data),
     };
     const response = yield call(requestNoParse, requestURL, options);
-    if (typeof response === 'string') console.log(response);
-    // yield put(tooltipUpdated(response));
+    if (typeof response === 'string') console.log('ressss setTooltip',response);
+    yield put(setTooltipSuccess(response));
   } catch (err) {
     console.log(err);
   }
@@ -81,6 +81,8 @@ export function* deleteTooltip(data) {
         },
       };
       const response = yield call(requestNoParse, requestURL, options);
+      if (typeof response === 'string') console.log(response);
+      yield put(deleteTooltipSuccess(response,data.data));
     } catch (err) {
       console.log(err);
     }
@@ -92,5 +94,5 @@ export default [
   takeLatest(LOAD_TOOLTIPS, loadtooltips),
   takeLatest(SET_TOOLTIP, setTooltip),
   takeLatest(UPDATE_TOOLTIP, updateTooltip),
-  takeLatest(DELETE_TOOLTIP, deleteTooltip)
+  takeLatest(DELETE_TOOLTIP, deleteTooltip),
 ];

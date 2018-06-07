@@ -26,8 +26,8 @@ import {
         shape: l.shape,
         coords: l.coords,
         id: l._id,
-        business_name: l.record.business_name,
-        business_description: l.record.business_description,
+        business_name: (l.record ? l.record.business_name : ''),
+        business_description: (l.record ? l.record.business_description : ''),
       });
     }))
   }

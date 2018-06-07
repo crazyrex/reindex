@@ -33,6 +33,11 @@ export class EditComponent extends React.PureComponent {
      
 
   }
+	
+  componentWillReceiveProps(nextProps) {
+    console.log('componentWillReceiveProps next props',nextProps.data);
+  }
+
   componentDidMount(){
 	this.props.loadRecords();   
 	this.props.loadTooltips();
@@ -50,7 +55,6 @@ export class EditComponent extends React.PureComponent {
  *
  * Thu May 15 2013 15:15:27 GMT+0400
  */
-
 
 function SummerHtmlImageMapCreator() {
 	
@@ -479,7 +483,7 @@ function SummerHtmlImageMapCreator() {
 				// var str = window.localStorage.getItettooooltipssm('SummerHTMLImageMapCreator'),
 				// 	obj = JSON.parse(str);
 					// areas = obj.areas;
-			const areas = self.props.data.tooltips;
+			    const areas = self.props.data.tooltips;
 				console.log('areassss',areas);
 				
 				// this.loadImage(obj.img);
@@ -519,6 +523,7 @@ function SummerHtmlImageMapCreator() {
 							break;
 					}
 				});
+
 				return this;
 			},
 			hide : function() {
@@ -799,7 +804,10 @@ function SummerHtmlImageMapCreator() {
 			console.log('onDeleteTooltip objjjj',obj);
 			self.OnDeleteTooltipInfo(obj._id);///yehudit!!
 		//areas delete id in client side
-		console.log('areas',obj,'id: ',obj._id);
+
+		//const index=list.map(function(x){ return x.Id; }).indexOf(id);
+		//list.splice(index,1);
+		console.log('app',app,'areas',obj,'id: ',obj._id);
 			e.preventDefault();
 		};
 		function unload() {
@@ -1766,7 +1774,7 @@ function SummerHtmlImageMapCreator() {
 	};
 	
 	Rect.createFromSaved = function(params) {
-		console.log('createFromSaved  paramsss',params);
+		console.log('createFromSaved  paramsss',params);//yehudit
 		var coords = params.coords,
 			_id = params._id,//yehudit
 			record = params.record,
@@ -2462,7 +2470,7 @@ handleCategoriesRequest(searchText, index, tabType) {
 </div>
   
 <div id="get_image_wrapper">
-	<img src={this.props.settings.landscapeImage}/>
+	<img src={this.props.settings.landscapeImage} width="600px"/>
 	<div id="get_image">
 		<div id="loading">Loading</div>
 		{/* <div id="file_reader_support">
@@ -2519,6 +2527,8 @@ handleCategoriesRequest(searchText, index, tabType) {
   }
   
 }
+	
+
 export function mapStateToProps(state){//yehudit
 	return {
 		data: state.records,
@@ -2544,7 +2554,7 @@ export function mapDispatchToProps(dispatch) {
 			console.log('deleteTooltip  id',id);
 			const approve = confirm('Are you sure you want to delete?');
 			if (approve) dispatch(deleteTooltip(id))
-		  },
+		  },		
         loadImage: () => {
             dispatch(getSetting('landscapeImage'));
         },
