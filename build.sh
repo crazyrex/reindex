@@ -1,6 +1,6 @@
 #!/bin/bash
 source .env &&
-echo "Building the app. Please waite." &&
+echo "Building the app. Please wait" &&
 sudo docker-compose up --build -d &&
 sleep 30 &&
 echo "Done building the app, now performing some modifications." &&
