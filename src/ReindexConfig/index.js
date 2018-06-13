@@ -36,7 +36,7 @@ export default {
     }
   },
   recaptcha: {
-    key: '6LfNoRsUAAAAAKbOeiWoCVgbDoVe49gYcPWPI0hH'
+    key: 'recaptcha-key'
   },
   beta: true,
   hierarchyFilters: {
