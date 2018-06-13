@@ -10,9 +10,8 @@ To build the neccesary dockers you need to clone both repsitories in the same di
 
 Rename env-example to .env  
 ``` mv env-example .env```  
-Build the docker compose file  
-```docker-compose up --build```  
-
+Build the docker compose file and start the services  
+``` ./build.sh```  
 
 ## Credits
 - Client side Forked from - React Universal Saga
