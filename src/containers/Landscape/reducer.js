@@ -26,6 +26,7 @@ import {
         shape: l.shape,
         coords: l.coords,
         id: l._id,
+        recordId: l.record._id,
         business_name: (l.record ? l.record.business_name : ''),
         business_description: (l.record ? l.record.business_description : ''),
       });

@@ -287,7 +287,7 @@ class Results extends React.Component {
                 </div>
                 <div className="wrapper-actions">
                   <div style={{ margin: '10px 0' }}>
-                    <Link to={res._source.link}>{config.searchTabs[res._source.listing_type_1] === 'businesses' ? `${translate.goToBusinessPage}` : `${translate.goToContactPage}`}</Link>
+                    <Link to={res._source.link}> {translate.goToBusinessPage}</Link>
                   </div>
                   <div className="wrapper-icon-content">
                     <IconButton className="icon-update" ><UpdateIcon /></IconButton>

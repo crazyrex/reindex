@@ -21,7 +21,7 @@ class Landscape extends React.PureComponent {
     }
 
     onClick(area, index, event) {
-        location.href = 'biz/' + area.id + '/' + area.business_name;
+        location.href = 'biz/' + area.recordId + '/' + area.business_name;
     }
 
     onMouseEnter(area, index, event) {
