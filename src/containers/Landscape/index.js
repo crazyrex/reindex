@@ -14,8 +14,8 @@ class Landscape extends React.PureComponent {
         this.onClick = this.onClick.bind(this); 
         this.state = {
             display: 'none',
-            width: '1407',
-            height: '796'
+            width: 1407,
+            height: 796
         };
         this.props.loadLandscape(); 
     }

@@ -11,7 +11,7 @@ import UploadImage from 'components/UploadImage';
 import { getSetting } from './../../components/Settings/actions';
 import './style.css';
 let selectedValueRecord={}
-
+let app;
 export class EditComponent extends React.PureComponent {
 
   constructor(props) {
@@ -30,12 +30,14 @@ export class EditComponent extends React.PureComponent {
 		searchText:'',
 		dataSource:[],
   };
-     
+    
 
   }
-	
+  
   componentWillReceiveProps(nextProps) {
-    console.log('componentWillReceiveProps next props',nextProps.data);
+	console.log('componentWillReceiveProps next props',nextProps.data);
+	 if(app && (nextProps.data.tooltips!=this.props.data.tooltips))
+	   app.UpdateTooltips();
   }
 
   componentDidMount(){
@@ -189,7 +191,7 @@ function SummerHtmlImageMapCreator() {
 	
 	
 	/* Main object */
-	var app = (function() {
+	 app = (function() {
 		var body = document.getElementsByTagName('body')[0],
 			wrapper = utils.id('wrapper'),
 			svg = utils.id('svg'),
@@ -478,8 +480,8 @@ function SummerHtmlImageMapCreator() {
 				console.log('Saved');
 				return this;
 			},
-			loadFromLocalStorage : function() {
-				console.log('loaddddd ',self.props.data.tooltips);
+			UpdateTooltips : function() {
+				console.log('UpdateTooltips self.props.data.tooltips: ',self.props.data.tooltips);
 				// var str = window.localStorage.getItettooooltipssm('SummerHTMLImageMapCreator'),
 				// 	obj = JSON.parse(str);
 					// areas = obj.areas;
@@ -1265,7 +1267,7 @@ function SummerHtmlImageMapCreator() {
 		function onLoadButtonClick(e) {
 			// Load from localStorage
 			app.clear()
-			   .loadFromLocalStorage();
+			   .UpdateTooltips();
 			
 			e.preventDefault();
 		}
@@ -2348,6 +2350,7 @@ function SummerHtmlImageMapCreator() {
 };
 
 document.addEventListener("DOMContentLoaded", SummerHtmlImageMapCreator, false);
+
   }
 
 OnLoadGetRecords(){
@@ -2372,11 +2375,12 @@ handleCategoriesRequest(searchText, index, tabType) {
   }
 
   OnSaveTooltipInfo(tooltipInfo){
-	  console.log('OnSaveTooltipInfoooooo',tooltipInfo)
+	  console.log('OnSaveTooltipInfoooooo',tooltipInfo);
 	this.props.setTooltip(tooltipInfo);
   }
 
   OnDeleteTooltipInfo(id){
+	  console.log('OnDeleteTooltipInfo(id)',id);
   this.props.deleteTooltip(id);
   }
   render() {

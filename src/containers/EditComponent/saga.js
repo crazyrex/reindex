@@ -44,7 +44,7 @@ export function* setTooltip(data) {
       },
       body: JSON.stringify(data.data),
     };
-    const response = yield call(requestNoParse, requestURL, options);
+    const response = yield call(request, requestURL, options);
     if (typeof response === 'string') console.log('ressss setTooltip',response);
     yield put(setTooltipSuccess(response));
   } catch (err) {

@@ -4,6 +4,7 @@ import {
     LOAD_TOOLTIPS_SUCCESS,
     LOAD_TOOLTIPS,
     SET_TOOLTIP,
+    SET_TOOLTIP_SUCCESS,
     DELETE_TOOLTIP,
     DELETE_TOOLTIP_SUCCESS
   } from './constants';
