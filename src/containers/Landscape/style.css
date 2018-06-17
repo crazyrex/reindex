@@ -4,7 +4,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 200px;
+    max-width: 350px;
     border: 1px solid black;
     z-index: 10;
     position: absolute;

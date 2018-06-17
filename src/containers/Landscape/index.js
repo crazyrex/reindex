@@ -29,7 +29,8 @@ class Landscape extends React.PureComponent {
          left: area.coords[0]+'px',
          display:'block',
          business_name:area.business_name,
-         description: area.business_description
+         description: area.business_description,
+         founder:area.founder
         });
     }
 
@@ -46,7 +47,8 @@ class Landscape extends React.PureComponent {
             <div>
                 <div className="tooltip" style={{display: this.state.display, top:this.state.top, left:this.state.left}}>
                 <h1>{this.state.business_name}</h1>
-                {this.state.description}
+                {this.state.description}<br/>
+                founder: {this.state.founder}
                 </div>
                 {this.props.settings.landscapeImage ? 
                     <ImageMapper src={this.props.settings.landscapeImage}
