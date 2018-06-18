@@ -48,7 +48,7 @@ class Landscape extends React.PureComponent {
                 <div className="tooltip" style={{display: this.state.display, top:this.state.top, left:this.state.left}}>
                 <h1>{this.state.business_name}</h1>
                 {this.state.description}<br/>
-                founder: {this.state.founder}
+                founded: {this.state.founder}
                 </div>
                 {this.props.settings.landscapeImage ? 
                     <ImageMapper src={this.props.settings.landscapeImage}
