@@ -795,7 +795,7 @@ function SummerHtmlImageMapCreator() {
 			obj.record = selectedValueRecord._id;
 			// obj.href ? obj.with_href() : obj.without_href();
 			self.OnSaveTooltipInfo(obj);
-
+			info.unload();
 			changedReset();
 			//app.saveInLocalStorage();
 
