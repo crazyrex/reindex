@@ -5,6 +5,8 @@ import {
     LOAD_TOOLTIPS,
     SET_TOOLTIP,
     SET_TOOLTIP_SUCCESS,
+    UPDATE_TOOLTIP,
+    UPDATE_TOOLTIP_SUCCESS,
     DELETE_TOOLTIP,
     DELETE_TOOLTIP_SUCCESS
   } from './constants';
@@ -65,6 +67,22 @@ import {
 
     return {
         type:SET_TOOLTIP_SUCCESS,
+        response
+    };
+  }
+
+  export function updateTooltip(response) {
+    console.log('updateTooltip action');
+    return {
+        type:UPDATE_TOOLTIP,
+        response
+    };
+  }
+
+  export function updateTooltipSuccess(response) {
+    console.log('updateTooltipSuccess action');
+    return {
+        type:UPDATE_TOOLTIP_SUCCESS,
         response
     };
   }

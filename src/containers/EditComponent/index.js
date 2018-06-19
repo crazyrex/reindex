@@ -1,5 +1,5 @@
 import React from 'react';
-import {loadRecords, recordsLoaded,loadTooltips,tooltipsLoaded,updateTooltips,setTooltip,deleteTooltip} from './actions';
+import {loadRecords, recordsLoaded,loadTooltips,tooltipsLoaded,setTooltip,deleteTooltip,updateTooltip} from './actions';
 import {createSetting} from './../../components/Settings/actions';
 import PropTypes from 'prop-types';
 import keycode from 'keycode';
@@ -35,8 +35,7 @@ export class EditComponent extends React.PureComponent {
   }
   
   componentWillReceiveProps(nextProps) {
-	console.log('componentWillReceiveProps next props',nextProps.data);
-	 if(app && (nextProps.data.tooltips!=this.props.data.tooltips))
+	 if(app)// && (nextProps.data.tooltips!=this.props.data.tooltips))
 	   app.UpdateTooltips();
   }
 
@@ -481,10 +480,10 @@ function SummerHtmlImageMapCreator() {
 				return this;
 			},
 			UpdateTooltips : function() {
-				console.log('UpdateTooltips self.props.data.tooltips: ',self.props.data.tooltips);
 				// var str = window.localStorage.getItettooooltipssm('SummerHTMLImageMapCreator'),
 				// 	obj = JSON.parse(str);
 					// areas = obj.areas;
+					app.clear();
 			    const areas = self.props.data.tooltips;
 				console.log('areassss',areas);
 				
@@ -803,13 +802,7 @@ function SummerHtmlImageMapCreator() {
 		};
 
 		function onDeleteTooltip(e){
-			console.log('onDeleteTooltip objjjj',obj);
-			self.OnDeleteTooltipInfo(obj._id);///yehudit!!
-		//areas delete id in client side
-
-		//const index=list.map(function(x){ return x.Id; }).indexOf(id);
-		//list.splice(index,1);
-		console.log('app',app,'areas',obj,'id: ',obj._id);
+			self.OnDeleteTooltipInfo(obj._id);///yehudit!
 			e.preventDefault();
 		};
 		function unload() {
@@ -1776,7 +1769,6 @@ function SummerHtmlImageMapCreator() {
 	};
 	
 	Rect.createFromSaved = function(params) {
-		console.log('createFromSaved  paramsss',params);//yehudit
 		var coords = params.coords,
 			_id = params._id,//yehudit
 			record = params.record,
@@ -2375,12 +2367,10 @@ handleCategoriesRequest(searchText, index, tabType) {
   }
 
   OnSaveTooltipInfo(tooltipInfo){
-	  console.log('OnSaveTooltipInfoooooo',tooltipInfo);
-	this.props.setTooltip(tooltipInfo);
+	  tooltipInfo._id?this.props.updateTooltip(tooltipInfo):this.props.setTooltip(tooltipInfo);
   }
 
   OnDeleteTooltipInfo(id){
-	  console.log('OnDeleteTooltipInfo(id)',id);
   this.props.deleteTooltip(id);
   }
   render() {
@@ -2555,10 +2545,12 @@ export function mapDispatchToProps(dispatch) {
 			dispatch(setTooltip(data));
 		},
 		deleteTooltip: (id) => {
-			console.log('deleteTooltip  id',id);
 			const approve = confirm('Are you sure you want to delete?');
 			if (approve) dispatch(deleteTooltip(id))
-		  },		
+		  },
+		 updateTooltip:(data)=>{
+			dispatch(updateTooltip(data));
+		  },	
         loadImage: () => {
             dispatch(getSetting('landscapeImage'));
         },

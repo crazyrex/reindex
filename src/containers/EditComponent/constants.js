@@ -7,4 +7,5 @@ export const UPDATE_TOOLTIP = 'boilerplate/Landscape/UPDATE_TOOLTIP';
 export const DELETE_TOOLTIP = 'boilerplate/Landscape/DELETE_TOOLTIP';
 export const SET_TOOLTIP_SUCCESS = 'boilerplate/Landscape/SET_TOOLTIP_SUCCESS';
 export const DELETE_TOOLTIP_SUCCESS = 'boilerplate/Landscape/DELETE_TOOLTIP_SUCCESS';
+export const UPDATE_TOOLTIP_SUCCESS = 'boilerplate/Landscape/UPDATE_TOOLTIP_SUCCESS';
 

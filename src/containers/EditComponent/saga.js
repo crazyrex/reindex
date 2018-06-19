@@ -2,7 +2,7 @@ import { take, put, call, cancel, select, takeLatest } from 'redux-saga/effects'
 import request, { requestNoParse } from 'utils/request';
 import config from '../../ReindexConfig';
 import { LOAD_RECORDS,LOAD_TOOLTIPS,SET_TOOLTIP,UPDATE_TOOLTIP,LOAD_TOOLTIPS_SUCCESS, DELETE_TOOLTIP, DELETE_TOOLTIP_SUCCESS, SET_TOOLTIP_SUCCESS } from './constants';
-import { recordsLoaded,tooltipsLoaded, setTooltipSuccess, deleteTooltipSuccess } from './actions';
+import { recordsLoaded,tooltipsLoaded, setTooltipSuccess, deleteTooltipSuccess, updateTooltipSuccess } from './actions';
 
 export function* loadRecords(data) {
   
@@ -33,7 +33,6 @@ export function* loadtooltips(data) {
 }
 
 export function* setTooltip(data) {
-  console.log('SAGA function* setTooltip ',data)
   const requestURL = `${config.apiRoot}landscape/tooltip`;
   try {
     const options = {
@@ -52,25 +51,24 @@ export function* setTooltip(data) {
   }
 }
  export function* updateTooltip(data) {
-    const requestURL = `${config.apiRoot}landscape/tooltip/${data.data._id}`;
-    try {
-      const options = {
-        method: 'put',
-        headers: {
-          'Content-Type': 'application/json',
-           Authorization: localStorage.getItem('token'),
-        },
-        body: JSON.stringify(data.data),
-      };
-      const response = yield call(requestNoParse, requestURL, options);
-      if (typeof response === 'string') console.log(response);
-      // yield put(tooltipUpdated(response));
-    } catch (err) {
-      console.log(err);
-    }
+=      const requestURL = `${config.apiRoot}landscape/tooltip/${data.response._id}`;
+      try {
+        const options = {
+          method: 'put',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: localStorage.getItem('token'),
+          },
+          body: JSON.stringify(data.response),
+        };
+        const response = yield call(request, requestURL, options);
+        if (typeof response === 'string') console.log('updateTooltip response',response);
+        yield put(updateTooltipSuccess(response));
+      } catch (err) {
+        console.log(err);
+      }
   }
 export function* deleteTooltip(data) {
-  console.log('ssssagggaa deleteTooltip data ', data);
     const requestURL = `${config.apiRoot}landscape/tooltip/${data.data}`;
     try {  
       const options = {

@@ -5,7 +5,8 @@ import {
   SET_TOOLTIP,
   SET_TOOLTIP_SUCCESS,
   DELETE_TOOLTIP_SUCCESS,
-  UPDATE_TOOLTIP
+  UPDATE_TOOLTIP,
+  UPDATE_TOOLTIP_SUCCESS
 } from './constants';
 
 const initialState = {
@@ -35,24 +36,30 @@ function RecordsReducer(state = initialState, action) {
       }
     case SET_TOOLTIP_SUCCESS:
       {
-        debugger;
-        console.log('SET_TOOLTIP_SUCCESSsss', action);
-        //delete the last one without id
-        state.tooltips.splice(state.tooltips.length-1, 1);
-        state.tooltips.push(action.response.tooltips);
+        console.log('SET_TOOLTIP_SUCCESSsss', action.response.tooltips);
+	    	 state.tooltips.push(action.response.tooltips);
            return Object.assign({}, state, {
           tooltips: state.tooltips
         });
-      }
+	  }
+	  case UPDATE_TOOLTIP_SUCCESS:
+      {
+        console.log('UPDATE_TOOLTIP_SUCCESS', action.response.tooltips);
+      //delete the last one without id
+      const index = state.tooltips.map(function (x) {
+        return x._id;
+        }).indexOf(action.response.tooltips._id);
+        state.tooltips[index]=action.response.tooltips;
+            return Object.assign({}, state, {
+            tooltips: state.tooltips
+          });
+	  }
     case DELETE_TOOLTIP_SUCCESS:
       {
-        console.log('tooltipsssss',action.response);//addddddd if dellete by num>0
         const index = state.tooltips.map(function (x) {
           return x._id;
         }).indexOf(action.id);
         state.tooltips.splice(index, 1);
-        console.log('tooltipsssss',state.tooltips);
-
         return Object.assign({}, state, {
           tooltips:state.tooltips
         });
