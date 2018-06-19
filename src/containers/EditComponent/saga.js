@@ -51,7 +51,7 @@ export function* setTooltip(data) {
   }
 }
  export function* updateTooltip(data) {
-=      const requestURL = `${config.apiRoot}landscape/tooltip/${data.response._id}`;
+  const requestURL = `${config.apiRoot}landscape/tooltip/${data.response._id}`;
       try {
         const options = {
           method: 'put',
