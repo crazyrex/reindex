@@ -188,7 +188,7 @@ let CreateForm = class CreateForm extends React.Component {
           paperClassName="create-paper"
         >
           <form onSubmit={this.props.handleSubmit(this.createRecord)}>
-            <div className={styles["wrapper-fields"]}>
+            <div className={styles['wrapper-fields']}>
               <div>
                 <Field name="listing_type_1" component={this.renderSelectField} label="סווג">
                   <MenuItem value={1} primaryText="אנשים" />
@@ -267,7 +267,7 @@ export function mapDispatchToProps(dispatch) {
   return {
     createRecord: (values, categories, ip) => {
       if (values && values.sender && values.sender.email && values.sender.is_agreed_to_receive_data && values.sender.is_agreed_to_receive_data === true) {
-        dispatch(register2MailingList({ values ,ip}));
+        dispatch(register2MailingList({ values, ip }));
       }
       dispatch(createRecord({ values, categories }));
     },
@@ -305,7 +305,7 @@ export function scrollToFirstError(errors) {
       errorFields = getErrorFieldNames(errors.sender);
       flag = true;
     }
-  
+
     // Using breakable for loop
     for (let i = 0; i < errorFields.length; i++) {
       let fieldName;
@@ -317,7 +317,6 @@ export function scrollToFirstError(errors) {
       }
     }
   }
-
 }
 
 CreateForm = reduxForm({

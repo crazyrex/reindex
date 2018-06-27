@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { uploadRequest } from './actions';
 import UploadFile from 'rc-upload';
 import config from 'ReindexConfig';
 import FlatButton from 'material-ui/FlatButton';
-
 
 
 class Upload extends Component {
@@ -23,14 +20,13 @@ class Upload extends Component {
       uploaderProps: ''
 
     };
-
-
   }
 
 
-  handleChange(e) {
-    let uploaderProps = {
-      action: `${config.apiRoot}uploadFile?type=` + this.state.type + `&cat=` + this.state.cat + `&city=` + this.state.city,
+  handleChange() {
+    const uploaderProps = {
+      action: `${config.apiRoot}importRecords?type=` + this.state.type + '&cat=' + this.state.cat + '&city=' + this.state.city,
+      headers: { Authorization: localStorage.getItem('token') },
       beforeUpload(file) {
         console.log('beforeUpload', file.name);
       },
@@ -50,28 +46,23 @@ class Upload extends Component {
     };
     this.setState({
       uploaderProps: uploaderProps
-    })
-
+    });
   }
   change1(e) {
     this.setState({ type: e.target.value }, function () {
-      this.handleChange()
+      this.handleChange();
     });
   }
   change2(e) {
     this.setState({ cat: e.target.value }, function () {
-      this.handleChange()
+      this.handleChange();
     });
   }
   change3(e) {
     this.setState({ city: e.target.value }, function () {
-      this.handleChange()
+      this.handleChange();
     });
-
   }
-
-
-
 
   render() {
     return (
@@ -81,7 +72,7 @@ class Upload extends Component {
         <input type="text" value={this.state.input2} placeholder="city" name="input3" onChange={this.change3} />
         <UploadFile {...this.state.uploaderProps} >
           <a>
-            <FlatButton label='Upload CSV File' />
+            <FlatButton label={'Upload CSV File'} />
           </a>
         </UploadFile>
       </div>
@@ -91,6 +82,3 @@ class Upload extends Component {
 
 
 export default Upload;
-
-
-  
