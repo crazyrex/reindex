@@ -24,6 +24,7 @@ import { loadResults } from '../ResultsPage/actions';
 import styles from './App.scss'; // eslint-disable-line
 import 'assets/css/global-styles.scss';
 
+
 class App extends Component {
   constructor(props) {
     super(props);

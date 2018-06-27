@@ -63,14 +63,14 @@ class SearchBar extends React.Component {
               {this.props.search.activeTab === 'businesses' ?
                 <Autocomplete
                   text={this.props.search.businesses.value[0]}
-                  hintText="חפשת ומצאת ..."
+                  hintText="Search..."
                   dataSource={this.props.categories}
                   handleUpdateInput={(searchText) => this.props.handleInput(searchText, 'businesses', 'categories')}
                   onNewRequest={(chosenRequest, index) => { this.closeSelect(); this.props.emptySubCategories(index); this.handleCategoriesRequest(chosenRequest, index, 'businesses')}}
                 /> :
                 <Autocomplete
                   text={this.props.search.people.value[0]}
-                  hintText="חפשת ומצאת ..."
+                  hintText="Search ..."
                   dataSource={[]}
                   handleUpdateInput={(searchText) => this.props.updateSearchObj(searchText, 'people', 'categories')}
                   onNewRequest={() => { this.closeSelect(); this.props.onNewRequest(); }}

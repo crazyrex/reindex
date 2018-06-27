@@ -14,5 +14,5 @@ export MainSearch from './MainSearch';
 export ThanksPage from './ThanksPage';
 export ResultsPage from './ResultsPage';
 export Thank from './Thank';
-
-
+export EditComponent from './EditComponent';
+export LandscapePage from './Landscape';

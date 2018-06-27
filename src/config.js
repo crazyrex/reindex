@@ -11,6 +11,7 @@ module.exports = Object.assign({
   host: process.env.HOST || 'localhost',
   port: process.env.PORT || '3000',
   apiRoot: 'http://localhost:3005/api/v1/',
+  apiUrl: 'http://localhost:3005/',
   apiBaseUrl: process.env.API_URL || 'https://api.github.com',
   app: {
     googleAnalytics: {

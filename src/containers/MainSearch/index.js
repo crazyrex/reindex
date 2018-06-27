@@ -49,7 +49,7 @@ export class MainSearch extends React.PureComponent {
     this.changeState = this.changeState.bind(this);
     this.toggleIcons = this.toggleIcons.bind(this);
     this.onResize = this.onResize.bind(this);
-    this.handleClose = this.handleClose.bind(this);
+    this.handleClose = this.handleClose.bind(this);   
     this.props.checkData();
 
     }
@@ -83,11 +83,11 @@ export class MainSearch extends React.PureComponent {
     that.toggleIcons();
   }
 
-  componentWillMount(){
+   componentWillMount(){
   }
 
   componentWillUnmount() {
-
+   
     // you need to unbind the same listener that was binded.
     window.removeEventListener('resize', this.onResize, false);
 
@@ -115,7 +115,6 @@ export class MainSearch extends React.PureComponent {
   }
 
   render() {
-   
     return (
       <div className={`main-search full-height-container main ${this.props.state === 'main' ? 'main' : 'search'} ${!this.state.ifApp ? 'gotoapp' : ''}`}>
         <Helmet
@@ -190,7 +189,6 @@ MainSearch.propTypes = {
 };
 
 export function mapStateToProps(state) {
-  console.log('eeeeeeeeeeeeeeeeeeeeee', state.search)
   return {
     state: state.mainSearch.state,
     results: state.mainSearch.results,

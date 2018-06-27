@@ -100,6 +100,8 @@ import ResultsSaga from '../containers/ResultsPage/sagas';
 import AdminSearch from '../containers/AdminSearch/sagas';
 import AuthPage from '../containers/AuthPage/sagas';
 import AdminUsers from '../containers/AdminUsers/sagas';
+import LandscapeSaga from '../containers/Landscape/saga';
+import RecordsSaga from '../containers/EditComponent/saga';
 import SettingsSaga from '../components/Settings/saga';
 
 export default function* root() {
@@ -114,6 +116,8 @@ export default function* root() {
     ...AdminSearch,
     ...AuthPage,
     ...AdminUsers,
+    ...LandscapeSaga,
+    ...RecordsSaga,
     ...SettingsSaga
   ];
 }

@@ -1,5 +1,7 @@
 export const RESULTS_SUCCESS = 'boilerplate/MainSearch/RESULTS_SUCCESS';
+export const LANDSCAPES_SUCCESS = 'boilerplate/MainSearch/LANDSCAPES_SUCCESS';
 export const LOAD_RESULTS = 'boilerplate/MainSearch/LOAD_RESULTS';
+export const LOAD_LANDSCAPES = 'boilerplate/MainSearch/LOAD_LANDSCAPES';
 export const CHANGE_STATE = 'boilerplate/MainSearch/CHANGE_STATE';
 export const CREATE_RECORD_SUCCESS = 'boilerplate/MainSearch/CREATE_RECORD_SUCCESS';
 export const UPDATE_RECORD = 'boilerplate/MainSearch/UPDATE_RECORD';

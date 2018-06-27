@@ -2,7 +2,7 @@
 .drawer > div {
     // top: calc(#{$headerlogo-height} + (2 * #{$headerPadding})) !important;
     top: 85px !important;
-    background-color:rgb(64, 58, 58) !important;
+    background-color:rgb(64, 58, 58);
     padding-top: 21px;
 }
 .drawer a, .drawer .admin-menu div {
