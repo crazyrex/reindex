@@ -27,9 +27,9 @@ app.use(compression());
 // app.use(Express.static(path.join(__dirname, '..', 'static')));
 
 // Proxy to API
-app.use('/api', proxy(config.apiBaseUrl, {
+app.use('/api/*', proxy(config.apiBaseUrl, {
   // eslint-disable-next-line
-  forwardPath: (req, res) => url.parse(req.url).path
+  forwardPath: (req, res) => url.parse(req.originalUrl).path
 }));
 
 app.use((req, res) => {

@@ -10,8 +10,8 @@ const environment = {
 module.exports = Object.assign({
   host: process.env.HOST || 'localhost',
   port: process.env.PORT || '3000',
-  apiRoot: 'http://localhost:3005/api/v1/',
-  apiUrl: 'http://localhost:3005/',
+  apiRoot: `${process.env.API_URL}/api/v1/`,
+  apiUrl: process.env.API_URL,
   apiBaseUrl: process.env.API_URL || 'https://api.github.com',
   app: {
     googleAnalytics: {
@@ -22,7 +22,8 @@ module.exports = Object.assign({
     head: {
       titleTemplate: 'React Universal Saga',
       meta: [
-        { name: 'description', content: 'Universal React Starter Kit ft. Redux Saga' },
+        { name: 'description', content:
+         'Universal React Starter Kit ft. Redux Saga' },
         { charset: 'utf-8' },
         { property: 'og:site_name', content: 'React Universal Saga' },
         { property: 'og:image', content: 'https://facebook.github.io/react/img/logo_og.png' },

@@ -1,8 +1,8 @@
 import config from 'config';
 
 export default {  
-  apiRoot: 'http://localhost:3005/api/v1/',
-  apiUrl: 'http://localhost:3005/',
+  apiRoot: '/api/v1/',
+  apiUrl: '/',
   categoriesIndex: 'reindex-categories',
   lang: "en",
   tabs:{
