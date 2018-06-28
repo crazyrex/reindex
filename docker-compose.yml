@@ -7,28 +7,39 @@ services:
      volumes:
       - "${MONGODB_DATA_PATH}:/data/db"
      ports:
-      - "27017:27017"
+      - "27017"
      restart: always
    rabbit:
      image: rabbitmq:3.6.14
      container_name: "${PROJECT_NAME}-rabbit"
      ports:
-      - "15672:15672"
-      - "5672:5672"
+      - "15672"
+      - "5672"
      restart: always
    app-api:
      container_name: "${PROJECT_NAME}-api"
      build: ../reindex-api
-    #  volumes:
-    #   - "../reindex-api:/usr/src/app"
+     volumes:
+      - "../reindex-api:/usr/src/app"
      ports:
       - "${API_HTTP_PORT}:3005"
+     environment:
+      - PORT=3005
+      - DB_NAME=reindex-dev
+      - RECORDS_INDEX=reindex-records
+      - HCATEGORIES_INDEX=reindex-categories
+      - CATEGORIES_INDEX=reindex-cities
+      - HISTORY_INDEX=reindex-history
+      - HISTORY_TYPE=search
+      - ELASTIC_HOST=${PROJECT_NAME}-elasticsearch
+      - RABBITMQ_HOST=${PROJECT_NAME}-rabbit
+      - DB_PORT_27017_TCP_ADDR=${PROJECT_NAME}-mongodb
      restart: always
    elasticsearch:
      container_name: "${PROJECT_NAME}-elasticsearch"
      image: elasticsearch:2.4.2
      ports:
-       - "9200:9200"
+       - "9200"
      volumes:
       - "${ELASTIC_DATA_PATH}:/usr/share/elasticsearch/data"
      restart: always
@@ -36,12 +47,12 @@ services:
      container_name: "${PROJECT_NAME}-app"
      build: .
      volumes: 
-      - "./src:/usr/src/app/src"
+      - ".:/usr/src/app"
      ports:
       - "${APP_HTTP_PORT}:3000"
-      - "3001:3001"
      environment:
-      - API_URL=http://reindex-api:3005
+      - API_URL=http://${PROJECT_NAME}-api:3005
      restart: always
+     
 
 
