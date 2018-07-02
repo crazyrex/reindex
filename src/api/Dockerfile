@@ -5,9 +5,9 @@ RUN apt-get update
 RUN apt-get install -y mongodb-org-tools
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
-# COPY package.json /usr/src/app
+COPY package.json /usr/src/app
 #RUN npm cache clean
-# RUN npm install
+RUN npm install
 COPY . /usr/src/app
 #prod mode (not supported now)-> COPY . /usr/src/app
 EXPOSE 3005
