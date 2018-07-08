@@ -1,9 +1,6 @@
 curl -XPUT $ELASTIC_HOST:9200/$RECORDS_INDEX -d '{
   "mappings": {
     "record": {
-      "_timestamp": {
-          "enabled": "true"
-      },
       "dynamic_templates": [{
         "phone": {
           "match": "phone*",
@@ -42,7 +39,7 @@ curl -XPUT $ELASTIC_HOST:9200/$RECORDS_INDEX -d '{
         "updated": {
           "type": "date"
         },
-        "business_name": {
+        "reindexTitle": {
           "type": "string",
           "fields": {
             "plain": {
@@ -55,10 +52,15 @@ curl -XPUT $ELASTIC_HOST:9200/$RECORDS_INDEX -d '{
             "notanalyzed": {
               "type": "string",
               "index": "not_analyzed"
+            },
+            "ac": {
+              "type": "string",
+              "analyzer": "autocomplete",
+              "search_analyzer": "standard"
             }
           }
         },
-        "tags": {
+        "reindexTags": {
           "type": "string",
           "fields": {
             "plain": {
@@ -70,78 +72,8 @@ curl -XPUT $ELASTIC_HOST:9200/$RECORDS_INDEX -d '{
             }
           }
         },
-        "location": {
+        "reindexLocationPoints": {
           "type": "geo_point"
-        },
-        "address_city": {
-          "type": "string",
-          "fields": {
-           "raw": {
-              "type": "string"
-            },
-            "notanalyzed": {
-              "type": "string",
-              "index": "not_analyzed"
-            }
-          }       
-        },
-
-        "address_street_number": {
-          "type": "string",
-          "fields": {
-            "raw": {
-              "type": "string",
-              "index": "not_analyzed"
-            }
-          }
-        },
-        "first_name": {
-          "type": "string",
-          "copy_to": "full_name"
-        },
-        "last_name": {
-          "type": "string",
-          "copy_to": "full_name"
-        },
-        "full_name": {
-          "type": "string",
-          "fields": {
-            "raw": {
-              "type": "string"
-            },
-            "notanalyzed": {
-              "type": "string",
-              "index": "not_analyzed"
-            }
-          }
-        },
-        "uk3": {
-          "type": "string"
-        },
-        "score": {
-          "properties": {
-            "value": {
-              "type": "double"
-            },
-            "options": {
-              "type": "string",
-              "fields": {
-                "raw": {
-                  "type": "string",
-                  "index": "not_analyzed"
-                }
-              }
-            }
-          }
-        },
-        "score_value": {
-          "type": "double"
-        },
-        "raw": {
-          "type": "object"
-        },
-        "calculated": {
-          "type": "object"
         }
       }
     }

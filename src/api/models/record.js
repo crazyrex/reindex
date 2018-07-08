@@ -11,49 +11,12 @@ var mongoose = require('mongoose'),
   Constants = require('../config/constants');
 
 var RecordSchema = new Schema({
-  raw: Map,
-  calculated: Map,
-  wp_num: Number,
-  business_name: String,
-  first_name: String,
-  last_name: String,
-  business_description: String,
-  business_website: String,
-  address_street_name: String,
-  address_street_number: String,
-  address_street_entrance: String,
-  address_additional_info: String,
-  address_neighborhood: String,
-  address_city: String,
-  location: Array,
-  latitude: String,
-  longitude: String,
-  phone: String,
-  phone_2: String,
-  phone_3: String,
-  logo: String,
-  founder:String,
-  virtual_number: {
-    created: Date,
-    id: String,
-    value: String,
-    rtpn: String,
-  },
-  constant_virtual_number: Boolean,
-  uk1: String,
-  uk2: String,
-  uk3: String,
-  phone_landline: String,
-  email: String,
-  website: String,
-  Timestamp_1: String,
-  listing_type_2: Number,
-  listing_type_1: Number,
-  multipurpose1: String,
-  empty_1: String,
-  Empty_2: String,
-  tags: String,
-  categories: [String],
+  reindexId: String,
+  reindexTitle: String,
+  reindexDescription: String,
+  reindexLocationString: String,
+  reindexLocationPoints: [Number],
+  reindexTags: [String],
   created: {
     type: Date,
     default: Date.now()
@@ -62,19 +25,12 @@ var RecordSchema = new Schema({
     type: Date,
     default: Date.now()
   },
-  is_deleted: Boolean,
-  is_deleted_checked: Boolean,
   requests: [{
     type: Schema.Types.ObjectId,
     ref: 'RecordRequest'
-  }],
-  score_value: Number,
-  score: {
-    options: [String],
-    value: Number
-  }
+  }]
 }, {
-  collection: 'records'
+  strict: false
 });
 
 RecordSchema.pre('save', function (next) {
@@ -99,5 +55,3 @@ RecordSchema.post('save', function (doc) {
 RecordSchema.plugin(timestamps);
 
 mongoose.model('Record', RecordSchema);
-
-

@@ -1,6 +1,6 @@
 'use strict';
 module.exports = {
-  db: 'mongodb://' + (process.env.DB_PORT_27017_TCP_ADDR || '172.17.0.1') + '/' +  process.env.DB_NAME || 'reindex-dev',
+  db: 'mongodb://' + (process.env.DB_PORT_27017_TCP_ADDR || '127.0.0.1') + '/' +  process.env.DB_NAME || 'reindex-dev',
   dbName: process.env.DB_NAME || 'reindex-dev',
   dbHost: process.env.DB_PORT_27017_TCP_ADDR || '172.17.0.1',
   host: 'https://172.17.0.1:3005',

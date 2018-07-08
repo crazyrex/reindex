@@ -16,3 +16,4 @@ export ResultsPage from './ResultsPage';
 export Thank from './Thank';
 export EditComponent from './EditComponent';
 export LandscapePage from './Landscape';
+export AdminRecordsPage from './AdminRecords';
