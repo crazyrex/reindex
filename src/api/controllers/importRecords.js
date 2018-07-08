@@ -122,7 +122,6 @@ Upload.prototype.arrange = function (req, res, next) {
           doc.reindexLocationPoints = points;
         }
         if (doc.reindexTags && doc.reindexTags.length) {
-          console.log(doc.reindexTags, 'orit');
           doc.reindexTags = doc.reindexTags.split('|');
           doc.reindexTags = doc.reindexTags.map((r) => r.trim());
           if (doc.reindexTags[doc.reindexTags.length - 1] === '') doc.reindexTags.splice(doc.reindexTags.length - 1, 1);
