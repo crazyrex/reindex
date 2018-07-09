@@ -4,16 +4,13 @@
  * List all the features
  */
 import React from 'react';
-import Helmet from 'react-helmet';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import Snackbar from 'material-ui/Snackbar';
 import CategoriesTree from 'components/CategoriesTree';
-import Upload from 'components/Upload';
-// import Download from 'components/Download';
 import { closeActionResponseAlert } from './actions';
 
-import './AdminCategories.scss'
+import './AdminCategories.scss';
 
 export class AdminCategories extends React.PureComponent {
   constructor(props) {
@@ -38,10 +35,6 @@ export class AdminCategories extends React.PureComponent {
   render() {
     return (
       <div className="admin-categories full-height-container">
-        <div className='wrap-upload'>
-          {/* <Download /> */}
-          <Upload />
-        </div>
         <CategoriesTree src="admin" onUpdate={this.updateSelectedCategories} />
         <Snackbar
           open={this.props.actionResponseAlert.open}

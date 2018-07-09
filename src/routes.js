@@ -8,11 +8,11 @@ import {
   AdminRequests,
   AdminSettings,
   AdminUsers,
-  AdminFabric,
   ArchivesRequests,
   ArchivesRecords,
   AdminSearchHistory,
   AdminCategories,
+  AdminRecordsPage,
   MainSearch,
   LandingPage,
   RecordPage,
@@ -27,7 +27,6 @@ import {
   Thank,
   LandscapePage
 } from 'containers';
-
 
 export default () => {
   const routes = (
@@ -50,6 +49,7 @@ export default () => {
         <Route path="/admin/history" component={AdminSearchHistory} />
         <Route path="/admin/settings" component={AdminSettings} />
         <Route path="/admin/categories" component={AdminCategories} />
+        <Route path="/admin/records" component={AdminRecordsPage} />
         <Route path="/admin/archivesrequests" component={ArchivesRequests} />
         <Route path="/admin/ArchivesRecords" component={ArchivesRecords} />
         <Route path="/admin/users" component={AdminUsers}/>

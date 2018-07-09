@@ -49,6 +49,7 @@ class Admin extends React.PureComponent {
           <Link to="/admin/search"><MenuItem className="admin-menu">Search</MenuItem></Link>
           <Link to="/admin/history"><MenuItem className="admin-menu">History</MenuItem></Link>
           <Link to="/admin/categories"><MenuItem className="admin-menu">Categories</MenuItem></Link>
+          <Link to="/admin/records"><MenuItem className="admin-menu">Records</MenuItem></Link>
           <Link to="/admin/settings"><MenuItem className="admin-menu">Settings</MenuItem></Link>
           <Link to="/admin/users"><MenuItem className="admin-menu">Users</MenuItem></Link>
           <Link to="/admin/edit"><MenuItem className="admin-menu">Edit</MenuItem></Link>

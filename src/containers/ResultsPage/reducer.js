@@ -23,7 +23,7 @@ const initialState = {
 function processResults(results) {
   results.map((res) => {
     if (res._source.listing_type_1 === 1) res._source.link = `/ppl/${res._id}/${res._source.first_name}_${res._source.last_name}`;
-    else res._source.link = `/biz/${res._id}/${res._source.business_name}`;
+    else res._source.link = `/biz/${res._id}/${res._source.reindexTitle}`;
     res._source.link = res._source.link.replace(/ /g, '-');
     res.expanded = false;
     return res;

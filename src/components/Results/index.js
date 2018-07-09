@@ -5,19 +5,13 @@ import IconButton from 'material-ui/IconButton';
 import FlatButton from 'material-ui/FlatButton';
 import Chip from 'material-ui/Chip';
 import _ from 'lodash';
-//import  GMap  from 'components/GMap';
 import { Link } from 'react-router';
 import { detectmob } from 'utils/functions';
-// import DetailsForm from 'components/DetailsForm';
-import RaisedButton from 'material-ui/RaisedButton';
 import { ReCAPTCHA } from 'react-google-recaptcha';
-// import SocialBtns from 'components/SocialBtns';
 import { requestNoParse } from 'utils/request';
-import PhoneIcon from 'material-ui/svg-icons/communication/call';
 import HomeIcon from 'material-ui/svg-icons/action/home';
 import UpdateIcon from 'material-ui/svg-icons/action/update';
 import BusinessIcon from 'material-ui/svg-icons/places/business-center';
-// import { cleanData } from 'components/DetailsForm/actions';
 import PlaceIcon from 'material-ui/svg-icons/maps/place';
 import config from 'ReindexConfig';
 
@@ -26,12 +20,12 @@ let unit;
 if (config.lang == "he") {
   require('./Results.rtl.scss');
   translate = require('globalTranslateHE.json');
-  unit = "K";
+  unit = 'K';
 }
 else {
   translate = require('globalTranslate.json');
   require('./Results.scss');
-  unit = "M";
+  unit = 'M';
 }
 
 function splitTags(tagsStr, catArr, isDetectmob) {
@@ -73,7 +67,7 @@ class Results extends React.Component {
     let topArr = [];
     for (let i = 0; i < 5; i++) {
       if (data[i]) {
-        let tmp = data[i]._source.business_name ? data[i]._source.business_name : data[i]._source.first_name + ' ' + data[i]._source.last_name;
+        let tmp = data[i]._source.reindexTitle ? data[i]._source.reindexTitle : data[i]._source.first_name + ' ' + data[i]._source.last_name;
         if (data[i]._source.score_value)
           tmp += ' - top5'
         topArr.push(tmp);
@@ -162,7 +156,7 @@ class Results extends React.Component {
       if (!this.d || (this.d && Math.abs(this.d - this.x > 100))) {
         window.dataLayer.push({
           'event': 'click',
-          'cardname': this.props.data[index]._source.business_name
+          'cardname': this.props.data[index]._source.reindexTitle
         });
         if (this.d && Math.abs(this.d - this.x > 100)) {
           this.d = null;
@@ -187,7 +181,7 @@ class Results extends React.Component {
     window.dataLayer.push({
       'event': 'click Update',
       'type': record._source.listing_type_1 === 1 ? 'people' : 'business',
-      'name': record._source.listing_type_1 === 1 ? record._source.first_name + ' ' + record._source.last_name : record._source.business_name,
+      'name': record._source.listing_type_1 === 1 ? record._source.first_name + ' ' + record._source.last_name : record._source.reindexTitle,
       'status': 'open'
     });
   }
@@ -218,10 +212,10 @@ class Results extends React.Component {
                         </div>
                         : ''}
                       <span className="name">
-                        {res._source.business_name ||
+                        {res._source.reindexTitle ||
                           `${res._source.first_name} ${res._source.last_name}`}
                       </span>
-                      <div className="desc">{res._source.business_description}</div>
+                      <div className="desc">{res._source.reindexDescription}</div>
                     </div>
                     <div>
                   
@@ -256,9 +250,9 @@ class Results extends React.Component {
               <div className="wrapper-expand">
                 <div className="expand-mobile">
                   { /* <div className="name-wrapper">
-                    <span className="name">{res._source.business_name ||
+                    <span className="name">{res._source.reindexTitle ||
                       `${res._source.first_name} ${res._source.last_name}`}</span>
-                    <span>{res._source.business_description}</span>
+                    <span>{res._source.reindexDescription}</span>
                   </div>
                   <div className="tags">
                     {splitTags(res._source.tags, res._source.categories)}

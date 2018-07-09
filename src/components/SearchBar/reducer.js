@@ -88,7 +88,7 @@ const initialState = {
 function processFiltersData(data) {
   data.map((o) => {
     const obj = o;
-    obj.text = obj._source.content;
+    obj.text = obj._source.content || obj._source.reindexTitle;
     obj.value = obj._id;
     return obj;
   });

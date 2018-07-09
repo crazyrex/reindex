@@ -150,8 +150,8 @@ class RecordPage extends React.Component {
       const lastCategory = (categories.length) ? categories[categories.length - 1] : '';
       let categoriesStr = categories.toString();
       categoriesStr = categoriesStr.replace(/,/g, ' > ');
-      this.strTitle = 'Reindex - ' + lastCategory + ' - ' + data.business_name + ' in ' + data.address_city;
-      this.description = 'Contact information, address, phone and other information ' + 'Reindex | ' + categoriesStr + 'Index Bussines | ' + data.business_name + ' from ' + data.address_city;
+      this.strTitle = 'Reindex - ' + lastCategory + ' - ' + data.reindexTitle + ' in ' + data.address_city;
+      this.description = 'Contact information, address, phone and other information ' + 'Reindex | ' + categoriesStr + 'Index Bussines | ' + data.reindexTitle + ' from ' + data.address_city;
     }
     else {
       const name = `${data.first_name} ${data.last_name}`;
@@ -177,8 +177,8 @@ class RecordPage extends React.Component {
               <div className="wrapper-titles">
                 <IconButton className="editBtn" onClick={() => { this.setState({ modalOpen: !this.state.modalOpen }); }}><EditIcon /></IconButton>
                 <div className="name-n-desc">
-                  <div>{this.props.data.business_name || `${this.props.data.first_name} ${this.props.data.last_name}`}</div>
-                  <div>{this.props.data.business_description}</div>
+                  <div>{this.props.data.reindexTitle || `${this.props.data.first_name} ${this.props.data.last_name}`}</div>
+                  <div>{this.props.data.reindexDescription}</div>
                 </div>
                 {this.state.showSocialBtns ?
                   <SocialBtns data={this.props.data} /> : ''}
@@ -190,8 +190,8 @@ class RecordPage extends React.Component {
               <div className="wrapper-header">
                 {!this.state.detectmob ?
                   <div>
-                    <span className="name">{this.props.data.business_name || `${this.props.data.first_name} ${this.props.data.last_name}`}</span>
-                    <span>{this.props.data.business_description}</span>
+                    <span className="name">{this.props.data.reindexTitle || `${this.props.data.first_name} ${this.props.data.last_name}`}</span>
+                    <span>{this.props.data.reindexDescription}</span>
                   </div> : ''}
                 <div>
                 <div className="wrapper-logo"><img src={this.props.data.Logo} width="90px" height="50px"></img></div>
@@ -218,6 +218,13 @@ class RecordPage extends React.Component {
                 </div>
               </div>
               <div className="separate"></div>
+
+              <div>
+                {Object.entries(this.props.data).map(([key, v]) =>
+                   v ? <div>{key}: {v}</div> : ''
+                )}
+              </div>
+
               <div className="tags">
                 {(this.props.data.tags || this.props.data.categories) && splitTags(this.props.data.tags, this.props.data.categories, this.state.detectmob)}
               </div>
