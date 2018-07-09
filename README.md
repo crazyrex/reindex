@@ -10,12 +10,13 @@ Build the docker compose file and start the services
 ``` ./build.sh```  
 
 if you want to update the app:
-cd src/app
+``` cd src/app
 git init
 git remote add app <your new git repo>
 git add .
 git commit -m "Initial commit"
 git push -u app master
-  
+```
+
 ## Credits
 - Client side Forked from - React Universal Saga
