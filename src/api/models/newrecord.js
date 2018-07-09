@@ -14,7 +14,7 @@ var NewRecordSchema = new Schema({
   reindexDescription: String,
   reindexLocationString: String,
   reindexLocationPoints: [Number],
-  reindexTags: [String],
+  reindexTags: String,
   created: {
     type: Date,
     default: Date.now()

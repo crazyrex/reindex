@@ -17,7 +17,7 @@ module.exports = {
 	searchQuery: {
 	  records: {
 		default: {
-		  match: ['tags.raw'],
+		  match: ['reindexTags.raw'],
 		  regexp: ['reindexTitle']
 		},
 		notOnlyCategoriesFilter: {

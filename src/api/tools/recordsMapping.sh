@@ -69,6 +69,10 @@ curl -XPUT $ELASTIC_HOST:9200/$RECORDS_INDEX -d '{
             },
             "raw": {
               "type": "string"
+            },
+            "notanalyzed": {
+              "type": "string",
+              "index": "not_analyzed"
             }
           }
         },
