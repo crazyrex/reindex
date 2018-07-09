@@ -1,9 +1,9 @@
-version: "2"
+version: "3"
 
 services:
    db:
      container_name: "${PROJECT_NAME}-mongodb"
-     image: mongo:3.0.14
+     image: mongo:3.6
      volumes:
       - "${MONGODB_DATA_PATH}:/data/db"
      ports:
@@ -16,28 +16,23 @@ services:
       - "15672"
       - "5672"
      restart: always
-   app-api:
+   api:
      container_name: "${PROJECT_NAME}-api"
-     build: ../reindex-api
-     volumes:
-      - "../reindex-api:/usr/src/app"
+     build: ./src/api
+    #  volumes:
+    #   - "./src/api:/usr/src/app"
      ports:
       - "${API_HTTP_PORT}:3005"
+     env_file: './src/api/.env' 
      environment:
       - PORT=3005
-      - DB_NAME=${DB_NAME}
-      - RECORDS_INDEX=${RECORDS_INDEX}
-      - HCATEGORIES_INDEX=${HCATEGORIES_INDEX}
-      - CATEGORIES_INDEX=${CATEGORIES_INDEX}
-      - HISTORY_INDEX=${HISTORY_INDEX}
-      - HISTORY_TYPE=${HISTORY_TYPE}
       - ELASTIC_HOST=${PROJECT_NAME}-elasticsearch
       - RABBITMQ_HOST=${PROJECT_NAME}-rabbit
       - DB_PORT_27017_TCP_ADDR=${PROJECT_NAME}-mongodb
      restart: always
    elasticsearch:
      container_name: "${PROJECT_NAME}-elasticsearch"
-     image: elasticsearch:2.4.2
+     image: elasticsearch:5.6
      ports:
        - "9200"
      volumes:
@@ -45,14 +40,13 @@ services:
      restart: always
    app:
      container_name: "${PROJECT_NAME}-app"
-     build: .
-     volumes: 
-      - "./src:/usr/src/app/src"
+     build: ./src/app
+    #  volumes: 
+    #   - "./src/app:/usr/src/app"
      ports:
       - "${APP_HTTP_PORT}:3000"
+      - "3001:3001"
      environment:
       - API_URL=http://${PROJECT_NAME}-api:3005
      restart: always
-     
-
 
