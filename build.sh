@@ -1,5 +1,12 @@
 #!/bin/bash
 source .env &&
+if [ ! -d "src/app" ]; then
+  cd src &&
+  git clone $REINDEX_APP app &&
+  cd app &&
+  rm -rf .git &&
+  cd ../..
+fi
 echo "Building the app. Please wait" &&
 sudo COMPOSE_PROJECT_NAME=$PROJECT_NAME docker-compose up --build -d &&
 sleep 30 &&

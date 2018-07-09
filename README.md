@@ -12,3 +12,11 @@ Build the docker compose file and start the services
 
 ## Credits
 - Client side Forked from - React Universal Saga
+
+if you want to update the app:
+cd src/app
+git init
+git remote add app <your new git repo>
+git add .
+git commit -m "Initial commit"
+git push -u app master
