@@ -15,14 +15,14 @@ module.exports = {
 	  }
 	},
 	searchQuery: {
-	  businesses: {
+	  records: {
 		default: {
-		  match: ['tags.raw', 'categories'],
-		  regexp: ['business_name']
+		  match: ['tags.raw'],
+		  regexp: ['reindexTitle']
 		},
 		notOnlyCategoriesFilter: {
-		  match: ['business_name'],
-		  plain: ['business_name']
+		  match: ['reindexTitle'],
+		  plain: ['reindexTitle']
 		}
 	  }
 	},

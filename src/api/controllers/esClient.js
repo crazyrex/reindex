@@ -15,12 +15,14 @@ async = require('async'),
 _ = require('lodash');
 
 module.exports.getDataByTerm = function (req, res, next) {
+  const fields = (req.body.term) ? [req.body.term] : ['content.ac', 'reindexTitle.ac'];
   var body = {
     from: 0,
     size: 100,
     query: {
-      match: {
-        [req.body.term]: req.body.value
+      multi_match: {
+        query: req.body.value,
+        fields: fields
       }
     }
     /* ,
@@ -33,7 +35,7 @@ module.exports.getDataByTerm = function (req, res, next) {
   
   var search = {};
   if (req.body.type) search.type = req.body.type;
-  search.index = req.body.index || req.query.index || hierarchyCategoriesIndex;
+  search.index = req.body.index || req.query.index || [recordsIndex, hierarchyCategoriesIndex];
   search.body = body;
   
   _client.search(search, function (error, response, status) {
@@ -188,11 +190,11 @@ var searchQuery = {
     }) 
     return data.body;
   },
-  businesses: function (data) {
-    for (var i in config.searchQuery.businesses.default.match) {
+  records: function (data) {
+    for (var i in config.searchQuery.records.default.match) {
       data.body.query.bool.should.push({
         match: {
-          [config.searchQuery.businesses.default.match[i]]: {
+          [config.searchQuery.records.default.match[i]]: {
             query: data.valuesString,
             operator: 'and',
             //fuzziness: '1' // with it - nofesh gives nefesh
@@ -201,11 +203,11 @@ var searchQuery = {
       });
     }
     data.valuesString = data.valuesString.replace(/['"]/gi, '');
-    for (var i in config.searchQuery.businesses.default.regexp) {
+    for (var i in config.searchQuery.records.default.regexp) {
       data.body.query.bool.should.push({
         "regexp":{
-          [config.searchQuery.businesses.default.regexp[i]+".notanalyzed"]: {
-            "value":data.valuesString+".*?+",
+          [config.searchQuery.records.default.regexp[i]+".raw"]: {
+            "value": data.valuesString+".*?+",
             "flags" : "EMPTY"
           }
         }
@@ -214,10 +216,10 @@ var searchQuery = {
     
     
     if (!data.onlyCategoriesFilter) {
-      for (var i in config.searchQuery.businesses.notOnlyCategoriesFilter.plain) {
+      for (var i in config.searchQuery.records.notOnlyCategoriesFilter.plain) {
         data.body.query.bool.should.push({
           match: {
-            [config.searchQuery.businesses.notOnlyCategoriesFilter.plain[i]+'.plain']: {
+            [config.searchQuery.records.notOnlyCategoriesFilter.plain[i]+'.plain']: {
               query: data.valuesString.replace(/['"]/gi, ''),
               operator: 'and',
               //fuzziness: '1' // with it - nofesh gives nefesh
@@ -225,10 +227,10 @@ var searchQuery = {
           }
         });
       }
-      for (var i in config.searchQuery.businesses.notOnlyCategoriesFilter.plain) {
+      for (var i in config.searchQuery.records.notOnlyCategoriesFilter.plain) {
         data.body.query.bool.should.push({
           match: {
-            [config.searchQuery.businesses.notOnlyCategoriesFilter.match[i]]: {
+            [config.searchQuery.records.notOnlyCategoriesFilter.match[i]]: {
               query: data.valuesString,
               operator: 'and',
               //fuzziness: '1' // with it - nofesh gives nefesh
@@ -237,19 +239,19 @@ var searchQuery = {
         });
       }
     }
-    var categoriesBool = {
-      bool: {
-        must: []
-      }
-    };
-    data.values.forEach(function (v) {
-      categoriesBool.bool.must.push({
-        term: {
-          ['categories']: v
-        }
-      });
-    });
-    data.body.query.bool.should.push(categoriesBool);
+    // var categoriesBool = {
+    //   bool: {
+    //     must: []
+    //   }
+    // };
+    // data.values.forEach(function (v) {
+    //   categoriesBool.bool.must.push({
+    //     term: {
+    //       ['categories']: v
+    //     }
+    //   });
+    // });
+    // data.body.query.bool.should.push(categoriesBool);
     return data.body;
   },
   sortBy: function (data) {
@@ -332,33 +334,33 @@ var searchResultsQuery = exports.searchResultsQuery = function (value, query, _b
       ]
     };
 
-    data.types = query.type.split(',');
-    data.types = data.types.map(function (t) {
-      return parseInt(t);
-    });
+    // data.types = query.type.split(',');
+    // data.types = data.types.map(function (t) {
+    //   return parseInt(t);
+    // });
     value = value.map((str) => str.replace('?', ''));
     checkCategoryFilter(value, query).then(function (categories) {
       if (categories) {
         data.values = categories; 
       }
       else data.values = value;
-      var categoriesList = [categoriesAlias];
-      var tmpArr = [];
-      for (let i = 0 ;i <= data.values.length; i++){
-        categoriesList.forEach(function(e) {
-          Object.keys(e).forEach(function(key) {
-            if (key == data.values[i]){
-              _.forEach(e[key], function(value) {
-                data.values[i] = value;
-              });
-            }
-          })
-        });
-      }
+      // var categoriesList = [categoriesAlias];
+      // var tmpArr = [];
+      // for (let i = 0 ;i <= data.values.length; i++){
+      //   categoriesList.forEach(function(e) {
+      //     Object.keys(e).forEach(function(key) {
+      //       if (key == data.values[i]){
+      //         _.forEach(e[key], function(value) {
+      //           data.values[i] = value;
+      //         });
+      //       }
+      //     })
+      //   });
+      // }
       data.valuesString = data.values.toString();
       data.body = body;
       data.query = query;
-      data.type = Constants.TYPES[query.type];
+      data.type = 'records';
       data.ids = _body.ids;
       data.exceptIds = _body.exceptIds;
       data.lat = _body.lat;
@@ -366,18 +368,17 @@ var searchResultsQuery = exports.searchResultsQuery = function (value, query, _b
       data.onlyCategoriesFilter = _body.onlyCategoriesFilter;
       
       if (data.exceptIds) data.body = searchQuery['exceptIds'](data);
-      if (data.lat && data.lon)
-      data.body = searchQuery['GPS'](data);
+      if (data.lat && data.lon) data.body = searchQuery['GPS'](data);
       else if(data.onlyCategoriesFilter) data.body = searchQuery['score'](data);
       if (data.ids) data.body = searchQuery['ids'](data);
       else {
         if (data.values && data.values.length) data.body = searchQuery[data.type](data);
-        data.body = searchQuery['phone'](data);
+        // data.body = searchQuery['phone'](data);
         data.body = searchQuery['is_deleted'](data);
         for (var index in query)
           if (searchQuery[index])data.body = searchQuery[index](data);
       }
-      search.categories = (categories) ? categories.reverse() : [];
+      // search.categories = (categories) ? categories.reverse() : [];
       search.body = body;
       resolve(search);
     });
@@ -402,7 +403,7 @@ module.exports.getDataResults = function (req, res, next) {
       data: data.hits,
       totalCount: data.total,
       limit: 50,
-      categories: data.categories.reverse(),
+      // categories: data.categories.reverse(),
     });
     // ElasticCtrl.index('history', 'search', null, searchData(req, data)).then().catch();
   }).catch(function (error) {
