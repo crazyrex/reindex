@@ -31,8 +31,9 @@ function Upload() {
   this.config = config;
 }
 
-Upload.prototype.location2points = function (address) {
+Upload.prototype.location2points = function (address, points) {
   return new Promise(function (resolve, reject) {
+    if (points && points.length) return resolve(points);
     if (!address) return resolve(null);
     geocoder.geocode({
       address
@@ -115,17 +116,10 @@ Upload.prototype.arrange = function (req, res, next) {
     if (err) return res.status(500).send(err);
     let saveFlag = false;
     async.forEachOf(newrecords, function (doc, key, callback) {
-
-      self.location2points(doc.reindexLocationString).then(function (points) {
+      self.location2points(doc.reindexLocationString, doc.reindexLocationPoints).then(function (points) {
         if (points) {
           saveFlag = true;
           doc.reindexLocationPoints = points;
-        }
-        if (doc.reindexTags && doc.reindexTags.length) {
-          doc.reindexTags = doc.reindexTags.split('|');
-          doc.reindexTags = doc.reindexTags.map((r) => r.trim());
-          if (doc.reindexTags[doc.reindexTags.length - 1] === '') doc.reindexTags.splice(doc.reindexTags.length - 1, 1);
-          saveFlag = true;
         }
         if (saveFlag) {
           var promise = doc.save();
@@ -181,7 +175,9 @@ Upload.prototype.saveRecords = function (req, res, next) {
 }
 
 Upload.prototype.end = function (req, res, next) {
+  let flag = false;
   this.emitter.once('finishReindex', function () {
+    flag = true;
     console.log('in emit')
     shell.exec(`mongodump -d ${dbName} -c newrecords --out /tmp --host ${dbHost}`);
     shell.exec(`mongorestore -d ${dbName} -c records /tmp/${dbName}/newrecords.bson --host ${dbHost}`);
@@ -190,6 +186,9 @@ Upload.prototype.end = function (req, res, next) {
       if (res) return res.send('records updated');
     });
   });
+  setTimeout(() => {
+    if (!flag) return res.send('in process');
+  }, 90000);
 }
 
 module.exports = Upload;
