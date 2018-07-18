@@ -14,6 +14,14 @@ The project can be cloned and added the .env file using REINDEX_APP variable.
 
 If you want to create a new front end
 
+``` cd src/app
+git init
+git remote add app <your new git repo>
+git add .
+git commit -m "Initial commit"
+git push -u app master
+```
+
 ## Installation
 
 Copy env-example to .env  
