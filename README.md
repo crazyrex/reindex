@@ -1,7 +1,7 @@
 
 Reindex is a cloud native application - built to be run with docker and a docker orchestrator (docker-compose , kubernetes).
 
-## Project stracture
+## Project structure
 Current struacture is docker-compose based 
 * .env - Holds docker-compose.yml variables
 * src/api - Reindex API - Rest APi routes including authentication
