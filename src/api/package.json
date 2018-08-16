@@ -21,10 +21,6 @@
     "url": "https://github.com/linnovate/reindex-api.git"
   },
   "license": "Apache-2.0",
-  "engines": {
-    "node": "10.x.x",
-    "npm": ">= 3.x.x"
-  },
   "scripts": {
     "start": "if test \"$NODE_ENV\" = \"production\"; then npm run prod; else gulp dev; fi",
     "test": "gulp check",

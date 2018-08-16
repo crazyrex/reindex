@@ -1,52 +1,47 @@
-version: "3"
+version: '3'
 
 services:
-   db:
-     container_name: "${PROJECT_NAME}-mongodb"
-     image: mongo:3.6
-     volumes:
-      - "${MONGODB_DATA_PATH}:/data/db"
-     ports:
-      - "27017"
-     restart: always
-   rabbit:
-     image: rabbitmq:3.6.14
-     container_name: "${PROJECT_NAME}-rabbit"
-     ports:
-      - "15672"
-      - "5672"
-     restart: always
-   api:
-     container_name: "${PROJECT_NAME}-api"
-     build: ./src/api
-    #  volumes:
-    #   - "./src/api:/usr/src/app"
-     ports:
-      - "${API_HTTP_PORT}:3005"
-     env_file: './src/api/.env' 
-     environment:
-      - PORT=3005
-      - ELASTIC_HOST=${PROJECT_NAME}-elasticsearch
-      - RABBITMQ_HOST=${PROJECT_NAME}-rabbit
-      - DB_PORT_27017_TCP_ADDR=${PROJECT_NAME}-mongodb
-     restart: always
-   elasticsearch:
-     container_name: "${PROJECT_NAME}-elasticsearch"
-     image: elasticsearch:5.6
-     ports:
-       - "9200"
-     volumes:
-      - "${ELASTIC_DATA_PATH}:/usr/share/elasticsearch/data"
-     restart: always
-   app:
-     container_name: "${PROJECT_NAME}-app"
-     build: ./src/app
-    #  volumes: 
-    #   - "./src/app:/usr/src/app"
-     ports:
-      - "${APP_HTTP_PORT}:3000"
-      - "3001:3001"
-     environment:
-      - API_URL=http://${PROJECT_NAME}-api:3005
-     restart: always
+  mongo:
+    image: mongo:3.6
+    container_name: ${COMPOSE_PROJECT_NAME}_mongo
+    volumes:
+      - ${MONGODB_DATA_PATH}:/data/db
+    restart: always
 
+  rabbit:
+    image: rabbitmq:3.6-management
+    container_name: ${COMPOSE_PROJECT_NAME}_rabbit
+    restart: always
+
+  elasticsearch:
+    image: elasticsearch:5.6
+    container_name: ${COMPOSE_PROJECT_NAME}_elasticsearch
+    volumes:
+      - ${ELASTIC_DATA_PATH}:/usr/share/elasticsearch/data
+    restart: always
+
+  api:
+    build: ./src/api
+    container_name: ${COMPOSE_PROJECT_NAME}_api
+    volumes:
+      - ./src/api:/usr/src/app
+    env_file: ./src/api/.env
+    environment:
+      PORT: ${API_HTTP_PORT}
+      ELASTIC_HOST: ${COMPOSE_PROJECT_NAME}_elasticsearch
+      RABBITMQ_HOST: ${COMPOSE_PROJECT_NAME}_rabbit
+      DB_PORT_27017_TCP_ADDR: ${COMPOSE_PROJECT_NAME}_mongo
+    restart: always
+
+  app:
+    build: ./src/app
+    container_name: ${COMPOSE_PROJECT_NAME}_app
+    command: npm run dev
+    volumes:
+      - ./src/app:/usr/src/app
+    ports:
+      - ${APP_HTTP_PORT}:${APP_HTTP_PORT}
+    environment:
+      PORT: ${APP_HTTP_PORT}
+      API_URL: http://${COMPOSE_PROJECT_NAME}_api:${API_HTTP_PORT}
+    restart: always

@@ -1,17 +1,23 @@
 #!/bin/bash
-source .env &&
+
+source .env
+
 if [ ! -d "src/app" ]; then
-  cd src &&
-  git clone $REINDEX_APP app &&
-  cd app &&
-  cd ../..
+  if [ -n "$REINDEX_CUSTOM" ]; then
+    # Clone and point to custom repository
+    git clone $REINDEX_CUSTOM src/custom
+    ln -s $(pwd)/src/custom/app src/app
+    ln -s $(pwd)/src/custom/api src/api/custom
+  else
+    git clone git@github.com:linnovate/reindex-app.git src/app
+  fi
 fi
-echo "Building the app. Please wait" &&
-sudo COMPOSE_PROJECT_NAME=$PROJECT_NAME docker-compose up --build -d &&
-sleep 30 &&
-echo "Done building the app, now performing some modifications." &&
+
+echo "Building the app. Please wait"
+docker-compose up -d --build
+sleep 30
+echo "Done building the app, now performing some modifications."
 
 # todo - should be based on container named from .env
-sudo docker exec $PROJECT_NAME-rabbit bash -c 'rabbitmq-plugins enable rabbitmq_management' &&
-sudo docker exec $PROJECT_NAME-api bash -c 'sh tools/catMapping.sh && sh tools/recordsMapping.sh' &&
-sudo docker restart $PROJECT_NAME-api
+docker exec ${COMPOSE_PROJECT_NAME}_api bash -c 'sh tools/catMapping.sh && sh tools/recordsMapping.sh'
+docker restart ${COMPOSE_PROJECT_NAME}_api
