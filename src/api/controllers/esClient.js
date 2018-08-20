@@ -90,8 +90,20 @@ var searchQuery = {
     return data.body;
   },
   GPS: function (data) {
+    
     var lat = data.lat;
     var lon = data.lon;
+    if (data.distance) {
+      data.body.query.bool.must.push({
+          "geo_distance":{
+            "distance": data.distance+"km",
+            "reindexLocationPoints": {
+              "lat" : lat,			
+              "lon": lon
+            }
+        }
+      });
+    }
     // data.body.sort.push({
     //   _script: {
     //     type: 'number',
@@ -104,9 +116,9 @@ var searchQuery = {
     // })
     data.body.sort.push({
       "_geo_distance": {
-        "location": { 
-          "calculated.lat" : lat,			
-          "calculated.lon": lon
+        "reindexLocationPoints": { 
+          "lat" : lat,			
+          "lon": lon
         },
         "order": "asc",
         "unit": "km",
