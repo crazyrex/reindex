@@ -9,7 +9,7 @@ curl -XPUT $ELASTIC_HOST:9200/$HCATEGORIES_INDEX -d ' {
                     "match": "*",
                     "match_mapping_type": "string",
                     "mapping": {
-                        "type": "string",
+                        "type": "text",
                         "fields": {
                             "raw": {
                                 "type": "string",
@@ -34,7 +34,7 @@ curl -XPUT $ELASTIC_HOST:9200/$HCATEGORIES_INDEX -d ' {
                     "match": "*",
                     "match_mapping_type": "string",
                     "mapping": {
-                        "type": "string",
+                        "type": "text",
                         "_parent": {
                             "type": "A"
                         },
@@ -62,7 +62,7 @@ curl -XPUT $ELASTIC_HOST:9200/$HCATEGORIES_INDEX -d ' {
                     "match": "*",
                     "match_mapping_type": "string",
                     "mapping": {
-                        "type": "string",
+                        "type": "text",
                         "_parent": {
                             "type": "B"
                         },
@@ -90,7 +90,7 @@ curl -XPUT $ELASTIC_HOST:9200/$HCATEGORIES_INDEX -d ' {
                     "match": "*",
                     "match_mapping_type": "string",
                     "mapping": {
-                        "type": "string",
+                        "type": "text",
                         "_parent": {
                             "type": "C"
                         },
