@@ -25,6 +25,7 @@ services:
     container_name: ${COMPOSE_PROJECT_NAME}_api
     volumes:
       - ./src/api:/usr/src/app
+      - ./src/custom/api:/usr/src/custom/api
     env_file: ./src/api/.env
     environment:
       PORT: ${API_HTTP_PORT}
