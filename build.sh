@@ -6,8 +6,8 @@ if [ ! -d "src/app" ]; then
   if [ -n "$REINDEX_CUSTOM" ]; then
     # Clone and point to custom repository
     git clone $REINDEX_CUSTOM src/custom
-    ln -s $(pwd)/src/custom/app src/app
-    ln -s $(pwd)/src/custom/api src/api/custom
+    ln -s custom/app src/app
+    ln -s ../custom/api src/api/custom
   else
     git clone git@github.com:linnovate/reindex-app.git src/app
   fi
