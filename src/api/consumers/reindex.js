@@ -1,9 +1,9 @@
 'use strict';
 
 var elastic = require('../controllers/elastic'),
-    mongoose = require('mongoose');
+    mongoose = require('mongoose'),
+    config = require('../config');
 var emitter = require('../services/emitter');
-
 
 module.exports = function(rabbit, qData) {
     rabbit.consume(qData.name, qData.maxUnackMessages, handleMessage);
@@ -14,6 +14,8 @@ module.exports = function(rabbit, qData) {
 function handleMessage(message, error, done) {
     message.query = {};
     var bulkArr = [];
+    var moreIndexes = {};
+    for(var k in config.fieldsForIndex) moreIndexes[k] = {};
     find(message, function(err, docs) {
         if (err) {
             console.log('===== REINDEX ERR ================', err);            
@@ -34,7 +36,29 @@ function handleMessage(message, error, done) {
 
             delete doc._id;
             bulkArr.push(doc);
+
+            for(var k in config.fieldsForIndex) {
+                if (doc[k]) {
+                    var splitArr = doc[k].split(config.fieldsForIndex[k].separator);
+                    for(var i = 0; i < splitArr.length; i++) {
+                        moreIndexes[k][splitArr[i]] = splitArr[i];
+                    }
+                }
+            }
         });
+        for(var k in moreIndexes) {
+            for(var v in moreIndexes[k]) {
+                bulkArr.push({
+                    index: {
+                        _index: config.fieldsForIndex[k].index,
+                        _type: config.fieldsForIndex[k].type,
+                        _id: v
+                    }
+                });
+
+                bulkArr.push({content: v});
+            }
+        }
         console.log('SEND TO BULK: ' + message.collection  + ' FROM- ' + message.offset + ' LIMIT- ' + message.limit);
         elastic.bulk(bulkArr, function(err) {
             if (err) return error(err);

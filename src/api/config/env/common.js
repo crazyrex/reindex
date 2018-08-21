@@ -10,33 +10,44 @@ module.exports = {
 	root: rootPath,
 	categoriesFilters: ['kashrut'],
 	hierarchyFilters: {
-	  kashrut: {
-		content: 'אוכל'
-	  }
+		kashrut: {
+			content: 'אוכל'
+		}
 	},
 	searchQuery: {
-	  records: {
-		default: {
-		  match: ['reindexTags.raw'],
-		  regexp: ['reindexTitle']
-		},
-		notOnlyCategoriesFilter: {
-		  match: ['reindexTitle'],
-		  plain: ['reindexTitle']
+		records: {
+			default: {
+				match: ['reindexTags.raw'],
+				regexp: ['reindexTitle']
+			},
+			notOnlyCategoriesFilter: {
+				match: ['reindexTitle'],
+				plain: ['reindexTitle']
+			}
 		}
-	  }
+	},
+	fieldsForIndex: {
+		city: {
+			index: 'reindex-cities', 
+			type:'cities'
+		}, 
+		// languages: {
+		// 	index: 'reindex-languages', 
+		// 	type:'languages',
+		// 	separator: ','
+		// }
 	},
 	queues: [
-	  // {
-	  //   name: 'reindex-module',
-	  //   maxUnackMessages: 5
-	  // }
+		// {
+		//   name: 'reindex-module',
+		//   maxUnackMessages: 5
+		// }
 	],	
 	schedules: [
-	  // {
+		// {
 		// 	name: 'reindex-module',
 		// 	cron: '0 0 0 * * * *'
-	  // }
+		// }
 	],
 	routes: [
 		// {
@@ -45,6 +56,6 @@ module.exports = {
 		// }
 	],
 	inheritFunctions: {
-	  // importRecords: 'reindex-import-module',
+		// importRecords: 'reindex-import-module',
 	},
 };
