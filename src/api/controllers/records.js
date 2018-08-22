@@ -246,9 +246,12 @@ function updateRecord(req , res){
     _id: data._id
   }).then(function (record) {
     if (!record) res.send('record isn\'t found');
-    record = _.extend(record ,data);
+    _.forEach(data, function(value, key) {
+      record.set(key, value);
+    });
+    record.reindexLocationPoints = data.reindexLocationPoints || [];
     record.save(function (err, r) {
-     if (err) res.send(messages.errors.createRequest);
+     if (err) return res.send(messages.errors.createRequest);
      res.send(messages.successes.createRequest);
   });
   })

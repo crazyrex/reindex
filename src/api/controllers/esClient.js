@@ -218,12 +218,12 @@ var searchQuery = {
     for (var i in config.searchQuery.records.default.regexp) {
       data.body.query.bool.should.push({
         "regexp":{
-          [config.searchQuery.records.default.regexp[i]+".raw"]: {
+          [config.searchQuery.records.default.regexp[i]]: {
             "value": data.valuesString+".*?+",
             "flags" : "EMPTY"
           }
         }
-      }) 
+      });
     }
     
     
@@ -350,7 +350,7 @@ var searchResultsQuery = exports.searchResultsQuery = function (value, query, _b
     // data.types = data.types.map(function (t) {
     //   return parseInt(t);
     // });
-    value = value.map((str) => str.replace('?', ''));
+    value = value.map((str) => str ? str.replace('?', '') : '');
     checkCategoryFilter(value, query).then(function (categories) {
       if (categories) {
         data.values = categories; 
