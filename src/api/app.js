@@ -41,7 +41,7 @@ module.exports = function(db) {
 
     app.use(logger('dev'));
 
-    app.use(express.static(path.join(__dirname, 'files')));
+    app.use(baseUrl + '/files', express.static(path.join(__dirname, 'files')));
 
     app.set('superSecret', config.tokenSecret);
 

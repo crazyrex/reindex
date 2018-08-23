@@ -23,7 +23,7 @@ module.exports = function(db) {
     emailsCtrl = require('../controllers/emails'),
     contactsCtrl = require('../controllers/contacts'),
     scoreCtrl = require('../controllers/score'),
-    // uploadCtrl = require('../controllers/upload'),  
+    uploadCtrl = require('../controllers/upload'),
     ImportRecordsCtrl = require('../controllers/importRecords'),
     webhookCtrl = require('../controllers/webhooks'),
     auth = require('../auth'),
@@ -180,7 +180,7 @@ module.exports = function(db) {
 
   router.post('/import/records', requireAuth, authCtrl.roleAuthorization('Admin'), importRecordsCtrl.start.bind(importRecordsCtrl), importRecordsCtrl.upload.bind(importRecordsCtrl), importRecordsCtrl.arrange.bind(importRecordsCtrl), importRecordsCtrl.saveRecords.bind(importRecordsCtrl), importRecordsCtrl.end.bind(importRecordsCtrl));  
   // router.post('/downloadFile', uploadCtrl.download);
-  // router.post('/uploadImage', uploadCtrl.uploadImage);
+  router.post('/uploadImage', requireAuth, authCtrl.roleAuthorization('Admin'), uploadCtrl.uploadImage);
 
 
   return router;
