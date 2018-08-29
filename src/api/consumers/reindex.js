@@ -41,7 +41,8 @@ function handleMessage(message, error, done) {
                 if (doc[k]) {
                     var splitArr = doc[k].split(config.fieldsForIndex[k].separator);
                     for(var i = 0; i < splitArr.length; i++) {
-                        moreIndexes[k][splitArr[i]] = splitArr[i];
+                        var value = splitArr[i].trim();
+                        moreIndexes[k][value] = value;
                     }
                 }
             }
