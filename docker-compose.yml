@@ -1,4 +1,4 @@
-version: '3'
+version: '2'
 
 services:
   mongo:
@@ -19,6 +19,7 @@ services:
     volumes:
       - ${ELASTIC_DATA_PATH}:/usr/share/elasticsearch/data
     restart: always
+    mem_limit: 512m
 
   api:
     build: ./src/api
