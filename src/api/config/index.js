@@ -10,8 +10,15 @@ process.env.NODE_ENV = ~fs.readdirSync(__dirname + '/env').map(function(file) {
 // Extend the base configuration in all.js with environment
 // specific configuration
 
+try {
+    var customConfig = require('./../custom/config.js');
+} catch (ex) {
+    var customConfig = {};
+}
+
 module.exports = _.extend(
     require('./env/common'),
     require('./env/' + process.env.NODE_ENV || 'development') || {},
-    require('./messages') || {}
+    require('./messages') || {},
+    customConfig
 );
