@@ -13,6 +13,11 @@ hierarchyCategoriesIndex = config.hierarchyCategories.index,
 categoriesFilters = config.categoriesFilters,
 async = require('async'),
 _ = require('lodash');
+try {
+  var customSearch = require('./../custom/search');
+} catch (ex) {
+  var customSearch = {};
+}
 
 module.exports.getDataByTerm = function (req, res, next) {
   const fields = (req.body.term) ? [req.body.term] : ['content.ac', 'reindexTitle.ac'];
@@ -52,7 +57,7 @@ module.exports.getDataByTerm = function (req, res, next) {
   });
 };
 
-var searchQuery = {
+var searchQuery = _.extend({
   ids: function (data) {
     data.body.query.bool.must.push({
       ids: {
@@ -284,7 +289,7 @@ var searchQuery = {
     }
     return data.body;
   }
-};
+}, customSearch);
 
 function checkCategoryFilter(value, query) {
   return new Promise(function (resolve, reject) {
@@ -378,7 +383,6 @@ var searchResultsQuery = exports.searchResultsQuery = function (value, query, _b
       data.lat = _body.lat;
       data.lon = _body.lon;
       data.onlyCategoriesFilter = _body.onlyCategoriesFilter;
-      
       if (data.exceptIds) data.body = searchQuery['exceptIds'](data);
       if (data.lat && data.lon) data.body = searchQuery['GPS'](data);
       else if(data.onlyCategoriesFilter) data.body = searchQuery['score'](data);
