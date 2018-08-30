@@ -121,8 +121,8 @@ var searchQuery = _.extend({
     // })
     data.body.sort.push({
       "_geo_distance": {
-        "reindexLocationPoints": { 
-          "lat" : lat,			
+        "reindexLocationPoints": {
+          "lat" : lat,
           "lon": lon
         },
         "order": "asc",
@@ -380,8 +380,9 @@ var searchResultsQuery = exports.searchResultsQuery = function (value, query, _b
       data.type = 'records';
       data.ids = _body.ids;
       data.exceptIds = _body.exceptIds;
-      data.lat = _body.lat;
-      data.lon = _body.lon;
+      data.lat = _body.lat || query.lat;
+      data.lon = _body.lon || query.lon;
+      data.distance = _body.distance || query.distance;
       data.onlyCategoriesFilter = _body.onlyCategoriesFilter;
       if (data.exceptIds) data.body = searchQuery['exceptIds'](data);
       if (data.lat && data.lon) data.body = searchQuery['GPS'](data);

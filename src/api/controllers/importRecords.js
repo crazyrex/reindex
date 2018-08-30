@@ -42,7 +42,7 @@ Upload.prototype.location2points = function (address, points) {
       if (!data) return reject('no data');
       var geo = data[0];
       if (!geo) return reject('no data');
-      return resolve([geo.longitude, geo.latitude]);
+      return resolve({points: [geo.longitude, geo.latitude], region: geo.administrativeLevels.level1short, city: geo.city});
     });
   });
 }
@@ -116,10 +116,12 @@ Upload.prototype.arrange = function (req, res, next) {
     if (err) return res.status(500).send(err);
     let saveFlag = false;
     async.forEachOf(newrecords, function (doc, key, callback) {
-      self.location2points(doc.reindexLocationString, doc.reindexLocationPoints).then(function (points) {
-        if (points) {
+      self.location2points(doc.reindexLocationString, doc.reindexLocationPoints).then(function (response) {
+        if (response) {
           saveFlag = true;
-          doc.reindexLocationPoints = points;
+          doc.set('reindexLocationPoints', response.points);
+          doc.set('reindexCity', response.city);
+          doc.set('region', response.region);
         }
         if (saveFlag) {
           var promise = doc.save();
